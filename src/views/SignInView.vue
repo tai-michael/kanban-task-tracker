@@ -9,13 +9,13 @@
     <!-- <div class="mt-20 mb-10 text-3xl flex justify-center gap-3 items-end logo"> -->
     <img :src="logo" />
     <!-- </div> -->
-    <FirebaseUI />
+    <FirebaseUi />
   </div>
 </template>
 
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue';
-const FirebaseUI = defineAsyncComponent(
+const FirebaseUi = defineAsyncComponent(
   () => import('@/components/FirebaseUi.vue')
 );
 // const PullRefresher = defineAsyncComponent(() => import('@/components/PullRefresher.vue'))

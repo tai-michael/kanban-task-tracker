@@ -12,11 +12,14 @@ let app: ReturnType<typeof createApp>;
 // NOTE necessary for clearing the state after user logs out
 auth.onAuthStateChanged(user => {
   console.log('User', user);
+
   if (!app) {
     app = createApp(App);
-
     app.use(createPinia()).use(router);
-
     app.mount('#app');
+  }
+
+  if (user) {
+    router.push('/'); // redirect to the dashboard after successful sign-in
   }
 });
