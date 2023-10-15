@@ -1,14 +1,22 @@
-import './assets/main.css'
+import './assets/main.css';
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
 
-import App from './App.vue'
-import router from './router'
+import App from './App.vue';
+import router from './router';
+import { auth } from './firebaseInit';
 
-const app = createApp(App)
+let app: ReturnType<typeof createApp>;
 
-app.use(createPinia())
-app.use(router)
+// NOTE necessary for clearing the state after user logs out
+auth.onAuthStateChanged(user => {
+  console.log('User', user);
+  if (!app) {
+    app = createApp(App);
 
-app.mount('#app')
+    app.use(createPinia()).use(router);
+
+    app.mount('#app');
+  }
+});
