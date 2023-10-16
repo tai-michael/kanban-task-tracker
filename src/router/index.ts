@@ -24,7 +24,7 @@ router.beforeEach((to, from, next) => {
     return;
   }
 
-  if (to.path === '/' && !isAuthenticated.value) {
+  if (!isAuthenticated.value && to.path !== '/sign-in') {
     next('/sign-in');
     return;
   }
