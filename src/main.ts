@@ -19,7 +19,5 @@ auth.onAuthStateChanged(user => {
     app.mount('#app');
   }
 
-  if (user) {
-    router.push('/'); // redirect to the dashboard after successful sign-in
-  }
+  router.push(user ? '/' : '/sign-in');
 });
