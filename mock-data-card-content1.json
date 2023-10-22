@@ -1,0 +1,21 @@
+{
+  "id": "(cardId1)",
+  "name": "Build UI for onboarding flow (MT: maybe remove, as would need to duplicate changes to both here and in board collection)",
+  "description": "Blah blah blah blah blah blah blah blah blah blah",
+  "status": "(Todo -- prob reference current list name or remove this field altogether, not sure)",
+  "subtasks": [
+    {
+      "name": "Sign up page",
+      "isCompleted": true
+    },
+    {
+      "name": "Sign in page",
+      "isCompleted": false
+    },
+    {
+      "name": "Welcome page",
+      "isCompleted": false
+    }
+  ],
+  "attachments": "(attachments)"
+}
