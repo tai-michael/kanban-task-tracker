@@ -1,0 +1,282 @@
+[
+  {
+    "id": "c71ce98b-e5b9-4813-aab7-b7114bf31f8f",
+    "description": "Blah blah blah blah blah blah blah blah blah blah",
+    "status": "(Todo -- prob reference current list name or remove this field altogether, not sure)",
+    "subtasks": [
+      {
+        "name": "Sign up page",
+        "isCompleted": true
+      },
+      {
+        "name": "Sign in page",
+        "isCompleted": false
+      },
+      {
+        "name": "Welcome page",
+        "isCompleted": false
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "848be114-321b-4dc9-86b9-9cd1587f5773",
+    "description": "",
+    "status": "Todo",
+    "subtasks": [
+      {
+        "name": "Search page",
+        "isCompleted": false
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "7875b170-cfb5-4c16-b950-0a0e41a6c408",
+    "description": "",
+    "status": "Todo",
+    "subtasks": [
+      {
+        "name": "Account page",
+        "isCompleted": false
+      },
+      {
+        "name": "Billing page",
+        "isCompleted": false
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "68fdd022-f17c-49ff-9aad-187f5fc694f0",
+    "description": "Once we feel version one is ready, we need to rigorously test it both internally and externally to identify any major gaps.",
+    "status": "Todo",
+    "subtasks": [
+      {
+        "name": "Internal testing",
+        "isCompleted": false
+      },
+      {
+        "name": "External testing",
+        "isCompleted": false
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "ca299a36-30d3-4991-9a85-6dd3a9009f84",
+    "description": "",
+    "status": "Doing",
+    "subtasks": [
+      {
+        "name": "Settings - Account page",
+        "isCompleted": true
+      },
+      {
+        "name": "Settings - Billing page",
+        "isCompleted": true
+      },
+      {
+        "name": "Search page",
+        "isCompleted": false
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "d3b08d72-3eed-4bcd-9931-0b58d836ec23",
+    "description": "",
+    "status": "Doing",
+    "subtasks": [
+      {
+        "name": "Upgrade plan",
+        "isCompleted": true
+      },
+      {
+        "name": "Cancel plan",
+        "isCompleted": true
+      },
+      {
+        "name": "Update payment method",
+        "isCompleted": false
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "5ee6631c-d7f5-48b2-b430-c28111bec8b1",
+    "description": "",
+    "status": "Doing",
+    "subtasks": [
+      {
+        "name": "Sign up page",
+        "isCompleted": true
+      },
+      {
+        "name": "Sign in page",
+        "isCompleted": false
+      },
+      {
+        "name": "Welcome page",
+        "isCompleted": false
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "50ca524d-5cf8-42ae-9e43-a14da2467e74",
+    "description": "",
+    "status": "Doing",
+    "subtasks": [
+      {
+        "name": "Add search endpoint",
+        "isCompleted": true
+      },
+      {
+        "name": "Define search filters",
+        "isCompleted": false
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "179c6518-e289-43d1-a78c-428762959293",
+    "description": "",
+    "status": "Doing",
+    "subtasks": [
+      {
+        "name": "Define user model",
+        "isCompleted": true
+      },
+      {
+        "name": "Add auth endpoints",
+        "isCompleted": false
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "269cb304-1ffa-488f-a1fe-1950b9c5cc28",
+    "description": "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
+    "status": "Doing",
+    "subtasks": [
+      {
+        "name": "Research competitor pricing and business models",
+        "isCompleted": true
+      },
+      {
+        "name": "Outline a business model that works for our solution",
+        "isCompleted": false
+      },
+      {
+        "name": "Talk to potential customers about our proposed solution and ask for fair price expectancy",
+        "isCompleted": false
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "cd4dd570-aec2-4205-8ef6-79f7caf38a09",
+    "description": "Ensure the layout continues to make sense and we have strong buy-in from potential users.",
+    "status": "Done",
+    "subtasks": [
+      {
+        "name": "Complete 5 wireframe prototype tests",
+        "isCompleted": true
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "bd3fa2ca-fa0a-468a-8b25-f4385d8d6251",
+    "description": "Create a greyscale clickable wireframe prototype to test our asssumptions so far.",
+    "status": "Done",
+    "subtasks": [
+      {
+        "name": "Create clickable wireframe prototype in Balsamiq",
+        "isCompleted": true
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "a61d3fe1-2543-41c7-bc29-9881b4d8900c",
+    "description": "Keep iterating through the subtasks until we're clear on the core concepts for the app.",
+    "status": "Done",
+    "subtasks": [
+      {
+        "name": "Meet to review notes from previous tests and plan changes",
+        "isCompleted": true
+      },
+      {
+        "name": "Make changes to paper prototypes",
+        "isCompleted": true
+      },
+      {
+        "name": "Conduct 5 usability tests",
+        "isCompleted": true
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "1098cf21-7886-4a26-b683-943aeb13c076",
+    "description": "",
+    "status": "Done",
+    "subtasks": [
+      {
+        "name": "Create paper prototypes for version one",
+        "isCompleted": true
+      },
+      {
+        "name": "Complete 10 usability tests",
+        "isCompleted": true
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "9e5783b6-efad-4e09-b758-1b83224ce264",
+    "description": "We need to define and refine our core product. Interviews will help us learn common pain points and help us define the strongest MVP.",
+    "status": "Done",
+    "subtasks": [
+      {
+        "name": "Interview 10 prospective customers",
+        "isCompleted": true
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "9d0b886c-7adf-4569-9a0a-eed67946e2fd",
+    "description": "",
+    "status": "Done",
+    "subtasks": [
+      {
+        "name": "Find direct and indirect competitors",
+        "isCompleted": true
+      },
+      {
+        "name": "SWOT analysis for each competitor",
+        "isCompleted": true
+      }
+    ],
+    "attachments": "(attachments)"
+  },
+  {
+    "id": "d1352a96-eab7-4e8d-901d-62cad952d51d",
+    "description": "We need to get a solid overview of the market to ensure we have up-to-date estimates of market size and demand.",
+    "status": "Done",
+    "subtasks": [
+      {
+        "name": "Write up research analysis",
+        "isCompleted": true
+      },
+      {
+        "name": "Calculate TAM",
+        "isCompleted": true
+      }
+    ],
+    "attachments": "(attachments)"
+  }
+]
