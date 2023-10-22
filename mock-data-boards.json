@@ -1,0 +1,17 @@
+{
+  "id": "(userId)*",
+  "boards": [
+    {
+      "id": "(boardId1)",
+      "name": "Platform Launch"
+    },
+    {
+      "id": "(boardId2)",
+      "name": "Marketing Plan"
+    },
+    {
+      "id": "(boardId3)",
+      "name": "Roadmap"
+    }
+  ]
+}
