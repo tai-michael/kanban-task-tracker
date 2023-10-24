@@ -7,8 +7,14 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'dashboard',
-      component: () => import('@/views/DashboardView.vue'),
+      name: 'home',
+      component: () => import('@/views/HomeView.vue'),
+    },
+    {
+      path: '/boards/:boardId',
+      name: 'board',
+      component: () => import('@/views/BoardView.vue'),
+      props: route => ({ boardId: route.params.boardId }),
     },
     {
       path: '/sign-in',
