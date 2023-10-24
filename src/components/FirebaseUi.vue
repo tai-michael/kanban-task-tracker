@@ -3,17 +3,17 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { auth } from '@/firebaseInit';
-import firebase from 'firebase/compat/app';
-import * as firebaseui from 'firebaseui';
-import 'firebaseui/dist/firebaseui.css';
+import { onMounted } from 'vue'
+import { auth } from '@/firebaseInit'
+import firebase from 'firebase/compat/app'
+import * as firebaseui from 'firebaseui'
+import 'firebaseui/dist/firebaseui.css'
 
 onMounted(() => {
   // console.log('Sign in view mounted')
   const uiConfig = {
     // Redirect route; necessary if 'signInSuccessWithAuthResult' set to true
-    // signInSuccessUrl: 'http://localhost:4000/custom-lists',
+    signInSuccessUrl: 'http://localhost:5173/',
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
@@ -25,21 +25,21 @@ onMounted(() => {
     ],
     // Setting this to false makes it so that page won't refresh after sign in
     callbacks: {
-      signInSuccessWithAuthResult: () => false,
+      signInSuccessWithAuthResult: () => true,
       // uiShown: function () {
       //   // The widget is rendered.
       //   // Hide the loader.
       //   document.getElementById('loader').style.display = 'none'
       // }
     },
-  };
+  }
 
   const ui =
-    firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth);
-  ui.start('#firebaseui-auth-container', uiConfig);
+    firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth)
+  ui.start('#firebaseui-auth-container', uiConfig)
 
   // ui.disableAutoSignIn()
-});
+})
 </script>
 
 <style lang="scss">
