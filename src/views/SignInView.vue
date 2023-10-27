@@ -9,17 +9,17 @@
     <!-- <div class="mt-20 mb-10 text-3xl flex justify-center gap-3 items-end logo"> -->
     <img :src="logo" />
     <!-- </div> -->
-    <FirebaseUi />
+    <FirebaseUI />
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue';
-const FirebaseUi = defineAsyncComponent(
-  () => import('@/components/FirebaseUi.vue')
-);
+import { defineAsyncComponent } from 'vue'
+const FirebaseUI = defineAsyncComponent(
+  () => import('@/components/FirebaseUI.vue')
+)
 // const PullRefresher = defineAsyncComponent(() => import('@/components/PullRefresher.vue'))
-const logo = new URL('@/assets/images/logo-dark.svg', import.meta.url).href;
+const logo = new URL('@/assets/images/logo-dark.svg', import.meta.url).href
 </script>
 
 <style lang="scss">

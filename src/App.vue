@@ -16,8 +16,14 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
-// import HelloWorld from './components/HelloWorld.vue'
+import { RouterLink, RouterView } from 'vue-router'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { isAuthenticated } from '@/firebaseInit'
+
+const router = useRouter()
+
+onMounted(() => {})
 </script>
 
 <style scoped>
