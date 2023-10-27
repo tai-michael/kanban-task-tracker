@@ -9,12 +9,14 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: () => import('@/views/HomeView.vue'),
-    },
-    {
-      path: '/boards/:boardId',
-      name: 'board',
-      component: () => import('@/views/BoardView.vue'),
-      props: (route) => ({ boardId: route.params.boardId }),
+      children: [
+        {
+          path: '/boards/:boardId',
+          name: 'board',
+          component: () => import('@/views/BoardView.vue'),
+          props: (route) => ({ boardId: route.params.boardId }),
+        },
+      ],
     },
     {
       path: '/sign-in',
@@ -39,6 +41,8 @@ router.beforeEach((to, from, next) => {
     next('/sign-in')
     return
   }
+
+  next()
 })
 
 export default router
