@@ -10,16 +10,21 @@
 
 <script setup lang="ts">
 import { ref, defineAsyncComponent } from 'vue'
-const Card = defineAsyncComponent(() => import('@/components/Card.vue'))
+const Card = defineAsyncComponent(() => import('@/components/CardPreview.vue'))
 
 const props = defineProps(['card'])
 </script>
 
 <style scoped lang="scss">
 ul {
+  padding: 8px 12px 4px;
+  margin: 8px 4px;
   background: #73b2f1;
-  padding: 8px;
+  border: black 1px solid;
+  border-radius: 8px;
+  min-height: 24px;
 }
+
 li {
   font-style: italic;
 }
