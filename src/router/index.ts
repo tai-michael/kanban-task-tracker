@@ -11,7 +11,7 @@ const router = createRouter({
       component: () => import('@/views/HomeView.vue'),
       children: [
         {
-          path: '/boards/:boardId',
+          path: '/board/:boardId',
           name: 'board',
           component: () => import('@/views/BoardView.vue'),
           props: (route) => ({ boardId: route.params.boardId }),
