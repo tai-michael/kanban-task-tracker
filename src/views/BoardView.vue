@@ -1,38 +1,55 @@
 <template>
   <div>
-    <h1>{{ board.name }}</h1>
-    <!-- Display lists and cards here -->
-    <div v-for="list of board.lists">
-      <List :list="list"></List>
-    </div>
+    <Board
+      v-if="props.boardId || store.lastBoardRoute || card.boardId"
+      :boardId="boardId"
+    />
+
+    <transition name="fade">
+      <div
+        v-if="cardId"
+        class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
+      >
+        <CardContent v-if="card" :card="card" />
+      </div>
+    </transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, defineAsyncComponent } from 'vue'
+import { ref, computed, defineAsyncComponent, onMounted } from 'vue'
 import { db } from '@/firebaseInit'
 import { doc, getDoc } from 'firebase/firestore'
-const List = defineAsyncComponent(() => import('@/components/List.vue'))
+import { useCardStore } from '@/stores'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+const store = useCardStore()
+const Board = defineAsyncComponent(() => import('@/components/Board.vue'))
+const CardContent = defineAsyncComponent(
+  () => import('@/components/CardContent.vue')
+)
+const props = defineProps(['cardId', 'boardId'])
 
-const props = defineProps(['boardId'])
-const board = ref({})
+const boardId = computed(
+  () => props.boardId || store.lastBoardRoute || card.value.boardId
+)
 
-const fetchBoardData = async (id) => {
-  const boardRef = doc(db, 'boards_single', id)
-  const boardDoc = await getDoc(boardRef)
-  if (boardDoc.exists()) return boardDoc.data()
+const card = ref({})
+const fetchingCardFromBackend = ref(false)
+const fetchCard = async (id: string) => {
+  const cardRef = doc(db, 'cards', id)
+  const cardDoc = await getDoc(cardRef)
+  console.log(cardDoc?.data()?.card)
+  if (cardDoc.exists()) return cardDoc.data()
 }
 
 onMounted(async () => {
-  board.value = await fetchBoardData(props.boardId)
-  console.log(board.value)
+  if (route.params.cardId) {
+    fetchingCardFromBackend.value = true
+    card.value = await fetchCard(props.cardId)
+    console.log(card.value)
+    fetchingCardFromBackend.value = false
+  } else if (route.params.boardId) {
+  }
 })
-
-// Additional logic to fetch lists and cards for this board...
 </script>
-<style scoped lang="scss">
-h1 {
-  font-weight: 600;
-  font-size: 1.5rem;
-}
-</style>
