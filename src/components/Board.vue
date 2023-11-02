@@ -1,10 +1,9 @@
 <template>
   <div>
-    <h1>{{ board.name }}</h1>
+    <h1>{{ store.board.name }}</h1>
 
-    <div v-if="fetchingBoard">Loading board...</div>
-    <div v-else class="flex">
-      <div v-for="list of board.lists">
+    <div class="flex">
+      <div v-for="list of store.board.lists">
         <List :list="list"></List>
       </div>
     </div>
@@ -13,26 +12,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted, defineAsyncComponent } from 'vue'
-import { db } from '@/firebaseInit'
-import { doc, getDoc } from 'firebase/firestore'
+import { useBoardStore } from '@/stores'
 const List = defineAsyncComponent(() => import('@/components/List.vue'))
-
-const props = defineProps(['boardId'])
-const board = ref({})
-const fetchingBoard = ref(false)
-const fetchBoardData = async (id: string) => {
-  const boardRef = doc(db, 'boards_single', id)
-  const boardDoc = await getDoc(boardRef)
-  if (boardDoc.exists()) return boardDoc.data()
-}
-
-onMounted(async () => {
-  fetchingBoard.value = true
-  board.value = await fetchBoardData(props.boardId)
-  console.log(board.value)
-  fetchingBoard.value = false
-})
+const store = useBoardStore()
 </script>
+
 <style scoped lang="scss">
 h1 {
   font-weight: 600;
