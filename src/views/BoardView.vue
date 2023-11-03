@@ -6,11 +6,11 @@
 
     <transition name="fade">
       <div
-        v-show="cardId"
+        v-if="cardId"
         class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
       >
         <CardContent
-          v-show="cardStore.card"
+          v-if="cardStore.cardSummary"
           @close-button-clicked="router.push(`/board/${boardStore.board.id}`)"
           :isFetchingCard="isFetchingCard"
         />
@@ -34,7 +34,7 @@ const cardStore = useCardStore()
 const boardStore = useBoardStore()
 const props = defineProps(['cardId', 'boardId'])
 
-const boardId = computed(() => props.boardId || cardStore.card.boardId)
+const boardId = computed(() => props.boardId || cardStore.cardDetails.boardId)
 
 const isFetchingBoard = ref(false)
 const fetchBoardData = async (id: string) => {
@@ -49,8 +49,8 @@ const isFetchingCard = ref(false)
 const fetchCard = async (id: string) => {
   const cardRef = doc(db, 'cards', id)
   const cardDoc = await getDoc(cardRef)
-  if (cardDoc.exists()) cardStore.hydrateCard(cardDoc.data())
-  console.log(cardStore.card)
+  if (cardDoc.exists()) cardStore.hydrateCardContent(cardDoc.data())
+  console.log(cardStore.cardDetails)
 }
 
 watch(

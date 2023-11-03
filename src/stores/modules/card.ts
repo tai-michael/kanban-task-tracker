@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useBoardStore } from '@/stores'
 
 export const useCardStore = defineStore('card', () => {
   const router = useRouter()
