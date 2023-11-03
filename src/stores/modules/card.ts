@@ -5,41 +5,53 @@ import { useRouter, useRoute } from 'vue-router'
 export const useCardStore = defineStore('card', () => {
   const router = useRouter()
   const route = useRoute()
-  const isCardModalOpen = ref(false)
-  // const currentCardId = ref()
-  const lastBoardRoute = ref()
-  // const boardId = ref('e58629a1-434f-41b5-b570-d3c2b3c2d168')
+  const boardStore = useBoardStore()
+  const cards = ref([])
 
-  const openCardModal = (cardId: string) => {
-    isCardModalOpen.value = true
-    // currentCardId.value = cardId
-    lastBoardRoute.value = route.params.boardId
-    console.log(lastBoardRoute.value)
-    router.push(`/card/${cardId}`)
+  const cardSummary = computed(() => {
+    if (boardStore.board.lists) {
+      for (const list of boardStore.board.lists) {
+        for (const c of list.cards) {
+          if (c.id === cardDetails.value.id) {
+            return c
+          }
+        }
+      }
+    }
+
+    return null
+  })
+  // TODO Add watcher or something to App.vue or BoardView.vue for cardStore.cardDetails and cardStore.cardSummary, where if they changed while (cardId === cardStore.activeCard.id), then update the backend for their respective firestore docs
+  const cardDetails = ref({})
+  const activeCard = computed(() => {
+    if (!cardSummary.value) return null
+    return {
+      name: cardSummary.value.name,
+      dueDate: cardSummary.value.due_date,
+      checklistProgress: cardSummary.value.checklist_progress,
+      ...cardDetails.value,
+    }
+  })
+
+  const hydrateCardContent = (cardContent: object) => {
+    cardDetails.value = cardContent
   }
-
-  const closeCardModal = () => {
-    isCardModalOpen.value = false
-    // currentCardId.value = null
-    router.go(-1)
+  const memoizeCard = () => {
+    // not pushing activeCard, as that content is always taken from the active board, which has local rather than backend data (no need to refetch)
+    cards.value.push(cardDetails.value)
   }
-
-  // const checkRouteForCardModal = () => {
-  //   if (router.currentRoute.value.path.startsWith('/card/')) {
-  //     console.log()
-  //     openCardModal(route.params.cardId)
-  //   } else {
-  //     closeCardModal()
-  //   }
-  // }
+  const clearCard = () => {
+    cardDetails.value = {}
+  }
 
   return {
-    isCardModalOpen,
-    // currentCardId,
-    lastBoardRoute,
+    activeCard,
+    cardSummary,
+    cardDetails,
+    cards,
 
-    openCardModal,
-    closeCardModal,
-    // checkRouteForCardModal,
+    hydrateCardContent,
+    memoizeCard,
+    clearCard,
   }
 })

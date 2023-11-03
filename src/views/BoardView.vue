@@ -56,9 +56,13 @@ const fetchCard = async (id: string) => {
 watch(
   () => props.cardId,
   async (newValue, oldValue) => {
-    if (newValue && newValue !== cardStore.card.id) {
+    if (newValue && newValue !== cardStore?.activeCard?.id) {
       console.log('new card id detected')
-      if (Object.keys(cardStore.card).length) cardStore.clearCard()
+      if (Object.keys(cardStore.cardDetails).length) cardStore.clearCard()
+
+      const matchingCard = cardStore.cards.find((card) => card.id === newValue)
+      if (matchingCard) return cardStore.hydrateCardContent(matchingCard)
+
       isFetchingCard.value = true
       await fetchCard(props.cardId)
       isFetchingCard.value = false
