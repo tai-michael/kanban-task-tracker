@@ -4,7 +4,8 @@
     <div v-else>
       <button @click="$emit('close-button-clicked')">Close modal</button>
       <ul>
-        <li>{{ cardStore.card.id }}</li>
+        <li>{{ cardStore.activeCard.name }}</li>
+        <li>{{ cardStore.activeCard.id }}</li>
         <li></li>
       </ul>
     </div>
@@ -16,9 +17,13 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useBoardStore, useCardStore } from '@/stores'
 const cardStore = useCardStore()
 const props = defineProps(['isFetchingCard'])
-// onMounted(() => {
-//   console.log('card content mounted')
-// })
+
+onMounted(() => {
+  if (!cardStore.cards.some((card) => card.id === cardStore.activeCard.id)) {
+    console.log('memoizing card')
+    cardStore.memoizeCard()
+  }
+})
 // onUnmounted(() => {
 //   console.log('unmounted Card Content')
 // })
