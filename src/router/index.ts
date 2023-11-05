@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { isAuthenticated } from '@/firebaseInit'
+import { useCardStore } from '@/stores'
 // import Home from '@/views/HomeView.vue';
 
 const router = createRouter({
@@ -15,6 +16,12 @@ const router = createRouter({
           name: 'board',
           component: () => import('@/views/BoardView.vue'),
           props: (route) => ({ boardId: route.params.boardId }),
+        },
+        {
+          path: '/card/:cardId',
+          name: 'card',
+          component: () => import('@/views/BoardView.vue'),
+          props: (route) => ({ cardId: route.params.cardId }),
         },
       ],
     },
@@ -32,6 +39,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const cardStore = useCardStore()
   if (to.path === '/sign-in' && isAuthenticated.value) {
     next('/')
     return
