@@ -14,6 +14,11 @@
           @close-button-clicked="router.push(`/board/${boardStore.board.id}`)"
           :isFetchingCard="isFetchingCard"
         />
+          <CardContent
+            v-if="cardStore.cardSummary"
+            @close-button-clicked="router.push(`/board/${boardStore.board.id}`)"
+          />
+        </div>
       </div>
     </transition>
   </div>

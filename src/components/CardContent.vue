@@ -1,23 +1,21 @@
 <template>
-  <div class="bg-white p-8 rounded-lg">
-    <div v-if="isFetchingCard">Loading card...</div>
-    <div v-else>
-      <button @click="$emit('close-button-clicked')">Close modal</button>
-      <ul>
-        <li>{{ cardStore.activeCard.name }}</li>
-        <li>{{ cardStore.activeCard.id }}</li>
-        <li></li>
-      </ul>
-    </div>
-  </div>
+  <button class="mb-4" @click="closeButtonClicked">Close modal</button>
+  <ul>
+    <li>{{ cardStore.activeCard.name }}</li>
+    <li>{{ cardStore.activeCard.id }}</li>
+    <li></li>
+  </ul>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useBoardStore, useCardStore } from '@/stores'
+const emit = defineEmits(['closeButtonClicked'])
 const cardStore = useCardStore()
-const props = defineProps(['isFetchingCard'])
 
+const closeButtonClicked = () => {
+  emit('closeButtonClicked')
+}
 onMounted(() => {
   if (!cardStore.cards.some((card) => card.id === cardStore.activeCard.id)) {
     console.log('memoizing card')
