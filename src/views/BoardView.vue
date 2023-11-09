@@ -2,18 +2,14 @@
   <div>
     <div v-if="isFetchingBoard">Loading board...</div>
     <Board v-if="boardStore.board" />
-    <!-- REVIEW could pass 'fetching' variables as props into their respective components and render spinners there; not sure which is the more reusable approach -->
 
     <transition name="fade">
       <div
         v-if="cardId"
         class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
       >
-        <CardContent
-          v-if="cardStore.cardSummary"
-          @close-button-clicked="router.push(`/board/${boardStore.board.id}`)"
-          :isFetchingCard="isFetchingCard"
-        />
+        <div class="bg-white p-8 rounded-lg">
+          <div v-if="isFetchingCard">Loading card...</div>
           <CardContent
             v-if="cardStore.cardSummary"
             @close-button-clicked="router.push(`/board/${boardStore.board.id}`)"
@@ -76,15 +72,15 @@ watch(
 )
 
 onMounted(async () => {
-  console.log('Board View mounted')
+  isFetchingBoard.value = true
+
   if (props.cardId) {
     isFetchingCard.value = true
     await fetchCard(props.cardId)
-    isFetchingCard.value = false
   }
-
-  isFetchingBoard.value = true
   await fetchBoardData(boardId.value)
+
   isFetchingBoard.value = false
+  isFetchingCard.value = false
 })
 </script>
