@@ -31,12 +31,25 @@ const CardPreview = defineAsyncComponent(
 )
 const router = useRouter()
 const props = defineProps(['list'])
-const store = useCardStore()
 </script>
 
 <style scoped lang="scss">
-h1 {
+h2 {
   font-weight: 600;
   font-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+.drag > div {
+  transform: rotate(3deg);
+}
+
+.ghost {
+  background-color: rgb(226, 226, 226);
+  border-radius: 8px;
+}
+
+.ghost > div {
+  visibility: hidden;
 }
 </style>
