@@ -20,8 +20,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, defineAsyncComponent } from 'vue'
+import { defineAsyncComponent } from 'vue'
 import { useBoardStore } from '@/stores'
+import draggable from 'vuedraggable'
 const List = defineAsyncComponent(() => import('@/components/List.vue'))
 const store = useBoardStore()
 </script>
@@ -30,5 +31,19 @@ const store = useBoardStore()
 h1 {
   font-weight: 600;
   font-size: 1.5rem;
+}
+.flex-container {
+  display: flex;
+  flex-direction: row; /* Align children in a row */
+  gap: 20px; /* Optional: add some space between columns */
+}
+
+.ghost {
+  background-color: rgb(226, 226, 226);
+  border-radius: 8px;
+}
+
+.ghost > div {
+  visibility: hidden;
 }
 </style>
