@@ -1,20 +1,31 @@
 <template>
-  <div class="w-[372px]">
-    <h1>{{ list.name }}</h1>
+  <h2>{{ list.name }}</h2>
 
-    <div v-for="card of list.cards">
-      <CardPreview
-        :card="card"
-        @click="router.push(`/card/${card.id}`)"
-      ></CardPreview>
-    </div>
-  </div>
+  <draggable
+    v-model="list.cards"
+    group="cards"
+    item-key="id"
+    :animation="150"
+    drag-class="drag"
+    ghost-class="ghost"
+    class="space-y-3"
+  >
+    <template #item="{ element: card }">
+      <div>
+        <CardPreview
+          :card="card"
+          @click="router.push(`/card/${card.id}`)"
+        ></CardPreview>
+      </div>
+    </template>
+  </draggable>
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent } from 'vue'
+import { defineAsyncComponent } from 'vue'
 import { useRouter } from 'vue-router'
-import { useCardStore } from '@/stores'
+import { useBoardStore } from '@/stores'
+import draggable from 'vuedraggable'
 const CardPreview = defineAsyncComponent(
   () => import('@/components/CardPreview.vue')
 )
