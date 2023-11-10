@@ -2,11 +2,20 @@
   <div>
     <h1>{{ store.board.name }}</h1>
 
-    <div class="flex">
-      <div v-for="list of store.board.lists">
-        <List :list="list"></List>
-      </div>
-    </div>
+    <draggable
+      v-model="store.board.lists"
+      item-key="id"
+      group="lists"
+      :animation="150"
+      ghost-class="ghost"
+      class="flex-container"
+    >
+      <template #item="{ element: list }">
+        <div class="w-[372px]">
+          <List :list="list"></List>
+        </div>
+      </template>
+    </draggable>
   </div>
 </template>
 
