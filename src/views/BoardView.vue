@@ -10,8 +10,8 @@
       >
         <div class="bg-white p-8 rounded-lg">
           <div v-if="isFetchingCard">Loading card...</div>
-          <CardContent
-            v-if="cardStore.cardSummary"
+          <CardDetails
+            v-else
             @close-button-clicked="router.push(`/board/${boardStore.board.id}`)"
           />
         </div>
@@ -27,8 +27,8 @@ import { doc, getDoc } from 'firebase/firestore'
 import { useCardStore, useBoardStore } from '@/stores'
 import { useRouter } from 'vue-router'
 const Board = defineAsyncComponent(() => import('@/components/Board.vue'))
-const CardContent = defineAsyncComponent(
-  () => import('@/components/CardContent.vue')
+const CardDetails = defineAsyncComponent(
+  () => import('@/components/CardDetails.vue')
 )
 const router = useRouter()
 const cardStore = useCardStore()
@@ -50,7 +50,7 @@ const isFetchingCard = ref(false)
 const fetchCard = async (id: string) => {
   const cardRef = doc(db, 'cards', id)
   const cardDoc = await getDoc(cardRef)
-  if (cardDoc.exists()) cardStore.hydrateCardContent(cardDoc.data())
+  if (cardDoc.exists()) cardStore.hydrateCardDetails(cardDoc.data())
   console.log(cardStore.cardDetails)
 }
 
@@ -62,7 +62,7 @@ watch(
       if (Object.keys(cardStore.cardDetails).length) cardStore.clearCard()
 
       const matchingCard = cardStore.cards.find((card) => card.id === newValue)
-      if (matchingCard) return cardStore.hydrateCardContent(matchingCard)
+      if (matchingCard) return cardStore.hydrateCardDetails(matchingCard)
 
       isFetchingCard.value = true
       await fetchCard(props.cardId)

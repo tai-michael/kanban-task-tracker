@@ -18,6 +18,7 @@ import { ref, onMounted } from 'vue'
 import { db, user, auth } from '@/firebaseInit'
 import { signOut } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
+import CardDetails from '@/components/CardDetails.vue'
 
 const boards = ref([])
 const fetchingBoardsFromBackend = ref(false)

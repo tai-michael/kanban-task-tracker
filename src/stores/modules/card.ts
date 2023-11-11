@@ -34,7 +34,7 @@ export const useCardStore = defineStore('card', () => {
     }
   })
 
-  const hydrateCardContent = (cardContent: object) => {
+  const hydrateCardDetails = (cardContent: object) => {
     cardDetails.value = cardContent
   }
   const memoizeCard = () => {
@@ -51,7 +51,7 @@ export const useCardStore = defineStore('card', () => {
     cardDetails,
     cards,
 
-    hydrateCardContent,
+    hydrateCardDetails,
     memoizeCard,
     clearCard,
   }
