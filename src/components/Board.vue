@@ -20,11 +20,36 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
+import { ref, defineAsyncComponent, watch } from 'vue'
+import { db } from '@/firebaseInit'
+import { setDoc, doc } from 'firebase/firestore'
 import { useBoardStore } from '@/stores'
 import draggable from 'vuedraggable'
 const List = defineAsyncComponent(() => import('@/components/List.vue'))
 const store = useBoardStore()
+const isInitialLoad = ref(true)
+
+const updateBoardInFirestore = async () => {
+  try {
+    const boardRef = doc(db, 'boards_single', store.board.id)
+    await setDoc(boardRef, store.board)
+    console.log('Updated backend with new board')
+  } catch (err) {
+    console.error('Failed to update backend:', err)
+  }
+}
+
+watch(
+  () => store.board,
+  () => {
+    if (isInitialLoad.value) {
+      isInitialLoad.value = false
+      return
+    }
+    updateBoardInFirestore()
+  },
+  { deep: true }
+)
 </script>
 
 <style scoped lang="scss">
