@@ -1,5 +1,6 @@
 import { db } from '@/firebaseInit'
 import { setDoc, doc } from 'firebase/firestore'
+import debounce from 'lodash/debounce'
 
 const updateFirestoreDoc = async (
   collectionId: string,
@@ -15,3 +16,4 @@ const updateFirestoreDoc = async (
   }
 }
 
+export default debounce(updateFirestoreDoc, 1500)
