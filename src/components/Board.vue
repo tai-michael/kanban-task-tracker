@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent, watch } from 'vue'
 import { useBoardStore } from '@/stores'
-import useUpdateFirestoreDoc from '@/composables/useUpdateFirestoreDoc'
+import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import draggable from 'vuedraggable'
 const List = defineAsyncComponent(() => import('@/components/List.vue'))
 const store = useBoardStore()
@@ -36,7 +36,7 @@ watch(
       isInitialLoad.value = false
       return
     }
-    useUpdateFirestoreDoc('boards_single', store.board.id, store.board)
+    updateFirestoreDoc('boards_single', store.board.id, store.board)
   },
   { deep: true }
 )
@@ -62,4 +62,4 @@ h1 {
   visibility: hidden;
 }
 </style>
-@/composables/useUpdateFirestoreDoc
+@/composables/useUpdateFirestoreDoc @/composables/updateFirestoreDoc
