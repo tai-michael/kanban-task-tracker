@@ -21,32 +21,22 @@
 
 <script setup lang="ts">
 import { ref, defineAsyncComponent, watch } from 'vue'
-import { db } from '@/firebaseInit'
-import { setDoc, doc } from 'firebase/firestore'
 import { useBoardStore } from '@/stores'
+import useUpdateFirestoreDoc from '@/composables/useUpdateFirestoreDoc'
 import draggable from 'vuedraggable'
 const List = defineAsyncComponent(() => import('@/components/List.vue'))
 const store = useBoardStore()
 const isInitialLoad = ref(true)
 
-const updateBoardInFirestore = async () => {
-  try {
-    const boardRef = doc(db, 'boards_single', store.board.id)
-    await setDoc(boardRef, store.board)
-    console.log('Updated backend with new board')
-  } catch (err) {
-    console.error('Failed to update backend:', err)
-  }
-}
-
 watch(
   () => store.board,
   () => {
+    // flag needed to avoid triggering watcher when board is initially fetched from backend
     if (isInitialLoad.value) {
       isInitialLoad.value = false
       return
     }
-    updateBoardInFirestore()
+    useUpdateFirestoreDoc('boards_single', store.board.id, store.board)
   },
   { deep: true }
 )
@@ -72,3 +62,4 @@ h1 {
   visibility: hidden;
 }
 </style>
+@/composables/useUpdateFirestoreDoc
