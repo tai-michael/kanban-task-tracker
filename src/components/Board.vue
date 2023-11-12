@@ -31,7 +31,7 @@ const isInitialLoad = ref(true)
 watch(
   () => store.board,
   () => {
-    // flag needed to avoid triggering watcher when board is initially fetched from backend
+    // avoids triggering watcher when board is initially fetched from backend
     if (isInitialLoad.value) {
       isInitialLoad.value = false
       return
@@ -62,4 +62,3 @@ h1 {
   visibility: hidden;
 }
 </style>
-@/composables/useUpdateFirestoreDoc @/composables/updateFirestoreDoc
