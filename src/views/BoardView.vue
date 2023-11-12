@@ -10,7 +10,7 @@
       >
         <div class="bg-white p-8 rounded-lg">
           <div v-if="isFetchingCard">Loading card...</div>
-          <CardDetails
+          <Card
             v-else
             @close-button-clicked="router.push(`/board/${boardStore.board.id}`)"
           />
@@ -27,9 +27,7 @@ import { doc, getDoc } from 'firebase/firestore'
 import { useCardStore, useBoardStore } from '@/stores'
 import { useRouter } from 'vue-router'
 const Board = defineAsyncComponent(() => import('@/components/Board.vue'))
-const CardDetails = defineAsyncComponent(
-  () => import('@/components/CardDetails.vue')
-)
+const Card = defineAsyncComponent(() => import('@/components/Card.vue'))
 const router = useRouter()
 const cardStore = useCardStore()
 const boardStore = useBoardStore()
@@ -45,7 +43,7 @@ const fetchBoardData = async (id: string) => {
   console.log(boardStore.board)
 }
 
-const card = ref({})
+// const card = ref({})
 const isFetchingCard = ref(false)
 const fetchCard = async (id: string) => {
   const cardRef = doc(db, 'cards', id)
