@@ -55,7 +55,7 @@ const fetchCard = async (id: string) => {
 watch(
   () => props.cardId,
   async (newValue, oldValue) => {
-    if (newValue && newValue !== cardStore?.activeCard?.id) {
+    if (newValue && newValue !== cardStore?.cardDetails?.id) {
       console.log('new card id detected')
       if (Object.keys(cardStore.cardDetails).length) cardStore.clearCard()
 

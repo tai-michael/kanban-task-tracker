@@ -4,11 +4,11 @@ import { useRouter, useRoute } from 'vue-router'
 import { useBoardStore } from '@/stores'
 
 export const useCardStore = defineStore('card', () => {
-  const router = useRouter()
-  const route = useRoute()
+  // const router = useRouter()
+  // const route = useRoute()
   const boardStore = useBoardStore()
   const cards = ref([])
-
+  const cardDetails = ref({})
   const cardSummary = computed(() => {
     if (boardStore.board.lists) {
       for (const list of boardStore.board.lists) {
@@ -21,17 +21,6 @@ export const useCardStore = defineStore('card', () => {
     }
 
     return null
-  })
-  // TODO Add watcher or something to App.vue or BoardView.vue for cardStore.cardDetails and cardStore.cardSummary, where if they changed while (cardId === cardStore.activeCard.id), then update the backend for their respective firestore docs
-  const cardDetails = ref({})
-  const activeCard = computed(() => {
-    if (!cardSummary.value) return null
-    return {
-      name: cardSummary.value.name,
-      dueDate: cardSummary.value.due_date,
-      checklistProgress: cardSummary.value.checklist_progress,
-      ...cardDetails.value,
-    }
   })
 
   const hydrateCardDetails = (cardContent: object) => {
@@ -46,7 +35,6 @@ export const useCardStore = defineStore('card', () => {
   }
 
   return {
-    activeCard,
     cardSummary,
     cardDetails,
     cards,
