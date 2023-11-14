@@ -43,7 +43,6 @@ const fetchBoardData = async (id: string) => {
   console.log(boardStore.board)
 }
 
-// const card = ref({})
 const isFetchingCard = ref(false)
 const fetchCard = async (id: string) => {
   const cardRef = doc(db, 'cards', id)

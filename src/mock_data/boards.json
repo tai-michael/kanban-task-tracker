@@ -3,15 +3,15 @@
   "boards": [
     {
       "id": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
-      "name": "Platform Launch"
+      "title": "Platform Launch"
     },
     {
       "id": "8c78c03b-6659-4ab6-9584-88bb9f79f3d1",
-      "name": "Marketing Plan"
+      "title": "Marketing Plan"
     },
     {
       "id": "26c6c6e5-82fc-4bcf-8fba-d20a6c2bdc0c",
-      "name": "Roadmap"
+      "title": "Roadmap"
     }
   ]
 }

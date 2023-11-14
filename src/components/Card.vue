@@ -1,7 +1,7 @@
 <template>
   <button class="mb-4" @click="closeButtonClicked">Close modal</button>
   <ul>
-    <li>{{ store.cardSummary.name }}</li>
+    <li>{{ store.cardSummary.title }}</li>
     <li>{{ store.cardSummary.id }}</li>
     <li>{{ store.cardDetails.description }}</li>
 </template>

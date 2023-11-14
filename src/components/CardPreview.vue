@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li>{{ card.name }}</li>
+      <li>{{ card.title }}</li>
       <li>{{ card.due_date }}</li>
       <li>{{ card.checklist_progress }}</li>
     </ul>

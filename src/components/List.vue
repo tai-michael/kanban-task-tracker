@@ -1,5 +1,5 @@
 <template>
-  <h2>{{ list.name }}</h2>
+  <h2>{{ list.title }}</h2>
 
   <draggable
     v-model="list.cards"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ store.board.name }}</h1>
+    <h1>{{ store.board.title }}</h1>
 
     <draggable
       v-model="store.board.lists"
