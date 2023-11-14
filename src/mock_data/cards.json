@@ -3,19 +3,21 @@
     "id": "c71ce98b-e5b9-4813-aab7-b7114bf31f8f",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "Blah blah blah blah blah blah blah blah blah blah",
-    "status": "(Todo -- prob reference current list name or remove this field altogether, not sure)",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Sign up page",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "10ff97ba-2bc2-40a3-b972-022fa9d9b2e9"
       },
       {
         "name": "Sign in page",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "e7c77138-fe09-4054-90de-cebe885adf1f"
       },
       {
         "name": "Welcome page",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "acbd8f1c-d5b9-445b-b148-ff50cf2f65e3"
       }
     ],
     "attachments": "(attachments)"
@@ -24,11 +26,11 @@
     "id": "848be114-321b-4dc9-86b9-9cd1587f5773",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "",
-    "status": "Todo",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Search page",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "43f44b3e-fa82-43f4-a8d1-f7d32a35c07c"
       }
     ],
     "attachments": "(attachments)"
@@ -37,15 +39,16 @@
     "id": "7875b170-cfb5-4c16-b950-0a0e41a6c408",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "",
-    "status": "Todo",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Account page",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "e9a7f946-1b7e-4f53-830c-6fddeff13816"
       },
       {
         "name": "Billing page",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "b080c46d-8e2c-421d-8572-5d362a7188fe"
       }
     ],
     "attachments": "(attachments)"
@@ -54,15 +57,16 @@
     "id": "68fdd022-f17c-49ff-9aad-187f5fc694f0",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "Once we feel version one is ready, we need to rigorously test it both internally and externally to identify any major gaps.",
-    "status": "Todo",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Internal testing",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "bb579984-0111-4c4c-96b8-c66893359c38"
       },
       {
         "name": "External testing",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "5dd830b7-2e37-41f9-80f6-3e07245c6d3b"
       }
     ],
     "attachments": "(attachments)"
@@ -71,19 +75,21 @@
     "id": "ca299a36-30d3-4991-9a85-6dd3a9009f84",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "",
-    "status": "Doing",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Settings - Account page",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "f07f2624-db23-4cd9-8443-1b9a0f1e7a42"
       },
       {
         "name": "Settings - Billing page",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "497799a3-0312-4691-864e-992983bd73cb"
       },
       {
         "name": "Search page",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "fae8c167-1fc6-4a7a-98db-37212b1d08d8"
       }
     ],
     "attachments": "(attachments)"
@@ -92,19 +98,21 @@
     "id": "d3b08d72-3eed-4bcd-9931-0b58d836ec23",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "",
-    "status": "Doing",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Upgrade plan",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "e8526acc-4db9-4072-8e1a-58b5a060b9d7"
       },
       {
         "name": "Cancel plan",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "39b5004f-bf00-4387-9dc0-4b0048648ac8"
       },
       {
         "name": "Update payment method",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "da0a67cc-e4ce-4ba3-964c-f59c3dc2f54b"
       }
     ],
     "attachments": "(attachments)"
@@ -113,19 +121,21 @@
     "id": "5ee6631c-d7f5-48b2-b430-c28111bec8b1",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "",
-    "status": "Doing",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Sign up page",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "ec3a9a95-fdde-452d-b802-1da3c19260d5"
       },
       {
         "name": "Sign in page",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "5b73d94b-9cb8-444c-9363-c07e9462cbad"
       },
       {
         "name": "Welcome page",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "3c3884bc-cb77-4ac4-b9e9-1dc53081a784"
       }
     ],
     "attachments": "(attachments)"
@@ -134,15 +144,16 @@
     "id": "50ca524d-5cf8-42ae-9e43-a14da2467e74",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "",
-    "status": "Doing",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Add search endpoint",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "0049b249-1bba-409a-bd88-8e9f059362fc"
       },
       {
         "name": "Define search filters",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "31540d87-2243-44fe-9f9f-9890f2a62412"
       }
     ],
     "attachments": "(attachments)"
@@ -151,15 +162,16 @@
     "id": "179c6518-e289-43d1-a78c-428762959293",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "",
-    "status": "Doing",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Define user model",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "3482946c-55c4-43cf-acd1-796a7b067085"
       },
       {
         "name": "Add auth endpoints",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "395a13bc-0d95-4852-8f88-2014f91c5ed9"
       }
     ],
     "attachments": "(attachments)"
@@ -167,20 +179,22 @@
   {
     "id": "269cb304-1ffa-488f-a1fe-1950b9c5cc28",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
-    "description": "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
-    "status": "Doing",
-    "subtasks": [
+    "description": "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the checklist until we have a coherent proposition.",
+    "checklist": [
       {
         "name": "Research competitor pricing and business models",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "1132d6ff-1851-4a56-a4cb-f3f0012fa857"
       },
       {
         "name": "Outline a business model that works for our solution",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "d0cec6d0-74e0-4721-bf55-801c4a4d804b"
       },
       {
         "name": "Talk to potential customers about our proposed solution and ask for fair price expectancy",
-        "isCompleted": false
+        "isCompleted": false,
+        "id": "372cc420-c9ca-4bdb-af34-d50e321572c3"
       }
     ],
     "attachments": "(attachments)"
@@ -189,11 +203,11 @@
     "id": "cd4dd570-aec2-4205-8ef6-79f7caf38a09",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "Ensure the layout continues to make sense and we have strong buy-in from potential users.",
-    "status": "Done",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Complete 5 wireframe prototype tests",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "a0ac07bf-24d4-4e0a-ae9a-5bab483ae2cd"
       }
     ],
     "attachments": "(attachments)"
@@ -202,11 +216,11 @@
     "id": "bd3fa2ca-fa0a-468a-8b25-f4385d8d6251",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "Create a greyscale clickable wireframe prototype to test our asssumptions so far.",
-    "status": "Done",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Create clickable wireframe prototype in Balsamiq",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "d25d4dd2-2ca9-4f88-a8f7-4fe3727f0d41"
       }
     ],
     "attachments": "(attachments)"
@@ -214,20 +228,22 @@
   {
     "id": "a61d3fe1-2543-41c7-bc29-9881b4d8900c",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
-    "description": "Keep iterating through the subtasks until we're clear on the core concepts for the app.",
-    "status": "Done",
-    "subtasks": [
+    "description": "Keep iterating through the checklist until we're clear on the core concepts for the app.",
+    "checklist": [
       {
         "name": "Meet to review notes from previous tests and plan changes",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "a2fe6716-75b3-4701-9027-4301687fcb33"
       },
       {
         "name": "Make changes to paper prototypes",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "2f37f735-ba88-402b-af9c-5a0d69816f19"
       },
       {
         "name": "Conduct 5 usability tests",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "83b1f0ff-b708-41c6-936c-76cdcc00a581"
       }
     ],
     "attachments": "(attachments)"
@@ -236,15 +252,16 @@
     "id": "1098cf21-7886-4a26-b683-943aeb13c076",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "",
-    "status": "Done",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Create paper prototypes for version one",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "67139218-c9ec-4b4c-ab9a-10fccc3ef2fa"
       },
       {
         "name": "Complete 10 usability tests",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "f984e8af-daa5-4dc3-9071-221aeeb2ef5a"
       }
     ],
     "attachments": "(attachments)"
@@ -253,11 +270,11 @@
     "id": "9e5783b6-efad-4e09-b758-1b83224ce264",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "We need to define and refine our core product. Interviews will help us learn common pain points and help us define the strongest MVP.",
-    "status": "Done",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Interview 10 prospective customers",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "1441e8e0-0560-48c5-99d5-16409aba2a8d"
       }
     ],
     "attachments": "(attachments)"
@@ -266,15 +283,16 @@
     "id": "9d0b886c-7adf-4569-9a0a-eed67946e2fd",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "",
-    "status": "Done",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Find direct and indirect competitors",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "d0297589-1bb6-47e5-82ac-1de2b3efbd51"
       },
       {
         "name": "SWOT analysis for each competitor",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "b8dacb94-59fd-4bc7-80a9-22d5abb13f03"
       }
     ],
     "attachments": "(attachments)"
@@ -283,15 +301,16 @@
     "id": "d1352a96-eab7-4e8d-901d-62cad952d51d",
     "boardId": "e58629a1-434f-41b5-b570-d3c2b3c2d168",
     "description": "We need to get a solid overview of the market to ensure we have up-to-date estimates of market size and demand.",
-    "status": "Done",
-    "subtasks": [
+    "checklist": [
       {
         "name": "Write up research analysis",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "9c979752-b6a1-40f3-83c8-237d86efc10a"
       },
       {
         "name": "Calculate TAM",
-        "isCompleted": true
+        "isCompleted": true,
+        "id": "5761a21a-cb01-4389-954e-00310c700783"
       }
     ],
     "attachments": "(attachments)"
