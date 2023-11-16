@@ -1,14 +1,27 @@
 <template>
   <button class="mb-4" @click="closeButtonClicked">Close modal</button>
-  <ul>
-    <li>{{ store.cardSummary.title }}</li>
-    <li>{{ store.cardSummary.id }}</li>
-    <li>{{ store.cardDetails.description }}</li>
+  <ul class="flex flex-col w-full gap-y-3 h-full">
+    <CardTitle />
+    <!-- TODO add due date component -->
+    <CardDescription />
+    <CardChecklist />
+    <!-- TODO add attachment component -->
+  </ul>
 </template>
+
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { watch, onMounted, defineAsyncComponent } from 'vue'
 import { useCardStore } from '@/stores'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
+const CardChecklist = defineAsyncComponent(
+  () => import('@/components/card-details/CardChecklist.vue')
+)
+const CardDescription = defineAsyncComponent(
+  () => import('@/components/card-details/CardDescription.vue')
+)
+const CardTitle = defineAsyncComponent(
+  () => import('@/components/card-details/CardTitle.vue')
+)
 const emit = defineEmits(['closeButtonClicked'])
 const store = useCardStore()
 const closeButtonClicked = () => {
