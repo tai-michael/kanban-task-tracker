@@ -81,3 +81,9 @@ onMounted(async () => {
   isFetchingCard.value = false
 })
 </script>
+
+<style scoped lang="scss">
+// Card {
+//   min-width: 400px;
+// }
+</style>

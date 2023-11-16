@@ -22,7 +22,7 @@ const FirebaseUI = defineAsyncComponent(
 const logo = new URL('@/assets/images/logo-dark.svg', import.meta.url).href
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @media (min-width: 1024px) {
   .sign-in {
     min-height: 100vh;

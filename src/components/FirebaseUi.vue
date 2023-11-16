@@ -42,7 +42,7 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .firebaseui-container {
   width: 360px;
 }
