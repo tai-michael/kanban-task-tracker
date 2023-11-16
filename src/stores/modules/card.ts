@@ -33,6 +33,21 @@ export const useCardStore = defineStore('card', () => {
   const clearCard = () => {
     cardDetails.value = {}
   }
+  const updateCardDescription = (description: string) => {
+    cardDetails.value.description = description
+  }
+  const updateCardTitle = (title: string) => {
+    cardSummary.value.title = title
+  }
+  const addChecklistItem = (item: object) => {
+    cardDetails.value.checklist.push(item)
+  }
+  const updateChecklistItemName = (id: string, name: string) => {
+    const item = cardDetails.value.checklist.find((item) => item.id === id)
+    // console.log(item.name)
+    item.name = name
+    console.log(item.name)
+  }
 
   return {
     cardSummary,
@@ -42,5 +57,9 @@ export const useCardStore = defineStore('card', () => {
     hydrateCardDetails,
     memoizeCard,
     clearCard,
+    updateCardDescription,
+    updateCardTitle,
+    addChecklistItem,
+    updateChecklistItemName,
   }
 })
