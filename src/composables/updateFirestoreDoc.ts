@@ -12,4 +12,4 @@ const updateDoc = async (collectionId: string, documentId: string, newDoc) => {
   }
 }
 
-export default debounce(updateDoc, 1500)
+export default debounce(updateDoc, 500)
