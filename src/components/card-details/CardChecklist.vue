@@ -41,16 +41,18 @@
           </button>
         </div>
       </div>
-      <!-- TODO add checkbox and delete btn + logic (refer to Trello) -->
     </li>
   </ul>
-  <input
-    v-if="isCreatingItem"
-    v-model="newItemName"
-    v-focus="isCreatingItem"
-    @blur="createItem"
-    placeholder="Add an item"
-  />
+  <div v-if="isCreatingItem">
+    <input
+      v-model="newItemName"
+      v-focus="isCreatingItem"
+      @blur="createItem"
+      placeholder="Add an item"
+    />
+    <button @click="createItem">Add</button>
+    <button @click="cancelCreateItem">Cancel</button>
+  </div>
   <button v-else @click="isCreatingItem = true" class="border-2">
     Add a checklist item
   </button>
@@ -65,6 +67,11 @@ const store = useCardStore()
 const isCreatingItem = ref(false)
 const newItemName = ref('')
 const createItem = () => {
+  if (!newItemName.value) {
+    isCreatingItem.value = false
+    return
+  }
+
   const item = {
     id: uuidv4(),
     name: newItemName.value,
@@ -72,6 +79,10 @@ const createItem = () => {
   }
 
   store.addChecklistItem(item)
+  cancelCreateItem()
+}
+
+const cancelCreateItem = () => {
   newItemName.value = ''
   isCreatingItem.value = false
 }
