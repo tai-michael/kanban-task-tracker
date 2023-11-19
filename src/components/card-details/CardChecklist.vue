@@ -3,28 +3,43 @@
     <li
       v-for="item of store.cardDetails.checklist"
       :key="item.id"
-      class="flex flex-col gap-x-3 border-2"
+      class="flex gap-x-3 border-2"
     >
-      <div v-if="item.id === activeItemId" class="flex gap-x-3">
-        <input
-          class="editable-input"
-          v-model="activeItemName"
-          v-focus="item.id === activeItemId"
-          @blur="storeUnsavedItemName(item.name)"
-        />
-        <button @click="saveItemName">Save</button>
-        <button @click="clearItemEdit(item.id)">X</button>
-      </div>
-      <span v-else @click="beginItemNameEdit(item, $event)">
-        {{ item.name }}
-      </span>
-      <div
-        v-if="item.id !== activeItemId && item.unsavedName"
-        class="flex gap-x-3"
-      >
-        <span>You have unsaved changes</span>
-        <button @click="beginItemNameEdit(item, $event)">View edits</button>
-        <button @click="clearItemEdit(item.id)">Discard</button>
+      <input
+        type="checkbox"
+        @click.stop="store.toggleChecklistItemCompleted(item.id)"
+        :checked="item.isCompleted"
+      />
+      <div>
+        <div v-if="item.id === activeItemId" class="flex gap-x-3">
+          <input
+            class="editable-input"
+            v-model="activeItemName"
+            v-focus="item.id === activeItemId"
+            @blur="storeUnsavedItemName(item.name)"
+          />
+          <button @click="saveItemName">Save</button>
+          <button @click="clearItemEdit(item.id)">X</button>
+        </div>
+        <span
+          v-else
+          @click.stop="beginItemNameEdit(item)"
+          :class="{ 'line-through': item.isCompleted }"
+        >
+          {{ item.name }}
+        </span>
+        <div
+          v-if="item.id !== activeItemId && item.unsavedName"
+          class="flex gap-x-3"
+        >
+          <span>You have unsaved edits.</span>
+          <button @click.stop="beginItemNameEdit(item)" class="underline">
+            View edits
+          </button>
+          <button @click="clearItemEdit(item.id)" class="underline">
+            Discard
+          </button>
+        </div>
       </div>
       <!-- TODO add checkbox and delete btn + logic (refer to Trello) -->
     </li>
@@ -63,9 +78,8 @@ const createItem = () => {
 
 const activeItemId = ref('')
 const activeItemName = ref('')
-const beginItemNameEdit = (item: object, e: MouseEvent) => {
+const beginItemNameEdit = (item: object) => {
   // stopping propagation is necessary, as there's a global click handler that triggers clearFocus() for any non 'editable-input' class
-  e.stopPropagation()
   activeItemId.value = item.id
 
   item.unsavedName
