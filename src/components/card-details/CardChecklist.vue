@@ -51,7 +51,7 @@
       placeholder="Add an item"
     />
     <button @click="createItem">Add</button>
-    <button @click="cancelCreateItem">Cancel</button>
+    <button @click="exitItemCreation">Cancel</button>
   </div>
   <button v-else @click="isCreatingItem = true" class="border-2">
     Add a checklist item
@@ -79,10 +79,10 @@ const createItem = () => {
   }
 
   store.addChecklistItem(item)
-  cancelCreateItem()
+  exitItemCreation()
 }
 
-const cancelCreateItem = () => {
+const exitItemCreation = () => {
   newItemName.value = ''
   isCreatingItem.value = false
 }
