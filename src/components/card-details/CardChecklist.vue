@@ -16,6 +16,8 @@
             class="editable-input"
             v-model="activeItemName"
             v-focus="item.id === activeItemId"
+            @keyup.enter="saveItemName"
+            @keyup.esc="clearItemEdit(item.id)"
             @blur="storeUnsavedItemName(item.name)"
           />
           <button @click="saveItemName">Save</button>
@@ -98,7 +100,7 @@ const beginItemNameEdit = (item: object) => {
     : (activeItemName.value = item.name)
 }
 const storeUnsavedItemName = (itemName: string) => {
-  if (activeItemName.value === itemName) return // only store if different
+  if (!activeItemName.value || activeItemName.value === itemName) return // only store if different
   store.storeUnsavedChecklistItemName(activeItemId.value, activeItemName.value)
 }
 const saveItemName = () => {
