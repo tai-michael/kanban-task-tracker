@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h1>{{ store.board.title }}</h1>
+    <Title
+      v-if="store.board.title"
+      :title="store.board.title"
+      @title-edited="changeBoardTitle"
+    />
 
     <draggable
       v-model="store.board.lists"
@@ -24,19 +28,25 @@ import { ref, defineAsyncComponent, watch } from 'vue'
 import { useBoardStore } from '@/stores'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import draggable from 'vuedraggable'
+import Title from '@/components/Title.vue'
 const List = defineAsyncComponent(() => import('@/components/List.vue'))
 const store = useBoardStore()
+const props = defineProps(['title'])
 const isInitialLoad = ref(true)
+const changeBoardTitle = (title: string) => {
+  store.updateBoardTitle(title)
+}
 
 watch(
   () => store.board,
   () => {
+    console.log('triggered board watcher')
     // avoids triggering watcher when board is initially fetched from backend
     if (isInitialLoad.value) {
       isInitialLoad.value = false
       return
     }
-    updateFirestoreDoc('boards_single', store.board.id, store.board)
+    updateFirestoreDoc('boards_single', store.board.id, store.board, true)
   },
   { deep: true }
 )
