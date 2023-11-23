@@ -10,10 +10,15 @@ export const useBoardStore = defineStore('board', () => {
   const hydrateBoard = (backendData: object) => {
     board.value = backendData
   }
+  const updateListTitle = (id: string, title: string) => {
+    const list = board.value.lists.find((list) => list.id === id)
+    list.title = title
+  }
 
   return {
     board,
 
     hydrateBoard,
+    updateListTitle,
   }
 })

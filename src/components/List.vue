@@ -1,5 +1,5 @@
 <template>
-  <h2>{{ list.title }}</h2>
+  <Title :title="list.title" @title-edited="changeListTitle" />
 
   <draggable
     v-model="list.cards"
@@ -26,11 +26,17 @@ import { defineAsyncComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useBoardStore } from '@/stores'
 import draggable from 'vuedraggable'
+import Title from '@/components/Title.vue'
 const CardPreview = defineAsyncComponent(
   () => import('@/components/CardPreview.vue')
 )
+const store = useBoardStore()
 const router = useRouter()
 const props = defineProps(['list'])
+
+const changeListTitle = (title: string) => {
+  store.updateListTitle(props.list.id, title)
+}
 </script>
 
 <style scoped lang="scss">

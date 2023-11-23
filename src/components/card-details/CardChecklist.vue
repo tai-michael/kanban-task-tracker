@@ -16,9 +16,9 @@
             class="editable-input"
             v-model="activeItemName"
             v-focus="item.id === activeItemId"
+            @blur="storeUnsavedItemName(item.name)"
             @keyup.enter="saveItemName"
             @keyup.esc="clearItemEdit(item.id)"
-            @blur="storeUnsavedItemName(item.name)"
           />
           <button @click="saveItemName">Save</button>
           <button @click="clearItemEdit(item.id)">X</button>

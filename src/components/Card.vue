@@ -1,7 +1,7 @@
 <template>
   <button class="mb-4" @click="closeButtonClicked">Close modal</button>
   <ul class="flex flex-col w-full gap-y-3 h-full">
-    <CardTitle />
+    <Title :title="store.cardSummary.title" @title-edited="changeCardTitle" />
     <!-- TODO add due date component -->
     <CardDescription />
     <CardChecklist />
@@ -19,14 +19,17 @@ const CardChecklist = defineAsyncComponent(
 const CardDescription = defineAsyncComponent(
   () => import('@/components/card-details/CardDescription.vue')
 )
-const CardTitle = defineAsyncComponent(
-  () => import('@/components/card-details/CardTitle.vue')
-)
+const Title = defineAsyncComponent(() => import('@/components/Title.vue'))
 const emit = defineEmits(['closeButtonClicked'])
 const store = useCardStore()
 const closeButtonClicked = () => {
   emit('closeButtonClicked')
 }
+
+const changeCardTitle = (title: string) => {
+  store.updateCardTitle(title)
+}
+
 onMounted(() => {
   if (!store.cards.some((card) => card.id === store.cardDetails.id)) {
     console.log('memoizing card')
