@@ -46,7 +46,8 @@ watch(
       isInitialLoad.value = false
       return
     }
-    updateFirestoreDoc('boards_single', store.board.id, store.board, true)
+    // NOTE debounce defaults to true here in case of rapid dragging and dropping of cards
+    updateFirestoreDoc('boards_single', store.board.id, store.board)
   },
   { deep: true }
 )

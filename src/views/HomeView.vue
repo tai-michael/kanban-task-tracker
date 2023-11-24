@@ -14,13 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { db, user, auth } from '@/firebaseInit'
+import { ref, onMounted, watch } from 'vue'
+import { db, auth } from '@/firebaseInit'
 import { signOut } from 'firebase/auth'
-import { doc, getDoc } from 'firebase/firestore'
-import CardDetails from '@/components/CardDetails.vue'
-
-const boards = ref([])
+import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { useBoardStore } from '@/stores'
+const store = useBoardStore()
+const isInitialLoad = ref(true)
 const fetchingBoardsFromBackend = ref(false)
 const fetchBoardsCollection = async (id: string) => {
   const boardsRef = doc(db, 'boards_grouped', id)
@@ -29,12 +29,29 @@ const fetchBoardsCollection = async (id: string) => {
   return boardsDoc.data().boards
 }
 
+watch(
+  () => store.boards,
+  () => {
+    // avoids triggering watcher when board is initially fetched from backend
+    if (isInitialLoad.value) {
+      isInitialLoad.value = false
+      return
+    }
+    console.log('triggered boards watcher')
+    const docRef = doc(db, 'boards_grouped', auth.currentUser.uid)
+    const updatedBoard = {
+      boards: store.boards,
+      id: auth.currentUser.uid,
+    }
+    setDoc(docRef, updatedBoard)
+  },
+  { deep: true }
+)
+
 onMounted(async () => {
   fetchingBoardsFromBackend.value = true
-  boards.value = await fetchBoardsCollection(auth.currentUser.uid)
-  console.log(boards.value)
+  const data = await fetchBoardsCollection(auth.currentUser.uid)
+  store.hydrateBoards(data)
   fetchingBoardsFromBackend.value = false
-  // card1.value = await fetchCard1Data(board1.value.lists[0].cards[0].id)
-  // console.log(card1.value)
 })
 </script>

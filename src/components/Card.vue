@@ -41,7 +41,7 @@ watch(
   () => store.cardDetails,
   () => {
     console.log('triggered card details watcher')
-    updateFirestoreDoc('cards', store.cardDetails.id, store.cardDetails)
+    updateFirestoreDoc('cards', store.cardDetails.id, store.cardDetails, false)
   },
   { deep: true }
 )

@@ -19,7 +19,7 @@ export default function (
   collectionId: string,
   documentId: string,
   newDoc,
-  useDebounce = false
+  useDebounce = true
 ) {
   if (useDebounce) {
     debouncedUpdateDoc(collectionId, documentId, newDoc)
