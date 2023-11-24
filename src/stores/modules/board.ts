@@ -17,7 +17,7 @@ export const useBoardStore = defineStore('board', () => {
   const updateBoardTitle = (title: string) => {
     board.value.title = title
 
-    // updates title in side panel
+    // updates title in side panel; necessary, as they belong in different firestore collections
     const activeBoard = boards.value.find((b) => b.id === board.value.id)
     activeBoard.title = title
   }
@@ -25,11 +25,16 @@ export const useBoardStore = defineStore('board', () => {
     const list = board.value.lists.find((list) => list.id === id)
     list.title = title
   }
+  const addCard = (id: string, card: object) => {
+    const list = board.value.lists.find((l) => l.id === id)
+    list.cards.push(card)
+  }
 
   return {
     boards,
     board,
 
+    addCard,
     hydrateBoards,
     hydrateBoard,
     updateBoardTitle,

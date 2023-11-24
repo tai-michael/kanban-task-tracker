@@ -33,7 +33,7 @@ const changeCardTitle = (title: string) => {
 onMounted(() => {
   if (!store.cards.some((card) => card.id === store.cardDetails.id)) {
     console.log('memoizing card')
-    store.memoizeCard()
+    store.memoizeCard(store.cardDetails)
   }
 })
 

@@ -26,9 +26,9 @@ export const useCardStore = defineStore('card', () => {
   const hydrateCardDetails = (cardContent: object) => {
     cardDetails.value = cardContent
   }
-  const memoizeCard = () => {
+  const memoizeCard = (card: object) => {
     // not pushing activeCard, as that content is always taken from the active board, which has local rather than backend data (no need to refetch)
-    cards.value.push(cardDetails.value)
+    cards.value.push(card)
   }
   const clearCard = () => {
     cardDetails.value = {}

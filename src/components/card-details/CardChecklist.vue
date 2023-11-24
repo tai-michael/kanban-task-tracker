@@ -61,9 +61,9 @@
 </template>
 
 <script setup lang="ts">
-import { v4 as uuidv4 } from 'uuid'
-import { useCardStore } from '@/stores'
 import { onMounted, onUnmounted, ref } from 'vue'
+import { useCardStore } from '@/stores'
+import { v4 as uuidv4 } from 'uuid'
 const store = useCardStore()
 
 const isCreatingItem = ref(false)

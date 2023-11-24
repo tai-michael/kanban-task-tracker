@@ -14,28 +14,67 @@
       <div>
         <CardPreview
           :card="card"
+          :is-creating-card="false"
           @click="router.push(`/card/${card.id}`)"
-        ></CardPreview>
+          class="cursor-pointer"
+        />
       </div>
     </template>
   </draggable>
+
+  <CardPreview
+    v-if="isCreatingCard"
+    :is-creating-card="isCreatingCard"
+    @create-card="createCard"
+  />
+  <button @click="beginCreatingCard" class="border-2">+ Add a card</button>
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
+import { ref, defineAsyncComponent } from 'vue'
+import Title from '@/components/Title.vue'
 import { useRouter } from 'vue-router'
 import { useBoardStore } from '@/stores'
+import { useCardStore } from '@/stores'
 import draggable from 'vuedraggable'
-import Title from '@/components/Title.vue'
+import { v4 as uuidv4 } from 'uuid'
+import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 const CardPreview = defineAsyncComponent(
   () => import('@/components/CardPreview.vue')
 )
-const store = useBoardStore()
+const boardStore = useBoardStore()
+const cardStore = useCardStore()
 const router = useRouter()
 const props = defineProps(['list'])
 
 const changeListTitle = (title: string) => {
-  store.updateListTitle(props.list.id, title)
+  boardStore.updateListTitle(props.list.id, title)
+}
+const isCreatingCard = ref(false)
+
+const beginCreatingCard = () => {
+  isCreatingCard.value = true
+}
+const createCard = (title: string) => {
+  const cardId = uuidv4()
+  const cardSummary = {
+    title: title,
+    id: cardId,
+    due_date: '(due date)',
+    checklist_progress: '(checklist progress)',
+  }
+  const cardDetails = {
+    id: cardId,
+    boardId: boardStore.board.id,
+    description: '',
+    checklist: [],
+    attachments: '(attachments)',
+  }
+
+  boardStore.addCard(props.list.id, cardSummary)
+  cardStore.memoizeCard(cardDetails)
+  updateFirestoreDoc('cards', cardDetails.id, cardDetails, false)
+  isCreatingCard.value = false
 }
 </script>
 
@@ -44,6 +83,7 @@ h2 {
   font-weight: 600;
   font-size: 1rem;
   margin-left: 0.5rem;
+  cursor: pointer;
 }
 
 .drag > div {
@@ -57,5 +97,6 @@ h2 {
 
 .ghost > div {
   visibility: hidden;
+  // opacity: 0.2;
 }
 </style>

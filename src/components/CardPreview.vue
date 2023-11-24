@@ -1,5 +1,14 @@
 <template>
-  <div>
+  <div v-if="isCreatingCard">
+    <input
+      v-model="newCardTitle"
+      v-focus="isCreatingCard"
+      @blur="$emit('create-card', newCardTitle)"
+      placeholder="Add a title for this card"
+    />
+  </div>
+
+  <div v-else>
     <ul>
       <li>{{ card.title }}</li>
       <li>{{ card.due_date }}</li>
@@ -9,10 +18,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent } from 'vue'
+import { ref, defineAsyncComponent, onMounted } from 'vue'
 const Card = defineAsyncComponent(() => import('@/components/CardPreview.vue'))
-
-const props = defineProps(['card'])
+const props = defineProps({
+  card: {
+    type: Object,
+    default: () => ({}),
+    required: false,
+  },
+  isCreatingCard: Boolean,
+})
+const newCardTitle = ref('')
 </script>
 
 <style scoped lang="scss">
