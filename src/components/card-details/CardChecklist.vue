@@ -20,8 +20,9 @@
             @keyup.enter="saveItemName"
             @keyup.esc="clearItemEdit(item.id)"
           />
-          <button @click="saveItemName">Save</button>
-          <button @click="clearItemEdit(item.id)">X</button>
+          <!-- NOTE 'mousedown' needed, as 'blur' triggers before 'click', meaning the button wouldn't exist in DOM, so its click would never trigger -->
+          <button @mousedown="saveItemName">Save</button>
+          <button @mousedown="clearItemEdit(item.id)">X</button>
         </div>
         <span
           v-else
@@ -35,7 +36,7 @@
           class="flex gap-x-3"
         >
           <span>You have unsaved edits.</span>
-          <button @click.stop="beginItemNameEdit(item)" class="underline">
+          <button @click="beginItemNameEdit(item)" class="underline">
             View edits
           </button>
           <button @click="clearItemEdit(item.id)" class="underline">
@@ -49,11 +50,11 @@
     <input
       v-model="newItemName"
       v-focus="isCreatingItem"
-      @blur="createItem"
+      @blur="processItemCreation"
       placeholder="Add an item"
     />
-    <button @click="createItem">Add</button>
-    <button @click="exitItemCreation">Cancel</button>
+    <button @mousedown="processItemCreation">Add</button>
+    <button @mousedown="exitItemCreation">Cancel</button>
   </div>
   <button v-else @click="isCreatingItem = true" class="border-2">
     Add a checklist item
@@ -68,7 +69,7 @@ const store = useCardStore()
 
 const isCreatingItem = ref(false)
 const newItemName = ref('')
-const createItem = () => {
+const processItemCreation = () => {
   if (!newItemName.value) {
     isCreatingItem.value = false
     return
@@ -92,7 +93,6 @@ const exitItemCreation = () => {
 const activeItemId = ref('')
 const activeItemName = ref('')
 const beginItemNameEdit = (item: object) => {
-  // stopping propagation is necessary, as there's a global click handler that triggers clearFocus() for any non 'editable-input' class
   activeItemId.value = item.id
 
   item.unsavedName
@@ -100,8 +100,14 @@ const beginItemNameEdit = (item: object) => {
     : (activeItemName.value = item.name)
 }
 const storeUnsavedItemName = (itemName: string) => {
-  if (!activeItemName.value || activeItemName.value === itemName) return // only store if different
-  store.storeUnsavedChecklistItemName(activeItemId.value, activeItemName.value)
+  // only store if names are different
+  if (activeItemName.value && activeItemName.value !== itemName) {
+    store.storeUnsavedChecklistItemName(
+      activeItemId.value,
+      activeItemName.value
+    )
+  }
+  clearFocus()
 }
 const saveItemName = () => {
   store.updateChecklistItemName(activeItemId.value, activeItemName.value)
@@ -115,18 +121,6 @@ const clearFocus = () => {
   activeItemId.value = ''
   activeItemName.value = ''
 }
-// NOTE Using event listener instead of @blur, as blur triggers its callback immediately upon losing focus, leading to the removal of the 'Save' and 'X' buttons before their click events can be registered. The global click listener, on the other hand, allows for a conditional check that properly registers button clicks before modifying the DOM.
-const handleGlobalClick = (e) => {
-  if (!e.target.classList.contains('editable-input')) {
-    clearFocus()
-  }
-}
-onMounted(() => {
-  window.addEventListener('click', handleGlobalClick)
-})
-onUnmounted(() => {
-  window.removeEventListener('click', handleGlobalClick)
-})
 </script>
 
 <style scoped lang="scss"></style>
