@@ -8,6 +8,14 @@
         placeholder="Add a title for this card"
       />
     </div>
+    <div class="flex gap-x-3">
+      <button @mousedown="processCardCreation" class="border-2 pl-2 pr-2">
+        Save
+      </button>
+      <button @mousedown="resetCardCreationState" class="border-2 pl-2 pr-2">
+        X
+      </button>
+    </div>
   </div>
   <button v-else @click.stop="isCreatingCard = true" class="border-2 pl-2 pr-2">
     + Add a card
