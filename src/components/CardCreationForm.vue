@@ -5,6 +5,8 @@
         v-model="newCardTitle"
         v-focus="isCreatingCard"
         @blur="processCardCreation"
+        @keyup.enter="processCardCreation"
+        @keyup.esc="resetCardCreationState"
         placeholder="Add a title for this card"
         class="w-full"
       />
