@@ -6,6 +6,7 @@
         v-focus="isCreatingCard"
         @blur="processCardCreation"
         placeholder="Add a title for this card"
+        class="w-full"
       />
     </div>
     <div class="flex gap-x-3">
@@ -24,41 +25,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useBoardStore } from '@/stores'
-import { useCardStore } from '@/stores'
-import { v4 as uuidv4 } from 'uuid'
-import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
-const boardStore = useBoardStore()
-const cardStore = useCardStore()
+import createAndAddCard from '@/composables/createAndAddCard'
 const props = defineProps(['listId'])
-
 const isCreatingCard = ref(false)
 const newCardTitle = ref('')
 
 const processCardCreation = () => {
-  if (newCardTitle.value) createAndAddCard(newCardTitle.value)
+  if (newCardTitle.value) createAndAddCard(props.listId, newCardTitle.value)
   resetCardCreationState()
-}
-
-const createAndAddCard = (title: string) => {
-  const cardId = uuidv4()
-  const cardSummary = {
-    title: title,
-    id: cardId,
-    due_date: '(due date)',
-    checklist_progress: '(checklist progress)',
-  }
-  const cardDetails = {
-    id: cardId,
-    boardId: boardStore.board.id,
-    description: '',
-    checklist: [],
-    attachments: '(attachments)',
-  }
-
-  boardStore.addCard(props.listId, cardSummary)
-  cardStore.memoizeCard(cardDetails)
-  updateFirestoreDoc('cards', cardDetails.id, cardDetails, false)
 }
 
 const resetCardCreationState = () => {
@@ -69,6 +43,7 @@ const resetCardCreationState = () => {
 
 <style scoped lang="scss">
 .input-form {
+  display: flex;
   padding: 12px;
   margin: 8px 4px;
   background: #73b2f1;
