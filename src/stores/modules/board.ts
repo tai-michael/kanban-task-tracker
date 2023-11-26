@@ -25,15 +25,26 @@ export const useBoardStore = defineStore('board', () => {
     const list = board.value.lists.find((list) => list.id === id)
     list.title = title
   }
-  const addCard = (id: string, card: object) => {
-    const list = board.value.lists.find((l) => l.id === id)
+  const addCard = (listId: string, card: object) => {
+    const list = board.value.lists.find((l) => l.id === listId)
     list.cards.push(card)
+  }
+  const removeCard = (cardId: string) => {
+    for (const list of board.value.lists) {
+      const cardIndex = list.cards.findIndex((c) => c.id === cardId)
+
+      if (cardIndex !== -1) {
+        list.cards.splice(cardIndex, 1)
+        break
+      }
+    }
   }
 
   return {
     boards,
     board,
 
+    removeCard,
     addCard,
     hydrateBoards,
     hydrateBoard,
