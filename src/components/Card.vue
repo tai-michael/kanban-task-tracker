@@ -1,7 +1,8 @@
 <template>
-  <button class="mb-4" @click="closeButtonClicked">Close modal</button>
+  <button @click="$emit('closeButtonClicked')" class="mb-4">Close modal</button>
+  <button @click="deleteCardAndCloseModal" class="ml-4">Delete card</button>
   <ul class="flex flex-col w-full gap-y-3 h-full">
-    <Title :title="store.cardSummary.title" @title-edited="changeCardTitle" />
+    <Title :title="store.cardSummary?.title" @title-edited="changeCardTitle" />
     <!-- TODO add due date component -->
     <CardDescription />
     <CardChecklist />
@@ -13,6 +14,7 @@
 import { watch, onMounted, defineAsyncComponent } from 'vue'
 import { useCardStore } from '@/stores'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
+import deleteCard from '@/composables/deleteCard'
 const CardChecklist = defineAsyncComponent(
   () => import('@/components/card-details/CardChecklist.vue')
 )
@@ -22,12 +24,14 @@ const CardDescription = defineAsyncComponent(
 const Title = defineAsyncComponent(() => import('@/components/Title.vue'))
 const emit = defineEmits(['closeButtonClicked'])
 const store = useCardStore()
-const closeButtonClicked = () => {
-  emit('closeButtonClicked')
-}
 
 const changeCardTitle = (title: string) => {
   store.updateCardTitle(title)
+}
+
+const deleteCardAndCloseModal = () => {
+  deleteCard(store.cardDetails.id)
+  emit('closeButtonClicked')
 }
 
 onMounted(() => {
