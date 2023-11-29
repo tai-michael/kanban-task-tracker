@@ -21,8 +21,7 @@
     </template>
   </draggable>
 
-  <!-- TODO Add delete card functionality; check figma whether it's on the card preview and/or just in the card modal -->
-  <CardCreationForm :listId="list.id" />
+  <CardComposer :listId="list.id" />
 </template>
 
 <script setup lang="ts">
@@ -34,8 +33,8 @@ import draggable from 'vuedraggable'
 const CardPreview = defineAsyncComponent(
   () => import('@/components/CardPreview.vue')
 )
-const CardCreationForm = defineAsyncComponent(
-  () => import('@/components/CardCreationForm.vue')
+const CardComposer = defineAsyncComponent(
+  () => import('@/components/CardComposer.vue')
 )
 const store = useBoardStore()
 const router = useRouter()
