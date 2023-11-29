@@ -21,6 +21,10 @@ export const useBoardStore = defineStore('board', () => {
     const activeBoard = boards.value.find((b) => b.id === board.value.id)
     activeBoard.title = title
   }
+  const removeList = (listId: string) => {
+    const listIndex = board.value.lists.findIndex((list) => list.id === listId)
+    board.value.lists.splice(listIndex, 1)
+  }
   const updateListTitle = (id: string, title: string) => {
     const list = board.value.lists.find((list) => list.id === id)
     list.title = title
@@ -44,11 +48,12 @@ export const useBoardStore = defineStore('board', () => {
     boards,
     board,
 
-    removeCard,
-    addCard,
     hydrateBoards,
     hydrateBoard,
     updateBoardTitle,
+    removeList,
     updateListTitle,
+    removeCard,
+    addCard,
   }
 })

@@ -1,5 +1,10 @@
 <template>
-  <Title :title="list.title" @title-edited="changeListTitle" />
+  <div class="flex justify-between">
+    <Title :title="list.title" @title-edited="changeListTitle" />
+    <button class="bg-red-400" @click="store.removeList(props.list.id)">
+      Delete List
+    </button>
+  </div>
 
   <draggable
     v-model="list.cards"
