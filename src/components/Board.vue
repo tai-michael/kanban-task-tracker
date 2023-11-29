@@ -6,20 +6,24 @@
       @title-edited="changeBoardTitle"
     />
 
-    <draggable
-      v-model="store.board.lists"
-      item-key="id"
-      group="lists"
-      :animation="150"
-      ghost-class="ghost"
-      class="flex-container"
-    >
-      <template #item="{ element: list }">
-        <div class="w-[372px]">
-          <List :list="list"></List>
-        </div>
-      </template>
-    </draggable>
+    <div class="flex">
+      <draggable
+        v-model="store.board.lists"
+        item-key="id"
+        group="lists"
+        :animation="150"
+        ghost-class="ghost"
+        class="flex-container"
+      >
+        <template #item="{ element: list }">
+          <div class="w-[304px]">
+            <List :list="list"></List>
+          </div>
+        </template>
+      </draggable>
+
+      <ListComposer />
+    </div>
   </div>
 </template>
 
@@ -30,6 +34,9 @@ import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import draggable from 'vuedraggable'
 import Title from '@/components/Title.vue'
 const List = defineAsyncComponent(() => import('@/components/List.vue'))
+const ListComposer = defineAsyncComponent(
+  () => import('@/components/ListComposer.vue')
+)
 const store = useBoardStore()
 const props = defineProps(['title'])
 const isInitialLoad = ref(true)

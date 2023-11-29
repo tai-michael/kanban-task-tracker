@@ -20,6 +20,7 @@
       </button>
     </div>
   </div>
+
   <button v-else @click.stop="isCreatingCard = true" class="border-2 pl-2 pr-2">
     + Add a card
   </button>
