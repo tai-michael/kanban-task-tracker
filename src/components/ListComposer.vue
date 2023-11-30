@@ -50,16 +50,13 @@ const processListCreation = () => {
 const showListComposer = () => {
   isCreatingList.value = true
 }
-
 const hideListComposer = () => {
   isCreatingList.value = false
 }
-
 const handleClickOutside = (e: MouseEvent) => {
   if (composer.value && !composer.value.contains(e.target as Node))
     hideListComposer()
 }
-
 onMounted(() => {
   window.addEventListener('click', handleClickOutside)
 })

@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { db } from '@/firebaseInit'
+import { writeBatch, doc } from 'firebase/firestore'
 
 export const useBoardStore = defineStore('board', () => {
   const router = useRouter()
@@ -24,9 +26,24 @@ export const useBoardStore = defineStore('board', () => {
   const addList = (list: object) => {
     board.value.lists.push(list)
   }
-  const removeList = (listId: string) => {
+  const removeList = async (listId: string) => {
     const listIndex = board.value.lists.findIndex((list) => list.id === listId)
-    board.value.lists.splice(listIndex, 1)
+    if (listIndex === -1) return
+
+    const batch = writeBatch(db)
+    const list = board.value.lists[listIndex]
+    board.value.lists.splice(listIndex, 1) // or put after batch.commit()
+
+    for (const card of list.cards) {
+      const cardDocRef = doc(db, 'cards', card.id)
+      batch.delete(cardDocRef)
+    }
+
+    try {
+      await batch.commit()
+    } catch (error) {
+      console.error('Error deleting cards:', error)
+    }
   }
   const updateListTitle = (id: string, title: string) => {
     const list = board.value.lists.find((list) => list.id === id)
