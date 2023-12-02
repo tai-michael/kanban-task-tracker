@@ -7,7 +7,7 @@
         @blur="processCardCreation"
         @keyup.enter="processCardCreation"
         @keyup.esc="resetCardCreationState"
-        placeholder="Add a title for this card"
+        placeholder="Enter a card title"
         class="w-full"
       />
     </div>
