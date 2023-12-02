@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isFetchingBoard">Loading board...</div>
-    <Board v-if="boardStore.board" />
+    <Board v-else="boardStore.board" />
 
     <transition name="fade">
       <div
