@@ -1,8 +1,9 @@
 <template>
-  <main>DASHBOARD VIEW!</main>
-  <div class="flex flex-col">
+  <header class="mb-4 flex gap-x-2">
+    <span class="font-bold uppercase" @click="router.push('/')">Kanban</span>
     <button @click="signOut(auth)">Sign Out</button>
     <router-link :to="`/admin`">Admin</router-link>
+  </header>
 
     <div v-if="fetchingBoardsFromBackend">Loading...</div>
     <div v-else>
@@ -19,6 +20,8 @@ import { db, auth } from '@/firebaseInit'
 import { signOut } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { useBoardStore } from '@/stores'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const store = useBoardStore()
 const isInitialLoad = ref(true)
 const fetchingBoardsFromBackend = ref(false)
@@ -38,6 +41,8 @@ watch(
       return
     }
     console.log('triggered boards watcher')
+
+    // NOTE opting not to use the updateFirestoreDoc composable, as that one debounces by default, which cancels out
     const docRef = doc(db, 'boards_grouped', auth.currentUser.uid)
     const updatedBoard = {
       boards: store.boards,
