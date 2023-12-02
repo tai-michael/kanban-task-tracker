@@ -5,13 +5,12 @@
     <router-link :to="`/admin`">Admin</router-link>
   </header>
 
-    <div v-if="fetchingBoardsFromBackend">Loading...</div>
-    <div v-else>
-      <div v-for="board in boards" :key="board.id">
-        <router-link :to="`/boards/${board.id}`">{{ board.name }}</router-link>
-      </div>
+  <main class="flex w-full h-[95vh]">
+    <SidePanel :fetching-boards-from-backend="fetchingBoardsFromBackend" />
+    <div class="flex-grow overflow-x-auto">
+      <router-view></router-view>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -21,6 +20,7 @@ import { signOut } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { useBoardStore } from '@/stores'
 import { useRouter } from 'vue-router'
+import SidePanel from '@/components/SidePanel.vue'
 const router = useRouter()
 const store = useBoardStore()
 const isInitialLoad = ref(true)
