@@ -3,17 +3,18 @@ import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { db } from '@/firebaseInit'
 import { writeBatch, doc } from 'firebase/firestore'
+import type { Board, List, CardSummary } from '@/types'
 
 export const useBoardStore = defineStore('board', () => {
   const router = useRouter()
   const route = useRoute()
 
-  const boards = ref([])
-  const board = ref({})
-  const hydrateBoards = (backendData) => {
+  const boards = ref<Board[]>([])
+  const board = ref<Board | null>({})
+  const hydrateBoards = (backendData: Board[]) => {
     boards.value = backendData
   }
-  const hydrateBoard = (backendData: object) => {
+  const hydrateBoard = (backendData: Board) => {
     board.value = backendData
   }
   const updateBoardTitle = (title: string) => {
@@ -23,7 +24,7 @@ export const useBoardStore = defineStore('board', () => {
     const activeBoard = boards.value.find((b) => b.id === board.value.id)
     activeBoard.title = title
   }
-  const addList = (list: object) => {
+  const addList = (list: List) => {
     board.value.lists.push(list)
   }
   const removeList = async (listId: string) => {
@@ -49,7 +50,7 @@ export const useBoardStore = defineStore('board', () => {
     const list = board.value.lists.find((list) => list.id === id)
     list.title = title
   }
-  const addCard = (listId: string, card: object) => {
+  const addCard = (listId: string, card: CardSummary) => {
     const list = board.value.lists.find((l) => l.id === listId)
     list.cards.push(card)
   }

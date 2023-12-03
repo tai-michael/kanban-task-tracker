@@ -2,13 +2,14 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useBoardStore } from '@/stores'
+import type { CardDescription, ChecklistItem } from '@/types'
 
 export const useCardStore = defineStore('card', () => {
   // const router = useRouter()
   // const route = useRoute()
   const boardStore = useBoardStore()
-  const cards = ref([])
-  const cardDetails = ref({})
+  const cards = ref<CardDescription[]>([])
+  const cardDetails = ref<CardDescription | null>({})
   const cardSummary = computed(() => {
     if (boardStore.board.lists) {
       for (const list of boardStore.board.lists) {
@@ -23,10 +24,10 @@ export const useCardStore = defineStore('card', () => {
     return null
   })
 
-  const hydrateCardDetails = (cardContent: object) => {
+  const hydrateCardDetails = (cardContent: CardDescription) => {
     cardDetails.value = cardContent
   }
-  const memoizeCard = (card: object) => {
+  const memoizeCard = (card: CardDescription) => {
     // not pushing activeCard, as that content is always taken from the active board, which has local rather than backend data (no need to refetch)
     cards.value.push(card)
   }
@@ -39,7 +40,7 @@ export const useCardStore = defineStore('card', () => {
   const updateCardTitle = (title: string) => {
     cardSummary.value.title = title
   }
-  const addChecklistItem = (item: object) => {
+  const addChecklistItem = (item: ChecklistItem) => {
     cardDetails.value.checklist.push(item)
   }
   const updateChecklistItemName = (id: string, name: string) => {

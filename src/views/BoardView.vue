@@ -6,9 +6,9 @@
     <transition name="fade">
       <div
         v-if="cardId"
-        class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
+        class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto"
       >
-        <div class="bg-white p-8 rounded-lg">
+        <div class="bg-white p-8 rounded-lg w-[400px] min-h-[300px]">
           <div v-if="isFetchingCard">Loading card...</div>
           <Card
             v-else
