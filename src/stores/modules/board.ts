@@ -24,6 +24,11 @@ export const useBoardStore = defineStore('board', () => {
     const activeBoard = boards.value.find((b) => b.id === board.value.id)
     activeBoard.title = title
   }
+
+  const isCreatingNewBoard = ref(false)
+  const toggleBoardComposer = () => {
+    isCreatingNewBoard.value = !isCreatingNewBoard.value
+  }
   const addList = (list: List) => {
     board.value.lists.push(list)
   }
@@ -68,10 +73,12 @@ export const useBoardStore = defineStore('board', () => {
   return {
     boards,
     board,
+    isCreatingNewBoard,
 
     hydrateBoards,
     hydrateBoard,
     updateBoardTitle,
+    toggleBoardComposer,
     addList,
     removeList,
     updateListTitle,
