@@ -53,7 +53,7 @@ const fetchCard = async (id: string) => {
 
 watch(
   () => props.cardId,
-  async (newValue, oldValue) => {
+  async (newValue) => {
     if (newValue && newValue !== cardStore?.cardDetails?.id) {
       console.log('new card id detected')
       if (Object.keys(cardStore.cardDetails).length) cardStore.clearCard()
@@ -64,6 +64,19 @@ watch(
       isFetchingCard.value = true
       await fetchCard(props.cardId)
       isFetchingCard.value = false
+    }
+  }
+)
+
+watch(
+  () => props.boardId,
+  async (newValue) => {
+    if (newValue && newValue !== boardStore?.board?.id) {
+      console.log('new board id detected')
+
+      isFetchingBoard.value = true
+      await fetchBoardData(props.boardId)
+      isFetchingBoard.value = false
     }
   }
 )
