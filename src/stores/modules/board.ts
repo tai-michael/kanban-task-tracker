@@ -3,18 +3,18 @@ import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { db } from '@/firebaseInit'
 import { writeBatch, doc } from 'firebase/firestore'
-import type { Board, List, CardSummary } from '@/types'
+import type { BoardMeta, BoardDetails, List, CardSummary } from '@/types'
 
 export const useBoardStore = defineStore('board', () => {
   const router = useRouter()
   const route = useRoute()
 
-  const boards = ref<Board[]>([])
-  const board = ref<Board | null>({})
-  const hydrateBoards = (backendData: Board[]) => {
+  const boards = ref<BoardMeta[]>([])
+  const board = ref<BoardDetails | null>({})
+  const hydrateBoards = (backendData: BoardMeta[]) => {
     boards.value = backendData
   }
-  const hydrateBoard = (backendData: Board) => {
+  const hydrateBoard = (backendData: BoardDetails) => {
     board.value = backendData
   }
   const updateBoardTitle = (title: string) => {

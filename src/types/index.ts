@@ -1,8 +1,13 @@
 export type ID = string
 
-// export type Boards = Board[]
+// export type Boards = Board[] // probably unnecessary
 
-export interface Board {
+export interface BoardMeta {
+  id: ID
+  title: string
+}
+
+export interface BoardDetails {
   id: ID
   title: string
   lists: List[]
@@ -17,8 +22,8 @@ export interface List {
 export interface CardSummary {
   id: ID
   title: string
-  due_date: Date
-  checklist_progress: string // change later probably
+  due_date: string // TODO change later probably to 'Date'
+  checklist_progress: string // TODO change later probably
 }
 
 export interface CardDescription {
@@ -26,7 +31,7 @@ export interface CardDescription {
   boardId: ID
   description: string
   checklist: ChecklistItem[]
-  attachments: string // change later
+  attachments: string // TODO change later
 }
 
 export interface ChecklistItem {

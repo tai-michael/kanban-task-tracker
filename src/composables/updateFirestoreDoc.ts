@@ -1,7 +1,7 @@
 import { db } from '@/firebaseInit'
 import { setDoc, doc } from 'firebase/firestore'
 import debounce from 'lodash/debounce'
-import type { Card, Board } from '@/types'
+import type { CardDescription, BoardDetails } from '@/types'
 
 const updateDoc = async (collectionId: string, documentId: string, newDoc) => {
   try {
@@ -18,7 +18,7 @@ const debouncedUpdateDoc = debounce(updateDoc, 500)
 export default function (
   collectionId: string,
   documentId: string,
-  newDoc,
+  newDoc: CardDescription | BoardDetails,
   useDebounce = true
 ) {
   if (useDebounce) {
