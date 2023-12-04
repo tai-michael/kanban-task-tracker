@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isFetchingBoard">Loading board...</div>
-    <Board v-else="boardStore.board" />
+    <Board v-if="!isFetchingBoard && Object.keys(boardStore.board).length" />
 
     <transition name="fade">
       <div
@@ -11,7 +11,7 @@
         <div class="bg-white p-8 rounded-lg w-[400px] min-h-[300px]">
           <div v-if="isFetchingCard">Loading card...</div>
           <Card
-            v-else
+            v-if="!isFetchingCard && Object.keys(cardStore.cardDetails).length"
             @close-button-clicked="router.push(`/board/${boardStore.board.id}`)"
           />
         </div>
@@ -24,40 +24,65 @@
 import { ref, computed, defineAsyncComponent, onMounted, watch } from 'vue'
 import { db } from '@/firebaseInit'
 import { doc, getDoc } from 'firebase/firestore'
-import { useCardStore, useBoardStore } from '@/stores'
+import { useCardStore, useBoardStore, useErrorStore } from '@/stores'
 import { useRouter } from 'vue-router'
 const Board = defineAsyncComponent(() => import('@/components/Board.vue'))
 const Card = defineAsyncComponent(() => import('@/components/Card.vue'))
 const router = useRouter()
 const cardStore = useCardStore()
 const boardStore = useBoardStore()
+const errorStore = useErrorStore()
 const props = defineProps(['cardId', 'boardId'])
 
 const boardId = computed(() => props.boardId || cardStore.cardDetails.boardId)
 
 const isFetchingBoard = ref(false)
 const fetchBoardData = async (id: string) => {
-  const boardRef = doc(db, 'boards_single', id)
-  const boardDoc = await getDoc(boardRef)
-  if (boardDoc.exists()) boardStore.hydrateBoard(boardDoc.data())
-  console.log(boardStore.board)
+  try {
+    const boardRef = doc(db, 'boards_single', id)
+    const boardDoc = await getDoc(boardRef)
+
+    if (boardDoc.exists()) {
+      boardStore.hydrateBoard(boardDoc.data())
+      console.log(boardStore.board)
+    } else {
+      errorStore.triggerError(
+        "The link you entered does not look like a valid Kanban link. If someone gave you this link, you may need to ask them to check that it's correct"
+      )
+    }
+  } catch (err) {
+    console.error('Error fetching board:', err)
+  }
 }
 
 const isFetchingCard = ref(false)
 const fetchCard = async (id: string) => {
-  const cardRef = doc(db, 'cards', id)
-  const cardDoc = await getDoc(cardRef)
-  if (cardDoc.exists()) cardStore.hydrateCardDetails(cardDoc.data())
-  console.log(cardStore.cardDetails)
+  try {
+    const cardRef = doc(db, 'cards', id)
+    const cardDoc = await getDoc(cardRef)
+
+    if (cardDoc.exists()) {
+      cardStore.hydrateCardDetails(cardDoc.data())
+      console.log(cardStore.cardDetails)
+    } else {
+      errorStore.triggerError(
+        "The link you entered does not look like a valid Kanban link. If someone gave you this link, you may need to ask them to check that it's correct"
+      )
+    }
+  } catch (err) {
+    console.error('Error fetching card:', err)
+  }
 }
 
 watch(
   () => props.cardId,
   async (newValue) => {
+    // second condition prevents clearing card and 'find' from triggering if closing and reopening card
     if (newValue && newValue !== cardStore?.cardDetails?.id) {
       console.log('new card id detected')
       if (Object.keys(cardStore.cardDetails).length) cardStore.clearCard()
 
+      // speeds up switching between already opened cards
       const matchingCard = cardStore.cards.find((card) => card.id === newValue)
       if (matchingCard) return cardStore.hydrateCardDetails(matchingCard)
 
@@ -71,6 +96,7 @@ watch(
 watch(
   () => props.boardId,
   async (newValue) => {
+    // second condition prevents refetching board from closing a card
     if (newValue && newValue !== boardStore?.board?.id) {
       console.log('new board id detected')
 
