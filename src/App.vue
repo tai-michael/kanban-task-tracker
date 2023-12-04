@@ -18,7 +18,7 @@
     </div>
   </header> -->
 
-  <PageNotFound v-if="errorStore.showErrorPage" />
+  <PageNotFoundView v-if="errorStore.showErrorPage" />
   <RouterView v-else />
 </template>
 
@@ -35,6 +35,8 @@ const router = useRouter()
 onMounted(() => {})
 const PageNotFound = defineAsyncComponent(
   () => import('@/components/PageNotFound.vue')
+const PageNotFoundView = defineAsyncComponent(
+  () => import('@/views/PageNotFoundView.vue')
 )
 const errorStore = useErrorStore()
 </script>
