@@ -6,18 +6,27 @@
     </header>
 
     <input
+      v-model="boardTitle"
       v-focus
       class="px-2 py-1.5 mb-6 rounded-sm"
       placeholder="Enter a title"
     />
-    <button class="bg-blue-300 hover:bg-blue-200 rounded p-1">Create</button>
+    <button
+      @click="createAndAddBoard(boardTitle)"
+      class="bg-blue-300 hover:bg-blue-200 rounded p-1"
+    >
+      Create
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useBoardStore } from '@/stores'
+import createAndAddBoard from '@/composables/createAndAddBoard'
 const store = useBoardStore()
+const boardTitle = ref('')
+
 // onMounted(() => {
 // })
 
