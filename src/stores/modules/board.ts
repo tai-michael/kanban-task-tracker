@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { db } from '@/firebaseInit'
-import { writeBatch, doc } from 'firebase/firestore'
+import { writeBatch, doc, deleteDoc } from 'firebase/firestore'
 import type { BoardMeta, BoardDetails, List, CardSummary } from '@/types'
 
 export const useBoardStore = defineStore('board', () => {
@@ -71,12 +71,45 @@ export const useBoardStore = defineStore('board', () => {
   const removeCard = (cardId: string) => {
     for (const list of board.value.lists) {
       const cardIndex = list.cards.findIndex((c) => c.id === cardId)
+      if (cardIndex === -1) return
 
-      if (cardIndex !== -1) {
-        list.cards.splice(cardIndex, 1)
-        break
-      }
+      list.cards.splice(cardIndex, 1)
+      break
     }
+  }
+  const removeBoardFromSingleBoardsCollection = () => {
+    deleteDoc(doc(db, 'boards_single', board.value.id))
+  }
+  const removeBoardFromSidePanel = () => {
+    const boardIndex = boards.value.findIndex((b) => b.id === board.value.id)
+
+    if (boardIndex === -1) return
+    boards.value.splice(boardIndex, 1)
+  }
+  const removeCardDescriptionsFromBackend = async () => {
+    const batch = writeBatch(db)
+
+    const cardIds = board.value.lists.flatMap((list) =>
+      list.cards.map((card) => card.id)
+    )
+
+    cardIds.forEach((id) => {
+      const cardDocRef = doc(db, 'cards', id)
+      batch.delete(cardDocRef)
+    })
+
+    try {
+      await batch.commit()
+    } catch (error) {
+      console.error('Error deleting cards:', error)
+    }
+  }
+  const deleteBoard = () => {
+    removeBoardFromSingleBoardsCollection()
+    removeBoardFromSidePanel()
+    removeCardDescriptionsFromBackend()
+    clearBoard()
+    router.replace('/')
   }
 
   return {
@@ -85,7 +118,7 @@ export const useBoardStore = defineStore('board', () => {
     isCreatingNewBoard,
 
     addBoard,
-    clearBoard,
+    deleteBoard,
     hydrateBoards,
     hydrateBoard,
     updateBoardTitle,
@@ -93,7 +126,7 @@ export const useBoardStore = defineStore('board', () => {
     addList,
     removeList,
     updateListTitle,
-    removeCard,
     addCard,
+    removeCard,
   }
 })

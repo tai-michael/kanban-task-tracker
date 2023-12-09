@@ -1,10 +1,15 @@
 <template>
   <div>
-    <Title
-      v-if="store.board.title"
-      :title="store.board.title"
-      @title-edited="changeBoardTitle"
-    />
+    <div class="flex justify-between">
+      <Title
+        v-if="store.board.title"
+        :title="store.board.title"
+        @title-edited="changeBoardTitle"
+      />
+      <button @click="handleDeleteBoard" class="p-1 mr-2 bg-red-200">
+        Delete Board
+      </button>
+    </div>
 
     <div class="flex">
       <draggable
@@ -41,6 +46,10 @@ const store = useBoardStore()
 const props = defineProps(['title'])
 const changeBoardTitle = (title: string) => {
   store.updateBoardTitle(title)
+}
+
+const handleDeleteBoard = () => {
+  store.deleteBoard()
 }
 
 watch(
