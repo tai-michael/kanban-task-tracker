@@ -18,27 +18,18 @@
     </div>
   </header> -->
 
-  <PageNotFoundView v-if="errorStore.showErrorPage" />
-  <RouterView v-else />
+  <RouterView />
 </template>
 
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import { ref, onMounted } from 'vue'
-import { ref, onMounted, defineAsyncComponent } from 'vue'
+import { onMounted, defineAsyncComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { isAuthenticated } from '@/firebaseInit'
-
-import { useErrorStore } from '@/stores'
 const router = useRouter()
-
-onMounted(() => {})
-const PageNotFound = defineAsyncComponent(
-  () => import('@/components/PageNotFound.vue')
 const PageNotFoundView = defineAsyncComponent(
   () => import('@/views/PageNotFoundView.vue')
 )
-const errorStore = useErrorStore()
 </script>
 
 <style scoped>

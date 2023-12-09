@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onUnmounted } from 'vue'
 import { useErrorStore } from '@/stores'
 const store = useErrorStore()
 const errMessage = computed(
@@ -14,6 +14,8 @@ const errMessage = computed(
     store.errorMessage ||
     'The link you entered does not look like a valid Kanban link'
 )
+
+onUnmounted(() => store.clearError())
 </script>
 
 <style scoped lang="scss"></style>

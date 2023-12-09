@@ -1,25 +1,32 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export const useErrorStore = defineStore('error', () => {
-  const showErrorPage = ref(false)
+  const router = useRouter()
   const errorMessage = ref('')
 
-  const setError = (showError: boolean, message: string) => {
-    showErrorPage.value = showError
+  const setErrorMessage = (message: string) => {
     errorMessage.value = message
   }
 
   const triggerError = (message: string) => {
-    setError(true, message)
+    setErrorMessage(message)
+    router.replace({
+      name: 'page-not-found',
+      params: {
+        pathMatch: router.currentRoute.value.path.split('/').slice(1),
+      },
+      query: router.currentRoute.value.query,
+      hash: router.currentRoute.value.hash,
+    })
   }
 
   const clearError = () => {
-    setError(false, '')
+    setErrorMessage('')
   }
 
   return {
-    showErrorPage,
     errorMessage,
 
     triggerError,

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { isAuthenticated } from '@/firebaseInit'
-import { useCardStore, useErrorStore } from '@/stores'
+// import { useCardStore, useErrorStore } from '@/stores'
 // import Home from '@/views/HomeView.vue';
 
 const router = createRouter({
@@ -35,12 +35,15 @@ const router = createRouter({
       name: 'admin',
       component: () => import('@/views/AdminView.vue'),
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'page-not-found',
+      component: () => import('@/views/PageNotFoundView.vue'),
+    },
   ],
 })
 
 router.beforeEach((to, from, next) => {
-  const errorStore = useErrorStore()
-
   if (to.path === '/sign-in' && isAuthenticated.value) {
     next('/')
     return
@@ -51,16 +54,6 @@ router.beforeEach((to, from, next) => {
     return
   }
 
-  // Check for non-existent routes or existing error message (set in BoardView when no id for board found)
-  if (!router.hasRoute(to.name) || errorStore.errorMessage) {
-    // Set error message and show error component without changing URL
-    if (!errorStore.errorMessage) errorStore.triggerError('')
-    next(false)
-    return
-  }
-
-  // Clear any existing error
-  errorStore.clearError()
   next()
 })
 

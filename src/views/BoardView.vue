@@ -21,7 +21,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, defineAsyncComponent, onMounted, watch } from 'vue'
+import {
+  ref,
+  computed,
+  defineAsyncComponent,
+  onMounted,
+  watch,
+  onBeforeMount,
+} from 'vue'
 import { db } from '@/firebaseInit'
 import { doc, getDoc } from 'firebase/firestore'
 import { useCardStore, useBoardStore, useErrorStore } from '@/stores'
@@ -107,7 +114,7 @@ watch(
   }
 )
 
-onMounted(async () => {
+onBeforeMount(async () => {
   isFetchingBoard.value = true
 
   if (props.cardId) {
