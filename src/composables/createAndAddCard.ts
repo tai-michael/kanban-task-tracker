@@ -24,5 +24,5 @@ export default function (listId: string, title: string) {
 
   boardStore.addCard(listId, cardSummary)
   cardStore.memoizeCard(cardDetails)
-  updateFirestoreDoc('cards', cardDetails.id, cardDetails, false)
+  updateFirestoreDoc('cards', cardId, cardDetails, false)
 }

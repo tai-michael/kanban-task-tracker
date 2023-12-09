@@ -39,7 +39,6 @@ const ListComposer = defineAsyncComponent(
 )
 const store = useBoardStore()
 const props = defineProps(['title'])
-const isInitialLoad = ref(true)
 const changeBoardTitle = (title: string) => {
   store.updateBoardTitle(title)
 }
@@ -47,12 +46,6 @@ const changeBoardTitle = (title: string) => {
 watch(
   () => store.board,
   () => {
-    console.log('triggered board watcher')
-    // avoids triggering watcher when board is initially fetched from backend
-    if (isInitialLoad.value) {
-      isInitialLoad.value = false
-      return
-    }
     // NOTE debounce defaults to true here in case of rapid dragging and dropping of cards
     updateFirestoreDoc('boards_single', store.board.id, store.board)
   },
