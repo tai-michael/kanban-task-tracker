@@ -11,6 +11,19 @@ export const useBoardStore = defineStore('board', () => {
 
   const boards = ref<BoardMeta[]>([])
   const board = ref<BoardDetails | null>({})
+
+  const isCreatingNewBoard = ref(false)
+  const toggleBoardComposer = () => {
+    isCreatingNewBoard.value = !isCreatingNewBoard.value
+  }
+  const addBoard = (board: BoardMeta) => {
+    boards.value.push(board)
+  }
+  const clearBoard = () => {
+    board.value = {}
+    console.log('board cleared')
+  }
+
   const hydrateBoards = (backendData: BoardMeta[]) => {
     boards.value = backendData
   }
@@ -25,10 +38,6 @@ export const useBoardStore = defineStore('board', () => {
     activeBoard.title = title
   }
 
-  const isCreatingNewBoard = ref(false)
-  const toggleBoardComposer = () => {
-    isCreatingNewBoard.value = !isCreatingNewBoard.value
-  }
   const addList = (list: List) => {
     board.value.lists.push(list)
   }
@@ -75,6 +84,8 @@ export const useBoardStore = defineStore('board', () => {
     board,
     isCreatingNewBoard,
 
+    addBoard,
+    clearBoard,
     hydrateBoards,
     hydrateBoard,
     updateBoardTitle,

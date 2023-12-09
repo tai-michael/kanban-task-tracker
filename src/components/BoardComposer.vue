@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col bg-gray-200 w-full h-full p-3">
+  <div ref="composer" class="flex flex-col bg-gray-200 w-full h-full p-3">
     <header>
       <h2>Create board</h2>
       <button @click="store.toggleBoardComposer">X</button>
@@ -13,6 +13,8 @@
     />
     <button
       @click="createAndAddBoard(boardTitle)"
+      :disabled="!boardTitle"
+      :class="{ '!bg-gray-300': !boardTitle }"
       class="bg-blue-300 hover:bg-blue-200 rounded p-1"
     >
       Create
@@ -21,14 +23,23 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, type Ref } from 'vue'
 import { useBoardStore } from '@/stores'
 import createAndAddBoard from '@/composables/createAndAddBoard'
 const store = useBoardStore()
 const boardTitle = ref('')
+const composer: Ref<HTMLElement | null> = ref(null)
 
-// onMounted(() => {
-// })
+const handleClickOutside = (e: MouseEvent) => {
+  if (composer.value && !composer.value.contains(e.target as Node))
+    store.toggleBoardComposer()
+}
+onMounted(() => {
+  window.addEventListener('click', handleClickOutside)
+})
+onUnmounted(() => {
+  window.removeEventListener('click', handleClickOutside)
+})
 
 // TODO add event handler for clicking outside this component
 // NOTE board in boards_grouped is just 'id' and 'title', in boards_single is 'id', 'title', and 'lists': []

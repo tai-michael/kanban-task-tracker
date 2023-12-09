@@ -11,7 +11,7 @@
           }}</router-link>
         </li>
         <button
-          @click="store.toggleBoardComposer"
+          @click.stop="store.toggleBoardComposer"
           class="bg-green-400 rounded p-1 hover:bg-green-300"
         >
           + Create new board
