@@ -2,7 +2,6 @@
   <div>
     <label>Due Date:</label>
     <VueDatePicker
-      v-model="date"
       @update:model-value="handleDateSelected"
       time-picker-inline
       select-text="Save"
@@ -11,10 +10,11 @@
       <template #trigger>
         <div class="flex gap-x-2">
           <input
-            type="text"
             :value="formattedDueDate"
-            class="w-[150px] p-1 border-2"
+            type="text"
+            readonly
             placeholder="Select Date"
+            class="w-[150px] p-1 border-2 cursor-pointer"
           /><span
             v-if="formattedDueDate && isOverdue"
             class="bg-red-400 p-1 flex items-center"
@@ -30,11 +30,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { ref, computed } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import type { DatePickerInstance } from '@vuepic/vue-datepicker'
-const props = defineProps(['date'])
+const props = defineProps(['dueDate'])
 
 const datePicker = ref<DatePickerInstance>(null)
 const handleClearDueDate = () => {
@@ -44,8 +44,14 @@ const handleClearDueDate = () => {
   }
 }
 
-const date = ref()
-const formatDate = (date: Date) => {
+const dueDate = computed(() => {
+  if (!props.dueDate) return ''
+  return props.dueDate.seconds
+    ? new Date(props.dueDate.seconds * 1000)
+    : props.dueDate
+})
+
+const formatDate = (date) => {
   if (!date) return ''
   return `${date.getMonth() + 1}/${date.getDate()} at ${date.getHours()}:${date
     .getMinutes()
@@ -53,22 +59,15 @@ const formatDate = (date: Date) => {
     .padStart(2, '0')}`
 }
 
-const formattedDueDate = computed(() => formatDate(date.value))
+const formattedDueDate = computed(() => formatDate(dueDate.value))
 
 const emit = defineEmits(['dateSelected'])
-const handleDateSelected = (modelData: Date) => {
-  console.log(modelData)
-  emit('dateSelected', modelData)
+const handleDateSelected = (date: Date) => {
+  emit('dateSelected', date)
 }
 
 const isOverdue = computed(() => {
-  return date.value < new Date()
-})
-
-onMounted(() => {
-  // convert Firestore timestamp to Date format
-  if (!props.date) return
-  date.value = new Date(props.date.seconds * 1000)
+  return dueDate.value < new Date()
 })
 </script>
 

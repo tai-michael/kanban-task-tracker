@@ -5,7 +5,7 @@
     <Title :title="store.cardSummary?.title" @title-edited="changeCardTitle" />
     <!-- TODO add due date component -->
     <CardDatePicker
-      :date="store.cardSummary?.due_date"
+      :due-date="store.cardSummary?.due_date"
       @date-selected="changeCardDueDate"
     />
     <CardDescription />
