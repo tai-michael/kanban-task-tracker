@@ -50,6 +50,7 @@ const changeBoardTitle = (title: string) => {
 
 const handleDeleteBoard = () => {
   store.deleteBoard()
+  // TODO add toast or something similar
 }
 
 watch(

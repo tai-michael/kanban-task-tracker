@@ -8,7 +8,7 @@ export const useCardStore = defineStore('card', () => {
   // const router = useRouter()
   // const route = useRoute()
   const boardStore = useBoardStore()
-  const cards = ref<CardDescription[]>([])
+  const memoizedCards = ref<CardDescription[]>([])
   const cardDetails = ref<CardDescription | null>({})
   const cardSummary = computed(() => {
     if (boardStore.board.lists) {
@@ -29,7 +29,7 @@ export const useCardStore = defineStore('card', () => {
   }
   const memoizeCard = (card: CardDescription) => {
     // not pushing activeCard, as that content is always taken from the active board, which has local rather than backend data (no need to refetch)
-    cards.value.push(card)
+    memoizedCards.value.push(card)
   }
   const clearCard = () => {
     cardDetails.value = {}
@@ -63,7 +63,7 @@ export const useCardStore = defineStore('card', () => {
   return {
     cardSummary,
     cardDetails,
-    cards,
+    memoizedCards,
 
     hydrateCardDetails,
     memoizeCard,

@@ -35,7 +35,7 @@ const deleteCardAndCloseModal = () => {
 }
 
 onMounted(() => {
-  if (!store.cards.some((card) => card.id === store.cardDetails.id)) {
+  if (!store.memoizedCards.some((card) => card.id === store.cardDetails.id)) {
     console.log('memoizing card')
     store.memoizeCard(store.cardDetails)
   }

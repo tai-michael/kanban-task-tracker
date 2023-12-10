@@ -40,9 +40,6 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('click', handleClickOutside)
 })
-
-// NOTE board in boards_grouped is just 'id' and 'title', in boards_single is 'id', 'title', and 'lists': []
-// NOTE when deleting a board, the backend not just needs to delete from boards_grouped and boards_single, but also from 'cards' (all documents matching the card ids from lists need to be deleted -- refer to 'removeList' in board store)
 </script>
 
 <style scoped lang="scss">

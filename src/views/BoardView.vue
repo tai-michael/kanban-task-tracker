@@ -90,7 +90,9 @@ watch(
       if (Object.keys(cardStore.cardDetails).length) cardStore.clearCard()
 
       // speeds up switching between already opened cards
-      const matchingCard = cardStore.cards.find((card) => card.id === newValue)
+      const matchingCard = cardStore.memoizedCards.find(
+        (card) => card.id === newValue
+      )
       if (matchingCard) return cardStore.hydrateCardDetails(matchingCard)
 
       isFetchingCard.value = true
