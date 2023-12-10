@@ -2,8 +2,17 @@
   <ul>
     <li>{{ card.title }}</li>
     <li v-if="formattedDueDate">
-      <button :class="{ overdue: isOverdue }" class="due-date-button">
-        <input type="checkbox" /> 🕓 {{ formattedDueDate }}
+      <button
+        :class="{ overdue: isOverdue, completed: card.is_completed }"
+        class="due-date-button"
+      >
+        <input
+          type="checkbox"
+          :checked="card.is_completed"
+          @click.stop="store.toggleCardCompleted(card.id)"
+        />
+        🕓
+        {{ formattedDueDate }}
       </button>
     </li>
     <li>{{ card.checklist_progress }}</li>
@@ -12,6 +21,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useCardStore } from '@/stores'
+const store = useCardStore()
 const props = defineProps(['card'])
 // NOTE Firestore automatically converts all Date objects to firestore timestamp objects (no way to really avoid this), which means when reloading the page, we will receive timestamp objects for dates, which need to be converted to Date objects. Meanwhile, the VueDatePicker only exports data as Date objects, which do not require conversion.
 const formatDate = (date) => {
@@ -24,7 +35,7 @@ const formattedDueDate = computed(() => formatDate(props.card.due_date))
 
 const isOverdue = computed(() => {
   const dueDate = props.card.due_date
-  if (dueDate) {
+  if (dueDate && !props.card.is_completed) {
     const dueDateTime = dueDate.seconds
       ? new Date(dueDate.seconds * 1000)
       : dueDate
@@ -58,5 +69,9 @@ ul {
 
 .overdue {
   background-color: rgb(255, 94, 0);
+}
+
+.completed {
+  background-color: rgb(0, 255, 13);
 }
 </style>

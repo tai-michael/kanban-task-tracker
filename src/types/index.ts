@@ -23,6 +23,7 @@ export interface CardSummary {
   id: ID
   title: string
   due_date: Date
+  is_completed: boolean
   checklist_progress: string // TODO change later probably
 }
 

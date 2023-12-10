@@ -11,6 +11,11 @@
       <template #trigger>
         <div class="flex gap-x-2">
           <input
+            type="checkbox"
+            :checked="store.cardSummary?.is_completed"
+            @click.stop="store.toggleCardCompleted(store.cardSummary.id)"
+          />
+          <input
             :value="formattedDueDate"
             type="text"
             readonly
@@ -19,6 +24,11 @@
           />
           <span v-if="isOverdue" class="bg-red-400 p-1 flex items-center"
             >Overdue</span
+          >
+          <span
+            v-if="store.cardSummary?.is_completed"
+            class="bg-green-300 p-1 flex items-center"
+            >Completed</span
           >
           <button v-if="selectedDate" @click.stop="handleClearDueDate">
             Remove date

@@ -43,6 +43,15 @@ export const useCardStore = defineStore('card', () => {
   const updateCardDueDate = (date: Date) => {
     cardSummary.value.due_date = date
   }
+  const toggleCardCompleted = (id: string) => {
+    for (const list of boardStore.board.lists) {
+      const card = list.cards.find((c) => c.id === id)
+      if (card) {
+        card.is_completed = !card.is_completed
+        break
+      }
+    }
+  }
   const addChecklistItem = (item: ChecklistItem) => {
     cardDetails.value.checklist.push(item)
   }
@@ -74,6 +83,7 @@ export const useCardStore = defineStore('card', () => {
     updateCardDescription,
     updateCardTitle,
     updateCardDueDate,
+    toggleCardCompleted,
     addChecklistItem,
     updateChecklistItemName,
     storeUnsavedChecklistItemName,
