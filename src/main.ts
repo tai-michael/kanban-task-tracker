@@ -1,11 +1,11 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { auth } from './firebaseInit'
 
 import App from './App.vue'
 import router from './router'
-import { auth } from './firebaseInit'
+
+import './assets/main.css'
 
 let app: ReturnType<typeof createApp>
 
