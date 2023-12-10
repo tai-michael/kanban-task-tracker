@@ -3,11 +3,7 @@
   <button @click="deleteCardAndCloseModal" class="ml-4">Delete card</button>
   <ul class="flex flex-col w-full gap-y-3 h-full">
     <Title :title="store.cardSummary?.title" @title-edited="changeCardTitle" />
-    <!-- TODO add due date component -->
-    <CardDatePicker
-      :due-date="store.cardSummary?.due_date"
-      @date-selected="changeCardDueDate"
-    />
+    <CardDatePicker />
     <CardDescription />
     <CardChecklist />
     <!-- TODO add attachment component -->
@@ -34,10 +30,6 @@ const store = useCardStore()
 
 const changeCardTitle = (title: string) => {
   store.updateCardTitle(title)
-}
-
-const changeCardDueDate = (date: Date) => {
-  store.updateCardDueDate(date)
 }
 
 const deleteCardAndCloseModal = () => {
