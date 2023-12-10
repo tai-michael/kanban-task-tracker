@@ -40,6 +40,9 @@ export const useCardStore = defineStore('card', () => {
   const updateCardTitle = (title: string) => {
     cardSummary.value.title = title
   }
+  const updateCardDueDate = (date: Date) => {
+    cardSummary.value.due_date = date
+  }
   const addChecklistItem = (item: ChecklistItem) => {
     cardDetails.value.checklist.push(item)
   }
@@ -70,6 +73,7 @@ export const useCardStore = defineStore('card', () => {
     clearCard,
     updateCardDescription,
     updateCardTitle,
+    updateCardDueDate,
     addChecklistItem,
     updateChecklistItemName,
     storeUnsavedChecklistItemName,

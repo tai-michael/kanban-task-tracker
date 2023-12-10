@@ -4,6 +4,10 @@
   <ul class="flex flex-col w-full gap-y-3 h-full">
     <Title :title="store.cardSummary?.title" @title-edited="changeCardTitle" />
     <!-- TODO add due date component -->
+    <CardDatePicker
+      :date="store.cardSummary?.due_date"
+      @date-selected="changeCardDueDate"
+    />
     <CardDescription />
     <CardChecklist />
     <!-- TODO add attachment component -->
@@ -11,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, onMounted, defineAsyncComponent } from 'vue'
+import { ref, watch, onMounted, defineAsyncComponent } from 'vue'
 import { useCardStore } from '@/stores'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import deleteCard from '@/composables/deleteCard'
@@ -21,12 +25,19 @@ const CardChecklist = defineAsyncComponent(
 const CardDescription = defineAsyncComponent(
   () => import('@/components/card-details/CardDescription.vue')
 )
+const CardDatePicker = defineAsyncComponent(
+  () => import('@/components/card-details/CardDatePicker.vue')
+)
 const Title = defineAsyncComponent(() => import('@/components/Title.vue'))
 const emit = defineEmits(['closeButtonClicked'])
 const store = useCardStore()
 
 const changeCardTitle = (title: string) => {
   store.updateCardTitle(title)
+}
+
+const changeCardDueDate = (date: Date) => {
+  store.updateCardDueDate(date)
 }
 
 const deleteCardAndCloseModal = () => {

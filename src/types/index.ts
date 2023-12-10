@@ -22,7 +22,7 @@ export interface List {
 export interface CardSummary {
   id: ID
   title: string
-  due_date: string // TODO change later probably to 'Date'
+  due_date: Date
   checklist_progress: string // TODO change later probably
 }
 
