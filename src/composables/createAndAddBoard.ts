@@ -1,6 +1,7 @@
 import { useBoardStore } from '@/stores'
 import { v4 as uuidv4 } from 'uuid'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
+import { auth } from '@/firebaseInit'
 
 export default function (title: string) {
   const store = useBoardStore()
@@ -11,12 +12,12 @@ export default function (title: string) {
     title: title,
   }
   const boardDetails = {
+    created_by: auth.currentUser.uid,
     id: boardId,
     title: title,
     lists: [],
   }
 
-  // TODO consider security/access of boards and cards. Perhaps add verified_users field or something to these. Ask chatGPT.
   store.addBoard(boardMeta)
   updateFirestoreDoc('boards_single', boardId, boardDetails, false)
 }

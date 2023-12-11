@@ -2,6 +2,7 @@ import { useBoardStore } from '@/stores'
 import { useCardStore } from '@/stores'
 import { v4 as uuidv4 } from 'uuid'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
+import { auth } from '@/firebaseInit'
 
 export default function (listId: string, title: string) {
   const boardStore = useBoardStore()
@@ -20,6 +21,7 @@ export default function (listId: string, title: string) {
     description: '',
     checklist: [],
     attachments: '(attachments)',
+    created_by: auth.currentUser.uid,
   }
 
   boardStore.addCard(listId, cardSummary)

@@ -58,7 +58,14 @@ const fetchBoardData = async (id: string) => {
       )
     }
   } catch (err) {
-    console.error('Error fetching board:', err)
+    if (err.code === 'permission-denied') {
+      console.error('Access denied:', err)
+      errorStore.triggerError(
+        'You do not have permission to access this board.'
+      )
+    } else {
+      console.error('Error fetching data:', err)
+    }
   }
 }
 
@@ -77,7 +84,12 @@ const fetchCard = async (id: string) => {
       )
     }
   } catch (err) {
-    console.error('Error fetching card:', err)
+    if (err.code === 'permission-denied') {
+      console.error('Access denied:', err)
+      errorStore.triggerError('You do not have permission to access this card.')
+    } else {
+      console.error('Error fetching data:', err)
+    }
   }
 }
 
