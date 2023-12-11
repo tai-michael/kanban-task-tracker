@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex justify-between">
+    <div class="flex justify-between mb-4">
       <Title
         v-if="store.board.title"
         :title="store.board.title"

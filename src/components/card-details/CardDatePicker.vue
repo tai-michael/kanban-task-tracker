@@ -11,6 +11,7 @@
       <template #trigger>
         <div class="flex gap-x-2">
           <input
+            v-if="selectedDate"
             type="checkbox"
             :checked="store.cardSummary?.is_completed"
             @click.stop="store.toggleCardCompleted(store.cardSummary.id)"
@@ -22,13 +23,11 @@
             placeholder="Select Date"
             class="w-[130px] p-1 border-2 cursor-pointer"
           />
+          <span v-if="isCompleted" class="bg-green-300 p-1 flex items-center"
+            >Completed</span
+          >
           <span v-if="isOverdue" class="bg-red-400 p-1 flex items-center"
             >Overdue</span
-          >
-          <span
-            v-if="store.cardSummary?.is_completed"
-            class="bg-green-300 p-1 flex items-center"
-            >Completed</span
           >
           <button v-if="selectedDate" @click.stop="handleClearDueDate">
             Remove date
@@ -82,13 +81,17 @@ const handleClearDueDate = () => {
     datePicker.value.closeMenu()
     datePicker.value.clearValue()
   }
+  if (store.cardSummary?.is_completed)
+    store.toggleCardCompleted(store.cardSummary.id)
 }
+
+const isCompleted = computed(
+  () => selectedDate.value && store.cardSummary?.is_completed
+)
 
 const isOverdue = computed(() => {
   return (
-    !store.cardSummary?.is_completed &&
-    selectedDate.value &&
-    selectedDate.value < new Date()
+    selectedDate.value && !isCompleted.value && selectedDate.value < new Date()
   )
 })
 </script>
