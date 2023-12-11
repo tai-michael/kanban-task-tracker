@@ -3,15 +3,24 @@
     <li>{{ card.title }}</li>
     <li v-if="formattedDueDate">
       <button
-        :class="{ overdue: isOverdue, completed: card.is_completed }"
+        @mouseenter="hover = true"
+        @mouseleave="hover = false"
+        :class="{
+          overdue: isOverdue,
+          completed: card.is_completed,
+          'hover-show-checkbox': hover,
+        }"
         class="due-date-button"
       >
-        <input
-          type="checkbox"
-          :checked="card.is_completed"
-          @click.stop="store.toggleCardCompleted(card.id)"
-        />
-        🕓
+        <div class="w-5">
+          <input
+            v-show="hover"
+            type="checkbox"
+            :checked="card.is_completed"
+            @click.stop="store.toggleCardCompleted(card.id)"
+          />
+          <span v-show="!hover">🕓</span>
+        </div>
         {{ formattedDueDate }}
       </button>
     </li>
@@ -20,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useCardStore } from '@/stores'
 const store = useCardStore()
 const props = defineProps(['card'])
@@ -43,6 +52,8 @@ const isOverdue = computed(() => {
   }
   return false
 })
+
+const hover = ref(false)
 </script>
 
 <style scoped lang="scss">
@@ -60,11 +71,24 @@ ul {
 // }
 
 .due-date-button {
+  display: flex;
+  column-gap: 4px;
+  padding: 2px 4px;
   background: none;
   border: none;
-  padding: 0;
+  border-radius: 8px;
   color: inherit;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .due-date-button input[type='checkbox'] {
+    display: inline;
+  }
+
+  .due-date-button span {
+    display: none; /* Hide the clock icon */
+  }
 }
 
 .overdue {
