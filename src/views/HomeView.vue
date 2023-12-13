@@ -23,7 +23,6 @@ import { useRouter } from 'vue-router'
 import SidePanel from '@/components/SidePanel.vue'
 const router = useRouter()
 const boardStore = useBoardStore()
-const errorStore = useErrorStore()
 const isInitialLoad = ref(true)
 const fetchingBoardsFromBackend = ref(false)
 const fetchBoardsCollection = async (id: string) => {
@@ -33,14 +32,7 @@ const fetchBoardsCollection = async (id: string) => {
     console.log(boardsDoc.data().boards)
     return boardsDoc.data().boards
   } catch (err) {
-    if (err.code === 'permission-denied') {
-      console.error('Access denied:', err)
-      errorStore.triggerError(
-        "You do not have permission to access this user's boards."
-      )
-    } else {
-      console.error('Error fetching data:', err)
-    }
+    console.error('Error fetching data:', err)
   }
 }
 
