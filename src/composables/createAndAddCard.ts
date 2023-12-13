@@ -12,8 +12,8 @@ export default function (listId: string, title: string) {
   const cardSummary = {
     title: title,
     id: cardId,
-    due_date: '(due date)',
-    checklist_progress: '(checklist progress)',
+    due_date: '',
+    checklist_progress: '',
   }
   const cardDetails = {
     id: cardId,
