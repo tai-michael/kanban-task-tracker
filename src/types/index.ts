@@ -8,6 +8,7 @@ export interface BoardMeta {
 }
 
 export interface BoardDetails {
+  created_by: ID
   id: ID
   title: string
   lists: List[]
@@ -28,6 +29,7 @@ export interface CardSummary {
 }
 
 export interface CardDescription {
+  created_by: ID
   id: ID
   boardId: ID
   description: string
