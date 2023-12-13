@@ -12,7 +12,7 @@
       placeholder="Enter a title"
     />
     <button
-      @click="createAndAddBoard(boardTitle)"
+      @click="handleCreateBoard"
       :disabled="!boardTitle"
       :class="{ '!bg-gray-300': !boardTitle }"
       class="bg-blue-300 hover:bg-blue-200 rounded p-1"
@@ -30,6 +30,11 @@ const store = useBoardStore()
 const boardTitle = ref('')
 const composer: Ref<HTMLElement | null> = ref(null)
 
+const handleCreateBoard = () => {
+  createAndAddBoard(boardTitle.value)
+  store.toggleBoardComposer()
+  // TODO possibly navigate to the board right after
+}
 const handleClickOutside = (e: MouseEvent) => {
   if (composer.value && !composer.value.contains(e.target as Node))
     store.toggleBoardComposer()
