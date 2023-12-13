@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import { auth } from '@/firebaseInit'
 
-export default function (listId: string, title: string) {
+export default async function (listId: string, title: string) {
   const boardStore = useBoardStore()
   const cardStore = useCardStore()
 
@@ -24,7 +24,7 @@ export default function (listId: string, title: string) {
     created_by: auth.currentUser.uid,
   }
 
+  await updateFirestoreDoc('cards', cardId, cardDetails, false)
   boardStore.addCard(listId, cardSummary)
   cardStore.memoizeCard(cardDetails)
-  updateFirestoreDoc('cards', cardId, cardDetails, false)
 }

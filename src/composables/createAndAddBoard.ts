@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import { auth } from '@/firebaseInit'
 
-export default function (title: string) {
+export default async function (title: string) {
   const store = useBoardStore()
 
   const boardId = uuidv4()
@@ -18,6 +18,6 @@ export default function (title: string) {
     lists: [],
   }
 
+  await updateFirestoreDoc('boards_single', boardId, boardDetails, false)
   store.addBoard(boardMeta)
-  updateFirestoreDoc('boards_single', boardId, boardDetails, false)
 }

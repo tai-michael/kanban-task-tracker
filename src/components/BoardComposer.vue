@@ -30,8 +30,8 @@ const store = useBoardStore()
 const boardTitle = ref('')
 const composer: Ref<HTMLElement | null> = ref(null)
 
-const handleCreateBoard = () => {
-  createAndAddBoard(boardTitle.value)
+const handleCreateBoard = async () => {
+  await createAndAddBoard(boardTitle.value)
   store.toggleBoardComposer()
   // TODO possibly navigate to the board right after
 }

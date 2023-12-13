@@ -17,7 +17,7 @@ const updateDoc = async (collectionId: string, documentId: string, newDoc) => {
 
 const debouncedUpdateDoc = debounce(updateDoc, 500)
 
-export default function (
+export default async function (
   collectionId: string,
   documentId: string,
   newDoc: CardDescription | BoardDetails,
@@ -26,6 +26,6 @@ export default function (
   if (useDebounce) {
     debouncedUpdateDoc(collectionId, documentId, newDoc)
   } else {
-    updateDoc(collectionId, documentId, newDoc)
+    await updateDoc(collectionId, documentId, newDoc)
   }
 }
