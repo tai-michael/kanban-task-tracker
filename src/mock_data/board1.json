@@ -12,28 +12,28 @@
           "title": "Build UI for onboarding flow",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "1/3"
         },
         {
           "id": "848be114-321b-4dc9-86b9-9cd1587f5773",
           "title": "Build UI for search",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "0/1"
         },
         {
           "id": "7875b170-cfb5-4c16-b950-0a0e41a6c408",
           "title": "Build settings UI",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "0/2"
         },
         {
           "id": "68fdd022-f17c-49ff-9aad-187f5fc694f0",
           "title": "QA and test all major user journeys",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "0/2"
         }
       ]
     },
@@ -46,42 +46,42 @@
           "title": "Design settings and search pages",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "2/3"
         },
         {
           "id": "d3b08d72-3eed-4bcd-9931-0b58d836ec23",
           "title": "Add account management endpoints",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "2/3"
         },
         {
           "id": "5ee6631c-d7f5-48b2-b430-c28111bec8b1",
           "title": "Design onboarding flow",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "1/3"
         },
         {
           "id": "50ca524d-5cf8-42ae-9e43-a14da2467e74",
           "title": "Add search enpoints",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "1/2"
         },
         {
           "id": "179c6518-e289-43d1-a78c-428762959293",
           "title": "Add authentication endpoints",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "1/2"
         },
         {
           "id": "269cb304-1ffa-488f-a1fe-1950b9c5cc28",
           "title": "Research pricing points of various competitors and trial different business models",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "1/3"
         }
       ]
     },
@@ -94,49 +94,49 @@
           "title": "Conduct 5 wireframe tests",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "1/1"
         },
         {
           "id": "bd3fa2ca-fa0a-468a-8b25-f4385d8d6251",
           "title": "Create wireframe prototype",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "1/1"
         },
         {
           "id": "a61d3fe1-2543-41c7-bc29-9881b4d8900c",
           "title": "Review results of usability tests and iterate",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "3/3"
         },
         {
           "id": "1098cf21-7886-4a26-b683-943aeb13c076",
           "title": "Create paper prototypes and conduct 10 usability tests with potential customers",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "2/2"
         },
         {
           "id": "9e5783b6-efad-4e09-b758-1b83224ce264",
           "title": "Market discovery",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "1/1"
         },
         {
           "id": "9d0b886c-7adf-4569-9a0a-eed67946e2fd",
           "title": "Competitor analysis",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "2/2"
         },
         {
           "id": "d1352a96-eab7-4e8d-901d-62cad952d51d",
           "title": "Research the market",
           "due_date": "",
           "is_completed": false,
-          "checklist_progress": "(checklist progress)"
+          "checklist_progress": "2/2"
         }
       ]
     }
