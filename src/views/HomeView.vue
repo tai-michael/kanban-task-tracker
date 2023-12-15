@@ -15,12 +15,13 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
+import SidePanel from '@/components/SidePanel.vue'
 import { db, auth } from '@/firebaseInit'
 import { signOut } from 'firebase/auth'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, getDoc } from 'firebase/firestore'
+import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import { useBoardStore, useErrorStore } from '@/stores'
 import { useRouter } from 'vue-router'
-import SidePanel from '@/components/SidePanel.vue'
 const router = useRouter()
 const boardStore = useBoardStore()
 const isInitialLoad = ref(true)
@@ -44,15 +45,19 @@ watch(
       isInitialLoad.value = false
       return
     }
-    console.log('triggered boards watcher')
+    console.log('triggered boards meta watcher')
 
-    // NOTE opting not to use the updateFirestoreDoc composable, as that one debounces by default, which cancels out
-    const docRef = doc(db, 'boards_grouped', auth.currentUser.uid)
     const updatedBoard = {
       boards: boardStore.boards,
       id: auth.currentUser.uid,
     }
-    setDoc(docRef, updatedBoard)
+
+    updateFirestoreDoc(
+      'boards_grouped',
+      auth.currentUser.uid,
+      updatedBoard,
+      false
+    )
   },
   { deep: true }
 )
