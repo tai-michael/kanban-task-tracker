@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useCardStore } from '@/stores'
 import { v4 as uuidv4 } from 'uuid'
 const store = useCardStore()
@@ -123,13 +123,21 @@ const clearFocus = () => {
 }
 
 const itemsCompleted = computed(
-  () => store.cardDetails.checklist.filter((item) => item.isCompleted).length
+  () => store.cardDetails.checklist.filter((item) => item.is_completed).length
+)
+watch(
+  () => itemsCompleted.value,
+  (newValue) => {
+    store.updateChecklistItemsCompleted(newValue)
+  }
 )
 const itemsTotal = computed(() => store.cardDetails.checklist.length)
-watch([() => itemsCompleted.value, () => itemsTotal.value], () => {
-  console.log('watcher triggered')
-  store.updateChecklistProgress(itemsCompleted.value, itemsTotal.value)
-})
+watch(
+  () => itemsTotal.value,
+  (newValue) => {
+    store.updateChecklistItemsTotal(newValue)
+  }
+)
 </script>
 
 <style scoped lang="scss"></style>

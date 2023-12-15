@@ -23,8 +23,9 @@
         </div>
         {{ formattedDueDate }}
       </button>
+
+      <span v-if="checklistProgress">✅ {{ checklistProgress }}</span>
     </li>
-    <li>{{ card.checklist_progress }}</li>
   </ul>
 </template>
 
@@ -54,6 +55,14 @@ const isOverdue = computed(() => {
 })
 
 const hover = ref(false)
+
+const checklistProgress = computed(() => {
+  if (props.card.checklist_items_total > 0) {
+    return `${props.card.checklist_items_completed}/${props.card.checklist_items_total}`
+  } else {
+    return ''
+  }
+})
 </script>
 
 <style scoped lang="scss">

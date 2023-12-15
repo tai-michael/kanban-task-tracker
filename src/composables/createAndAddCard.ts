@@ -10,18 +10,20 @@ export default async function (listId: string, title: string) {
 
   const cardId = uuidv4()
   const cardSummary = {
-    title: title,
     id: cardId,
+    title: title,
     due_date: '',
-    checklist_progress: '',
+    is_completed: false,
+    checklist_items_completed: 0,
+    checklist_items_total: 0,
   }
   const cardDetails = {
     id: cardId,
     boardId: boardStore.board.id,
+    created_by: auth.currentUser.uid,
     description: '',
     checklist: [],
     attachments: '(attachments)',
-    created_by: auth.currentUser.uid,
   }
 
   await updateFirestoreDoc('cards', cardId, cardDetails, false)

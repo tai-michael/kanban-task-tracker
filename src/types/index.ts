@@ -25,7 +25,8 @@ export interface CardSummary {
   title: string
   due_date: Date
   is_completed: boolean
-  checklist_progress: string // TODO change later probably
+  checklist_items_completed: number
+  checklist_items_total: number
 }
 
 export interface CardDescription {
