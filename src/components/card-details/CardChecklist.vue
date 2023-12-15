@@ -8,7 +8,7 @@
       <input
         type="checkbox"
         @click.stop="store.toggleChecklistItemCompleted(item.id)"
-        :checked="item.isCompleted"
+        :checked="item.is_completed"
       />
       <div>
         <div v-if="item.id === activeItemId" class="flex gap-x-3">
@@ -27,12 +27,12 @@
         <span
           v-else
           @click.stop="beginItemNameEdit(item)"
-          :class="{ 'line-through': item.isCompleted }"
+          :class="{ 'line-through': item.is_completed }"
         >
           {{ item.name }}
         </span>
         <div
-          v-if="item.id !== activeItemId && item.unsavedName"
+          v-if="item.id !== activeItemId && item.unsaved_name"
           class="flex gap-x-3"
         >
           <span>You have unsaved edits.</span>
@@ -78,7 +78,7 @@ const processItemCreation = () => {
   const item = {
     id: uuidv4(),
     name: newItemName.value,
-    isCompleted: false,
+    is_completed: false,
   }
 
   store.addChecklistItem(item)
@@ -95,8 +95,8 @@ const activeItemName = ref('')
 const beginItemNameEdit = (item: object) => {
   activeItemId.value = item.id
 
-  item.unsavedName
-    ? (activeItemName.value = item.unsavedName)
+  item.unsaved_name
+    ? (activeItemName.value = item.unsaved_name)
     : (activeItemName.value = item.name)
 }
 const storeUnsavedItemName = (itemName: string) => {

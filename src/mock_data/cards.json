@@ -7,20 +7,20 @@
     "checklist": [
       {
         "name": "Sign up page",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "10ff97ba-2bc2-40a3-b972-022fa9d9b2e9"
       },
       {
         "name": "Sign in page",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "e7c77138-fe09-4054-90de-cebe885adf1f"
       },
       {
         "name": "Welcome page",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "acbd8f1c-d5b9-445b-b148-ff50cf2f65e3"
       }
     ],
@@ -34,8 +34,8 @@
     "checklist": [
       {
         "name": "Search page",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "43f44b3e-fa82-43f4-a8d1-f7d32a35c07c"
       }
     ],
@@ -49,14 +49,14 @@
     "checklist": [
       {
         "name": "Account page",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "e9a7f946-1b7e-4f53-830c-6fddeff13816"
       },
       {
         "name": "Billing page",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "b080c46d-8e2c-421d-8572-5d362a7188fe"
       }
     ],
@@ -70,14 +70,14 @@
     "checklist": [
       {
         "name": "Internal testing",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "bb579984-0111-4c4c-96b8-c66893359c38"
       },
       {
         "name": "External testing",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "5dd830b7-2e37-41f9-80f6-3e07245c6d3b"
       }
     ],
@@ -91,20 +91,20 @@
     "checklist": [
       {
         "name": "Settings - Account page",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "f07f2624-db23-4cd9-8443-1b9a0f1e7a42"
       },
       {
         "name": "Settings - Billing page",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "497799a3-0312-4691-864e-992983bd73cb"
       },
       {
         "name": "Search page",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "fae8c167-1fc6-4a7a-98db-37212b1d08d8"
       }
     ],
@@ -118,20 +118,20 @@
     "checklist": [
       {
         "name": "Upgrade plan",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "e8526acc-4db9-4072-8e1a-58b5a060b9d7"
       },
       {
         "name": "Cancel plan",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "39b5004f-bf00-4387-9dc0-4b0048648ac8"
       },
       {
         "name": "Update payment method",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "da0a67cc-e4ce-4ba3-964c-f59c3dc2f54b"
       }
     ],
@@ -145,20 +145,20 @@
     "checklist": [
       {
         "name": "Sign up page",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "ec3a9a95-fdde-452d-b802-1da3c19260d5"
       },
       {
         "name": "Sign in page",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "5b73d94b-9cb8-444c-9363-c07e9462cbad"
       },
       {
         "name": "Welcome page",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "3c3884bc-cb77-4ac4-b9e9-1dc53081a784"
       }
     ],
@@ -172,14 +172,14 @@
     "checklist": [
       {
         "name": "Add search endpoint",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "0049b249-1bba-409a-bd88-8e9f059362fc"
       },
       {
         "name": "Define search filters",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "31540d87-2243-44fe-9f9f-9890f2a62412"
       }
     ],
@@ -193,14 +193,14 @@
     "checklist": [
       {
         "name": "Define user model",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "3482946c-55c4-43cf-acd1-796a7b067085"
       },
       {
         "name": "Add auth endpoints",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "395a13bc-0d95-4852-8f88-2014f91c5ed9"
       }
     ],
@@ -214,20 +214,20 @@
     "checklist": [
       {
         "name": "Research competitor pricing and business models",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "1132d6ff-1851-4a56-a4cb-f3f0012fa857"
       },
       {
         "name": "Outline a business model that works for our solution",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "d0cec6d0-74e0-4721-bf55-801c4a4d804b"
       },
       {
         "name": "Talk to potential customers about our proposed solution and ask for fair price expectancy",
-        "unsavedName": "",
-        "isCompleted": false,
+        "unsaved_name": "",
+        "is_completed": false,
         "id": "372cc420-c9ca-4bdb-af34-d50e321572c3"
       }
     ],
@@ -241,8 +241,8 @@
     "checklist": [
       {
         "name": "Complete 5 wireframe prototype tests",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "a0ac07bf-24d4-4e0a-ae9a-5bab483ae2cd"
       }
     ],
@@ -256,8 +256,8 @@
     "checklist": [
       {
         "name": "Create clickable wireframe prototype in Balsamiq",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "d25d4dd2-2ca9-4f88-a8f7-4fe3727f0d41"
       }
     ],
@@ -271,20 +271,20 @@
     "checklist": [
       {
         "name": "Meet to review notes from previous tests and plan changes",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "a2fe6716-75b3-4701-9027-4301687fcb33"
       },
       {
         "name": "Make changes to paper prototypes",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "2f37f735-ba88-402b-af9c-5a0d69816f19"
       },
       {
         "name": "Conduct 5 usability tests",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "83b1f0ff-b708-41c6-936c-76cdcc00a581"
       }
     ],
@@ -298,14 +298,14 @@
     "checklist": [
       {
         "name": "Create paper prototypes for version one",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "67139218-c9ec-4b4c-ab9a-10fccc3ef2fa"
       },
       {
         "name": "Complete 10 usability tests",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "f984e8af-daa5-4dc3-9071-221aeeb2ef5a"
       }
     ],
@@ -319,8 +319,8 @@
     "checklist": [
       {
         "name": "Interview 10 prospective customers",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "1441e8e0-0560-48c5-99d5-16409aba2a8d"
       }
     ],
@@ -334,14 +334,14 @@
     "checklist": [
       {
         "name": "Find direct and indirect competitors",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "d0297589-1bb6-47e5-82ac-1de2b3efbd51"
       },
       {
         "name": "SWOT analysis for each competitor",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "b8dacb94-59fd-4bc7-80a9-22d5abb13f03"
       }
     ],
@@ -355,14 +355,14 @@
     "checklist": [
       {
         "name": "Write up research analysis",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "9c979752-b6a1-40f3-83c8-237d86efc10a"
       },
       {
         "name": "Calculate TAM",
-        "unsavedName": "",
-        "isCompleted": true,
+        "unsaved_name": "",
+        "is_completed": true,
         "id": "5761a21a-cb01-4389-954e-00310c700783"
       }
     ],

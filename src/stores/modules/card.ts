@@ -61,15 +61,15 @@ export const useCardStore = defineStore('card', () => {
   }
   const storeUnsavedChecklistItemName = (id: string, name: string) => {
     const item = cardDetails.value.checklist.find((item) => item.id === id)
-    item.unsavedName = name
+    item.unsaved_name = name
   }
   const deleteUnsavedChecklistItemName = (id: string) => {
     const item = cardDetails.value.checklist.find((item) => item.id === id)
-    item.unsavedName = ''
+    item.unsaved_name = ''
   }
   const toggleChecklistItemCompleted = (id: string) => {
     const item = cardDetails.value.checklist.find((item) => item.id === id)
-    if (item) item.isCompleted = !item.isCompleted
+    if (item) item.is_completed = !item.is_completed
   }
   const updateChecklistProgress = (
     itemsCompleted: number,

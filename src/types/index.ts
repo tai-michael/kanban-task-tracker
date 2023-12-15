@@ -29,9 +29,9 @@ export interface CardSummary {
 }
 
 export interface CardDescription {
-  created_by: ID
   id: ID
   boardId: ID
+  created_by: ID
   description: string
   checklist: ChecklistItem[]
   attachments: string // TODO change later
@@ -40,6 +40,6 @@ export interface CardDescription {
 export interface ChecklistItem {
   id: ID
   name: string
-  unsavedName: string
-  isCompleted: boolean
+  unsaved_name: string
+  is_completed: boolean
 }
