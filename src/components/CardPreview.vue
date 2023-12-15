@@ -1,13 +1,14 @@
 <template>
   <ul>
     <li>{{ card.title }}</li>
-    <li v-if="formattedDueDate">
+    <li class="flex gap-x-2 items-center">
       <button
+        v-if="formattedDueDate"
         @mouseenter="hover = true"
         @mouseleave="hover = false"
         :class="{
           overdue: isOverdue,
-          completed: card.is_completed,
+          'card-completed': card.is_completed,
           'hover-show-checkbox': hover,
         }"
         class="due-date-button"
@@ -24,7 +25,12 @@
         {{ formattedDueDate }}
       </button>
 
-      <span v-if="checklistProgress">✅ {{ checklistProgress }}</span>
+      <span
+        v-if="checklistProgress"
+        class="checklist-progress"
+        :class="{ 'checklist-completed': allChecklistItemsCompleted }"
+        >✅ {{ checklistProgress }}</span
+      >
     </li>
   </ul>
 </template>
@@ -55,7 +61,6 @@ const isOverdue = computed(() => {
 })
 
 const hover = ref(false)
-
 const checklistProgress = computed(() => {
   if (props.card.checklist_items_total > 0) {
     return `${props.card.checklist_items_completed}/${props.card.checklist_items_total}`
@@ -63,6 +68,11 @@ const checklistProgress = computed(() => {
     return ''
   }
 })
+const allChecklistItemsCompleted = computed(() =>
+  props.card.checklist_items_completed / props.card.checklist_items_total === 1
+    ? true
+    : false
+)
 </script>
 
 <style scoped lang="scss">
@@ -79,13 +89,16 @@ ul {
 //   font-style: italic;
 // }
 
+.due-date-button,
+.checklist-progress {
+  padding: 2px 4px;
+  border-radius: 8px;
+}
 .due-date-button {
   display: flex;
   column-gap: 4px;
-  padding: 2px 4px;
   background: none;
   border: none;
-  border-radius: 8px;
   color: inherit;
   cursor: pointer;
 }
@@ -104,7 +117,11 @@ ul {
   background-color: rgb(255, 94, 0);
 }
 
-.completed {
+.card-completed {
+  background-color: rgb(0, 255, 13);
+}
+
+.checklist-completed {
   background-color: rgb(0, 255, 13);
 }
 </style>
