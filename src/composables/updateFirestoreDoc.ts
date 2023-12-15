@@ -15,7 +15,18 @@ const updateDoc = async (collectionId: string, documentId: string, newDoc) => {
   }
 }
 
-const debouncedUpdateDoc = debounce(updateDoc, 500)
+// The function being stored in the debouncedUpdates map ensures that each collection/document pair has its own debounced function, thereby preventing an update to a collection from cancelling out a debounced update to a different collection
+const debouncedUpdates = new Map()
+
+const getDebouncedUpdate = (collectionId, documentId) => {
+  const key = `${collectionId}:${documentId}`
+  if (!debouncedUpdates.has(key)) {
+    const debouncedUpdate = debounce(updateDoc, 500)
+    debouncedUpdates.set(key, debouncedUpdate)
+  }
+
+  return debouncedUpdates.get(key)
+}
 
 export default async function (
   collectionId: string,
@@ -24,8 +35,15 @@ export default async function (
   useDebounce = true
 ) {
   if (useDebounce) {
-    debouncedUpdateDoc(collectionId, documentId, newDoc)
+    const debouncedUpdateFn = getDebouncedUpdate(collectionId, documentId)
+    debouncedUpdateFn(collectionId, documentId, newDoc)
   } else {
+    // Cancel any pending debounced calls before executing immediately
+    const key = `${collectionId}:${documentId}`
+    const debounced = debouncedUpdates.get(key)
+    if (debounced) {
+      debounced.cancel()
+    }
     await updateDoc(collectionId, documentId, newDoc)
   }
 }
