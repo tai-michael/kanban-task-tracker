@@ -13,14 +13,14 @@
       </div>
       <div class="flex gap-x-3">
         <button
-          @mousedown="processListCreation"
+          @click="processListCreation"
           class="pl-2 pr-2 rounded bg-blue-300 hover:bg-blue-200"
         >
           Save
         </button>
         <button
-          @mousedown="hideListComposer"
-          class="pl-2 pr-2 hover:bg-gray-200"
+          @click="hideListComposer"
+          class="pl-2 pr-2 rounded hover:bg-gray-200"
         >
           X
         </button>
@@ -36,10 +36,8 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, type Ref } from 'vue'
 import createAndAddList from '@/composables/createAndAddList'
-import { useBoardStore } from '@/stores'
 const isCreatingList = ref(false)
 const newListTitle = ref('')
-const store = useBoardStore()
 const composer: Ref<HTMLElement | null> = ref(null)
 
 const processListCreation = () => {

@@ -3,7 +3,7 @@
     {{ title }}
   </span>
 
-  <input v-else v-model="title" v-focus="isEditingTitle" @blur="changeTitle" />
+  <input v-else v-model="title" v-focus="isEditingTitle" @blur="handleBlur" />
 </template>
 
 <script setup lang="ts">
@@ -13,8 +13,12 @@ const title = ref('')
 const isEditingTitle = ref(false)
 const emit = defineEmits(['titleEdited'])
 
-const changeTitle = () => {
-  emit('titleEdited', title.value)
+const handleBlur = () => {
+  if (title.value) {
+    emit('titleEdited', title.value)
+  } else {
+    title.value = props.title
+  }
   isEditingTitle.value = false
 }
 
@@ -24,9 +28,9 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-span {
-}
+// span {
+// }
 
-input {
-}
+// input {
+// }
 </style>
