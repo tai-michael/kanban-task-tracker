@@ -1,6 +1,12 @@
 <template>
-  <div>
-    <label>Due Date:</label>
+  <label>Due Date:</label>
+  <div class="flex gap-x-2">
+    <input
+      v-if="selectedDate"
+      type="checkbox"
+      :checked="store.cardSummary?.is_completed"
+      @click.stop="store.toggleCardCompleted(store.cardSummary.id)"
+    />
     <VueDatePicker
       v-model="selectedDate"
       @update:model-value="handleDateSelected"
@@ -9,13 +15,7 @@
       ref="datePicker"
     >
       <template #trigger>
-        <div class="flex gap-x-2">
-          <input
-            v-if="selectedDate"
-            type="checkbox"
-            :checked="store.cardSummary?.is_completed"
-            @click.stop="store.toggleCardCompleted(store.cardSummary.id)"
-          />
+        <div>
           <input
             :value="formattedDueDate"
             type="text"
@@ -23,18 +23,18 @@
             placeholder="Select Date"
             class="w-[130px] p-1 border-2 cursor-pointer"
           />
-          <span v-if="isCompleted" class="bg-green-300 p-1 flex items-center"
-            >Completed</span
-          >
-          <span v-if="isOverdue" class="bg-red-400 p-1 flex items-center"
-            >Overdue</span
-          >
-          <button v-if="selectedDate" @click.stop="handleClearDueDate">
-            Remove date
-          </button>
         </div>
       </template>
     </VueDatePicker>
+    <span v-if="isCompleted" class="bg-green-300 p-1 flex items-center"
+      >Completed</span
+    >
+    <span v-if="isOverdue" class="bg-red-400 p-1 flex items-center"
+      >Overdue</span
+    >
+    <button v-if="selectedDate" @click.stop="handleClearDueDate">
+      Remove date
+    </button>
   </div>
 </template>
 
@@ -96,4 +96,8 @@ const isOverdue = computed(() => {
 })
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.dp__main {
+  width: 130px !important;
+}
+</style>
