@@ -20,4 +20,6 @@ export default async function (title: string) {
 
   await updateFirestoreDoc('boards_single', boardId, boardDetails, false)
   store.addBoard(boardMeta)
+
+  return boardMeta.id
 }

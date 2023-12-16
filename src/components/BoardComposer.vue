@@ -24,16 +24,18 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, type Ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useBoardStore } from '@/stores'
 import createAndAddBoard from '@/composables/createAndAddBoard'
+const router = useRouter()
 const store = useBoardStore()
 const boardTitle = ref('')
 const composer: Ref<HTMLElement | null> = ref(null)
 
 const handleCreateBoard = async () => {
-  await createAndAddBoard(boardTitle.value)
+  const boardId = await createAndAddBoard(boardTitle.value)
+  router.push(`/board/${boardId}`)
   store.toggleBoardComposer()
-  // TODO possibly navigate to the board right after
 }
 const handleClickOutside = (e: MouseEvent) => {
   if (composer.value && !composer.value.contains(e.target as Node))
