@@ -24,8 +24,6 @@
             @keyup.esc="clearItemEdit(item.id, item.name)"
           />
           <!-- NOTE 'mousedown' needed, as 'blur' triggers before 'click', meaning the button wouldn't exist in DOM, so its click would never trigger -->
-          <button @mousedown="saveItemName">Save</button>
-          <button @mousedown="clearItemEdit(item.id)">X</button>
           <div class="flex justify-between">
             <div>
               <button @mousedown="saveItemName(item.name)" class="mr-3">
@@ -33,6 +31,9 @@
               </button>
               <button @mousedown="clearItemEdit(item.id, item.name)">X</button>
             </div>
+            <button @mousedown="store.removeChecklistItem(item.id)">
+              Delete
+            </button>
           </div>
         </div>
         <span
@@ -54,6 +55,12 @@
             Discard
           </button>
         </div>
+        <button
+          v-if="item.id !== activeItemId"
+          @click="store.removeChecklistItem(item.id)"
+        >
+          Delete
+        </button>
       </div>
     </li>
   </ul>

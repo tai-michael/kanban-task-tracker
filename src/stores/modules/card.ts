@@ -55,6 +55,13 @@ export const useCardStore = defineStore('card', () => {
   const addChecklistItem = (item: ChecklistItem) => {
     cardDetails.value.checklist.push(item)
   }
+  const removeChecklistItem = (id: string) => {
+    const itemIndex = cardDetails.value.checklist.findIndex(
+      (item) => item.id === id
+    )
+    if (itemIndex === -1) return
+    cardDetails.value.checklist.splice(itemIndex, 1)
+  }
   const updateChecklistItemName = (id: string, name: string) => {
     const item = cardDetails.value.checklist.find((item) => item.id === id)
     item.name = name
@@ -91,6 +98,7 @@ export const useCardStore = defineStore('card', () => {
     updateCardDueDate,
     toggleCardCompleted,
     addChecklistItem,
+    removeChecklistItem,
     updateChecklistItemName,
     storeUnsavedChecklistItemName,
     deleteUnsavedChecklistItemName,
