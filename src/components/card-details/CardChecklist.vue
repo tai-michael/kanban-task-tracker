@@ -10,19 +10,30 @@
         @click.stop="store.toggleChecklistItemCompleted(item.id)"
         :checked="item.is_completed"
       />
-      <div>
-        <div v-if="item.id === activeItemId" class="flex gap-x-3">
+      <div class="flex gap-x-2 w-full">
+        <div
+          v-if="item.id === activeItemId"
+          class="flex flex-col gap-x-3 w-full"
+        >
           <input
-            class="editable-input"
+            class="flex"
             v-model="activeItemName"
             v-focus="item.id === activeItemId"
             @blur="storeUnsavedItemName(item.name)"
-            @keyup.enter="saveItemName"
-            @keyup.esc="clearItemEdit(item.id)"
+            @keyup.enter="saveItemName(item.name)"
+            @keyup.esc="clearItemEdit(item.id, item.name)"
           />
           <!-- NOTE 'mousedown' needed, as 'blur' triggers before 'click', meaning the button wouldn't exist in DOM, so its click would never trigger -->
           <button @mousedown="saveItemName">Save</button>
           <button @mousedown="clearItemEdit(item.id)">X</button>
+          <div class="flex justify-between">
+            <div>
+              <button @mousedown="saveItemName(item.name)" class="mr-3">
+                Save
+              </button>
+              <button @mousedown="clearItemEdit(item.id, item.name)">X</button>
+            </div>
+          </div>
         </div>
         <span
           v-else
@@ -39,7 +50,7 @@
           <button @click="beginItemNameEdit(item)" class="underline">
             View edits
           </button>
-          <button @click="clearItemEdit(item.id)" class="underline">
+          <button @click="clearItemEdit(item.id, item.name)" class="underline">
             Discard
           </button>
         </div>
@@ -99,9 +110,9 @@ const beginItemNameEdit = (item: object) => {
     ? (activeItemName.value = item.unsaved_name)
     : (activeItemName.value = item.name)
 }
-const storeUnsavedItemName = (itemName: string) => {
+const storeUnsavedItemName = (existingName: string) => {
   // only store if names are different
-  if (activeItemName.value && activeItemName.value !== itemName) {
+  if (activeItemName.value && activeItemName.value !== existingName) {
     store.storeUnsavedChecklistItemName(
       activeItemId.value,
       activeItemName.value
@@ -109,12 +120,17 @@ const storeUnsavedItemName = (itemName: string) => {
   }
   clearFocus()
 }
-const saveItemName = () => {
-  store.updateChecklistItemName(activeItemId.value, activeItemName.value)
-  clearItemEdit(activeItemId.value)
+const saveItemName = (existingName: string) => {
+  if (!activeItemName.value.trim()) return
+  if (activeItemName.value !== existingName) {
+    store.updateChecklistItemName(activeItemId.value, activeItemName.value)
+  }
+  clearItemEdit(activeItemId.value, existingName)
 }
-const clearItemEdit = (id: string) => {
-  store.deleteUnsavedChecklistItemName(id)
+const clearItemEdit = (id: string, existingName: string) => {
+  if (activeItemName.value !== existingName) {
+    store.deleteUnsavedChecklistItemName(id)
+  }
   clearFocus()
 }
 const clearFocus = () => {
