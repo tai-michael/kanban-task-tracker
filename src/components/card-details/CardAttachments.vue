@@ -49,6 +49,48 @@ import {
 import { storage, auth } from '@/firebaseInit'
 import { useCardStore } from '@/stores'
 const store = useCardStore()
+
+const maxFileSize = 10 * 1024 * 1024 // 10 MB
+const allowedFileTypesArray = [
+  'image/*',
+  'application/pdf',
+  'audio/*',
+  'video/*',
+  // Microsoft Office Formats
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
+  'application/vnd.ms-powerpoint',
+  'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .pptx
+  // OpenOffice Formats
+  'application/vnd.oasis.opendocument.text', // .odt
+  'application/vnd.oasis.opendocument.spreadsheet', // .ods
+  'application/vnd.oasis.opendocument.presentation', // .odp
+  // Text Formats
+  'text/plain',
+  'text/rtf',
+  'text/csv',
+  'text/html',
+  'text/xml',
+  'text/css',
+  'text/javascript',
+  'application/json',
+  'text/markdown',
+  'application/x-yaml',
+  // Compressed File Formats
+  'application/zip',
+  'application/x-zip-compressed',
+  'application/x-rar-compressed',
+  'application/x-7z-compressed',
+  'application/gzip',
+  'application/x-tar',
+  'application/x-bzip',
+  'application/x-bzip2',
+  'application/x-gzip',
+]
+const allowedFileTypes = allowedFileTypesArray.join(',')
+
 const isUploadingFile = vueRef(false)
 const uploadError = vueRef('')
 const uploadFile = async (event) => {
