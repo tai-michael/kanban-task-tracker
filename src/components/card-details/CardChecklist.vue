@@ -64,15 +64,18 @@
       </div>
     </li>
   </ul>
-  <div v-if="isCreatingItem">
+  <div v-if="isCreatingItem" class="flex flex-col w-full">
     <input
       v-model="newItemName"
       v-focus="isCreatingItem"
       @blur="processItemCreation"
       placeholder="Add an item"
+      class="w-full"
     />
-    <button @mousedown="processItemCreation">Add</button>
-    <button @mousedown="exitItemCreation">Cancel</button>
+    <div>
+      <button @mousedown="processItemCreation" class="mr-2">Add</button>
+      <button @mousedown="exitItemCreation">Cancel</button>
+    </div>
   </div>
   <button v-else @click="isCreatingItem = true" class="border-2">
     Add a checklist item
