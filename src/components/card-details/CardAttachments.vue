@@ -34,10 +34,15 @@
         <span :title="file.originalName" class="max-w-[200px] truncate block">{{
           file.originalName
         }}</span>
+        <div>
+          <a :href="file.url" target="_blank" download class="mr-2">Download</a>
+          <button @click="deleteFile(file)">Delete</button>
+        </div>
       </li>
     </ul>
   </div>
 </template>
+
 <script setup lang="ts">
 import { ref as vueRef, watch } from 'vue'
 import {
@@ -141,3 +146,23 @@ const uploadFile = async (event) => {
     isUploadingFile.value = false
   }
 }
+
+const deleteFile = async (fileToDelete) => {
+  try {
+    const fileRef = storageRef(
+      storage,
+      `attachments/${auth.currentUser.uid}/${store.cardDetails?.boardId}/${store.cardDetails?.id}/${fileToDelete.storageName}`
+    )
+    await deleteObject(fileRef)
+    store.removeAttachment(fileToDelete)
+  } catch (error) {
+    console.error('Error deleting file:', error)
+  }
+}
+watch(
+  () => store.cardDetails?.attachments.length,
+  (newValue) => {
+    store.syncAttachmentsTotal(newValue)
+  }
+)
+</script>
