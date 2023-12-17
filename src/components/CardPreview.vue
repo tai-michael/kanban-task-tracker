@@ -25,6 +25,8 @@
         {{ formattedDueDate }}
       </button>
 
+      <span v-if="card.attachments_total">📎 {{ card.attachments_total }}</span>
+
       <span
         v-if="checklistProgress"
         class="checklist-progress"

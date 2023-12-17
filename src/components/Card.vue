@@ -6,7 +6,7 @@
     <CardDatePicker />
     <CardDescription />
     <CardChecklist />
-    <!-- TODO add attachment component -->
+    <CardAttachments />
   </ul>
 </template>
 
@@ -24,6 +24,9 @@ const CardDescription = defineAsyncComponent(
 const CardDatePicker = defineAsyncComponent(
   () => import('@/components/card-details/CardDatePicker.vue')
 )
+const CardAttachments = defineAsyncComponent(
+  () => import('@/components/card-details/CardAttachments.vue')
+)
 const Title = defineAsyncComponent(() => import('@/components/Title.vue'))
 const emit = defineEmits(['closeButtonClicked'])
 const store = useCardStore()
@@ -33,7 +36,7 @@ const changeCardTitle = (title: string) => {
 }
 
 const deleteCardAndCloseModal = () => {
-  deleteCard(store.cardDetails.id)
+  deleteCard(store.cardDetails?.boardId, store.cardDetails.id)
   emit('closeButtonClicked')
 }
 
