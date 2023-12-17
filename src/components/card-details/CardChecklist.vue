@@ -151,14 +151,14 @@ const itemsCompleted = computed(
 watch(
   () => itemsCompleted.value,
   (newValue) => {
-    store.updateChecklistItemsCompleted(newValue)
+    store.syncChecklistItemsCompleted(newValue)
   }
 )
 const itemsTotal = computed(() => store.cardDetails.checklist.length)
 watch(
   () => itemsTotal.value,
   (newValue) => {
-    store.updateChecklistItemsTotal(newValue)
+    store.syncChecklistItemsTotal(newValue)
   }
 )
 </script>
