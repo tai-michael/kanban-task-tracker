@@ -166,3 +166,22 @@ watch(
   }
 )
 </script>
+
+<style scoped lang="scss">
+.custom-file-input {
+  display: flex;
+  justify-content: center;
+  width: 160px;
+  padding: 10px 15px;
+  background-color: #f0f0f0;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+}
+
+.custom-file-input.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+</style>

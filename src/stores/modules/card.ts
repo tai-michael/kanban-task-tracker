@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useBoardStore } from '@/stores'
-import type { CardDescription, ChecklistItem } from '@/types'
+import type { CardDescription, ChecklistItem, CardAttachment } from '@/types'
 
 export const useCardStore = defineStore('card', () => {
   // const router = useRouter()
@@ -84,6 +84,18 @@ export const useCardStore = defineStore('card', () => {
   const syncChecklistItemsTotal = (itemsTotal: number) => {
     cardSummary.value.checklist_items_total = itemsTotal
   }
+  const addAttachment = (attachment: CardAttachment) => {
+    cardDetails.value.attachments.push(attachment)
+  }
+  const removeAttachment = (attachmentToDelete: CardAttachment) => {
+    const attachmentIndex = cardDetails.value.attachments.findIndex(
+      (attachment) => attachment.storageName === attachmentToDelete.storageName
+    )
+
+    if (attachmentIndex !== -1) {
+      cardDetails.value.attachments.splice(attachmentIndex, 1)
+    }
+  }
 
   return {
     cardSummary,
@@ -105,5 +117,7 @@ export const useCardStore = defineStore('card', () => {
     toggleChecklistItemCompleted,
     syncChecklistItemsCompleted,
     syncChecklistItemsTotal,
+    addAttachment,
+    removeAttachment,
   }
 })
