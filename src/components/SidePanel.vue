@@ -42,7 +42,7 @@ const store = useBoardStore()
   top: 0; // Align top with SidePanel
   left: 100%; // Position to the right of SidePanel
   width: 300px; // Adjust to your desired width
-  height: 17vh; // Adjust to your desired height
+  height: 22vh; // Adjust to your desired height
   background-color: white; // Optional, for visibility
   border: 1px solid #ccc; // Optional, for visibility
   border-radius: 8px;

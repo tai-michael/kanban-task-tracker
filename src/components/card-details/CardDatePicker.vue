@@ -5,7 +5,7 @@
       v-if="selectedDate"
       type="checkbox"
       :checked="store.cardSummary?.is_completed"
-      @click.stop="store.toggleCardCompleted(store.cardSummary.id)"
+      @click="store.toggleCardCompleted(store.cardSummary.id)"
     />
     <VueDatePicker
       v-model="selectedDate"
@@ -32,9 +32,7 @@
     <span v-if="isOverdue" class="bg-red-400 p-1 flex items-center"
       >Overdue</span
     >
-    <button v-if="selectedDate" @click.stop="handleClearDueDate">
-      Remove date
-    </button>
+    <button v-if="selectedDate" @click="handleClearDueDate">Remove date</button>
   </div>
 </template>
 

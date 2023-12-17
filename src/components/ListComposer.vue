@@ -1,5 +1,5 @@
 <template>
-  <div class="min-w-[304px] ml-2 mr-2 p-2">
+  <div class="min-w-[304px] ml-2 mr-2 pl-2 pr-2">
     <div v-if="isCreatingList" ref="composer" class="list-composer">
       <div class="input-form">
         <input
