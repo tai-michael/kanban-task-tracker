@@ -96,6 +96,9 @@ export const useCardStore = defineStore('card', () => {
       cardDetails.value.attachments.splice(attachmentIndex, 1)
     }
   }
+  const syncAttachmentsTotal = (attachmentsTotal: number) => {
+    cardSummary.value.attachments_total = attachmentsTotal
+  }
 
   return {
     cardSummary,
@@ -119,5 +122,6 @@ export const useCardStore = defineStore('card', () => {
     syncChecklistItemsTotal,
     addAttachment,
     removeAttachment,
+    syncAttachmentsTotal,
   }
 })
