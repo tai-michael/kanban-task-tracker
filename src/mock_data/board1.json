@@ -13,7 +13,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 1,
-          "checklist_items_total": 3
+          "checklist_items_total": 3,
+          "attachments_total": 0
         },
         {
           "id": "848be114-321b-4dc9-86b9-9cd1587f5773",
@@ -21,7 +22,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 0,
-          "checklist_items_total": 1
+          "checklist_items_total": 1,
+          "attachments_total": 0
         },
         {
           "id": "7875b170-cfb5-4c16-b950-0a0e41a6c408",
@@ -29,7 +31,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 0,
-          "checklist_items_total": 2
+          "checklist_items_total": 2,
+          "attachments_total": 0
         },
         {
           "id": "68fdd022-f17c-49ff-9aad-187f5fc694f0",
@@ -37,7 +40,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 0,
-          "checklist_items_total": 2
+          "checklist_items_total": 2,
+          "attachments_total": 0
         }
       ]
     },
@@ -51,7 +55,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 2,
-          "checklist_items_total": 3
+          "checklist_items_total": 3,
+          "attachments_total": 0
         },
         {
           "id": "d3b08d72-3eed-4bcd-9931-0b58d836ec23",
@@ -59,7 +64,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 2,
-          "checklist_items_total": 3
+          "checklist_items_total": 3,
+          "attachments_total": 0
         },
         {
           "id": "5ee6631c-d7f5-48b2-b430-c28111bec8b1",
@@ -67,7 +73,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 1,
-          "checklist_items_total": 3
+          "checklist_items_total": 3,
+          "attachments_total": 0
         },
         {
           "id": "50ca524d-5cf8-42ae-9e43-a14da2467e74",
@@ -75,7 +82,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 1,
-          "checklist_items_total": 2
+          "checklist_items_total": 2,
+          "attachments_total": 0
         },
         {
           "id": "179c6518-e289-43d1-a78c-428762959293",
@@ -83,7 +91,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 1,
-          "checklist_items_total": 2
+          "checklist_items_total": 2,
+          "attachments_total": 0
         },
         {
           "id": "269cb304-1ffa-488f-a1fe-1950b9c5cc28",
@@ -91,7 +100,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 1,
-          "checklist_items_total": 3
+          "checklist_items_total": 3,
+          "attachments_total": 0
         }
       ]
     },
@@ -105,7 +115,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 1,
-          "checklist_items_total": 1
+          "checklist_items_total": 1,
+          "attachments_total": 0
         },
         {
           "id": "bd3fa2ca-fa0a-468a-8b25-f4385d8d6251",
@@ -113,7 +124,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 1,
-          "checklist_items_total": 1
+          "checklist_items_total": 1,
+          "attachments_total": 0
         },
         {
           "id": "a61d3fe1-2543-41c7-bc29-9881b4d8900c",
@@ -121,7 +133,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 3,
-          "checklist_items_total": 3
+          "checklist_items_total": 3,
+          "attachments_total": 0
         },
         {
           "id": "1098cf21-7886-4a26-b683-943aeb13c076",
@@ -129,7 +142,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 2,
-          "checklist_items_total": 2
+          "checklist_items_total": 2,
+          "attachments_total": 0
         },
         {
           "id": "9e5783b6-efad-4e09-b758-1b83224ce264",
@@ -137,7 +151,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 1,
-          "checklist_items_total": 1
+          "checklist_items_total": 1,
+          "attachments_total": 0
         },
         {
           "id": "9d0b886c-7adf-4569-9a0a-eed67946e2fd",
@@ -145,7 +160,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 2,
-          "checklist_items_total": 2
+          "checklist_items_total": 2,
+          "attachments_total": 0
         },
         {
           "id": "d1352a96-eab7-4e8d-901d-62cad952d51d",
@@ -153,7 +169,8 @@
           "due_date": "",
           "is_completed": false,
           "checklist_items_completed": 2,
-          "checklist_items_total": 2
+          "checklist_items_total": 2,
+          "attachments_total": 0
         }
       ]
     }
