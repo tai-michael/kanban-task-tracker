@@ -27,6 +27,7 @@ export interface CardSummary {
   is_completed: boolean
   checklist_items_completed: number
   checklist_items_total: number
+  attachments_total: number
 }
 
 export interface CardDescription {
@@ -35,7 +36,7 @@ export interface CardDescription {
   created_by: ID
   description: string
   checklist: ChecklistItem[]
-  attachments: string // TODO change later
+  attachments: CardAttachment[]
 }
 
 export interface ChecklistItem {
@@ -43,4 +44,10 @@ export interface ChecklistItem {
   name: string
   unsaved_name: string
   is_completed: boolean
+}
+
+export interface CardAttachment {
+  originalName: string
+  storageName: string
+  url: string
 }

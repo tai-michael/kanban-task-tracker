@@ -16,6 +16,7 @@ export default async function (listId: string, title: string) {
     is_completed: false,
     checklist_items_completed: 0,
     checklist_items_total: 0,
+    attachments_total: 0,
   }
   const cardDetails = {
     id: cardId,
@@ -23,7 +24,7 @@ export default async function (listId: string, title: string) {
     created_by: auth.currentUser.uid,
     description: '',
     checklist: [],
-    attachments: '(attachments)',
+    attachments: [],
   }
 
   await updateFirestoreDoc('cards', cardId, cardDetails, false)
