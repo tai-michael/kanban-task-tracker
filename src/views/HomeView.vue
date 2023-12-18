@@ -9,21 +9,35 @@
     <SidePanel :fetching-boards-from-backend="fetchingBoardsFromBackend" />
     <div class="flex-grow overflow-x-auto">
       <router-view></router-view>
+      <div
+        v-if="route.name === 'home'"
+        class="flex justify-center items-center mt-5"
+      >
+        {{ greetingMessage }}
+      </div>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 import SidePanel from '@/components/SidePanel.vue'
 import { db, auth } from '@/firebaseInit'
 import { signOut } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
-import { useBoardStore, useErrorStore } from '@/stores'
-import { useRouter } from 'vue-router'
+import { useBoardStore } from '@/stores'
+import { useRouter, useRoute } from 'vue-router'
+const route = useRoute()
 const router = useRouter()
 const boardStore = useBoardStore()
+const greetingMessage = computed(() => {
+  const hasBoards = Object.keys(boardStore.boards).length > 0
+  return hasBoards
+    ? 'Click on a board or create a new one!'
+    : 'Start by creating a board!'
+})
+
 const isInitialLoad = ref(true)
 const fetchingBoardsFromBackend = ref(false)
 const fetchBoardsCollection = async (id: string) => {
