@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { db } from '@/firebaseInit'
+import { db, auth, storage } from '@/firebaseInit'
 import { writeBatch, doc, deleteDoc } from 'firebase/firestore'
+import { ref as storageRef, listAll, deleteObject } from 'firebase/storage'
 import type { BoardMeta, BoardDetails, List, CardSummary } from '@/types'
 
 export const useBoardStore = defineStore('board', () => {
@@ -104,10 +105,27 @@ export const useBoardStore = defineStore('board', () => {
       console.error('Error deleting cards:', error)
     }
   }
+  const removeCardAttachmentsFromFirebaseStorage = async () => {
+    const boardFolderRef = storageRef(
+      storage,
+      `attachments/${auth.currentUser.uid}/${board.value.id}`
+    )
+
+    try {
+      const { prefixes } = await listAll(boardFolderRef)
+      for (const cardFolder of prefixes) {
+        const { items } = await listAll(cardFolder)
+        await Promise.all(items.map((fileRef) => deleteObject(fileRef)))
+      }
+    } catch (error) {
+      console.error('Error deleting files from Firebase Storage:', error)
+    }
+  }
   const deleteBoard = () => {
     removeBoardFromSingleBoardsCollection()
     removeBoardFromSidePanel()
     removeCardDescriptionsFromBackend()
+    removeCardAttachmentsFromFirebaseStorage() // not from firestore
     clearBoard()
     router.replace('/')
   }
