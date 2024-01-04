@@ -3,7 +3,12 @@
     {{ title }}
   </span>
 
-  <input v-else v-model="title" v-focus="isEditingTitle" @blur="handleBlur" />
+  <input
+    v-else
+    v-model.trim="title"
+    v-focus="isEditingTitle"
+    @blur="handleBlur"
+  />
 </template>
 
 <script setup lang="ts">

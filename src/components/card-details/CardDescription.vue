@@ -14,7 +14,7 @@
   <textarea
     v-else
     ref="textArea"
-    v-model="cardDescription"
+    v-model.trim="cardDescription"
     v-focus="isEditingDescription"
     @input="adjustTextAreaHeight"
     @blur="changeCardDescription"

@@ -10,14 +10,14 @@
         @click.stop="store.toggleChecklistItemCompleted(item.id)"
         :checked="item.is_completed"
       />
-      <div class="flex gap-x-2 w-full">
+      <div class="flex justify-between gap-x-2 w-full">
         <div
           v-if="item.id === activeItemId"
           class="flex flex-col gap-x-3 w-full"
         >
           <input
             class="flex"
-            v-model="activeItemName"
+            v-model.trim="activeItemName"
             v-focus="item.id === activeItemId"
             @blur="storeUnsavedItemName(item.name)"
             @keyup.enter="saveItemName(item.name)"
@@ -66,7 +66,7 @@
   </ul>
   <div v-if="isCreatingItem" class="flex flex-col w-full">
     <input
-      v-model="newItemName"
+      v-model.trim="newItemName"
       v-focus="isCreatingItem"
       @blur="processItemCreation"
       placeholder="Add an item"
@@ -131,7 +131,7 @@ const storeUnsavedItemName = (existingName: string) => {
   clearFocus()
 }
 const saveItemName = (existingName: string) => {
-  if (!activeItemName.value.trim()) return
+  if (!activeItemName.value) return
   if (activeItemName.value !== existingName) {
     store.updateChecklistItemName(activeItemId.value, activeItemName.value)
   }

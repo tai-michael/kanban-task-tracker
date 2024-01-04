@@ -6,7 +6,7 @@
     </header>
 
     <input
-      v-model="boardTitle"
+      v-model.trim="boardTitle"
       v-focus
       class="px-2 py-1.5 mb-6 rounded-sm"
       placeholder="Enter a title"

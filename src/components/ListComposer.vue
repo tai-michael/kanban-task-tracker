@@ -3,7 +3,7 @@
     <div v-if="isCreatingList" ref="composer" class="list-composer">
       <div class="input-form">
         <input
-          v-model="newListTitle"
+          v-model.trim="newListTitle"
           v-focus="isCreatingList"
           @keyup.enter="processListCreation"
           @keyup.esc="hideListComposer"
@@ -41,7 +41,7 @@ const newListTitle = ref('')
 const composer: Ref<HTMLElement | null> = ref(null)
 
 const processListCreation = () => {
-  if (!newListTitle.value.trim()) return
+  if (!newListTitle.value) return
   createAndAddList(newListTitle.value)
   newListTitle.value = ''
   hideListComposer()
