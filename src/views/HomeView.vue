@@ -8,26 +8,28 @@
   <main class="flex w-full h-[95vh]">
     <SidePanel :fetching-boards-from-backend="fetchingBoardsFromBackend" />
     <div class="flex-grow overflow-x-auto">
-      <router-view></router-view>
-      <div
+      <HomePageStatusIndicator
         v-if="route.name === 'home'"
-        class="flex justify-center items-center mt-5"
-      >
-        {{ greetingMessage }}
-      </div>
+        :fetching-boards-from-backend="fetchingBoardsFromBackend"
+        :greeting-message="greetingMessage"
+      />
+      <router-view></router-view>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, onMounted, watch, computed, defineAsyncComponent } from 'vue'
 import SidePanel from '@/components/SidePanel.vue'
+const HomePageStatusIndicator = defineAsyncComponent(
+  () => import('@/components/HomePageStatusIndicator.vue')
+)
 import { db, auth } from '@/firebaseInit'
 import { signOut } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import { useBoardStore } from '@/stores'
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
 const boardStore = useBoardStore()
