@@ -1,9 +1,9 @@
 <template>
-  <header class="mb-4 flex gap-x-2">
+  <!-- <header class="mb-4 flex gap-x-2">
     <span class="font-bold uppercase" @click="router.push('/')">Kanban</span>
     <button @click="signOut(auth)">Sign Out</button>
     <router-link :to="`/admin`">Admin</router-link>
-  </header>
+  </header> -->
 
   <main class="flex w-full h-[95vh]">
     <SidePanel :fetching-boards-from-backend="fetchingBoardsFromBackend" />

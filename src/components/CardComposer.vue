@@ -2,7 +2,7 @@
   <div v-if="isCreatingCard">
     <div class="input-form">
       <textarea
-        v-model="newCardTitle"
+        v-model.trim="newCardTitle"
         v-focus="isCreatingCard"
         @blur="processCardCreation"
         @keyup.enter="processCardCreation"

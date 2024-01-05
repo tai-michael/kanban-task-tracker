@@ -43,7 +43,6 @@ const ListComposer = defineAsyncComponent(
   () => import('@/components/ListComposer.vue')
 )
 const store = useBoardStore()
-const props = defineProps(['title'])
 const changeBoardTitle = (title: string) => {
   store.updateBoardTitle(title)
 }
