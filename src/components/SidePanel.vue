@@ -56,9 +56,12 @@
       <BoardComposer />
     </div>
 
-    <div class="mt-auto ml-8">
-      <button class="mr-4" @click="signOut(auth)">Sign Out</button>
-      <router-link :to="`/admin`">Admin</router-link>
+    <div class="mt-auto flex flex-col">
+      <DarkmodeToggle class="ml-6 mr-6 h-12" />
+      <div class="mt-4 ml-8">
+        <button class="mr-4" @click="signOut(auth)">Sign Out</button>
+        <router-link :to="`/admin`">Admin</router-link>
+      </div>
     </div>
   </nav>
 </template>
@@ -67,6 +70,7 @@
 import { defineAsyncComponent } from 'vue'
 import LogoDark from '@/assets/images/logo-dark.svg'
 import BoardIcon from '@/assets/icons/icon-board.vue'
+import DarkmodeToggle from '@/components/DarkmodeToggle.vue'
 import { auth } from '@/firebaseInit'
 import { signOut } from 'firebase/auth'
 import { useRoute, useRouter } from 'vue-router'
