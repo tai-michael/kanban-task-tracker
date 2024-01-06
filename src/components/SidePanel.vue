@@ -19,6 +19,8 @@
         <li v-for="board in store.boards" :key="board.id" :title="board.title">
           <router-link
             :to="`/board/${board.id}`"
+            @mouseenter="onMouseEnterBoardLink(board.id)"
+            @mouseleave="onMouseLeaveBoardLink"
             class="flex items-center w-full p-3 pl-8 gap-x-4"
             :class="[
               {
@@ -27,13 +29,7 @@
               },
             ]"
           >
-            <BoardIcon
-              :color="`${
-                board.id === route.params.boardId
-                  ? 'white'
-                  : 'var(--medium-gray)'
-              }`"
-            />
+            <BoardIcon :color="getBoardIconColor(board.id)" />
             <span
               class="truncate whitespace-nowrap font-bold text-[var(--medium-gray)]"
               >{{ board.title }}</span
@@ -97,6 +93,23 @@ const BoardComposer = defineAsyncComponent(
 )
 defineProps(['fetchingBoardsFromBackend'])
 const store = useBoardStore()
+
+const hoveredBoardId = ref(null)
+const onMouseEnterBoardLink = (boardId: string) => {
+  hoveredBoardId.value = boardId
+}
+const onMouseLeaveBoardLink = () => {
+  hoveredBoardId.value = null
+}
+const getBoardIconColor = (boardId: string) => {
+  if (boardId === route.params.boardId) {
+    return 'white' // Active board color
+  } else if (boardId === hoveredBoardId.value) {
+    return 'var(--main-purple)' // Hover color
+  }
+  return 'var(--medium-gray)' // Default color
+}
+
 const hideSidebarButtonHovered = ref(false)
 </script>
 
@@ -116,6 +129,10 @@ const hideSidebarButtonHovered = ref(false)
 .hover-effect:hover {
   background-color: var(--light-nav-hover);
   border-radius: 0px 100px 100px 0px;
+
+  span {
+    color: var(--main-purple);
+  }
 }
 
 .board-composer {
