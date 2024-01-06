@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch, computed, defineAsyncComponent } from 'vue'
-import SidePanel from '@/components/SidePanel.vue'
+import Sidebar from '@/components/Sidebar.vue'
 const HomePageStatusIndicator = defineAsyncComponent(
   () => import('@/components/HomePageStatusIndicator.vue')
 )

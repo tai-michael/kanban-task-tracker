@@ -81,7 +81,7 @@ export const useBoardStore = defineStore('board', () => {
   const removeBoardFromSingleBoardsCollection = () => {
     deleteDoc(doc(db, 'boards_single', board.value.id))
   }
-  const removeBoardFromSidePanel = () => {
+  const removeBoardFromSidebar = () => {
     const boardIndex = boards.value.findIndex((b) => b.id === board.value.id)
 
     if (boardIndex === -1) return
@@ -123,7 +123,7 @@ export const useBoardStore = defineStore('board', () => {
   }
   const deleteBoard = () => {
     removeBoardFromSingleBoardsCollection()
-    removeBoardFromSidePanel()
+    removeBoardFromSidebar()
     removeCardDescriptionsFromBackend()
     removeCardAttachmentsFromFirebaseStorage() // not from firestore
     clearBoard()
