@@ -11,6 +11,11 @@
       <button @click="signOut(auth)">Sign Out</button>
       <router-link :to="`/admin`">Admin</router-link>
     </header>
+    <img
+      :src="LogoDark"
+      class="cursor-pointer w-[150px] ml-8 mt-8 mb-14"
+      @click="router.push('/')"
+    />
 
     <div class="flex w-full">
       <div v-if="fetchingBoardsFromBackend">Loading...</div>
@@ -37,9 +42,12 @@
 
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
+import LogoDark from '@/assets/images/logo-dark.svg'
 import { auth } from '@/firebaseInit'
 import { signOut } from 'firebase/auth'
 import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+const route = useRoute()
 const router = useRouter()
 import { useBoardStore } from '@/stores'
 const BoardComposer = defineAsyncComponent(
