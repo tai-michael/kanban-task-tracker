@@ -4,7 +4,7 @@
   >
     <img :src="SunIcon" class="mr-6" />
     <label
-      class="relative w-10 h-5 bg-[var(--main-purple)] rounded-full cursor-pointer"
+      class="relative w-10 h-5 bg-[var(--main-purple)] rounded-full cursor-pointer hover:bg-[var(--main-purple-hover)]"
       for="dark-toggle"
     >
       <input
