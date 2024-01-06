@@ -23,6 +23,13 @@
             :class="[
               {
                 'active-board': board.id === route.params.boardId,
+            <BoardIcon
+              :color="`${
+                board.id === route.params.boardId
+                  ? 'white'
+                  : 'var(--medium-gray)'
+              }`"
+            />
             <span
               class="truncate whitespace-nowrap font-bold text-[var(--medium-gray)]"
               >{{ board.title }}</span
@@ -32,6 +39,7 @@
         <button
           @click.stop="store.toggleBoardComposer"
         >
+          <BoardIcon :color="'var(--main-purple)'" />
           <span class="font-bold text-[var(--main-purple)]"
             >+ Create new board</span
           >
@@ -42,7 +50,6 @@
     <div v-if="store.isCreatingNewBoard" class="board-composer">
       <BoardComposer />
     </div>
-  </div>
 
     <div class="mt-auto ml-8">
       <button class="mr-4" @click="signOut(auth)">Sign Out</button>
@@ -54,6 +61,7 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
 import LogoDark from '@/assets/images/logo-dark.svg'
+import BoardIcon from '@/assets/icons/icon-board.vue'
 import { auth } from '@/firebaseInit'
 import { signOut } from 'firebase/auth'
 import { useRoute, useRouter } from 'vue-router'
