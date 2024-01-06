@@ -23,6 +23,10 @@
             :class="[
               {
                 'active-board': board.id === route.params.boardId,
+                'hover-effect': board.id !== route.params.boardId,
+              },
+            ]"
+          >
             <BoardIcon
               :color="`${
                 board.id === route.params.boardId
@@ -38,6 +42,7 @@
         </li>
         <button
           @click.stop="store.toggleBoardComposer"
+          class="flex items-center w-full p-3 pl-8 gap-x-4 hover-effect"
         >
           <BoardIcon :color="'var(--main-purple)'" />
           <span class="font-bold text-[var(--main-purple)]"
@@ -86,6 +91,11 @@ const store = useBoardStore()
   span {
     color: white;
   }
+}
+
+.hover-effect:hover {
+  background-color: var(--light-nav-hover);
+  border-radius: 0px 100px 100px 0px;
 }
 
 .board-composer {
