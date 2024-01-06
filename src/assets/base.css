@@ -1,6 +1,13 @@
 /* color palette from <https://github.com/vuejs/theme> */
-/* :root {
-  --vt-c-white: #ffffff;
+:root {
+  --main-purple: hsla(242, 48%, 58%);
+  --main-purple-hover: hsla(243, 100%, 82%);
+  --light-nav-hover: hsla(242, 48%, 58%, 10%);
+
+  --medium-gray: hsla(216, 15%, 57%);
+
+  --lines-light: hsla(221, 69%, 94%);
+  /* --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
 
@@ -18,8 +25,8 @@
   --vt-c-text-light-1: var(--vt-c-indigo);
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-} */
+  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64); */
+}
 
 /* semantic color variables for this project */
 /* :root {
