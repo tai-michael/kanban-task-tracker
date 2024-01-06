@@ -11,10 +11,3 @@
 import { defineProps } from 'vue'
 defineProps(['color'])
 </script>
-
-<style lang="scss" scoped>
-svg {
-  height: 16px;
-  width: 16px;
-}
-</style>
