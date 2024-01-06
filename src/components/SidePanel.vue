@@ -10,7 +10,7 @@
 
     <div class="flex w-full">
       <div v-if="fetchingBoardsFromBackend">Loading...</div>
-      <ul v-else class="flex flex-col w-full mr-6">
+      <ul v-else class="flex flex-col w-full">
         <label
           v-if="store.boards.length > 0"
           class="ml-8 mb-5 text-xs font-bold uppercase tracking-[2.4px] text-[var(--medium-gray)]"
@@ -57,8 +57,22 @@
     </div>
 
     <div class="mt-auto flex flex-col">
-      <DarkmodeToggle class="ml-6 mr-6 h-12" />
-      <div class="mt-4 ml-8">
+      <DarkmodeToggle class="h-12 ml-6" />
+      <button
+        class="mt-2 p-3 pl-8 inline-flex items-center gap-4 hover-effect"
+        @mouseover="hideSidebarButtonHovered = true"
+        @mouseleave="hideSidebarButtonHovered = false"
+      >
+        <HideSidebarIcon
+          :color="`${
+            hideSidebarButtonHovered
+              ? 'var(--main-purple)'
+              : 'var(--medium-gray)'
+          }`"
+        />
+        <span class="text-[var(--medium-gray)] font-bold">Hide Sidebar</span>
+      </button>
+      <div class="mt-3 ml-6">
         <button class="mr-4" @click="signOut(auth)">Sign Out</button>
         <router-link :to="`/admin`">Admin</router-link>
       </div>
@@ -67,10 +81,11 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
+import { ref, defineAsyncComponent } from 'vue'
 import LogoDark from '@/assets/images/logo-dark.svg'
 import BoardIcon from '@/assets/icons/icon-board.vue'
 import DarkmodeToggle from '@/components/DarkmodeToggle.vue'
+import HideSidebarIcon from '@/assets/icons/icon-hide-sidebar.vue'
 import { auth } from '@/firebaseInit'
 import { signOut } from 'firebase/auth'
 import { useRoute, useRouter } from 'vue-router'
@@ -82,6 +97,7 @@ const BoardComposer = defineAsyncComponent(
 )
 defineProps(['fetchingBoardsFromBackend'])
 const store = useBoardStore()
+const hideSidebarButtonHovered = ref(false)
 </script>
 
 <style scoped lang="scss">
