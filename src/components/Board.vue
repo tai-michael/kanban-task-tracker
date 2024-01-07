@@ -1,56 +1,34 @@
 <template>
-  <div>
-    <div class="flex justify-between mb-4">
-      <Title
-        v-if="store.board.title"
-        :title="store.board.title"
-        @title-edited="changeBoardTitle"
-      />
-      <button @click="handleDeleteBoard" class="p-1 mr-2 bg-red-200">
-        Delete Board
-      </button>
-    </div>
+  <div class="flex">
+    <draggable
+      v-model="store.board.lists"
+      item-key="id"
+      group="lists"
+      :animation="150"
+      ghost-class="ghost"
+      class="flex-container"
+    >
+      <template #item="{ element: list }">
+        <div class="w-[304px]">
+          <List :list="list"></List>
+        </div>
+      </template>
+    </draggable>
 
-    <div class="flex">
-      <draggable
-        v-model="store.board.lists"
-        item-key="id"
-        group="lists"
-        :animation="150"
-        ghost-class="ghost"
-        class="flex-container"
-      >
-        <template #item="{ element: list }">
-          <div class="w-[304px]">
-            <List :list="list"></List>
-          </div>
-        </template>
-      </draggable>
-
-      <ListComposer />
-    </div>
+    <ListComposer />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent, watch } from 'vue'
+import { defineAsyncComponent, watch } from 'vue'
 import { useBoardStore } from '@/stores'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import draggable from 'vuedraggable'
-import Title from '@/components/Title.vue'
 const List = defineAsyncComponent(() => import('@/components/List.vue'))
 const ListComposer = defineAsyncComponent(
   () => import('@/components/ListComposer.vue')
 )
 const store = useBoardStore()
-const changeBoardTitle = (title: string) => {
-  store.updateBoardTitle(title)
-}
-
-const handleDeleteBoard = () => {
-  store.deleteBoard()
-  // TODO add toast or something similar
-}
 
 watch(
   () => store.board,

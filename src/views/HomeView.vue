@@ -16,11 +16,16 @@
     <Sidebar v-if="!isMobileView || isChoosingBoard" />
 
     <div class="flex-grow overflow-x-auto">
+      <Header
+        v-if="isMobileView || route.name === 'board' || route.name === 'card'"
+      />
+
       <HomePageStatusIndicator
         v-if="route.name === 'home'"
         :fetching-boards-from-backend="fetchingBoardsFromBackend"
         :greeting-message="greetingMessage"
       />
+
       <router-view></router-view>
     </div>
   </main>
@@ -36,9 +41,6 @@ import {
   provide,
 } from 'vue'
 import Sidebar from '@/components/Sidebar.vue'
-const HomePageStatusIndicator = defineAsyncComponent(
-  () => import('@/components/HomePageStatusIndicator.vue')
-)
 import { db, auth } from '@/firebaseInit'
 import { signOut } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
@@ -46,6 +48,10 @@ import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import { useBoardStore } from '@/stores'
 import { useRoute, useRouter } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
+const Header = defineAsyncComponent(() => import('@/components/Header.vue'))
+const HomePageStatusIndicator = defineAsyncComponent(
+  () => import('@/components/HomePageStatusIndicator.vue')
+)
 
 const route = useRoute()
 const router = useRouter()
