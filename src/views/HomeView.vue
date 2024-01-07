@@ -5,8 +5,16 @@
     <router-link :to="`/admin`">Admin</router-link>
   </header> -->
 
-  <main class="flex w-full h-[95vh]">
-    <SidePanel :fetching-boards-from-backend="fetchingBoardsFromBackend" />
+  <main class="flex w-full h-[100vh]">
+    <button @click="isChoosingBoard = true">Select board</button>
+    <div
+      class="overlay"
+      v-if="isMobileView && isChoosingBoard"
+      @click="isChoosingBoard = false"
+    ></div>
+
+    <Sidebar v-if="!isMobileView || isChoosingBoard" />
+
     <div class="flex-grow overflow-x-auto">
       <HomePageStatusIndicator
         v-if="route.name === 'home'"
@@ -19,7 +27,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, computed, defineAsyncComponent } from 'vue'
+import {
+  ref,
+  onMounted,
+  watch,
+  computed,
+  defineAsyncComponent,
+  provide,
+} from 'vue'
 import Sidebar from '@/components/Sidebar.vue'
 const HomePageStatusIndicator = defineAsyncComponent(
   () => import('@/components/HomePageStatusIndicator.vue')
@@ -30,6 +45,8 @@ import { doc, getDoc } from 'firebase/firestore'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import { useBoardStore } from '@/stores'
 import { useRoute, useRouter } from 'vue-router'
+import { useWindowSize } from '@vueuse/core'
+
 const route = useRoute()
 const router = useRouter()
 const boardStore = useBoardStore()
@@ -84,4 +101,34 @@ onMounted(async () => {
   boardStore.hydrateBoards(data)
   fetchingBoardsFromBackend.value = false
 })
+
+provide('fetchingBoardsFromBackend', fetchingBoardsFromBackend)
+
+const isChoosingBoard = ref(false)
+const { width } = useWindowSize()
+const isMobileView = computed(() => width.value <= 480)
+watch(isMobileView, (isMobile) => {
+  if (!isMobile) {
+    isChoosingBoard.value = false
+  }
+})
 </script>
+
+<style scoped lang="scss">
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9000;
+  transition: all 0.5s;
+}
+
+@media (min-width: 481px) {
+  .overlay {
+    display: none;
+  }
+}
+</style>
