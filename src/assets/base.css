@@ -4,10 +4,19 @@
   --main-purple-hover: hsla(243, 100%, 82%);
   --light-nav-hover: hsla(242, 48%, 58%, 10%);
 
-  --light-gray: hsl(220, 69%, 97%);
-  --medium-gray: hsla(216, 15%, 57%);
+  --black: hsla(237, 100%, 4%);
+  --very-dark-gray-dark-bg: hsla(235, 16%, 15%);
 
+  --dark-gray: hsla(235, 12%, 19%);
+  --medium-gray: hsla(216, 15%, 57%);
+  --light-gray-light-bg: hsl(220, 69%, 97%);
+
+  --lines-dark: hsla(236, 11%, 27%);
   --lines-light: hsla(221, 69%, 94%);
+
+  --red: hsla(0, 78%, 63%);
+  --red-hover: hsla(0, 100%, 80%);
+
   /* --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
