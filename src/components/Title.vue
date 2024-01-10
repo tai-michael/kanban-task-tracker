@@ -5,31 +5,38 @@
 
   <input
     v-else
-    v-model.trim="title"
+    v-model.trim="editableTitle"
     v-focus="isEditingTitle"
     @blur="handleBlur"
   />
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 const props = defineProps(['title'])
-const title = ref('')
+const editableTitle = ref('')
 const isEditingTitle = ref(false)
 const emit = defineEmits(['titleEdited'])
 
 const handleBlur = () => {
-  if (title.value) {
-    emit('titleEdited', title.value)
+  if (editableTitle.value) {
+    emit('titleEdited', editableTitle.value)
   } else {
-    title.value = props.title
+    editableTitle.value = props.title
   }
   isEditingTitle.value = false
 }
 
 onMounted(() => {
-  title.value = props.title
+  editableTitle.value = props.title
 })
+
+watch(
+  () => props.title,
+  (newValue) => {
+    editableTitle.value = newValue
+  }
+)
 </script>
 
 <style scoped lang="scss">
