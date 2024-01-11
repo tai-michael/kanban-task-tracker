@@ -20,14 +20,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
-const emit = defineEmits([
-  'closeTriggered',
-  'backdropDismissed',
-  'escapePressed',
-])
-
 const dialog = ref<HTMLDialogElement>() // backdrop element
-
 const props = defineProps({
   classes: {
     type: String,
@@ -52,9 +45,10 @@ const close = (returnVal?: string) => {
   visible.value = false
 }
 
+// Allows further handling in parent, like route changes
+const emit = defineEmits(['closeTriggered'])
 const handleCloseClicked = () => {
   close()
-  // These emits allow further handling in parent, like route changes
   emit('closeTriggered')
 }
 
@@ -62,13 +56,13 @@ const handleBackdropClick = (event) => {
   // Closes dialog if backdrop element is clicked
   if (event.target === dialog.value) {
     close()
-    emit('backdropDismissed')
+    emit('closeTriggered')
   }
 }
 
 const handleEscapePress = (event: KeyboardEvent) => {
   if (event.key === 'Escape' && visible.value) {
-    emit('escapePressed')
+    emit('closeTriggered')
   }
 }
 
