@@ -11,7 +11,7 @@
         method="dialog"
         :class="{ [props.classes]: props.classes }"
       >
-        <button @click="handleCloseClicked">Close</button>
+        <button type="button" @click="handleCloseClicked">Close</button>
         <slot />
       </form>
     </div>

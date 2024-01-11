@@ -1,6 +1,9 @@
 <template>
   <button @click="$emit('closeButtonClicked')" class="mb-4">Close modal</button>
   <button @click="deleteCardAndCloseModal" class="ml-4">Delete card</button>
+  <button type="button" @click="deleteCardAndCloseModal" class="ml-4">
+    Delete card
+  </button>
   <ul class="flex flex-col w-full gap-y-3 h-full">
     <Title :title="store.cardSummary?.title" @title-edited="changeCardTitle" />
     <CardDatePicker />
