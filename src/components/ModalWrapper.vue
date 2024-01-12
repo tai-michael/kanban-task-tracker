@@ -11,8 +11,15 @@
         method="dialog"
         :class="{ [props.classes]: props.classes }"
       >
-        <button type="button" @click="handleCloseClicked">Close</button>
-        <slot />
+        <!-- TODO replace with spinner -->
+        <div v-if="props.loading">Loading...</div>
+
+        <div v-else>
+          <button type="button" @click="handleCloseClicked" class="">
+            Close
+          </button>
+          <slot />
+        </div>
       </form>
     </div>
   </dialog>
@@ -25,6 +32,9 @@ const props = defineProps({
   classes: {
     type: String,
     default: '',
+  },
+  loading: {
+    type: Boolean,
   },
 })
 
