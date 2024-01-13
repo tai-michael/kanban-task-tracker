@@ -21,7 +21,6 @@
         :title="board.title"
         class="w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)]"
       >
-          @click.stop="store.toggleBoardComposer"
         <router-link
           :to="`/board/${board.id}`"
           @mouseenter="onMouseEnterBoardLink(board.id)"
@@ -33,6 +32,7 @@
               'hover-effect': board.id !== route.params.boardId,
             },
           ]"
+          @click="emit('boardLinkClicked')"
         >
           <BoardIcon :color="getBoardIconColor(board.id)" />
           <span
@@ -43,6 +43,7 @@
       </li>
     </ul>
     <button
+      @click="emit('boardComposerTriggered')"
       class="flex items-center gap-x-4 w-[var(--)] xs:w-[var(--sidebar-navbtn-width-desktop)] pt-3 pl-8 xs:pb-3 xs:mb-5 hover-effect"
     >
       <BoardIcon :color="'var(--main-purple)'" />
@@ -56,11 +57,12 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue'
 import BoardIcon from '@/assets/icons/icon-board.vue'
-import { useBoardStore } from '@/stores'
+import { useBoardStore, useCardStore } from '@/stores'
 import { useRoute } from 'vue-router'
 const route = useRoute()
-const store = useBoardStore()
-
+const boardStore = useBoardStore()
+const cardStore = useCardStore()
+const emit = defineEmits(['boardLinkClicked', 'boardComposerTriggered'])
 const fetchingBoardsFromBackend = inject('fetchingBoardsFromBackend')
 
 const hoveredBoardId = ref(null)
