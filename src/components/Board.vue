@@ -10,7 +10,7 @@
     >
       <template #item="{ element: list }">
         <div class="w-[304px]">
-          <List :list="list"></List>
+          <List :list="list" @card-selected="$emit('card-selected')"></List>
         </div>
       </template>
     </draggable>

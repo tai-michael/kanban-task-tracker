@@ -1,38 +1,34 @@
 <template>
   <div>
     <div v-if="isFetchingBoard">Loading board...</div>
-    <Board v-if="!isFetchingBoard && Object.keys(boardStore.board).length" />
+    <Board
+      v-if="!isFetchingBoard && Object.keys(boardStore.board).length"
+      @card-selected="modal?.showModal()"
+    />
 
-    <transition name="fade">
-      <div
-        v-if="cardId"
-        class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center overflow-auto"
-      >
-        <div class="bg-white p-8 rounded-lg w-[400px] min-h-[300px]">
-          <div v-if="isFetchingCard">Loading card...</div>
-          <Card
-            v-if="!isFetchingCard && Object.keys(cardStore.cardDetails).length"
-            @close-button-clicked="router.push(`/board/${boardStore.board.id}`)"
-          />
-        </div>
-      </div>
-    </transition>
+    <ModalWrapper
+      ref="modal"
+      :loading="isFetchingCard"
+      :show-close-button="true"
+      @close-triggered="router.push(`/board/${boardStore.board?.id}`)"
+      :classes="'p-5 w-[320px] xs:w-[400px] min-h-[300px]'"
+    >
+      <Card
+        v-if="!isFetchingCard && Object.keys(cardStore.cardDetails).length"
+        @card-deleted="closeModalAndReturnToBoard"
+        @close-clicked="closeModalAndReturnToBoard"
+      />
+    </ModalWrapper>
   </div>
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  computed,
-  defineAsyncComponent,
-  onMounted,
-  watch,
-  onBeforeMount,
-} from 'vue'
+import { ref, computed, defineAsyncComponent, watch, onBeforeMount } from 'vue'
 import { db } from '@/firebaseInit'
 import { doc, getDoc } from 'firebase/firestore'
 import { useCardStore, useBoardStore, useErrorStore } from '@/stores'
 import { useRouter } from 'vue-router'
+import ModalWrapper from '@/components/ModalWrapper.vue'
 const Board = defineAsyncComponent(() => import('@/components/Board.vue'))
 const Card = defineAsyncComponent(() => import('@/components/Card.vue'))
 const router = useRouter()
@@ -42,7 +38,6 @@ const errorStore = useErrorStore()
 const props = defineProps(['cardId', 'boardId'])
 
 const boardId = computed(() => props.boardId || cardStore.cardDetails.boardId)
-
 const isFetchingBoard = ref(false)
 const fetchBoardData = async (id: string) => {
   try {
@@ -134,16 +129,19 @@ onBeforeMount(async () => {
   if (props.cardId) {
     isFetchingCard.value = true
     await fetchCard(props.cardId)
+    modal.value?.showModal()
   }
   await fetchBoardData(boardId.value)
 
   isFetchingBoard.value = false
   isFetchingCard.value = false
 })
+
+const modal = ref<InstanceType<typeof ModalWrapper>>()
+const closeModalAndReturnToBoard = () => {
+  modal.value?.close()
+  router.push(`/board/${boardStore.board?.id}`)
+}
 </script>
 
-<style scoped lang="scss">
-// Card {
-//   min-width: 400px;
-// }
-</style>
+<style scoped lang="scss"></style>
