@@ -1,6 +1,12 @@
 <template>
-  <button @click="$emit('closeButtonClicked')" class="mb-4">Close modal</button>
-  <button @click="deleteCardAndCloseModal" class="ml-4">Delete card</button>
+  <!-- <button
+    type="button"
+    @click="emit('closeClicked')"
+    class="absolute top-0 right-0"
+  >
+    <img :src="CrossIcon" />
+  </button> -->
+
   <button type="button" @click="deleteCardAndCloseModal" class="ml-4">
     Delete card
   </button>
@@ -31,16 +37,16 @@ const CardAttachments = defineAsyncComponent(
   () => import('@/components/card-details/CardAttachments.vue')
 )
 const Title = defineAsyncComponent(() => import('@/components/Title.vue'))
-const emit = defineEmits(['closeButtonClicked'])
 const store = useCardStore()
 
 const changeCardTitle = (title: string) => {
   store.updateCardTitle(title)
 }
 
+const emit = defineEmits(['cardDeleted'])
 const deleteCardAndCloseModal = () => {
   deleteCard(store.cardDetails?.boardId, store.cardDetails.id)
-  emit('closeButtonClicked')
+  emit('cardDeleted')
 }
 
 onMounted(() => {
