@@ -17,6 +17,12 @@
   --red: hsla(0, 78%, 63%);
   --red-hover: hsla(0, 100%, 80%);
 
+  --header-height-mobile: 4rem;
+  --header-height-desktop: 6rem;
+
+  --sidebar-width: 300px;
+  --sidebar-navbtn-width-mobile: 240px;
+  --sidebar-navbtn-width-desktop: 275px;
   /* --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
