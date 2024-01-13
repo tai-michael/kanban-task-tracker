@@ -1,9 +1,6 @@
 <template>
-  <div ref="composer" class="flex flex-col bg-gray-200 w-full h-full p-3">
-    <header>
-      <h2>Create board</h2>
-      <button @click="store.toggleBoardComposer">X</button>
-    </header>
+  <div ref="composer" class="flex flex-col bg-gray-200 h-full p-3">
+    <h2 class="pt-1 pb-4 text-center">Create board</h2>
 
     <input
       v-model.trim="boardTitle"
