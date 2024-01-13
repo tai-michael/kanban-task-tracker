@@ -19,7 +19,7 @@
       <div>
         <CardPreview
           :card="card"
-          @click="router.push(`/card/${card.id}`)"
+          @click="handleCardSelection(card.id)"
           class="cursor-pointer"
         />
       </div>
@@ -45,6 +45,11 @@ const store = useBoardStore()
 const router = useRouter()
 const props = defineProps(['list'])
 
+const emit = defineEmits(['cardSelected'])
+const handleCardSelection = (cardId: string) => {
+  emit('cardSelected')
+  router.push(`/card/${cardId}`)
+}
 const changeListTitle = (title: string) => {
   store.updateListTitle(props.list.id, title)
 }
