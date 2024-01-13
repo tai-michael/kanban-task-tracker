@@ -9,14 +9,20 @@
       <form
         v-if="visible"
         method="dialog"
+        class="relative"
         :class="{ [props.classes]: props.classes }"
       >
         <!-- TODO replace with spinner -->
         <div v-if="props.loading">Loading...</div>
 
         <div v-else>
-          <button type="button" @click="handleCloseClicked" class="">
-            Close
+          <button
+            v-if="props.showCloseButton"
+            type="button"
+            @click="handleCloseClicked"
+            class="absolute top-4 right-4 z-10"
+          >
+            <img :src="CrossIcon" />
           </button>
           <slot />
         </div>
@@ -27,6 +33,8 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
+import CrossIcon from '@/assets/icons/icon-cross.svg'
+
 const dialog = ref<HTMLDialogElement>() // backdrop element
 const props = defineProps({
   classes: {
@@ -34,6 +42,9 @@ const props = defineProps({
     default: '',
   },
   loading: {
+    type: Boolean,
+  },
+  showCloseButton: {
     type: Boolean,
   },
 })
