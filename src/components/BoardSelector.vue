@@ -1,45 +1,55 @@
 <template>
-  <div class="board-selection flex w-full pr-6">
-    <div v-if="fetchingBoardsFromBackend">Loading...</div>
-    <div v-else class="w-full">
-      <label
-        v-if="store.boards.length > 0"
-        class="ml-8 text-xs font-bold uppercase tracking-[2.4px] text-[var(--medium-gray)]"
-        >All boards ({{ store.boards.length }})</label
+  <div v-if="fetchingBoardsFromBackend" class="flex h-full">Loading...</div>
+  <div v-else>
+    <label
+      v-if="boardStore.boards.length > 0"
+      class="ml-8 text-xs font-bold uppercase tracking-[2.4px] text-[var(--medium-gray)]"
+      >All boards ({{ boardStore.boards.length }})</label
+    >
+
+    <ul
+      class="mt-5"
+      :class="{
+        'board-list-short': boardStore.boards.length <= 3,
+        'board-list-long': boardStore.boards.length > 3,
+        'mobile-border': boardStore.boards.length > 7,
+      }"
+    >
+      <li
+        v-for="board in boardStore.boards"
+        :key="board.id"
+        :title="board.title"
+        class="w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)]"
       >
-      <ul class="board-list mt-5 flex flex-col">
-        <li v-for="board in store.boards" :key="board.id" :title="board.title">
-          <!-- TODO add click handler for closing modal -->
-          <router-link
-            :to="`/board/${board.id}`"
-            @mouseenter="onMouseEnterBoardLink(board.id)"
-            @mouseleave="onMouseLeaveBoardLink"
-            class="flex items-center w-full p-3 pl-8 gap-x-4"
-            :class="[
-              {
-                'active-board': board.id === route.params.boardId,
-                'hover-effect': board.id !== route.params.boardId,
-              },
-            ]"
-          >
-            <BoardIcon :color="getBoardIconColor(board.id)" />
-            <span
-              class="truncate whitespace-nowrap font-bold text-[var(--medium-gray)]"
-              >{{ board.title }}</span
-            ></router-link
-          >
-        </li>
-        <button
           @click.stop="store.toggleBoardComposer"
-          class="flex items-center w-full p-3 pl-8 gap-x-4 hover-effect"
+        <router-link
+          :to="`/board/${board.id}`"
+          @mouseenter="onMouseEnterBoardLink(board.id)"
+          @mouseleave="onMouseLeaveBoardLink"
+          class="flex items-center gap-x-4 p-3 pl-8"
+          :class="[
+            {
+              'active-board': checkIfBoardActive(board.id),
+              'hover-effect': board.id !== route.params.boardId,
+            },
+          ]"
         >
-          <BoardIcon :color="'var(--main-purple)'" />
-          <span class="font-bold text-[var(--main-purple)]"
-            >+ Create new board</span
-          >
-        </button>
-      </ul>
-    </div>
+          <BoardIcon :color="getBoardIconColor(board.id)" />
+          <span
+            class="truncate whitespace-nowrap font-bold text-[var(--medium-gray)]"
+            >{{ board.title }}</span
+          ></router-link
+        >
+      </li>
+    </ul>
+    <button
+      class="flex items-center gap-x-4 w-[var(--)] xs:w-[var(--sidebar-navbtn-width-desktop)] pt-3 pl-8 xs:pb-3 xs:mb-5 hover-effect"
+    >
+      <BoardIcon :color="'var(--main-purple)'" />
+      <span class="font-bold text-[var(--main-purple)]"
+        >+ Create new board</span
+      >
+    </button>
   </div>
 </template>
 
@@ -60,6 +70,10 @@ const onMouseEnterBoardLink = (boardId: string) => {
 const onMouseLeaveBoardLink = () => {
   hoveredBoardId.value = null
 }
+
+const checkIfBoardActive = (boardId: string) =>
+  boardId === route.params.boardId || boardId === cardStore.cardDetails?.boardId
+
 const getBoardIconColor = (boardId: string) => {
   if (boardId === route.params.boardId) {
     return 'white' // Active board color
@@ -92,23 +106,28 @@ const getBoardIconColor = (boardId: string) => {
   }
 }
 
-.board-selection {
-  margin-top: 1rem;
+.board-list-short,
+.board-list-long {
+  overflow: auto;
 }
-
-.board-list {
+.board-list-short {
   max-height: 12em;
-  overflow: scroll;
+}
+.board-list-long {
+  max-height: 23em;
+}
+.mobile-border {
+  border-bottom: 1px solid rgb(223, 223, 223);
 }
 
 @media (min-width: 481px) {
-  .board-selection {
-    margin-top: 0;
-  }
-
-  .board-list {
+  .board-list-short,
+  .board-list-long {
     max-height: unset;
     overflow: unset;
+  }
+  .mobile-border {
+    border-bottom-width: 0px;
   }
 }
 </style>
