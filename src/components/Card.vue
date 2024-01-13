@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, defineAsyncComponent } from 'vue'
+import { watch, onMounted, defineAsyncComponent, onUnmounted } from 'vue'
 import { useCardStore } from '@/stores'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import deleteCard from '@/composables/deleteCard'
@@ -54,6 +54,11 @@ onMounted(() => {
     console.log('memoizing card')
     store.memoizeCard(store.cardDetails)
   }
+})
+
+// The active card's board id is used to determine active board in sidebar when a card is displayed. It's therefore necessary to clear the card id when navigating to another board; otherwise, the previous board will show as active in addition to the new board in sidebar
+onUnmounted(() => {
+  store.clearCard()
 })
 
 watch(
