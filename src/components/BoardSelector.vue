@@ -2,7 +2,7 @@
   <div v-if="fetchingBoardsFromBackend" class="flex h-full">Loading...</div>
   <div v-else>
     <label
-      v-if="boardStore.boards.length > 0"
+      v-if="boardStore.boards?.length > 0"
       class="ml-8 text-xs font-bold uppercase tracking-[2.4px] text-[var(--medium-gray)]"
       >All boards ({{ boardStore.boards.length }})</label
     >
@@ -10,9 +10,9 @@
     <ul
       class="mt-5"
       :class="{
-        'board-list-short': boardStore.boards.length <= 3,
-        'board-list-long': boardStore.boards.length > 3,
-        'mobile-border': boardStore.boards.length > 7,
+        'board-list-short': boardStore.boards?.length <= 3,
+        'board-list-long': boardStore.boards?.length > 3,
+        'mobile-border': boardStore.boards?.length > 7,
       }"
     >
       <li

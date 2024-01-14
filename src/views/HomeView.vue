@@ -69,8 +69,7 @@ const fetchBoardsCollection = async (id: string) => {
   try {
     const boardsRef = doc(db, 'boards_grouped', id)
     const boardsDoc = await getDoc(boardsRef)
-    console.log(boardsDoc.data().boards)
-    return boardsDoc.data().boards
+    return boardsDoc.data() ? boardsDoc.data().boards : []
   } catch (err) {
     console.error('Error fetching data:', err)
   }
