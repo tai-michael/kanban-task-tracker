@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-center items-center bg-[var(--light-gray)] rounded-md"
+    class="flex justify-center items-center bg-[var(--light-gray-light-bg)] rounded-md"
   >
     <img :src="SunIcon" class="mr-6" />
     <label
