@@ -1,33 +1,53 @@
 <template>
-  <!-- <header class="mb-4 flex gap-x-2">
-    <span class="font-bold uppercase" @click="router.push('/')">Kanban</span>
-    <button @click="signOut(auth)">Sign Out</button>
-    <router-link :to="`/admin`">Admin</router-link>
-  </header> -->
+  <main class="flex w-full h-[100vh] relative">
+    <Sidebar
+      v-if="!isMobileView"
+      @board-composer-triggered="toggleBoardComposer"
+    />
 
-  <main class="flex w-full h-[100vh]">
-    <button @click="isChoosingBoard = true">Select board</button>
-    <div
-      class="overlay"
-      v-if="isMobileView && isChoosingBoard"
-      @click="isChoosingBoard = false"
-    ></div>
-
-    <Sidebar v-if="!isMobileView || isChoosingBoard" />
-
-    <div class="flex-grow overflow-x-auto">
-      <Header
+    <div class="flex-grow overflow-x-auto bg-[var(--light-gray-light-bg)]">
+      <div
         v-if="isMobileView || route.name === 'board' || route.name === 'card'"
-      />
+        class="header-container"
+      >
+        <Header @board-selector-triggered="toggleBoardSelector" />
+      </div>
 
-      <HomePageStatusIndicator
+      <div
         v-if="route.name === 'home'"
-        :fetching-boards-from-backend="fetchingBoardsFromBackend"
-        :greeting-message="greetingMessage"
-      />
+        class="flex flex-col items-center"
+        :class="{
+          'items-stretch pt-3': isMobileView && boardStore.boards?.length > 0,
+        }"
+      >
+        <div v-if="fetchingBoardsFromBackend">Loading...</div>
+
+        <HomePageGreeting
+          v-else
+          :is-mobile-view="isMobileView"
+          @board-composer-toggled="toggleBoardComposer"
+        />
+      </div>
 
       <router-view></router-view>
     </div>
+
+    <ModalWrapper
+      ref="sideBarModal"
+      :show-close-button="true"
+      :classes="'w-[264px] min-h-[250px] max-h-[518px]'"
+      ><Sidebar
+        @board-link-clicked="toggleBoardSelector"
+        @board-composer-triggered="toggleBoardComposer"
+    /></ModalWrapper>
+
+    <ModalWrapper
+      ref="boardComposerModal"
+      :show-close-button="true"
+      :classes="'w-[300px]'"
+    >
+      <BoardComposer
+    /></ModalWrapper>
   </main>
 </template>
 
@@ -49,19 +69,30 @@ import { useBoardStore } from '@/stores'
 import { useRoute, useRouter } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
 const Header = defineAsyncComponent(() => import('@/components/Header.vue'))
-const HomePageStatusIndicator = defineAsyncComponent(
-  () => import('@/components/HomePageStatusIndicator.vue')
+const ModalWrapper = defineAsyncComponent(
+  () => import('@/components/ModalWrapper.vue')
 )
-
+const HomePageGreeting = defineAsyncComponent(
+  () => import('@/components/HomePageGreeting.vue')
+)
+const BoardComposer = defineAsyncComponent(
+  () => import('@/components/BoardComposer.vue')
+)
 const route = useRoute()
 const router = useRouter()
 const boardStore = useBoardStore()
-const greetingMessage = computed(() => {
-  const hasBoards = Object.keys(boardStore.boards).length > 0
-  return hasBoards
-    ? 'Click on a board or create a new one!'
-    : 'Start by creating a board!'
-})
+
+const boardComposerModal = ref<InstanceType<typeof ModalWrapper>>()
+const toggleBoardComposer = () => {
+  if (sideBarModal.value?.visible) sideBarModal.value?.close()
+  boardComposerModal.value?.showModal()
+}
+
+const sideBarModal = ref<InstanceType<typeof ModalWrapper>>()
+const toggleBoardSelector = () => {
+  if (sideBarModal.value?.visible) sideBarModal.value?.close()
+  else sideBarModal.value?.showModal()
+}
 
 const isInitialLoad = ref(true)
 const fetchingBoardsFromBackend = ref(false)
@@ -100,14 +131,13 @@ watch(
   { deep: true }
 )
 
+provide('fetchingBoardsFromBackend', fetchingBoardsFromBackend)
 onMounted(async () => {
   fetchingBoardsFromBackend.value = true
   const data = await fetchBoardsCollection(auth.currentUser.uid)
   boardStore.hydrateBoards(data)
   fetchingBoardsFromBackend.value = false
 })
-
-provide('fetchingBoardsFromBackend', fetchingBoardsFromBackend)
 
 const isChoosingBoard = ref(false)
 const { width } = useWindowSize()
@@ -120,20 +150,12 @@ watch(isMobileView, (isMobile) => {
 </script>
 
 <style scoped lang="scss">
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 9000;
-  transition: all 0.5s;
-}
+.header-container {
+  margin-bottom: 5rem;
+  margin-bottom: calc(var(--header-height-mobile) + 1rem);
 
-@media (min-width: 481px) {
-  .overlay {
-    display: none;
+  @media (min-width: 481px) {
+    margin-bottom: calc(var(--header-height-desktop) + 2rem);
   }
 }
 </style>

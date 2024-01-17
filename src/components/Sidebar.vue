@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex flex-col shrink-0 xs:w-[var(--sidebar-width)] xs:border-r-[1px_solid_var(--lines-light)]"
+    class="flex flex-col shrink-0 xs:w-[var(--sidebar-width)] xs:border-r xs:border-r-[var(--lines-light)]"
   >
     <div
       class="hidden xs:flex items-center shrink-0 h-[var(--header-height-desktop)] pl-8"
