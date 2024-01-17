@@ -22,10 +22,11 @@
       >
         <div v-if="fetchingBoardsFromBackend">Loading...</div>
 
+        <!-- TODO maybe convert below to tailwind. Afterwards, redo the css of the board composer so that it doesn't look off-centered in desktop mode when there's no other board around. Consider hiding the sidebar when theres nothing. -->
         <HomePageGreeting
           v-else
           :is-mobile-view="isMobileView"
-          @board-composer-toggled="toggleBoardComposer"
+          @board-composer-triggered="toggleBoardComposer"
         />
       </div>
 

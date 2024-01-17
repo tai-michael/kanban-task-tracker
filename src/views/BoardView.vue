@@ -16,7 +16,6 @@
       <Card
         v-if="!isFetchingCard && Object.keys(cardStore.cardDetails).length"
         @card-deleted="closeModalAndReturnToBoard"
-        @close-clicked="closeModalAndReturnToBoard"
       />
     </ModalWrapper>
   </div>

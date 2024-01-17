@@ -19,7 +19,7 @@
           <button
             v-if="props.showCloseButton"
             type="button"
-            @click="handleCloseClicked"
+            @click="handleCloseTriggered"
             class="absolute top-4 right-4 z-10"
           >
             <img :src="CrossIcon" />
@@ -68,7 +68,7 @@ const close = (returnVal?: string) => {
 
 // Allows further handling in parent, like route changes
 const emit = defineEmits(['closeTriggered'])
-const handleCloseClicked = () => {
+const handleCloseTriggered = () => {
   close()
   emit('closeTriggered')
 }
