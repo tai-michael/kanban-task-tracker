@@ -79,7 +79,9 @@ const onMouseLeaveBoardLink = () => {
 }
 
 const checkIfBoardActive = (boardId: string) =>
-  boardId === route.params.boardId || boardId === cardStore.cardDetails?.boardId
+  boardId === route.params.boardId ||
+  boardId === boardStore.board?.id ||
+  boardId === cardStore.cardDetails?.boardId
 
 const getBoardIconColor = (boardId: string) => {
   if (boardId === route.params.boardId) {
