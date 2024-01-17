@@ -3,12 +3,12 @@
   <div v-else>
     <label
       v-if="boardStore.boards?.length > 0"
-      class="ml-8 text-xs font-bold uppercase tracking-[2.4px] text-[var(--medium-gray)]"
+      class="hidden xs:inline ml-8 text-xs font-bold uppercase tracking-[2.4px] text-[var(--medium-gray)]"
       >All boards ({{ boardStore.boards.length }})</label
     >
 
     <ul
-      class="mt-5"
+      class="xs:mt-5"
       :class="{
         'board-list-short': boardStore.boards?.length <= 3,
         'board-list-long': boardStore.boards?.length > 3,
@@ -42,9 +42,11 @@
         >
       </li>
     </ul>
+
     <button
+      v-if="boardStore.boards?.length > 0"
       @click="emit('boardComposerTriggered')"
-      class="flex items-center gap-x-4 w-[var(--)] xs:w-[var(--sidebar-navbtn-width-desktop)] pt-3 pl-8 xs:pb-3 xs:mb-5 hover-effect"
+      class="flex items-center gap-x-4 w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)] py-3 pl-8 xs:mb-3 hover-effect"
     >
       <BoardIcon :color="'var(--main-purple)'" />
       <span class="font-bold text-[var(--main-purple)]"
@@ -116,7 +118,7 @@ const getBoardIconColor = (boardId: string) => {
   max-height: 12em;
 }
 .board-list-long {
-  max-height: 23em;
+  max-height: 29.5em;
 }
 .mobile-border {
   border-bottom: 1px solid rgb(223, 223, 223);
