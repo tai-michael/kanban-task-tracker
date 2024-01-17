@@ -161,7 +161,7 @@ watch(isMobileView, (isMobile) => {
 <style scoped lang="scss">
 .header-container {
   margin-bottom: 5rem;
-  margin-bottom: calc(var(--header-height-mobile) + 1rem);
+  margin-bottom: calc(var(--header-height-mobile) + 0.75rem);
 
   @media (min-width: 481px) {
     margin-bottom: calc(var(--header-height-desktop) + 2rem);

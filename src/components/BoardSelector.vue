@@ -12,7 +12,7 @@
       :class="{
         'board-list-short': boardStore.boards?.length <= 3,
         'board-list-long': boardStore.boards?.length > 3,
-        'mobile-border': boardStore.boards?.length > 7,
+        'mobile-border': boardStore.boards?.length > 9,
       }"
     >
       <li
@@ -47,6 +47,9 @@
       v-if="boardStore.boards?.length > 0"
       @click="emit('boardComposerTriggered')"
       class="flex items-center gap-x-4 w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)] py-3 pl-8 xs:mb-3 hover-effect"
+      :class="{
+        'mt-2': boardStore.boards?.length > 9,
+      }"
     >
       <BoardIcon :color="'var(--main-purple)'" />
       <span class="font-bold text-[var(--main-purple)]"
