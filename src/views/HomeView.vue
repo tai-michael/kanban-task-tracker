@@ -17,15 +17,20 @@
         v-if="route.name === 'home'"
         class="flex flex-col items-center"
         :class="{
-          'items-stretch pt-3': isMobileView && boardStore.boards?.length > 0,
+          'items-stretch': isMobileView && boardStore.boards?.length > 0,
         }"
       >
         <div v-if="fetchingBoardsFromBackend">Loading...</div>
 
         <!-- TODO maybe convert below to tailwind. Afterwards, redo the css of the board composer so that it doesn't look off-centered in desktop mode when there's no other board around. Consider hiding the sidebar when theres nothing. -->
-        <HomePageGreeting
+        <BoardGreeting
           v-else
           :is-mobile-view="isMobileView"
+          @board-composer-triggered="toggleBoardComposer"
+        />
+
+        <BoardSelector
+          v-if="isMobileView && boardStore.boards?.length > 0"
           @board-composer-triggered="toggleBoardComposer"
         />
       </div>
@@ -73,8 +78,11 @@ const Header = defineAsyncComponent(() => import('@/components/Header.vue'))
 const ModalWrapper = defineAsyncComponent(
   () => import('@/components/ModalWrapper.vue')
 )
-const HomePageGreeting = defineAsyncComponent(
-  () => import('@/components/HomePageGreeting.vue')
+const BoardGreeting = defineAsyncComponent(
+  () => import('@/components/BoardGreeting.vue')
+)
+const BoardSelector = defineAsyncComponent(
+  () => import('@/components/BoardSelector.vue')
 )
 const BoardComposer = defineAsyncComponent(
   () => import('@/components/BoardComposer.vue')
