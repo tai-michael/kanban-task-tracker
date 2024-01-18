@@ -12,9 +12,8 @@
 
     <div
       v-else-if="$route.name === 'board' || $route.name === 'card'"
-      class="flex justify-between"
+      class="flex w-full max-w-[100%] items-center justify-between gap-x-4"
     >
-      <div class="flex flex-nowrap items-center gap-x-4">
         <!-- TODO remove this and down arrow below-->
         <!-- <img :src="LogoMobile" class="logo-mobile" /> -->
         <span @click="router.push({ name: 'home' })" class="xs:hidden">⬅</span>
@@ -27,7 +26,7 @@
         <!-- <button @click="emit('boardSelectorTriggered')" class="p-3">
           <img :src="DownArrow" />
         </button> -->
-      </div>
+
       <!-- TODO add ellipsis and ellipsis menu and relocate delete button to it -->
       <button @click="handleDeleteBoard" class="p-1 mr-2 bg-red-200">
         Delete Board
@@ -62,7 +61,6 @@ header {
 }
 
 .title {
-  max-width: 190px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
