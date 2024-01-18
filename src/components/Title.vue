@@ -5,19 +5,27 @@
 
   <input
     v-else
+    ref="titleInput"
     v-model.trim="editableTitle"
     v-focus="isEditingTitle"
+    @focus="selectText"
     @blur="handleBlur"
+    class="w-full"
   />
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 const props = defineProps(['title'])
+
+const titleInput = ref()
+const selectText = () => {
+  titleInput.value.select() // Select all text in the input element
+}
+
 const editableTitle = ref('')
 const isEditingTitle = ref(false)
 const emit = defineEmits(['titleEdited'])
-
 const handleBlur = () => {
   if (editableTitle.value) {
     emit('titleEdited', editableTitle.value)
@@ -39,10 +47,4 @@ watch(
 )
 </script>
 
-<style scoped lang="scss">
-// span {
-// }
-
-// input {
-// }
-</style>
+<style scoped lang="scss"></style>
