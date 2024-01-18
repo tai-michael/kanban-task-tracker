@@ -1,5 +1,5 @@
 <template>
-  <header class="h-24 bg-white flex flex-col justify-center pl-6 pr-6 w-full">
+  <header>
     <div v-if="$route.name === 'home'" class="flex justify-between">
       <!-- <img
         :src="LogoDark"
@@ -12,31 +12,35 @@
 
     <div
       v-else-if="$route.name === 'board' || $route.name === 'card'"
-      class="flex w-full max-w-[100%] items-center justify-between gap-x-4"
+      class="flex w-full max-w-[100%] items-center justify-between gap-x-3"
     >
-        <!-- TODO remove this and down arrow below-->
-        <!-- <img :src="LogoMobile" class="logo-mobile" /> -->
-        <span @click="router.push({ name: 'home' })" class="xs:hidden">⬅</span>
-        <Title
-          v-if="store.board.title"
-          :title="store.board.title"
-          @title-edited="changeBoardTitle"
-          class="title"
-        />
-        <!-- <button @click="emit('boardSelectorTriggered')" class="p-3">
+      <!-- <img :src="LogoMobile" class="logo-mobile" /> -->
+      <span @click="router.push({ name: 'home' })" class="xs:hidden">⬅</span>
+      <Title
+        v-if="store.board.title"
+        :title="store.board.title"
+        @title-edited="changeBoardTitle"
+        class="title"
+      />
+      <!-- <button @click="emit('boardSelectorTriggered')" class="p-3">
           <img :src="DownArrow" />
         </button> -->
 
-      <!-- TODO add ellipsis and ellipsis menu and relocate delete button to it -->
-      <button @click="handleDeleteBoard" class="p-1 mr-2 bg-red-200">
-        Delete Board
+      <button class="p-3 min-w-[29px]">
+        <img :src="Ellipsis" class="ellipsis-btn" />
       </button>
+
+      <!-- TODO add popup for delete board -->
+      <!-- <button @click="handleDeleteBoard" class="p-1 bg-red-200">
+        Delete Board
+      </button> -->
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
 import Title from '@/components/Title.vue'
+import Ellipsis from '@/assets/icons/icon-vertical-ellipsis.svg'
 import { useBoardStore } from '@/stores'
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -56,8 +60,13 @@ const emit = defineEmits(['boardSelectorTriggered'])
 <style scoped lang="scss">
 header {
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
   height: var(--header-height-mobile);
-  padding: 0 16px;
+  padding: 0 4px;
+  background-color: white;
 }
 
 .title {
@@ -68,20 +77,27 @@ header {
   font-weight: 700;
 }
 
+.ellipsis-btn {
+  display: block;
+  width: 3.7px;
+  height: 16px;
+}
+
 @media (min-width: 481px) {
   header {
     height: var(--header-height-desktop);
     width: calc(100% - var(--sidebar-width));
     left: var(--sidebar-width);
-    padding: 0 24px;
+    padding: 0 16px;
   }
 
   .title {
     font-size: 24px;
   }
 
-  // .logo-mobile {
-  //   display: none;
-  // }
+  .ellipsis-btn {
+    width: 5px;
+    height: 20px;
+  }
 }
 </style>
