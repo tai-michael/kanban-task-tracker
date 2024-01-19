@@ -17,7 +17,7 @@
       <!-- <img :src="LogoMobile" class="logo-mobile" /> -->
       <button
         @click="router.push({ name: 'home' })"
-        class="p-1 xs:hidden rounded-full flex items-center justify-center hover:bg-[var(--placeholder-button-hover)] active:bg-[var(--placeholder-button-hover)]"
+        class="p-1 xs:hidden rounded-full flex items-center justify-center hover:bg-[var(--placeholder-button-hover)] active:bg-[var(--placeholder-button-hover)] transition duration-200 ease-in-out"
       >
         <BackArrow :color="'black'" class="w-8 h-8" />
       </button>
@@ -32,8 +32,9 @@
           <img :src="DownArrow" />
         </button> -->
 
-      <button class="p-3 min-w-[29px]">
-        class="py-3 px-[1.2rem] min-w-[29px] rounded-full flex items-center justify-center hover:bg-[var(--placeholder-button-hover)] active:bg-[var(--placeholder-button-hover)]"
+      <button
+        class="py-3 px-[1.2rem] min-w-[29px] rounded-full flex items-center justify-center hover:bg-[var(--placeholder-button-hover)] active:bg-[var(--placeholder-button-hover)] transition duration-200 ease-in-out"
+      >
         <img :src="Ellipsis" class="ellipsis-btn" />
       </button>
 
