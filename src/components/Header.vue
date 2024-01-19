@@ -1,13 +1,24 @@
 <template>
   <header>
-    <div v-if="$route.name === 'home'" class="flex justify-between">
+    <div v-if="$route.name === 'home'" class="flex justify-between xs:hidden">
       <!-- <img
         :src="LogoDark"
         class="logo-desktop cursor-pointer w-[120px]"
         @click="router.push('/')"
       /> -->
-      <div>(menu) <span class="font-bold text-lg">Boards</span></div>
-      🔍
+      <div class="flex items-center gap-x-2">
+        <div class="flex w-10 h-10">
+          <button class="icon-button">
+            <MenuIcon :fill="'black'" class="w-7 h-7" />
+          </button>
+        </div>
+        <span class="font-bold text-lg">Boards</span>
+      </div>
+      <div class="flex w-10 h-10">
+        <button class="icon-button">
+          <SearchIcon :fill="'black'" class="w-5 h-5" />
+        </button>
+      </div>
     </div>
 
     <div
@@ -15,12 +26,11 @@
       class="flex w-full max-w-[100%] items-center justify-between gap-x-3"
     >
       <!-- <img :src="LogoMobile" class="logo-mobile" /> -->
-      <button
-        @click="router.push({ name: 'home' })"
-        class="p-1 xs:hidden rounded-full flex items-center justify-center hover:bg-[var(--placeholder-button-hover)] active:bg-[var(--placeholder-button-hover)] transition duration-200 ease-in-out"
-      >
-        <BackArrow :color="'black'" class="w-8 h-8" />
-      </button>
+      <div class="flex w-10 h-10 xs:hidden">
+        <button @click="router.push({ name: 'home' })" class="icon-button">
+          <BackArrowIcon :color="'black'" class="w-8 h-8" />
+        </button>
+      </div>
 
       <Title
         v-if="store.board.title"
@@ -32,11 +42,14 @@
           <img :src="DownArrow" />
         </button> -->
 
-      <button
-        class="py-3 px-[1.2rem] min-w-[29px] rounded-full flex items-center justify-center hover:bg-[var(--placeholder-button-hover)] active:bg-[var(--placeholder-button-hover)] transition duration-200 ease-in-out"
-      >
-        <img :src="Ellipsis" class="ellipsis-btn" />
-      </button>
+      <div class="flex w-10 h-10">
+        <button @clicked="emit('ellipsisMenuTriggered')" class="icon-button">
+          <img
+            :src="EllipsisIcon"
+            class="w-[3.7px] h-[16px] xs:w-[5px] xs:h-[20px]"
+          />
+        </button>
+      </div>
 
       <!-- TODO add popup for delete board -->
       <!-- <button @click="handleDeleteBoard" class="p-1 bg-red-200">
@@ -48,8 +61,10 @@
 
 <script setup lang="ts">
 import Title from '@/components/Title.vue'
-import BackArrow from '@/assets/icons/icon-arrow-back.vue'
-import Ellipsis from '@/assets/icons/icon-vertical-ellipsis.svg'
+import MenuIcon from '@/assets/icons/icon-menu.vue'
+import SearchIcon from '@/assets/icons/icon-search.vue'
+import BackArrowIcon from '@/assets/icons/icon-arrow-back.vue'
+import EllipsisIcon from '@/assets/icons/icon-vertical-ellipsis.svg'
 import { useBoardStore } from '@/stores'
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -74,7 +89,7 @@ header {
   justify-content: center;
   width: 100%;
   height: var(--header-height-mobile);
-  padding: 0 4px;
+  padding: 0 6px;
   background-color: white;
 }
 
@@ -86,10 +101,19 @@ header {
   font-weight: 700;
 }
 
-.ellipsis-btn {
-  display: block;
-  width: 3.7px;
-  height: 16px;
+.icon-button {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px; /* fully rounded */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.icon-button:hover,
+.icon-button:active {
+  background-color: var(--header-button-hover);
 }
 
 @media (min-width: 481px) {
@@ -102,11 +126,6 @@ header {
 
   .title {
     font-size: 24px;
-  }
-
-  .ellipsis-btn {
-    width: 5px;
-    height: 20px;
   }
 }
 </style>
