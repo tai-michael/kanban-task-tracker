@@ -15,7 +15,13 @@
       class="flex w-full max-w-[100%] items-center justify-between gap-x-3"
     >
       <!-- <img :src="LogoMobile" class="logo-mobile" /> -->
-      <span @click="router.push({ name: 'home' })" class="xs:hidden">⬅</span>
+      <button
+        @click="router.push({ name: 'home' })"
+        class="p-1 xs:hidden rounded-full flex items-center justify-center hover:bg-[var(--placeholder-button-hover)] active:bg-[var(--placeholder-button-hover)]"
+      >
+        <BackArrow :color="'black'" class="w-8 h-8" />
+      </button>
+
       <Title
         v-if="store.board.title"
         :title="store.board.title"
@@ -40,6 +46,7 @@
 
 <script setup lang="ts">
 import Title from '@/components/Title.vue'
+import BackArrow from '@/assets/icons/icon-arrow-back.vue'
 import Ellipsis from '@/assets/icons/icon-vertical-ellipsis.svg'
 import { useBoardStore } from '@/stores'
 import { useRouter } from 'vue-router'
