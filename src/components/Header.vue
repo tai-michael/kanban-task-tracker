@@ -33,6 +33,7 @@
         </button> -->
 
       <button class="p-3 min-w-[29px]">
+        class="py-3 px-[1.2rem] min-w-[29px] rounded-full flex items-center justify-center hover:bg-[var(--placeholder-button-hover)] active:bg-[var(--placeholder-button-hover)]"
         <img :src="Ellipsis" class="ellipsis-btn" />
       </button>
 
