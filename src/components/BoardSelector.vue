@@ -36,7 +36,7 @@
         >
           <BoardIcon :color="getBoardIconColor(board.id)" />
           <span
-            class="truncate whitespace-nowrap font-bold text-[var(--medium-gray)]"
+            class="truncate whitespace-nowrap font-bold text-[var(--medium-gray)] max-w-[calc(var(--sidebar-navbtn-width-mobile)-80px)] xs:max-w-[calc(var(--sidebar-navbtn-width-desktop)-80px)]"
             >{{ board.title }}</span
           ></router-link
         >
@@ -46,7 +46,7 @@
     <button
       v-if="boardStore.boards?.length > 0"
       @click="emit('boardComposerTriggered')"
-      class="flex items-center gap-x-4 w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)] py-3 pl-8 xs:mb-3 hover-effect"
+      class="flex items-center gap-x-4 w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)] py-3 pl-8 xs:mb-3 xs:mt-0 hover-effect"
       :class="{
         'mt-2': boardStore.boards?.length > 9,
       }"
