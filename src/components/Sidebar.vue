@@ -1,6 +1,6 @@
 <template>
   <nav
-    v-if="sidebarExpanded"
+    v-if="isSidebarExpanded"
     class="flex flex-col shrink-0 xs:w-[var(--sidebar-width)] xs:border-r xs:border-r-[var(--lines-light)]"
   >
     <div
@@ -33,18 +33,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import BoardSelector from '@/components/BoardSelector.vue'
 import DarkmodeToggle from '@/components/DarkmodeToggle.vue'
 import HideSidebarButton from '@/components/HideSidebarButton.vue'
 import LogoDark from '@/assets/images/logo-dark.svg'
 import ShowSidebar from '@/assets/icons/icon-show-sidebar.svg'
+import { useLocalStorage } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const emit = defineEmits(['boardLinkClicked', 'boardComposerTriggered'])
-const sidebarExpanded = ref(true)
+
+const isSidebarExpanded = useLocalStorage('is-sidebar-expanded', true)
 const toggleSidebar = () => {
-  sidebarExpanded.value = !sidebarExpanded.value
+  isSidebarExpanded.value = !isSidebarExpanded.value
 }
 </script>
 
