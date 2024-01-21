@@ -48,4 +48,20 @@ const toggleSidebar = () => {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.show-sidebar-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 2.1rem;
+  width: 56px;
+  height: 48px;
+  border-radius: 0px 100px 100px 0px;
+  background-color: var(--main-purple);
+}
+
+.show-sidebar-btn:hover {
+  background-color: var(--main-purple-hover);
+}
+</style>
