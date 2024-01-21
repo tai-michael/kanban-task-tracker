@@ -16,7 +16,7 @@
       }"
     >
       <li
-        v-for="board in boardStore.boards"
+        v-for="board in sortedBoards"
         :key="board.id"
         :title="board.title"
         class="w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)]"
@@ -60,15 +60,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject } from 'vue'
+import { ref, inject, computed } from 'vue'
 import BoardIcon from '@/assets/icons/icon-board.vue'
 import { useBoardStore, useCardStore } from '@/stores'
+import { useBoardStore, useCardStore, useSearchStore } from '@/stores'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 const boardStore = useBoardStore()
 const cardStore = useCardStore()
+const searchStore = useSearchStore()
 const emit = defineEmits(['boardLinkClicked', 'boardComposerTriggered'])
 const fetchingBoardsFromBackend = inject('fetchingBoardsFromBackend')
+
+const sortedBoards = computed(() => {
+  return boardStore.boards.filter((board) =>
+    board.title.includes(searchStore.searchInput)
+  )
+})
 
 const hoveredBoardId = ref(null)
 const onMouseEnterBoardLink = (boardId: string) => {
