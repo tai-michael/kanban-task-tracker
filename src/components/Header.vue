@@ -27,7 +27,7 @@
     >
       <!-- <img :src="LogoMobile" class="logo-mobile" /> -->
       <div class="flex w-10 h-10 xs:hidden">
-        <button @click="router.push({ name: 'home' })" class="icon-button">
+        <button @click="handleReturnToBoards" class="icon-button">
           <BackArrowIcon :color="'black'" class="w-8 h-8" />
         </button>
       </div>
@@ -76,14 +76,16 @@ const emit = defineEmits(['boardSelectorTriggered', 'ellipsisMenuTriggered'])
 const changeBoardTitle = (title: string) => {
   boardStore.updateBoardTitle(title)
 }
+
+const handleReturnToBoards = () => {
+  router.push({ name: 'home' })
+  boardStore.clearBoard()
 }
 
 const handleDeleteBoard = () => {
-  store.deleteBoard()
+  boardStore.deleteBoard()
   // TODO add toast or something similar
 }
-
-const emit = defineEmits(['boardSelectorTriggered'])
 </script>
 
 <style scoped lang="scss">

@@ -156,6 +156,7 @@ watch(isMobileView, (isMobile) => {
     isChoosingBoard.value = false
   }
 })
+provide('isMobileView', isMobileView)
 </script>
 
 <style scoped lang="scss">

@@ -22,7 +22,6 @@ export const useBoardStore = defineStore('board', () => {
   }
   const clearBoard = () => {
     board.value = {}
-    console.log('board cleared')
   }
 
   const hydrateBoards = (backendData: BoardMeta[]) => {
@@ -139,6 +138,7 @@ export const useBoardStore = defineStore('board', () => {
     deleteBoard,
     hydrateBoards,
     hydrateBoard,
+    clearBoard,
     updateBoardTitle,
     toggleBoardComposer,
     addList,
