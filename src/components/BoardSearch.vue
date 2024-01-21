@@ -3,24 +3,31 @@
     <input
       ref="searchBar"
       v-model="store.searchInput"
-      placeholder="Search"
       @blur="handleBlur"
-      class="w-full border-2 px-2"
+      placeholder="Search boards"
+      class="w-full px-2 border-2 xs:h-10 xs:mr-3 xs:relative"
     />
   </div>
-
   <input
-    v-if="!store.isSearching"
+    v-else
     @click="beginSearch"
     placeholder="Search boards"
-    class="hidden xs:flex border-2 w-full ml-3 px-2"
+    class="hidden xs:flex xs:h-10 xs:mr-3 xs:relative w-full ml-3 px-2 border-2"
   />
 
-  <div class="flex shrink-0 w-10 h-10">
-    <button v-if="!store.isSearching" @click="beginSearch" class="icon-button">
+  <div class="flex shrink-0 w-10 h-10 xs:w-11 xs:absolute xs:right-3">
+    <button
+      v-if="!store.isSearching"
+      @click="beginSearch"
+      class="flex items-center justify-center w-full h-full"
+    >
       <SearchIcon :fill="'black'" class="w-5 h-5" />
     </button>
-    <button v-else @click="stopSearch" class="icon-button">
+    <button
+      v-else
+      @click="stopSearch"
+      class="flex items-center justify-center w-full h-full"
+    >
       <SearchIcon
         v-if="!store.isSearching"
         @click="beginSearch"
@@ -72,19 +79,4 @@ const handleBlur = () => {
 }
 </script>
 
-<style scoped lang="scss">
-.icon-button {
-  width: 100%;
-  height: 100%;
-  border-radius: 9999px; /* fully rounded */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.icon-button:hover,
-.icon-button:active {
-  background-color: var(--header-button-hover);
-}
-</style>
+<style scoped lang="scss"></style>
