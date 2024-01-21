@@ -1,6 +1,7 @@
 <template>
   <div>
     <button
+      @click="emit('hideSidebarTriggered')"
       class="w-full mt-2 p-3 pl-8 inline-flex items-center gap-4 hover-effect"
       @mouseover="hovered = true"
       @mouseleave="hovered = false"
@@ -22,6 +23,7 @@ import { ref } from 'vue'
 import HideSidebarIcon from '@/assets/icons/icon-hide-sidebar.vue'
 import { auth } from '@/firebaseInit'
 import { signOut } from 'firebase/auth'
+const emit = defineEmits(['hideSidebarTriggered'])
 const hovered = ref(false)
 </script>
 
