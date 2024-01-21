@@ -10,7 +10,7 @@
     v-focus="isEditingTitle"
     @focus="selectText"
     @blur="handleBlur"
-    class="w-full"
+    class="w-full p-2"
   />
 </template>
 

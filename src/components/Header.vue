@@ -1,12 +1,15 @@
 <template>
   <header>
-    <div v-if="$route.name === 'home'" class="flex justify-between xs:hidden">
+    <div
+      v-if="route.name === 'home'"
+      class="flex justify-between gap-x-2 xs:hidden"
+    >
       <!-- <img
         :src="LogoDark"
         class="logo-desktop cursor-pointer w-[120px]"
         @click="router.push('/')"
       /> -->
-      <div class="flex items-center gap-x-2">
+      <div v-if="!searchStore.isSearching" class="flex items-center gap-x-2">
         <div class="flex w-10 h-10">
           <button class="icon-button">
             <MenuIcon :fill="'black'" class="w-7 h-7" />
@@ -14,15 +17,12 @@
         </div>
         <span class="font-bold text-lg">Boards</span>
       </div>
-      <div class="flex w-10 h-10">
-        <button class="icon-button">
-          <SearchIcon :fill="'black'" class="w-5 h-5" />
-        </button>
-      </div>
+
+      <BoardSearch />
     </div>
 
     <div
-      v-else-if="$route.name === 'board' || $route.name === 'card'"
+      v-else-if="route.name === 'board' || route.name === 'card'"
       class="flex w-full max-w-[100%] items-center justify-between gap-x-3"
     >
       <!-- <img :src="LogoMobile" class="logo-mobile" /> -->
@@ -33,8 +33,8 @@
       </div>
 
       <Title
-        v-if="store.board.title"
-        :title="store.board.title"
+        v-if="boardStore.board?.title"
+        :title="boardStore.board.title"
         @title-edited="changeBoardTitle"
         class="title"
       />
@@ -61,16 +61,21 @@
 
 <script setup lang="ts">
 import Title from '@/components/Title.vue'
+import BoardSearch from '@/components/BoardSearch.vue'
 import MenuIcon from '@/assets/icons/icon-menu.vue'
-import SearchIcon from '@/assets/icons/icon-search.vue'
 import BackArrowIcon from '@/assets/icons/icon-arrow-back.vue'
 import EllipsisIcon from '@/assets/icons/icon-vertical-ellipsis.svg'
-import { useBoardStore } from '@/stores'
-import { useRouter } from 'vue-router'
+import { useBoardStore, useSearchStore } from '@/stores'
+import { useRouter, useRoute } from 'vue-router'
+const route = useRoute()
 const router = useRouter()
-const store = useBoardStore()
+const boardStore = useBoardStore()
+const searchStore = useSearchStore()
+const emit = defineEmits(['boardSelectorTriggered', 'ellipsisMenuTriggered'])
+
 const changeBoardTitle = (title: string) => {
-  store.updateBoardTitle(title)
+  boardStore.updateBoardTitle(title)
+}
 }
 
 const handleDeleteBoard = () => {
