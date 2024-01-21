@@ -2,7 +2,7 @@
   <div v-if="store.isSearching" class="flex w-full ml-3">
     <input
       ref="searchBar"
-      v-model="store.searchInput"
+      v-model="searchInput"
       @blur="handleBlur"
       placeholder="Search boards"
       class="w-full px-2 border-2 xs:h-10 xs:mr-3 xs:relative"
@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick, watch, inject } from 'vue'
+import { ref, nextTick, inject, computed, watch } from 'vue'
 import SearchIcon from '@/assets/icons/icon-search.vue'
 import CrossIcon from '@/assets/icons/icon-cross.svg'
 import { useSearchStore } from '@/stores'
@@ -48,23 +48,26 @@ import debounce from 'lodash/debounce'
 const store = useSearchStore()
 const isMobileView = inject('isMobileView')
 const searchBar = ref()
-const searchInput = ref('')
+const searchInput = computed({
+  get() {
+    return store.searchInput
+  },
+  set(input) {
+    setDebouncedSearchInput(input)
+  },
+})
+const setDebouncedSearchInput = debounce((input: string) => {
+  store.setSearchInput(input)
+}, 200)
 
 const beginSearch = () => {
   store.setSearchStatus(true)
   if (store.isSearching) nextTick(() => searchBar.value.focus())
 }
-const update = debounce(() => {
-  store.setSearchInput(searchInput.value)
-}, 500)
-watch(searchInput, () => {
-  update()
-})
 
 const stopSearch = () => {
   store.setSearchStatus(false)
-  store.setSearchInput('')
-  searchInput.value = '' // TODO test if i need this
+  searchInput.value = ''
 }
 
 const handleBlur = () => {
