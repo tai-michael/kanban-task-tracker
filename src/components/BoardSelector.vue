@@ -1,11 +1,18 @@
 <template>
   <div v-if="fetchingBoardsFromBackend" class="flex h-full">Loading...</div>
   <div v-else>
-    <label
+    <!-- <label
       v-if="boardStore.boards?.length > 0"
       class="hidden xs:inline ml-8 text-xs font-bold uppercase tracking-[2.4px] text-[var(--medium-gray)]"
       >All boards ({{ boardStore.boards.length }})</label
+    > -->
+
+    <div
+      v-if="boardStore.boards?.length > 0"
+      class="hidden xs:flex justify-end gap-x-2"
     >
+      <BoardSearch />
+    </div>
 
     <ul
       class="xs:mt-5"
@@ -61,8 +68,8 @@
 
 <script setup lang="ts">
 import { ref, inject, computed } from 'vue'
+import BoardSearch from '@/components/BoardSearch.vue'
 import BoardIcon from '@/assets/icons/icon-board.vue'
-import { useBoardStore, useCardStore } from '@/stores'
 import { useBoardStore, useCardStore, useSearchStore } from '@/stores'
 import { useRoute } from 'vue-router'
 const route = useRoute()
