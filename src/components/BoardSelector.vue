@@ -1,12 +1,6 @@
 <template>
   <div v-if="fetchingBoardsFromBackend" class="flex h-full">Loading...</div>
   <div v-else>
-    <!-- <label
-      v-if="boardStore.boards?.length > 0"
-      class="hidden xs:inline ml-8 text-xs font-bold uppercase tracking-[2.4px] text-[var(--medium-gray)]"
-      >All boards ({{ boardStore.boards.length }})</label
-    > -->
-
     <div
       v-if="boardStore.boards?.length > 0"
       class="hidden xs:flex justify-end gap-x-2"
@@ -93,10 +87,15 @@ const onMouseLeaveBoardLink = () => {
   hoveredBoardId.value = null
 }
 
-const checkIfBoardActive = (boardId: string) =>
-  boardId === route.params.boardId ||
-  boardId === boardStore.board?.id ||
-  boardId === cardStore.cardDetails?.boardId
+const checkIfBoardActive = (boardId: string) => {
+  if (route.name === 'card') {
+    return (
+      boardId === boardStore.board?.id ||
+      boardId === cardStore.cardDetails?.boardId
+    )
+  }
+  return boardId === route.params.boardId
+}
 
 const getBoardIconColor = (boardId: string) => {
   if (boardId === route.params.boardId) {
