@@ -20,7 +20,6 @@
       v-else-if="route.name === 'board' || route.name === 'card'"
       class="flex w-full max-w-[100%] items-center justify-between gap-x-3"
     >
-      <!-- <img :src="LogoMobile" class="logo-mobile" /> -->
       <div class="flex w-10 h-10 xs:hidden">
         <button @click="handleReturnToBoards" class="icon-button">
           <BackArrowIcon :color="'black'" class="w-8 h-8" />
@@ -34,41 +33,17 @@
         class="title"
       />
 
-      <div class="flex w-10 h-10 relative">
-        <button @click="toggleEllipsisMenu" class="icon-button">
-          <img
-            :src="EllipsisIcon"
-            class="w-[3.7px] h-[16px] xs:w-[5px] xs:h-[20px]"
-          />
-        </button>
-
-        <div v-if="isEllipsisMenuOpen">
-          <div class="backdrop" @click="toggleEllipsisMenu"></div>
-
-          <div class="ellipsis-popover">
-            <button
-              @click="handleDeleteBoard"
-              class="p-2 w-full bg-red-200 rounded-md"
-            >
-              Delete Board
-            </button>
-            <button class="p-2 w-full bg-red-200 rounded-md">
-              Change Title
-            </button>
-          </div>
-        </div>
-      </div>
+      <EllipsisMenu />
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import Title from '@/components/Title.vue'
 import BoardSearch from '@/components/BoardSearch.vue'
+import EllipsisMenu from '@/components/EllipsisMenu.vue'
 import MenuIcon from '@/assets/icons/icon-menu.vue'
 import BackArrowIcon from '@/assets/icons/icon-arrow-back.vue'
-import EllipsisIcon from '@/assets/icons/icon-vertical-ellipsis.svg'
 import { useBoardStore, useSearchStore } from '@/stores'
 import { useRouter, useRoute } from 'vue-router'
 const route = useRoute()
@@ -84,17 +59,6 @@ const changeBoardTitle = (title: string) => {
 const handleReturnToBoards = () => {
   router.push({ name: 'home' })
   boardStore.clearBoard()
-}
-
-const isEllipsisMenuOpen = ref(false)
-const toggleEllipsisMenu = () => {
-  isEllipsisMenuOpen.value = !isEllipsisMenuOpen.value
-}
-
-const handleDeleteBoard = () => {
-  boardStore.deleteBoard()
-  toggleEllipsisMenu()
-  // TODO add toast or something similar
 }
 </script>
 
@@ -116,31 +80,6 @@ header {
   white-space: nowrap;
   font-size: 18px;
   font-weight: 700;
-}
-
-.ellipsis-popover {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 0.5rem;
-  padding: 1rem;
-  justify-content: center;
-  background-color: white;
-  border-radius: 0.375rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
-
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9;
 }
 
 @media (min-width: 481px) {
