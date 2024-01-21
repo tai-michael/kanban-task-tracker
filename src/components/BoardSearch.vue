@@ -4,6 +4,7 @@
       ref="searchBar"
       v-model="store.searchInput"
       placeholder="Search"
+      @blur="handleBlur"
       class="w-full border-2 px-2"
     />
   </div>
@@ -59,6 +60,16 @@ const stopSearch = () => {
   searchInput.value = '' // TODO test if i need this
 }
 
+const handleBlur = () => {
+  if (isMobileView.value) {
+    // Delay stop search to allow navigating to board link
+    setTimeout(stopSearch, 10)
+  } else {
+    if (!store.searchInput) {
+      stopSearch()
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
