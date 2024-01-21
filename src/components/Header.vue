@@ -118,10 +118,6 @@ header {
   font-weight: 700;
 }
 
-.icon-button {
-  width: 100%;
-  height: 100%;
-  border-radius: 9999px; /* fully rounded */
 .ellipsis-popover {
   position: absolute;
   top: 100%;
@@ -138,9 +134,6 @@ header {
   z-index: 10;
 }
 
-.icon-button:hover,
-.icon-button:active {
-  background-color: var(--header-button-hover);
 .backdrop {
   position: fixed;
   top: 0;
