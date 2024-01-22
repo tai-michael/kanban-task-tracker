@@ -1,8 +1,11 @@
 <template>
   <div>
     <div v-if="isFetchingBoard">Loading board...</div>
+    <div v-if="isFetchingBoard && !Object.keys(boardStore.board).length">
+      Loading board...
+    </div>
     <Board
-      v-if="!isFetchingBoard && Object.keys(boardStore.board).length"
+      v-if="Object.keys(boardStore.board).length"
       @card-selected="modal?.showModal()"
     />
 

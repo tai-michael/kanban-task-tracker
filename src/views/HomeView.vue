@@ -105,6 +105,7 @@ const toggleBoardSelector = () => {
 
 const isInitialLoad = ref(true)
 const fetchingBoardsFromBackend = ref(false)
+provide('fetchingBoardsFromBackend', fetchingBoardsFromBackend)
 const fetchBoardsCollection = async (id: string) => {
   try {
     const boardsRef = doc(db, 'boards_grouped', id)
@@ -114,7 +115,14 @@ const fetchBoardsCollection = async (id: string) => {
     console.error('Error fetching data:', err)
   }
 }
+onMounted(async () => {
+  fetchingBoardsFromBackend.value = true
+  const data = await fetchBoardsCollection(auth.currentUser.uid)
+  boardStore.hydrateBoards(data)
+  fetchingBoardsFromBackend.value = false
+})
 
+const isInitialLoad = ref(true)
 watch(
   () => boardStore.boards,
   () => {
@@ -148,9 +156,9 @@ onMounted(async () => {
   fetchingBoardsFromBackend.value = false
 })
 
-const isChoosingBoard = ref(false)
 const { width } = useWindowSize()
 const isMobileView = computed(() => width.value <= 480)
+const isChoosingBoard = ref(false)
 watch(isMobileView, (isMobile) => {
   if (!isMobile) {
     isChoosingBoard.value = false

@@ -1,5 +1,7 @@
 <template>
-  <div v-if="fetchingBoardsFromBackend" class="flex h-full">Loading...</div>
+  <div v-if="isMobileView && fetchingBoardsFromBackend" class="flex h-full">
+    Loading...
+  </div>
   <div v-else>
     <div
       v-if="boardStore.boards?.length > 0"
@@ -71,6 +73,7 @@ const boardStore = useBoardStore()
 const cardStore = useCardStore()
 const searchStore = useSearchStore()
 const emit = defineEmits(['boardLinkClicked', 'boardComposerTriggered'])
+const isMobileView = inject('isMobileView')
 const fetchingBoardsFromBackend = inject('fetchingBoardsFromBackend')
 
 const sortedBoards = computed(() => {

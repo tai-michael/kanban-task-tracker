@@ -33,19 +33,22 @@
         class="title"
       />
 
-      <EllipsisMenu />
+      <EllipsisMenu v-if="Object.keys(boardStore.board).length" />
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
+import { inject } from 'vue'
 import Title from '@/components/Title.vue'
 import BoardSearch from '@/components/BoardSearch.vue'
 import EllipsisMenu from '@/components/EllipsisMenu.vue'
 import MenuIcon from '@/assets/icons/icon-menu.vue'
 import BackArrowIcon from '@/assets/icons/icon-arrow-back.vue'
+import { useLocalStorage } from '@vueuse/core'
 import { useBoardStore, useSearchStore } from '@/stores'
 import { useRouter, useRoute } from 'vue-router'
+const isMobileView = inject('isMobileView')
 const route = useRoute()
 const router = useRouter()
 const boardStore = useBoardStore()
@@ -58,7 +61,7 @@ const changeBoardTitle = (title: string) => {
 
 const handleReturnToBoards = () => {
   router.push({ name: 'home' })
-  boardStore.clearBoard()
+  if (isMobileView.value) boardStore.clearBoard()
 }
 </script>
 

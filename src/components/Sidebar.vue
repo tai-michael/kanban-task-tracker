@@ -27,6 +27,7 @@
       />
     </div>
   </nav>
+
   <button v-else @click="toggleSidebar" class="show-sidebar-btn">
     <img :src="ShowSidebar" />
   </button>
