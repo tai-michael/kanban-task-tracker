@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header :class="{ 'xs:!w-full xs:!left-[unset]': !isSidebarExpanded }">
     <div
       v-if="route.name === 'home'"
       class="flex justify-between gap-x-2 xs:hidden"
@@ -53,6 +53,7 @@ const route = useRoute()
 const router = useRouter()
 const boardStore = useBoardStore()
 const searchStore = useSearchStore()
+const isSidebarExpanded = useLocalStorage('is-sidebar-expanded', true)
 const emit = defineEmits(['boardSelectorTriggered'])
 
 const changeBoardTitle = (title: string) => {
