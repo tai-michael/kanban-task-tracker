@@ -1,45 +1,41 @@
 <template>
-  <input
-    v-if="store.isSearching"
-    ref="searchBar"
-    v-model="searchInput"
-    @blur="handleBlur"
-    placeholder="Search boards"
-    class="flex w-full xs:w-[250px] ml-3 px-2 xs:mr-3 xs:h-10 xs:relative border-2"
-  />
-  <input
-    v-else
-    @click="beginSearch"
-    placeholder="Search boards"
-    class="hidden xs:flex w-full xs:w-[250px] ml-3 px-2 xs:mr-3 xs:h-10 xs:relative border-2"
-  />
-
-  <div class="flex shrink-0 w-10 h-10 xs:w-11 xs:absolute xs:right-6">
-    <button
-      v-if="!store.isSearching"
-      @click="beginSearch"
-      class="flex items-center justify-center w-full h-full"
-    >
-      <SearchIcon :fill="'black'" class="w-5 h-5" />
-    </button>
-    <button
+  <div class="relative flex w-full h-10 xs:w-[unset]">
+    <input
+      v-if="store.isSearching"
+      ref="searchBar"
+      v-model="searchInput"
+      @blur="handleBlur"
+      placeholder="Search boards"
+      class="w-full xs:w-[250px] mx-3 px-2 border-2"
+    />
+    <input
       v-else
-      @click="stopSearch"
-      class="flex items-center justify-center w-full h-full"
-    >
-      <SearchIcon
+      @click="beginSearch"
+      placeholder="Search boards"
+      class="hidden xs:block w-full xs:w-[250px] mx-3 px-2 border-2"
+    />
+
+    <div class="flex shrink-0 absolute top-0 right-3 w-12 h-10">
+      <button
         v-if="!store.isSearching"
         @click="beginSearch"
-        :fill="'black'"
-        class="w-5 h-5"
-      />
-      <img :src="CrossIcon" class="w-4 h-4" />
-    </button>
+        class="flex items-center justify-center w-full h-full"
+      >
+        <SearchIcon :fill="'black'" class="w-5 h-5" />
+      </button>
+      <button
+        v-else
+        @click="stopSearch"
+        class="flex items-center justify-center w-full h-full"
+      >
+        <img :src="CrossIcon" class="w-4 h-4" />
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick, inject, computed, watch } from 'vue'
+import { ref, nextTick, inject, computed } from 'vue'
 import SearchIcon from '@/assets/icons/icon-search.vue'
 import CrossIcon from '@/assets/icons/icon-cross.svg'
 import { useSearchStore } from '@/stores'
