@@ -20,7 +20,7 @@
       v-else-if="route.name === 'board' || route.name === 'card'"
       class="flex w-full max-w-[100%] items-center justify-between gap-x-3"
     >
-      <div class="flex w-10 h-10 xs:hidden">
+      <div class="flex shrink-0 w-10 h-10 xs:hidden">
         <button @click="handleReturnToBoards" class="icon-button">
           <BackArrowIcon :color="'black'" class="w-8 h-8" />
         </button>

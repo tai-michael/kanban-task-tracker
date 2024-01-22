@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-10 h-10 relative">
+  <div class="flex shrink-0 w-10 h-10 relative">
     <button @click="toggleEllipsisMenu" class="icon-button">
       <img
         :src="EllipsisIcon"

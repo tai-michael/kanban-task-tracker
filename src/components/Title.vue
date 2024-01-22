@@ -10,7 +10,7 @@
     v-focus="isEditingTitle"
     @focus="selectText"
     @blur="handleBlur"
-    class="w-full p-2"
+    class="w-full px-2 py-1.5"
   />
 </template>
 
