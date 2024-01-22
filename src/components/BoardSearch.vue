@@ -1,21 +1,20 @@
 <template>
-  <div v-if="store.isSearching" class="flex w-full ml-3">
-    <input
-      ref="searchBar"
-      v-model="searchInput"
-      @blur="handleBlur"
-      placeholder="Search boards"
-      class="w-full px-2 border-2 xs:h-10 xs:mr-3 xs:relative"
-    />
-  </div>
+  <input
+    v-if="store.isSearching"
+    ref="searchBar"
+    v-model="searchInput"
+    @blur="handleBlur"
+    placeholder="Search boards"
+    class="flex w-full xs:w-[250px] ml-3 px-2 xs:mr-3 xs:h-10 xs:relative border-2"
+  />
   <input
     v-else
     @click="beginSearch"
     placeholder="Search boards"
-    class="hidden xs:flex xs:h-10 xs:mr-3 xs:relative w-full ml-3 px-2 border-2"
+    class="hidden xs:flex w-full xs:w-[250px] ml-3 px-2 xs:mr-3 xs:h-10 xs:relative border-2"
   />
 
-  <div class="flex shrink-0 w-10 h-10 xs:w-11 xs:absolute xs:right-3">
+  <div class="flex shrink-0 w-10 h-10 xs:w-11 xs:absolute xs:right-6">
     <button
       v-if="!store.isSearching"
       @click="beginSearch"

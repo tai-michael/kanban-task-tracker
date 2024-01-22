@@ -5,7 +5,7 @@
   <div v-else>
     <div
       v-if="boardStore.boards?.length > 0"
-      class="hidden xs:flex justify-end gap-x-2"
+      class="hidden xs:flex xs:justify-center gap-x-2"
     >
       <BoardSearch />
     </div>
