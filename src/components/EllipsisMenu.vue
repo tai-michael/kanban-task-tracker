@@ -1,6 +1,9 @@
 <template>
   <div class="flex shrink-0 w-10 h-10 relative">
-    <button @click="toggleEllipsisMenu" class="icon-button">
+    <button
+      @click="toggleEllipsisMenu"
+      :class="['icon-button', { 'icon-button--selected': isEllipsisMenuOpen }]"
+    >
       <img
         :src="EllipsisIcon"
         class="w-[3.7px] h-[16px] xs:w-[5px] xs:h-[20px]"

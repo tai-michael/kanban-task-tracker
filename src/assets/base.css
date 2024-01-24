@@ -4,6 +4,7 @@
   --main-purple-hover: hsla(243, 100%, 82%);
   --light-nav-hover: hsla(242, 48%, 58%, 10%);
   --header-button-hover: hsla(242, 48%, 58%, 25%);
+  --header-button-active: hsla(242, 48%, 58%, 40%);
 
   --black: hsla(237, 100%, 4%);
   --very-dark-gray-dark-bg: hsla(235, 16%, 15%);
@@ -114,7 +115,11 @@ body {
   transition: background-color 0.2s ease-in-out;
 }
 
-.icon-button:hover,
-.icon-button:active {
+.icon-button--selected,
+.icon-button:hover {
   background-color: var(--header-button-hover);
+}
+
+.icon-button:active {
+  background-color: var(--header-button-active);
 }
