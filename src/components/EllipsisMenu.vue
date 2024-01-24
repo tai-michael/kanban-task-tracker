@@ -11,13 +11,8 @@
       <div class="backdrop" @click="toggleEllipsisMenu"></div>
 
       <div class="ellipsis-popover">
-        <button
-          @click="handleDeleteBoard"
-          class="p-2 w-full bg-red-200 rounded-md"
-        >
-          Delete Board
-        </button>
-        <button class="p-2 w-full bg-red-200 rounded-md">Change Title</button>
+        <button @click="handleDeleteBoard">Delete Board</button>
+        <button>Change Title</button>
       </div>
     </div>
   </div>
@@ -58,12 +53,32 @@ const handleDeleteBoard = () => {
   width: 200px;
   display: flex;
   flex-direction: column;
-  row-gap: 0.5rem;
-  padding: 1rem;
   justify-content: center;
+  align-items: stretch;
   background-color: white;
   border-radius: 0.375rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 10;
+  overflow: hidden;
+
+  button {
+    flex-grow: 1;
+    padding: 1rem;
+    background-color: white;
+    border: none;
+    &:not(:last-child) {
+      border-bottom: 1px solid theme('colors.gray.300');
+    }
+
+    &:first-child {
+      border-top-left-radius: 0.375rem;
+      border-top-right-radius: 0.375rem;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 0.375rem;
+      border-bottom-right-radius: 0.375rem;
+    }
+  }
 }
 </style>
