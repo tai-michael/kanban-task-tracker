@@ -14,17 +14,37 @@
       <div class="backdrop" @click="toggleEllipsisMenu"></div>
 
       <div class="ellipsis-popover">
-        <button @click="handleDeleteBoard">Delete Board</button>
-        <button>Change Title</button>
+        <button @click="toggleModal">Delete Board</button>
+        <!-- <button>Change Title</button> -->
       </div>
     </div>
   </div>
+
+  <ModalWrapper ref="modal" :classes="'px-6 py-5 w-[270px] xs:w-[300px]'">
+    <div class="flex flex-col gap-y-5">
+      <span class="text-lg">Are you sure you want to delete this board?</span>
+      <div class="test">
+        <button @click="toggleModal" class="py-2 px-4 mr-2 rounded">
+          Cancel
+        </button>
+        <button
+          @click="handleDeleteBoard"
+          class="py-2 px-4 rounded bg-red-500 text-white"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </ModalWrapper>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, defineAsyncComponent } from 'vue'
 import EllipsisIcon from '@/assets/icons/icon-vertical-ellipsis.svg'
 import { useBoardStore } from '@/stores'
+const ModalWrapper = defineAsyncComponent(
+  () => import('@/components/ModalWrapper.vue')
+)
 const boardStore = useBoardStore()
 
 const isEllipsisMenuOpen = ref(false)
@@ -37,9 +57,21 @@ const handleDeleteBoard = () => {
   toggleEllipsisMenu()
   // TODO add toast or something similar
 }
+
+const modal = ref<InstanceType<typeof ModalWrapper>>()
+const toggleModal = () => {
+  if (isEllipsisMenuOpen.value) toggleEllipsisMenu()
+
+  if (modal.value?.visible) modal.value?.close()
+  else modal.value?.showModal()
+}
 </script>
 
 <style scoped lang="scss">
+.test {
+  align-self: flex-end;
+}
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -82,6 +114,10 @@ const handleDeleteBoard = () => {
       border-bottom-left-radius: 0.375rem;
       border-bottom-right-radius: 0.375rem;
     }
+  }
+
+  button:active {
+    background-color: var(--light-nav-hover);
   }
 }
 </style>
