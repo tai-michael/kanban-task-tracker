@@ -21,10 +21,10 @@
     </div>
   </div>
 
-  <ModalWrapper ref="modal" :classes="'px-6 py-5 w-[270px] xs:w-[300px]'">
-    <div class="flex flex-col gap-y-5">
-      <span class="text-lg">Are you sure you want to delete this board?</span>
-      <div class="test">
+  <ModalWrapper ref="modal" :classes="'w-[250px] px-6 py-5'">
+    <div class="flex flex-col gap-y-7">
+      <span class="text-lg font-semibold select-none">Delete this board?</span>
+      <div class="self-end">
         <button
           @click="toggleModal"
           type="button"
@@ -58,12 +58,6 @@ const toggleEllipsisMenu = () => {
   isEllipsisMenuOpen.value = !isEllipsisMenuOpen.value
 }
 
-const handleDeleteBoard = () => {
-  boardStore.deleteBoard()
-  toggleEllipsisMenu()
-  // TODO add toast or something similar
-}
-
 const modal = ref<InstanceType<typeof ModalWrapper>>()
 const toggleModal = () => {
   if (isEllipsisMenuOpen.value) toggleEllipsisMenu()
@@ -71,13 +65,15 @@ const toggleModal = () => {
   if (modal.value?.visible) modal.value?.close()
   else modal.value?.showModal()
 }
+
+const handleDeleteBoard = () => {
+  boardStore.deleteBoard()
+  toggleEllipsisMenu()
+  // TODO add toast or something similar
+}
 </script>
 
 <style scoped lang="scss">
-.test {
-  align-self: flex-end;
-}
-
 .backdrop {
   position: fixed;
   top: 0;
