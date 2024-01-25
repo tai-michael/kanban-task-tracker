@@ -1,5 +1,5 @@
 <template>
-  <span v-if="!isEditingTitle" @click="isEditingTitle = true">
+  <span v-if="!isEditingTitle" @click="toggleEditState">
     {{ title }}
   </span>
 
@@ -22,6 +22,7 @@ const titleInput = ref()
 const selectText = () => {
   titleInput.value.select() // Select all text in the input element
 }
+const toggleEditState = () => (isEditingTitle.value = !isEditingTitle.value)
 
 const editableTitle = ref('')
 const isEditingTitle = ref(false)
@@ -32,7 +33,7 @@ const handleBlur = () => {
   } else {
     editableTitle.value = props.title
   }
-  isEditingTitle.value = false
+  toggleEditState()
 }
 
 onMounted(() => {
