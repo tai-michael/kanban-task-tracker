@@ -6,7 +6,7 @@
     >
       <div v-if="!searchStore.isSearching" class="flex items-center gap-x-2">
         <div class="flex w-10 h-10">
-          <button class="icon-button">
+          <button type="button" class="icon-button">
             <MenuIcon :fill="'black'" class="w-7 h-7" />
           </button>
         </div>
@@ -21,7 +21,7 @@
       class="flex w-full max-w-[100%] items-center justify-between gap-x-3"
     >
       <div class="flex shrink-0 w-10 h-10 xs:hidden">
-        <button @click="handleReturnToBoards" class="icon-button">
+        <button @click="handleReturnToBoards" type="button" class="icon-button">
           <BackArrowIcon :color="'black'" class="w-8 h-8" />
         </button>
       </div>

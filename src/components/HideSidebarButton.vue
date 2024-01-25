@@ -2,6 +2,7 @@
   <div>
     <button
       @click="emit('hideSidebarTriggered')"
+      type="button"
       class="w-full mt-2 p-3 pl-8 inline-flex items-center gap-4 hover-effect"
       @mouseover="hovered = true"
       @mouseleave="hovered = false"
@@ -12,7 +13,9 @@
       <span class="text-[var(--medium-gray)] font-bold">Hide Sidebar</span>
     </button>
     <div class="mt-3 ml-6">
-      <button class="mr-4" @click="signOut(auth)">Sign Out</button>
+      <button @click="signOut(auth)" type="button" class="mr-4">
+        Sign Out
+      </button>
       <router-link :to="`/admin`">Admin</router-link>
     </div>
   </div>

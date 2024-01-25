@@ -4,14 +4,15 @@
     <li class="flex gap-x-2 items-center">
       <button
         v-if="formattedDueDate"
+        type="button"
         @mouseenter="hover = true"
         @mouseleave="hover = false"
+        class="due-date-button"
         :class="{
           overdue: isOverdue,
           'card-completed': card.is_completed,
           'hover-show-checkbox': hover,
         }"
-        class="due-date-button"
       >
         <div class="w-5">
           <input

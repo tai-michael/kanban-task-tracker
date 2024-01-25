@@ -2,7 +2,11 @@
   <div class="text-center flex flex-col items-center p-2">
     <h1 class="font-bold text-2xl mb-4">Page not found</h1>
     <span class="text-lg mb-4">{{ errMessage }}</span>
-    <button @click="router.push('/')" class="p-1.5 bg-blue-300 rounded">
+    <button
+      @click="router.push('/')"
+      type="button"
+      class="p-1.5 bg-blue-300 rounded"
+    >
       Home
     </button>
   </div>

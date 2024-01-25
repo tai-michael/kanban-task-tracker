@@ -14,6 +14,7 @@
 
     <button
       @click="emit('boardComposerTriggered')"
+      type="button"
       class="flex justify-center items-center mt-6 py-3 gap-x-4 w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)] bg-[var(--main-purple)] rounded-full hover:bg-[var(--main-purple-hover)]"
     >
       <BoardIcon :color="'white'" />

@@ -26,12 +26,24 @@
           <!-- NOTE 'mousedown' needed, as 'blur' triggers before 'click', meaning the button wouldn't exist in DOM, so its click would never trigger -->
           <div class="flex justify-between">
             <div>
-              <button @mousedown="saveItemName(item.name)" class="mr-3">
+              <button
+                @mousedown="saveItemName(item.name)"
+                type="submit"
+                class="mr-3"
+              >
                 Save
               </button>
-              <button @mousedown="clearItemEdit(item.id, item.name)">X</button>
+              <button
+                @mousedown="clearItemEdit(item.id, item.name)"
+                type="button"
+              >
+                X
+              </button>
             </div>
-            <button @mousedown="store.removeChecklistItem(item.id)">
+            <button
+              @mousedown="store.removeChecklistItem(item.id)"
+              type="button"
+            >
               Delete
             </button>
           </div>
@@ -48,16 +60,25 @@
           class="flex gap-x-3"
         >
           <span>You have unsaved edits.</span>
-          <button @click="beginItemNameEdit(item)" class="underline">
+          <button
+            @click="beginItemNameEdit(item)"
+            type="button"
+            class="underline"
+          >
             View edits
           </button>
-          <button @click="clearItemEdit(item.id, item.name)" class="underline">
+          <button
+            @click="clearItemEdit(item.id, item.name)"
+            type="button"
+            class="underline"
+          >
             Discard
           </button>
         </div>
         <button
           v-if="item.id !== activeItemId"
           @click="store.removeChecklistItem(item.id)"
+          type="button"
         >
           Delete
         </button>
@@ -73,11 +94,13 @@
       class="w-full"
     />
     <div>
-      <button @mousedown="processItemCreation" class="mr-2">Add</button>
-      <button @mousedown="exitItemCreation">Cancel</button>
+      <button @mousedown="processItemCreation" type="submit" class="mr-2">
+        Add
+      </button>
+      <button @mousedown="exitItemCreation" type="button">Cancel</button>
     </div>
   </div>
-  <button v-else @click="isCreatingItem = true" class="border-2">
+  <button v-else @click="isCreatingItem = true" type="button" class="border-2">
     Add a checklist item
   </button>
 </template>

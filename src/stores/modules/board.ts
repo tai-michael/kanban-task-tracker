@@ -30,6 +30,7 @@ export const useBoardStore = defineStore('board', () => {
   const hydrateBoard = (backendData: BoardDetails) => {
     board.value = backendData
   }
+
   const updateBoardTitle = (title: string) => {
     board.value.title = title
 

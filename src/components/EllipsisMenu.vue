@@ -2,6 +2,7 @@
   <div class="flex shrink-0 w-10 h-10 relative">
     <button
       @click="toggleEllipsisMenu"
+      type="button"
       :class="['icon-button', { 'icon-button--selected': isEllipsisMenuOpen }]"
     >
       <img
@@ -14,7 +15,7 @@
       <div class="backdrop" @click="toggleEllipsisMenu"></div>
 
       <div class="ellipsis-popover">
-        <button @click="toggleModal">Delete Board</button>
+        <button @click="toggleModal" type="button">Delete Board</button>
         <!-- <button>Change Title</button> -->
       </div>
     </div>
@@ -24,10 +25,15 @@
     <div class="flex flex-col gap-y-5">
       <span class="text-lg">Are you sure you want to delete this board?</span>
       <div class="test">
-        <button @click="toggleModal" class="py-2 px-4 mr-2 rounded">
+        <button
+          @click="toggleModal"
+          type="button"
+          class="py-2 px-4 mr-2 rounded"
+        >
           Cancel
         </button>
         <button
+          type="button"
           @click="handleDeleteBoard"
           class="py-2 px-4 rounded bg-red-500 text-white"
         >

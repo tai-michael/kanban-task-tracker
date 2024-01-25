@@ -32,7 +32,9 @@
     <span v-if="isOverdue" class="bg-red-400 p-1 flex items-center"
       >Overdue</span
     >
-    <button v-if="selectedDate" @click="handleClearDueDate">Remove</button>
+    <button v-if="selectedDate" @click="handleClearDueDate" type="button">
+      Remove
+    </button>
   </div>
 </template>
 

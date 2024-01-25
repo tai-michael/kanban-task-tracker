@@ -14,12 +14,14 @@
       <div class="flex gap-x-3">
         <button
           @click="processListCreation"
+          type="submit"
           class="pl-2 pr-2 rounded bg-blue-300 hover:bg-blue-200"
         >
           Save
         </button>
         <button
           @click="hideListComposer"
+          type="button"
           class="pl-2 pr-2 rounded hover:bg-gray-200"
         >
           X
@@ -27,7 +29,12 @@
       </div>
     </div>
 
-    <button v-else @click.stop="showListComposer" class="w-full bg-green-400">
+    <button
+      v-else
+      @click.stop="showListComposer"
+      type="button"
+      class="w-full bg-green-400"
+    >
       + Add a new list
     </button>
   </div>

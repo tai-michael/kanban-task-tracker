@@ -19,6 +19,7 @@
       <button
         v-if="!store.isSearching"
         @click="beginSearch"
+        type="button"
         class="flex items-center justify-center w-full h-full"
       >
         <SearchIcon :fill="'black'" class="w-5 h-5" />
@@ -26,6 +27,7 @@
       <button
         v-else
         @click="stopSearch"
+        type="button"
         class="flex items-center justify-center w-full h-full"
       >
         <img :src="CrossIcon" class="w-4 h-4" />

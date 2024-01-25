@@ -36,7 +36,7 @@
         }}</span>
         <div>
           <a :href="file.url" target="_blank" download class="mr-2">Download</a>
-          <button @click="deleteFile(file)">Delete</button>
+          <button @click="deleteFile(file)" type="button">Delete</button>
         </div>
       </li>
     </ul>

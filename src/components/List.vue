@@ -1,7 +1,11 @@
 <template>
   <div class="flex justify-between">
     <Title :title="list.title" @title-edited="changeListTitle" />
-    <button class="bg-red-400" @click="store.removeList(props.list.id)">
+    <button
+      @click="store.removeList(props.list.id)"
+      type="button"
+      class="bg-red-400"
+    >
       Delete List
     </button>
   </div>
