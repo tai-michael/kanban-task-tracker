@@ -18,8 +18,9 @@
         <div v-else>
           <button
             v-if="props.showCloseButton"
-            type="button"
             @click="handleCloseTriggered"
+            type="button"
+            aria-label="Close modal"
             class="absolute top-4 right-4 z-10"
           >
             <img :src="CrossIcon" />
