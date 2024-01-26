@@ -21,7 +21,11 @@
     </div>
   </div>
 
-  <ModalWrapper ref="modal" :classes="'w-[250px] px-6 py-5'">
+  <ModalWrapper
+    ref="modal"
+    :show-close-button="true"
+    :classes="'px-6 py-5 w-[260px] xs:w-[270px]'"
+  >
     <div class="flex flex-col gap-y-7">
       <span class="text-lg font-semibold select-none">Delete this board?</span>
       <div class="self-end">
@@ -94,7 +98,7 @@ const handleDeleteBoard = () => {
   align-items: stretch;
   background-color: white;
   border-radius: 0.375rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   z-index: 10;
   overflow: hidden;
 
