@@ -39,15 +39,6 @@
     </div>
 
     <ModalWrapper
-      ref="sideBarModal"
-      :show-close-button="true"
-      :classes="'w-[264px] min-h-[250px] max-h-[518px]'"
-      ><Sidebar
-        @board-link-clicked="toggleBoardSelector"
-        @board-composer-triggered="toggleBoardComposer"
-    /></ModalWrapper>
-
-    <ModalWrapper
       ref="boardComposerModal"
       :show-close-button="true"
       :classes="'w-[300px]'"
@@ -68,11 +59,10 @@ import {
 } from 'vue'
 import Sidebar from '@/components/Sidebar.vue'
 import { db, auth } from '@/firebaseInit'
-import { signOut } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import { useBoardStore } from '@/stores'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
 const Header = defineAsyncComponent(() => import('@/components/Header.vue'))
 const ModalWrapper = defineAsyncComponent(
@@ -88,22 +78,8 @@ const BoardComposer = defineAsyncComponent(
   () => import('@/components/BoardComposer.vue')
 )
 const route = useRoute()
-const router = useRouter()
 const boardStore = useBoardStore()
 
-const boardComposerModal = ref<InstanceType<typeof ModalWrapper>>()
-const toggleBoardComposer = () => {
-  if (sideBarModal.value?.visible) sideBarModal.value?.close()
-  boardComposerModal.value?.showModal()
-}
-
-const sideBarModal = ref<InstanceType<typeof ModalWrapper>>()
-const toggleBoardSelector = () => {
-  if (sideBarModal.value?.visible) sideBarModal.value?.close()
-  else sideBarModal.value?.showModal()
-}
-
-const isInitialLoad = ref(true)
 const fetchingBoardsFromBackend = ref(false)
 provide('fetchingBoardsFromBackend', fetchingBoardsFromBackend)
 const fetchBoardsCollection = async (id: string) => {
@@ -148,13 +124,10 @@ watch(
   { deep: true }
 )
 
-provide('fetchingBoardsFromBackend', fetchingBoardsFromBackend)
-onMounted(async () => {
-  fetchingBoardsFromBackend.value = true
-  const data = await fetchBoardsCollection(auth.currentUser.uid)
-  boardStore.hydrateBoards(data)
-  fetchingBoardsFromBackend.value = false
-})
+const boardComposerModal = ref<InstanceType<typeof ModalWrapper>>()
+const toggleBoardComposer = () => {
+  boardComposerModal.value?.showModal()
+}
 
 const { width } = useWindowSize()
 const isMobileView = computed(() => width.value <= 480)
