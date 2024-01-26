@@ -41,7 +41,7 @@
     <ModalWrapper
       ref="boardComposerModal"
       :show-close-button="true"
-      :classes="'w-[300px]'"
+      :classes="'w-[280px] xs:w-[300px]'"
     >
       <BoardComposer
     /></ModalWrapper>

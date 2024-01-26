@@ -1,6 +1,6 @@
 <template>
-  <div ref="composer" class="flex flex-col bg-gray-200 h-full p-3">
-    <h2 class="pt-1 pb-4 text-center">Create board</h2>
+  <div ref="composer" class="flex flex-col h-full p-3">
+    <h2 class="pt-1 pb-4 text-center font-semibold">Create board</h2>
 
     <input
       v-model.trim="boardTitle"
@@ -12,8 +12,10 @@
       @click="handleCreateBoard"
       type="submit"
       :disabled="!boardTitle"
-      :class="{ '!bg-gray-300': !boardTitle }"
-      class="bg-blue-300 hover:bg-blue-200 rounded p-1"
+      :class="[
+        { '!bg-[#bcd6f079]': !boardTitle, 'cursor-not-allowed': !boardTitle },
+      ]"
+      class="bg-[#75acfa] text-[#1D2125] hover:bg-[#89baff] rounded p-1 transition-colors duration-100 ease-in-out"
     >
       Create
     </button>
