@@ -109,6 +109,7 @@ dialog {
   position: fixed;
   inset: 0;
   margin: auto;
+  box-shadow: var(--box-shadow-heavy);
 }
 
 dialog::backdrop {

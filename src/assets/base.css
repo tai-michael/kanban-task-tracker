@@ -25,6 +25,9 @@
   --sidebar-width: 300px;
   --sidebar-navbtn-width-mobile: 290px;
   --sidebar-navbtn-width-desktop: 275px;
+
+  --box-shadow-heavy: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
   /* --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
