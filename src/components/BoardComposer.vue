@@ -10,7 +10,7 @@
     />
     <button
       @click="handleCreateBoard"
-      type="button"
+      type="submit"
       :disabled="!boardTitle"
       :class="{ '!bg-gray-300': !boardTitle }"
       class="bg-blue-300 hover:bg-blue-200 rounded p-1"
