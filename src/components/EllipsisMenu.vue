@@ -32,14 +32,14 @@
         <button
           @click="toggleModal"
           type="button"
-          class="py-2 px-4 mr-2 rounded"
+          class="mr-2 py-2 px-4 rounded select-none hover:bg-slate-100 active:bg-slate-200"
         >
           Cancel
         </button>
         <button
           type="button"
           @click="handleDeleteBoard"
-          class="py-2 px-4 rounded bg-red-500 text-white"
+          class="py-2 px-4 rounded select-none text-white bg-red-500 hover:bg-red-400 active:bg-red-600"
         >
           Delete
         </button>

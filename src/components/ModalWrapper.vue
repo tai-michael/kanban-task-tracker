@@ -21,7 +21,7 @@
             @click="handleCloseTriggered"
             type="button"
             aria-label="Close modal"
-            class="absolute top-4 right-4 z-10"
+            class="absolute top-2 right-2 z-10 p-2 rounded-full hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)] transition-colors duration-100"
           >
             <img :src="CrossIcon" />
           </button>
