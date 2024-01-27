@@ -7,7 +7,7 @@
 
     <div
       class="flex-grow overflow-x-auto bg-[var(--light-gray-light-bg)] xs:pl-[var(--sidebar-width)] xs:transition-pl xs:duration-300"
-      :class="{ 'xs:pl-0': !isSidebarExpanded }"
+      :class="{ 'xs:pl-0': !isSidebarShown }"
     >
       <Header
         v-if="isMobileView || route.name === 'board' || route.name === 'card'"
@@ -80,7 +80,7 @@ const BoardComposer = defineAsyncComponent(
 )
 const route = useRoute()
 const boardStore = useBoardStore()
-const isSidebarExpanded = useLocalStorage('is-sidebar-expanded', true)
+const isSidebarShown = useLocalStorage('is-sidebar-expanded', true)
 
 const fetchingBoardsFromBackend = ref(false)
 provide('fetchingBoardsFromBackend', fetchingBoardsFromBackend)

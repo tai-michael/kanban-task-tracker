@@ -1,5 +1,5 @@
 <template>
-  <header :class="{ 'xs:!w-full xs:!left-[unset]': !isSidebarExpanded }">
+  <header>
     <div
       v-if="route.name === 'home'"
       class="flex justify-between gap-x-2 xs:hidden"
@@ -45,7 +45,6 @@ import BoardSearch from '@/components/BoardSearch.vue'
 import EllipsisMenu from '@/components/EllipsisMenu.vue'
 import MenuIcon from '@/assets/icons/icon-menu.vue'
 import BackArrowIcon from '@/assets/icons/icon-arrow-back.vue'
-import { useLocalStorage } from '@vueuse/core'
 import { useBoardStore, useSearchStore } from '@/stores'
 import { useRouter, useRoute } from 'vue-router'
 const isMobileView = inject('isMobileView')
@@ -53,7 +52,6 @@ const route = useRoute()
 const router = useRouter()
 const boardStore = useBoardStore()
 const searchStore = useSearchStore()
-const isSidebarExpanded = useLocalStorage('is-sidebar-expanded', true)
 const emit = defineEmits(['boardSelectorTriggered'])
 
 const changeBoardTitle = (title: string) => {

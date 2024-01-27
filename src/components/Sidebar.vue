@@ -1,7 +1,7 @@
 <template>
   <nav
     class="flex flex-col shrink-0 bg-[var(--sidebar-background)] absolute top-0 bottom-0 left-0 xs:w-[var(--sidebar-width)] xs:border-r xs:border-r-[var(--lines-light)] transition-transform duration-300 ease-in-out"
-    :class="isSidebarExpanded ? 'translate-x-0' : '-translate-x-full'"
+    :class="isSidebarShown ? 'translate-x-0' : '-translate-x-full'"
   >
     <div
       class="hidden xs:flex items-center shrink-0 h-[var(--header-height-desktop)] pl-8"
@@ -30,7 +30,7 @@
 
   <TransitionFade>
     <button
-      v-if="!isSidebarExpanded"
+      v-if="!isSidebarShown"
       @click="toggleSidebar"
       type="button"
       class="show-sidebar-btn"
@@ -55,9 +55,9 @@ const TransitionFade = defineAsyncComponent(
 const router = useRouter()
 const emit = defineEmits(['boardLinkClicked', 'boardComposerTriggered'])
 
-const isSidebarExpanded = useLocalStorage('is-sidebar-expanded', true)
+const isSidebarShown = useLocalStorage('is-sidebar-expanded', true)
 const toggleSidebar = () => {
-  isSidebarExpanded.value = !isSidebarExpanded.value
+  isSidebarShown.value = !isSidebarShown.value
 }
 </script>
 
