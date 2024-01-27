@@ -68,12 +68,12 @@ const handleReturnToBoards = () => {
 
 <style scoped lang="scss">
 header {
-  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
   height: var(--header-height-mobile);
+  margin-bottom: 0.75rem;
   padding: 0 6px;
   background-color: white;
 }
@@ -89,8 +89,7 @@ header {
 @media (min-width: 481px) {
   header {
     height: var(--header-height-desktop);
-    width: calc(100% - var(--sidebar-width));
-    left: var(--sidebar-width);
+    margin-bottom: 2rem;
     padding: 0 16px;
   }
 

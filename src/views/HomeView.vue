@@ -5,13 +5,13 @@
       @board-composer-triggered="toggleBoardComposer"
     />
 
-    <div class="flex-grow overflow-x-auto bg-[var(--light-gray-light-bg)]">
-      <div
+    <div
+      class="flex-grow overflow-x-auto bg-[var(--light-gray-light-bg)] xs:pl-[var(--sidebar-width)] xs:transition-pl xs:duration-300"
+      :class="{ 'xs:pl-0': !isSidebarExpanded }"
+    >
+      <Header
         v-if="isMobileView || route.name === 'board' || route.name === 'card'"
-        class="header-container"
-      >
-        <Header @board-selector-triggered="toggleBoardSelector" />
-      </div>
+      />
 
       <div
         v-if="route.name === 'home'"
@@ -64,6 +64,7 @@ import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import { useBoardStore } from '@/stores'
 import { useRoute } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
+import { useLocalStorage } from '@vueuse/core'
 const Header = defineAsyncComponent(() => import('@/components/Header.vue'))
 const ModalWrapper = defineAsyncComponent(
   () => import('@/components/ModalWrapper.vue')
@@ -79,6 +80,7 @@ const BoardComposer = defineAsyncComponent(
 )
 const route = useRoute()
 const boardStore = useBoardStore()
+const isSidebarExpanded = useLocalStorage('is-sidebar-expanded', true)
 
 const fetchingBoardsFromBackend = ref(false)
 provide('fetchingBoardsFromBackend', fetchingBoardsFromBackend)
@@ -140,13 +142,4 @@ watch(isMobileView, (isMobile) => {
 provide('isMobileView', isMobileView)
 </script>
 
-<style scoped lang="scss">
-.header-container {
-  margin-bottom: 5rem;
-  margin-bottom: calc(var(--header-height-mobile) + 0.75rem);
-
-  @media (min-width: 481px) {
-    margin-bottom: calc(var(--header-height-desktop) + 2rem);
-  }
-}
-</style>
+<style scoped lang="scss"></style>
