@@ -2,7 +2,6 @@
   <div class="flex shrink-0 w-10 h-10 relative">
     <button
       @click="toggleEllipsisMenu"
-      type="button"
       :class="['icon-button', { 'icon-button--selected': isEllipsisMenuOpen }]"
     >
       <img
@@ -15,8 +14,11 @@
       <div class="backdrop" @click="toggleEllipsisMenu"></div>
 
       <div class="ellipsis-popover">
-        <button @click="toggleModal" type="button">Delete Board</button>
-        <!-- <button>Change Title</button> -->
+        <div @click="toggleModal" class="ellipsis-popover__button">
+          <DeleteIcon />
+          <button type="button" class="select-none">Delete Board</button>
+        </div>
+        <!-- <button class="ellipsis-popover__button">Change Title</button> -->
       </div>
     </div>
   </div>
@@ -51,6 +53,7 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent } from 'vue'
 import EllipsisIcon from '@/assets/icons/icon-vertical-ellipsis.svg'
+import DeleteIcon from '@/assets/icons/icon-delete.vue'
 import { useBoardStore } from '@/stores'
 const ModalWrapper = defineAsyncComponent(
   () => import('@/components/ModalWrapper.vue')
@@ -102,11 +105,17 @@ const handleDeleteBoard = () => {
   z-index: 10;
   overflow: hidden;
 
-  button {
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.5rem;
     flex-grow: 1;
     padding: 1rem;
     background-color: white;
     border: none;
+    cursor: pointer;
+
     &:not(:last-child) {
       border-bottom: 1px solid theme('colors.gray.300');
     }
@@ -122,7 +131,8 @@ const handleDeleteBoard = () => {
     }
   }
 
-  button:active {
+  &__button:active,
+  &__button:hover {
     background-color: var(--light-nav-hover);
   }
 }
