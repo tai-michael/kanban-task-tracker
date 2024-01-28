@@ -39,7 +39,7 @@
         <button
           type="button"
           @click="handleDeleteBoard"
-          class="py-2 px-4 rounded select-none text-white bg-red-500 hover:bg-red-400 active:bg-red-600"
+          class="py-2 px-4 rounded select-none text-white bg-red-500 hover:bg-red-400 active:bg-red-300"
         >
           Delete
         </button>
