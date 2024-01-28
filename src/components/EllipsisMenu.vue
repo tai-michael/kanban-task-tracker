@@ -23,25 +23,30 @@
     </div>
   </div>
 
-  <ModalWrapper
-    ref="modal"
-    :show-close-button="true"
-    :classes="'px-6 py-5 w-[260px] xs:w-[270px]'"
-  >
-    <div class="flex flex-col gap-y-7">
-      <span class="text-lg font-semibold select-none">Delete this board?</span>
-      <div class="self-end">
+  <ModalWrapper ref="modal" :show-close-button="true">
+    <div
+      class="flex flex-col gap-y-6 xs:max-w-[480px] xs:w-full p-6 xs:px-8 xs:pt-8 xs:pb-10"
+    >
+      <h2 class="text-lg font-bold select-none text-[#EA5555]">
+        Delete this board?
+      </h2>
+      <span class="font-medium text-sm text-[var(--medium-gray)] leading-6"
+        >Are you sure you want to delete the ‘{{ boardStore.board?.title }}’
+        board? This action will remove all lists and cards and cannot be
+        reversed.</span
+      >
+      <div class="flex gap-x-4 gap-y-4 flex-wrap xs:flex-nowrap">
         <button
           @click="toggleModal"
           type="button"
-          class="mr-2 py-2 px-4 rounded select-none hover:bg-slate-100 active:bg-slate-200"
+          class="button-shared text-[var(--main-purple)] bg-[var(--light-purple)] hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
         >
           Cancel
         </button>
         <button
           type="button"
           @click="handleDeleteBoard"
-          class="py-2 px-4 rounded select-none text-white bg-red-500 hover:bg-red-400 active:bg-red-300"
+          class="button-shared text-white bg-red-500 hover:bg-red-400 active:bg-red-300"
         >
           Delete
         </button>
@@ -81,6 +86,10 @@ const handleDeleteBoard = () => {
 </script>
 
 <style scoped lang="scss">
+.button-shared {
+  @apply py-2 px-4 rounded-[20px] select-none font-medium text-sm leading-6 w-full;
+}
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -133,7 +142,7 @@ const handleDeleteBoard = () => {
 
   &__button:active,
   &__button:hover {
-    background-color: var(--light-nav-hover);
+    background-color: var(--light-purple);
   }
 }
 </style>
