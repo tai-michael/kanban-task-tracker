@@ -6,8 +6,8 @@
     />
 
     <div
-      class="flex-grow overflow-x-auto bg-[var(--light-gray-light-bg)] xs:pl-[var(--sidebar-width)] xs:transition-pl xs:duration-300"
-      :class="{ 'xs:pl-0': !isSidebarShown }"
+      class="flex-grow overflow-x-auto bg-[var(--light-gray-light-bg)] xs:transition-pl xs:duration-300"
+      :class="isSidebarShown ? 'xs:pl-[var(--sidebar-width)]' : 'xs:pl-0'"
     >
       <Header
         v-if="isMobileView || route.name === 'board' || route.name === 'card'"
