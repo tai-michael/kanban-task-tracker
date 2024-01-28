@@ -1,7 +1,7 @@
 <template>
   <dialog
     ref="dialog"
-    class="rounded-lg"
+    class="rounded-md"
     @click="handleBackdropClick"
     @close="visible = false"
   >

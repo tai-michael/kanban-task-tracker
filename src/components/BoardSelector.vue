@@ -125,7 +125,7 @@ const getBoardIconColor = (boardId: string) => {
 }
 
 .hover-effect:hover {
-  background-color: var(--light-nav-hover);
+  background-color: var(--light-purple);
   border-radius: 0px 100px 100px 0px;
 
   span {

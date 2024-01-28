@@ -6,7 +6,7 @@
 :root {
   --main-purple: hsla(242, 48%, 58%);
   --main-purple-hover: hsla(243, 100%, 82%);
-  --light-nav-hover: hsla(242, 48%, 58%, 10%);
+  --light-purple: hsla(242, 48%, 58%, 10%);
   --icon-button-hover: hsla(242, 48%, 58%, 15%);
   --icon-button-active: hsla(242, 48%, 58%, 25%);
 
