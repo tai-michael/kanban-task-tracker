@@ -23,35 +23,22 @@
     </div>
   </div>
 
-  <ModalWrapper ref="modal" :show-close-button="true">
-    <div
-      class="flex flex-col gap-y-6 xs:max-w-[480px] xs:w-full p-6 xs:px-8 xs:pt-8 xs:pb-10"
+  <ModalWrapper
+    ref="modal"
+    :show-close-button="true"
+    :classes="'flex flex-col gap-y-6 xs:max-w-[480px] xs:w-full p-6 xs:px-8 xs:pt-8 xs:pb-10'"
+  >
+    <DeleteConfirmation
+      @cancel-triggered="toggleModal"
+      @delete-triggered="handleDeleteBoard"
     >
-      <h2 class="text-lg font-bold select-none text-[#EA5555]">
-        Delete this board?
-      </h2>
-      <span class="font-medium text-sm text-[var(--medium-gray)] leading-6"
-        >Are you sure you want to delete the ‘{{ boardStore.board?.title }}’
+      <template #header>Delete this board?</template>
+      <template #body>
+        Are you sure you want to delete the ‘{{ boardStore.board?.title }}’
         board? This action will remove all lists and cards and cannot be
-        reversed.</span
+        reversed.</template
       >
-      <div class="flex gap-x-4 gap-y-4 flex-wrap xs:flex-nowrap">
-        <button
-          @click="toggleModal"
-          type="button"
-          class="button-shared text-[var(--main-purple)] bg-[var(--light-purple)] hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
-        >
-          Cancel
-        </button>
-        <button
-          type="button"
-          @click="handleDeleteBoard"
-          class="button-shared text-white bg-red-500 hover:bg-red-400 active:bg-red-300"
-        >
-          Delete
-        </button>
-      </div>
-    </div>
+    </DeleteConfirmation>
   </ModalWrapper>
 </template>
 
@@ -62,6 +49,9 @@ import DeleteIcon from '@/assets/icons/icon-delete.vue'
 import { useBoardStore } from '@/stores'
 const ModalWrapper = defineAsyncComponent(
   () => import('@/components/ModalWrapper.vue')
+)
+const DeleteConfirmation = defineAsyncComponent(
+  () => import('@/components/DeleteConfirmation.vue')
 )
 const boardStore = useBoardStore()
 
@@ -81,15 +71,11 @@ const toggleModal = () => {
 const handleDeleteBoard = () => {
   boardStore.deleteBoard()
   toggleEllipsisMenu()
-  // TODO add toast or something similar
+  // REVIEW maybe add toast for this, though probably unnecessary
 }
 </script>
 
 <style scoped lang="scss">
-.button-shared {
-  @apply py-2 px-4 rounded-[20px] select-none font-medium text-sm leading-6 w-full;
-}
-
 .backdrop {
   position: fixed;
   top: 0;
