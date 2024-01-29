@@ -12,21 +12,19 @@
         class="relative"
         :class="{ [props.classes]: props.classes }"
       >
+        <button
+          v-if="props.showCloseButton"
+          @click="handleCloseTriggered"
+          type="button"
+          aria-label="Close modal"
+          class="absolute top-2 right-2 z-10 p-2 rounded-full hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)] transition-colors duration-100"
+        >
+          <img :src="CrossIcon" />
+        </button>
+
         <!-- TODO replace with spinner -->
         <div v-if="props.loading">Loading...</div>
-
-        <div v-else>
-          <button
-            v-if="props.showCloseButton"
-            @click="handleCloseTriggered"
-            type="button"
-            aria-label="Close modal"
-            class="absolute top-2 right-2 z-10 p-2 rounded-full hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)] transition-colors duration-100"
-          >
-            <img :src="CrossIcon" />
-          </button>
-          <slot />
-        </div>
+        <slot v-else />
       </form>
     </div>
   </dialog>
