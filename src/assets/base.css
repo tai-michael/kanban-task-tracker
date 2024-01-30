@@ -131,3 +131,16 @@ body {
 .icon-button:active {
   background-color: var(--icon-button-active);
 }
+
+.modal-button {
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 20px;
+  user-select: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}

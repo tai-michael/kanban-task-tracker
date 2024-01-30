@@ -26,7 +26,7 @@
   <ModalWrapper
     ref="modal"
     :show-close-button="true"
-    :classes="'flex flex-col gap-y-6 xs:max-w-[480px] xs:w-full p-6 xs:px-8 xs:pt-8 xs:pb-10'"
+    :classes="'flex flex-col gap-y-6 xs:max-w-[480px] p-6 xs:px-8 xs:pt-8 xs:pb-10'"
   >
     <DeleteConfirmation
       @cancel-triggered="toggleModal"

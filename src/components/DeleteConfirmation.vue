@@ -11,14 +11,14 @@
     <button
       @click="emit('cancelTriggered')"
       type="button"
-      class="button-shared text-[var(--main-purple)] bg-[var(--light-purple)] hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
+      class="modal-button text-[var(--main-purple)] bg-[var(--light-purple)] hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
     >
       <slot name="cancel-button">Cancel</slot>
     </button>
     <button
       @click="emit('deleteTriggered')"
       type="button"
-      class="button-shared text-white bg-red-500 hover:bg-red-400 active:bg-red-300"
+      class="modal-button text-white bg-red-500 hover:bg-red-400 active:bg-red-300"
     >
       <slot name="delete-button">Delete</slot>
     </button>
@@ -29,8 +29,4 @@
 const emit = defineEmits(['cancelTriggered', 'deleteTriggered'])
 </script>
 
-<style scoped lang="scss">
-.button-shared {
-  @apply py-2 px-4 rounded-[20px] select-none font-medium text-sm leading-6 w-full;
-}
-</style>
+<style scoped lang="scss"></style>
