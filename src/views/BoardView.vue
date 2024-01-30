@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div v-if="isFetchingBoard">Loading board...</div>
     <div v-if="isFetchingBoard && !Object.keys(boardStore.board).length">
       Loading board...
     </div>
