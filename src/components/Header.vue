@@ -66,6 +66,8 @@ const handleReturnToBoards = () => {
 
 <style scoped lang="scss">
 header {
+  position: sticky;
+  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
