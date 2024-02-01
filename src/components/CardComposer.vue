@@ -43,6 +43,7 @@
 import { ref } from 'vue'
 import createAndAddCard from '@/composables/createAndAddCard'
 const props = defineProps(['listId'])
+// TODO add 'required' to all required props in project
 const isCreatingCard = ref(false)
 const newCardTitle = ref('')
 

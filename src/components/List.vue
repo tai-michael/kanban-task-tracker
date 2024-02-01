@@ -28,6 +28,11 @@
         />
       </div>
     </template>
+
+    <!-- maybe add an eventlistener and handler that would somehow drop the card at the end if hovering over and letting go here -->
+    <!-- <template #footer>
+      <button class="opacity-0 absolute bottom-[-5] p-2">Add</button>
+    </template> -->
   </draggable>
 
   <div class="px-2 pt-2">
@@ -74,7 +79,7 @@ const changeListTitle = (title: string) => {
   }
 }
 
-.drag > div {
+.drag > * {
   transform: rotate(3deg);
 }
 
@@ -83,7 +88,7 @@ const changeListTitle = (title: string) => {
   border-radius: 8px;
 }
 
-.ghost > div {
+.ghost > * {
   visibility: hidden;
   // opacity: 0.2;
 }

@@ -5,6 +5,7 @@
       class="flex justify-between gap-x-2 xs:hidden"
     >
       <div v-if="!searchStore.isSearching" class="flex items-center gap-x-2">
+        <!-- TODO Add sidebar for hamburger menu (including slide in and out transitions; menu should have user profile button and darkmode toggle. Not sure what else.) -->
         <div class="flex w-10 h-10">
           <button type="button" class="icon-button">
             <MenuIcon :fill="'black'" class="w-7 h-7" />

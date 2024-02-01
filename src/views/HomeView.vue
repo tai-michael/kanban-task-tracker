@@ -5,6 +5,7 @@
       @board-composer-triggered="toggleBoardComposer"
     />
 
+    <!-- NOTE might have to remove the media queries eventually if I need transition animations for mobile -->
     <div
       class="flex-grow overflow-x-auto bg-[var(--light-gray-light-bg)] xs:transition-ml xs:duration-300"
       :class="isSidebarShown ? 'xs:ml-[var(--sidebar-width)]' : 'xs:ml-0'"
@@ -22,7 +23,7 @@
       >
         <div v-if="fetchingBoardsFromBackend">Loading...</div>
 
-        <!-- TODO maybe convert below to tailwind. Afterwards, redo the css of the board composer so that it doesn't look off-centered in desktop mode when there's no other board around. Consider hiding the sidebar when theres nothing. -->
+        <!-- TODO maybe redo the css of the board composer so that it doesn't look off-centered in desktop mode when there's no other board around. Consider hiding the sidebar when theres nothing. -->
         <BoardGreeting
           v-else
           :is-mobile-view="isMobileView"

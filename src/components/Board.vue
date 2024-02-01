@@ -3,9 +3,10 @@
     <!-- NOTE using optional chaining on the v-model breaks the wrapper -->
     <draggable
       v-model="store.board.lists"
-      item-key="id"
       group="lists"
+      item-key="id"
       :animation="150"
+      drag-class="drag"
       ghost-class="ghost"
       class="flex gap-x-4"
     >
@@ -42,6 +43,8 @@ watch(
 </script>
 
 <style scoped lang="scss">
+.drag > * {
+  transform: rotate(3deg);
 }
 
 .ghost {
@@ -49,7 +52,8 @@ watch(
   border-radius: 8px;
 }
 
-.ghost > div {
-  visibility: hidden;
-}
+// .ghost > * {
+//   // visibility: hidden;
+//   opacity: 0.2;
+// }
 </style>
