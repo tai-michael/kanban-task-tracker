@@ -72,10 +72,10 @@ export const useBoardStore = defineStore('board', () => {
   const removeCard = (cardId: string) => {
     for (const list of board.value.lists) {
       const cardIndex = list.cards.findIndex((c) => c.id === cardId)
-      if (cardIndex === -1) return
-
-      list.cards.splice(cardIndex, 1)
-      break
+      if (cardIndex !== -1) {
+        list.cards.splice(cardIndex, 1)
+        return
+      }
     }
   }
   const removeBoardFromSingleBoardsCollection = () => {
