@@ -98,7 +98,7 @@ const handleDeleteBoard = () => {
   border-radius: 0.375rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   z-index: 10;
-  overflow: hidden;
+  overflow: clip;
 
   &__button {
     display: flex;

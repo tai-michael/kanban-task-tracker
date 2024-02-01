@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between">
+  <div class="flex justify-between p-2">
     <Title :title="list.title" @title-edited="changeListTitle" />
     <button
       @click="store.removeList(props.list.id)"
@@ -17,7 +17,7 @@
     :animation="150"
     drag-class="drag"
     ghost-class="ghost"
-    class="space-y-3"
+    class="space-y-3 list-cards"
   >
     <template #item="{ element: card }">
       <div>
@@ -30,7 +30,9 @@
     </template>
   </draggable>
 
-  <CardComposer :listId="list.id" />
+  <div class="px-2 pt-2">
+    <CardComposer :listId="list.id" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -60,11 +62,16 @@ const changeListTitle = (title: string) => {
 </script>
 
 <style scoped lang="scss">
-h2 {
-  font-weight: 600;
-  font-size: 1rem;
-  margin-left: 0.5rem;
-  cursor: pointer;
+.list-cards {
+  margin: 0 4px;
+  padding: 2px 4px;
+  overflow-y: auto;
+  overflow-x: clip;
+  max-height: calc(100svh - (var(--header-height-mobile) * 2 + 3rem));
+
+  @media (min-width: 481px) {
+    max-height: calc(100svh - (var(--header-height-desktop) * 2 + 1.5rem));
+  }
 }
 
 .drag > div {

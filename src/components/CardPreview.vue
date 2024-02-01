@@ -81,7 +81,7 @@ const allChecklistItemsCompleted = computed(() =>
 <style scoped lang="scss">
 ul {
   padding: 8px 12px 4px;
-  margin: 8px 4px;
+  margin: 8px 0px;
   background: #73b2f1;
   border: black 1px solid;
   border-radius: 8px;

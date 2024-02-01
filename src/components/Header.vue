@@ -89,7 +89,6 @@ header {
 @media (min-width: 481px) {
   header {
     height: var(--header-height-desktop);
-    margin-bottom: 2rem;
     padding: 0 16px;
   }
 
