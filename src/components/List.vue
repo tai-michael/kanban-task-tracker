@@ -21,6 +21,9 @@
     drag-class="drag"
     ghost-class="ghost"
     class="space-y-3 list-cards"
+    :force-auto-scroll-fallback="true"
+    :scroll="true"
+    :scroll-sensitivity="isMobileView ? 400 : 500"
   >
     <div v-for="card in list.cards" :key="card.id">
       <CardPreview
@@ -56,6 +59,7 @@ const CardComposer = defineAsyncComponent(
 const store = useBoardStore()
 const router = useRouter()
 const props = defineProps(['list'])
+const isMobileView = inject('isMobileView')
 
 const emit = defineEmits(['cardSelected'])
 const handleCardSelection = (cardId: string) => {
