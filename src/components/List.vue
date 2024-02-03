@@ -10,30 +10,31 @@
     </button>
   </div>
 
-  <draggable
+  <VueDraggable
     v-model="list.cards"
     group="cards"
-    item-key="id"
+    :delay="200"
+    :delay-on-touch-only="true"
     :animation="150"
-    drag-class="drag"
+    :fallback-tolerance="3"
+    :revert-on-spill="true"
+    :force-fallback="true"
+    :scroll="true"
+    :scroll-sensitivity="90"
+    :bubble-scroll="true"
+    chosen-class="tilted"
+    drag-class="tilted"
     ghost-class="ghost"
     class="space-y-3 list-cards"
   >
-    <template #item="{ element: card }">
-      <div>
-        <CardPreview
-          :card="card"
-          @click="handleCardSelection(card.id)"
-          class="cursor-pointer"
-        />
-      </div>
-    </template>
-
-    <!-- maybe add an eventlistener and handler that would somehow drop the card at the end if hovering over and letting go here -->
-    <!-- <template #footer>
-      <button class="opacity-0 absolute bottom-[-5] p-2">Add</button>
-    </template> -->
-  </draggable>
+    <div v-for="card in list.cards" :key="card.id">
+      <CardPreview
+        :card="card"
+        @click="handleCardSelection(card.id)"
+        class="cursor-pointer"
+      />
+    </div>
+  </VueDraggable>
 
   <div class="px-2 pt-2">
     <CardComposer :listId="list.id" />
@@ -45,7 +46,7 @@ import { defineAsyncComponent } from 'vue'
 import Title from '@/components/Title.vue'
 import { useRouter } from 'vue-router'
 import { useBoardStore } from '@/stores'
-import draggable from 'vuedraggable'
+import { VueDraggable } from 'vue-draggable-plus'
 const CardPreview = defineAsyncComponent(
   () => import('@/components/CardPreview.vue')
 )
@@ -79,12 +80,12 @@ const changeListTitle = (title: string) => {
   }
 }
 
-.drag > * {
+.tilted > * {
   transform: rotate(3deg);
 }
 
 .ghost {
-  background-color: rgb(226, 226, 226);
+  background-color: rgb(216, 216, 216);
   border-radius: 8px;
 }
 

@@ -1,21 +1,26 @@
 <template>
+  <!-- NOTE using optional chaining on the v-model breaks the wrapper -->
   <div class="flex px-4">
-    <!-- NOTE using optional chaining on the v-model breaks the wrapper -->
-    <draggable
+    <VueDraggable
       v-model="store.board.lists"
+      ref="listsEl"
       group="lists"
-      item-key="id"
+      :delay="200"
+      :delay-on-touch-only="true"
       :animation="150"
-      drag-class="drag"
+      chosen-class="tilted"
+      drag-class="tilted"
       ghost-class="ghost"
       class="flex gap-x-4"
     >
-      <template #item="{ element: list }">
-        <div class="w-[304px] border rounded pb-2 h-fit">
-          <List :list="list" @card-selected="$emit('card-selected')"></List>
-        </div>
-      </template>
-    </draggable>
+      <div
+        v-for="list in store.board.lists"
+        :key="list.id"
+        class="min-w-[304px] border rounded pb-2 h-fit"
+      >
+        <List :list="list" @card-selected="$emit('card-selected')"></List>
+      </div>
+    </VueDraggable>
 
     <ListComposer />
   </div>
@@ -25,7 +30,9 @@
 import { defineAsyncComponent, watch } from 'vue'
 import { useBoardStore } from '@/stores'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
-import draggable from 'vuedraggable'
+// import draggable from 'vuedraggable'
+import { VueDraggable } from 'vue-draggable-plus'
+
 const List = defineAsyncComponent(() => import('@/components/List.vue'))
 const ListComposer = defineAsyncComponent(
   () => import('@/components/ListComposer.vue')
@@ -43,7 +50,7 @@ watch(
 </script>
 
 <style scoped lang="scss">
-.drag > * {
+.tilted > * {
   transform: rotate(3deg);
 }
 
