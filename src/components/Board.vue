@@ -5,8 +5,11 @@
       v-model="store.board.lists"
       ref="listsEl"
       group="lists"
+      :delay="200"
+      :delay-on-touch-only="true"
       :animation="150"
-      drag-class="drag"
+      chosen-class="tilted"
+      drag-class="tilted"
       ghost-class="ghost"
       class="flex gap-x-4"
     >
@@ -47,7 +50,7 @@ watch(
 </script>
 
 <style scoped lang="scss">
-.drag > * {
+.tilted > * {
   transform: rotate(3deg);
 }
 
