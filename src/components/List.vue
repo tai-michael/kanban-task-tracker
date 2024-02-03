@@ -10,34 +10,33 @@
     </button>
   </div>
 
-  <VueDraggable
-    v-model="list.cards"
-    ref="cardsEl"
-    group="cards"
-    :delay="200"
-    :delay-on-touch-only="true"
-    :animation="150"
-    :fallback-tolerance="5"
-    drag-class="drag"
-    ghost-class="ghost"
-    class="space-y-3 list-cards"
-    :force-auto-scroll-fallback="true"
-    :scroll="true"
-    :scroll-sensitivity="isMobileView ? 400 : 500"
-  >
-    <div v-for="card in list.cards" :key="card.id">
-      <CardPreview
-        :card="card"
-        @click="handleCardSelection(card.id)"
-        class="cursor-pointer"
-      />
-    </div>
-
-    <!-- maybe add an eventlistener and handler that would somehow drop the card at the end if hovering over and letting go here -->
-    <!-- <template #footer>
-      <button class="opacity-0 absolute bottom-[-5] p-2">Add</button>
-    </template> -->
-  </VueDraggable>
+  <div ref="listEl">
+    <VueDraggable
+      v-model="list.cards"
+      group="cards"
+      :delay="200"
+      :delay-on-touch-only="true"
+      :animation="150"
+      :fallback-tolerance="3"
+      :revert-on-spill="true"
+      :force-fallback="true"
+      :scroll="true"
+      :scroll-sensitivity="scrollSensitivity"
+      :bubble-scroll="true"
+      chosen-class="tilted"
+      drag-class="tilted"
+      ghost-class="ghost"
+      class="space-y-3 list-cards"
+    >
+      <div v-for="card in list.cards" :key="card.id">
+        <CardPreview
+          :card="card"
+          @click="handleCardSelection(card.id)"
+          class="cursor-pointer"
+        />
+      </div>
+    </VueDraggable>
+  </div>
 
   <div class="px-2 pt-2">
     <CardComposer :listId="list.id" />
@@ -45,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, inject } from 'vue'
+import { defineAsyncComponent, onMounted, onUnmounted, ref, watch } from 'vue'
 import Title from '@/components/Title.vue'
 import { useRouter } from 'vue-router'
 import { useBoardStore } from '@/stores'
@@ -59,7 +58,6 @@ const CardComposer = defineAsyncComponent(
 const store = useBoardStore()
 const router = useRouter()
 const props = defineProps(['list'])
-const isMobileView = inject('isMobileView')
 
 const emit = defineEmits(['cardSelected'])
 const handleCardSelection = (cardId: string) => {
@@ -69,6 +67,37 @@ const handleCardSelection = (cardId: string) => {
 const changeListTitle = (title: string) => {
   store.updateListTitle(props.list.id, title)
 }
+
+const listEl = ref<HTMLDialogElement>()
+const scrollSensitivity = ref(0)
+const updateScrollSensitivity = () => {
+  setTimeout(() => {
+    if (listEl.value) {
+      scrollSensitivity.value = listEl.value.clientHeight - 80
+      console.log(
+        'container height:' + listEl.value.clientHeight,
+        ', sensitivity lvl:' + scrollSensitivity.value
+      )
+    }
+  }, 500)
+}
+
+watch(
+  () => props.list.cards.length,
+  (newVal, oldVal) => {
+    if (newVal > oldVal) updateScrollSensitivity()
+  },
+  { immediate: true }
+)
+
+onMounted(() => {
+  updateScrollSensitivity()
+  window.addEventListener('resize', updateScrollSensitivity)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateScrollSensitivity)
+})
 </script>
 
 <style scoped lang="scss">
@@ -84,12 +113,12 @@ const changeListTitle = (title: string) => {
   }
 }
 
-.drag > * {
+.tilted > * {
   transform: rotate(3deg);
 }
 
 .ghost {
-  background-color: rgb(226, 226, 226);
+  background-color: rgb(216, 216, 216);
   border-radius: 8px;
 }
 
