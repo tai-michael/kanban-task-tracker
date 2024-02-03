@@ -10,33 +10,31 @@
     </button>
   </div>
 
-  <div ref="listEl">
-    <VueDraggable
-      v-model="list.cards"
-      group="cards"
-      :delay="200"
-      :delay-on-touch-only="true"
-      :animation="150"
-      :fallback-tolerance="3"
-      :revert-on-spill="true"
-      :force-fallback="true"
-      :scroll="true"
-      :scroll-sensitivity="scrollSensitivity"
-      :bubble-scroll="true"
-      chosen-class="tilted"
-      drag-class="tilted"
-      ghost-class="ghost"
-      class="space-y-3 list-cards"
-    >
-      <div v-for="card in list.cards" :key="card.id">
-        <CardPreview
-          :card="card"
-          @click="handleCardSelection(card.id)"
-          class="cursor-pointer"
-        />
-      </div>
-    </VueDraggable>
-  </div>
+  <VueDraggable
+    v-model="list.cards"
+    group="cards"
+    :delay="200"
+    :delay-on-touch-only="true"
+    :animation="150"
+    :fallback-tolerance="3"
+    :revert-on-spill="true"
+    :force-fallback="true"
+    :scroll="true"
+    :scroll-sensitivity="90"
+    :bubble-scroll="true"
+    chosen-class="tilted"
+    drag-class="tilted"
+    ghost-class="ghost"
+    class="space-y-3 list-cards"
+  >
+    <div v-for="card in list.cards" :key="card.id">
+      <CardPreview
+        :card="card"
+        @click="handleCardSelection(card.id)"
+        class="cursor-pointer"
+      />
+    </div>
+  </VueDraggable>
 
   <div class="px-2 pt-2">
     <CardComposer :listId="list.id" />
@@ -44,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, onMounted, onUnmounted, ref, watch } from 'vue'
+import { defineAsyncComponent } from 'vue'
 import Title from '@/components/Title.vue'
 import { useRouter } from 'vue-router'
 import { useBoardStore } from '@/stores'
@@ -67,37 +65,6 @@ const handleCardSelection = (cardId: string) => {
 const changeListTitle = (title: string) => {
   store.updateListTitle(props.list.id, title)
 }
-
-const listEl = ref<HTMLDialogElement>()
-const scrollSensitivity = ref(0)
-const updateScrollSensitivity = () => {
-  setTimeout(() => {
-    if (listEl.value) {
-      scrollSensitivity.value = listEl.value.clientHeight - 80
-      console.log(
-        'container height:' + listEl.value.clientHeight,
-        ', sensitivity lvl:' + scrollSensitivity.value
-      )
-    }
-  }, 500)
-}
-
-watch(
-  () => props.list.cards.length,
-  (newVal, oldVal) => {
-    if (newVal > oldVal) updateScrollSensitivity()
-  },
-  { immediate: true }
-)
-
-onMounted(() => {
-  updateScrollSensitivity()
-  window.addEventListener('resize', updateScrollSensitivity)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('resize', updateScrollSensitivity)
-})
 </script>
 
 <style scoped lang="scss">
