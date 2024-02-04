@@ -1,5 +1,6 @@
 <template>
   <div class="flex justify-between p-2">
+  <div class="flex justify-between p-2 select-none my-handle">
     <Title :title="list.title" @title-edited="changeListTitle" />
     <button
       @click="store.removeList(props.list.id)"

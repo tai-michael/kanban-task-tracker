@@ -8,15 +8,15 @@
       :delay="200"
       :delay-on-touch-only="true"
       :animation="150"
-      chosen-class="tilted"
       drag-class="tilted"
       ghost-class="ghost"
       class="flex gap-x-4"
+      handle=".my-handle"
     >
       <div
         v-for="list in store.board.lists"
         :key="list.id"
-        class="min-w-[304px] border rounded pb-2 h-fit"
+        class="w-[304px] h-fit border-2 rounded pb-2"
       >
         <List :list="list" @card-selected="$emit('card-selected')"></List>
       </div>
@@ -59,8 +59,8 @@ watch(
   border-radius: 8px;
 }
 
-// .ghost > * {
-//   // visibility: hidden;
-//   opacity: 0.2;
-// }
+.ghost > * {
+  // visibility: hidden;
+  opacity: 0.2;
+}
 </style>
