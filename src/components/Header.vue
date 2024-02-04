@@ -1,5 +1,5 @@
 <template>
-  <header :class="boardStore.isHoldingCard ? 'px-0' : 'px-1.5'">
+  <header :class="isCardHeld ? 'px-0' : 'px-1.5'">
     <div
       v-if="route.name === 'home'"
       class="flex justify-between gap-x-2 xs:hidden"
@@ -21,12 +21,11 @@
       v-else-if="route.name === 'board' || route.name === 'card'"
       class="flex h-full items-center justify-center transition-colors duration-100 ease-in-out"
       :class="{
-        'bg-[hsla(0,100%,80%)]':
-          boardStore.isHoldingCard && boardStore.isCardHoveringOverDeleteZone,
+        'bg-[hsla(0,100%,80%)]': isCardHeld && isHoveringDeleteZone,
       }"
     >
       <div
-        v-if="!boardStore.isHoldingCard || !isMobileView"
+        v-if="!isCardHeld || !isMobileView"
         class="flex w-full items-center gap-x-3"
       >
         <div class="flex shrink-0 w-10 h-10 xs:hidden">
@@ -50,7 +49,7 @@
       </div>
 
       <VueDraggable
-        v-if="boardStore.isHoldingCard && isMobileView"
+        v-if="isCardHeld && isMobileView"
         v-model="deleteZone"
         :group="deleteOptions"
         ghost-class="ghost"
@@ -71,6 +70,7 @@ import MenuIcon from '@/assets/icons/icon-menu.vue'
 import BackArrowIcon from '@/assets/icons/icon-arrow-back.vue'
 import { useBoardStore, useSearchStore } from '@/stores'
 import { useRouter, useRoute } from 'vue-router'
+import useCardInteractionState from '@/composables/useCardInteractionState'
 import { VueDraggable } from 'vue-draggable-plus'
 const isMobileView = inject('isMobileView')
 const route = useRoute()
@@ -87,6 +87,8 @@ const handleReturnToBoards = () => {
   router.push({ name: 'home' })
   if (isMobileView.value) boardStore.clearBoard()
 }
+
+const { isCardHeld, isHoveringDeleteZone } = useCardInteractionState()
 
 const deleteZone = []
 const deleteOptions = computed(() => {

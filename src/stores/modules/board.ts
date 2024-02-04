@@ -13,10 +13,6 @@ export const useBoardStore = defineStore('board', () => {
   const boards = ref<BoardMeta[]>([])
   const board = ref<BoardDetails | null>({})
 
-  const isCreatingNewBoard = ref(false)
-  const toggleBoardComposer = () => {
-    isCreatingNewBoard.value = !isCreatingNewBoard.value
-  }
   const addBoard = (board: BoardMeta) => {
     boards.value.push(board)
   }
@@ -78,17 +74,6 @@ export const useBoardStore = defineStore('board', () => {
       }
     }
   }
-  const isCardHoveringOverDeleteZone = ref(false)
-  const setCardHoverStatus = (isHovering: boolean) => {
-    isCardHoveringOverDeleteZone.value = isHovering
-    // console.log(
-    //   'isCardHoveringOverDeleteZone: ' + isCardHoveringOverDeleteZone.value
-    // )
-  }
-  const isHoldingCard = ref(false)
-  const setCardHoldingStatus = (isHolding: boolean) => {
-    isHoldingCard.value = isHolding
-  }
 
   const removeBoardFromSingleBoardsCollection = () => {
     deleteDoc(doc(db, 'boards_single', board.value.id))
@@ -145,9 +130,6 @@ export const useBoardStore = defineStore('board', () => {
   return {
     boards,
     board,
-    isCreatingNewBoard,
-    isCardHoveringOverDeleteZone,
-    isHoldingCard,
 
     addBoard,
     deleteBoard,
@@ -155,13 +137,10 @@ export const useBoardStore = defineStore('board', () => {
     hydrateBoard,
     clearBoard,
     updateBoardTitle,
-    toggleBoardComposer,
     addList,
     removeList,
     updateListTitle,
     addCard,
     removeCard,
-    setCardHoverStatus,
-    setCardHoldingStatus,
   }
 })

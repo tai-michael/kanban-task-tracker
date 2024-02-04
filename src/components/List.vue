@@ -27,9 +27,9 @@
     drag-class="tilted"
     ghost-class="ghost"
     class="space-y-3 list-cards"
-    @move="checkIsCardHoveringOverDeleteZone"
-    @choose="store.setCardHoldingStatus(true)"
-    @unchoose="store.setCardHoldingStatus(false)"
+    @move="checkIfCardHoveringDeleteZone"
+    @choose="updateCardHeldStatus(true)"
+    @unchoose="updateCardHeldStatus(false)"
   >
     <div v-for="card in list.cards" :key="card.id">
       <CardPreview
@@ -50,6 +50,7 @@ import { defineAsyncComponent, inject, ref } from 'vue'
 import Title from '@/components/Title.vue'
 import { useRouter } from 'vue-router'
 import { useBoardStore } from '@/stores'
+import useCardInteractionState from '@/composables/useCardInteractionState'
 import { VueDraggable } from 'vue-draggable-plus'
 const CardPreview = defineAsyncComponent(
   () => import('@/components/CardPreview.vue')
@@ -72,12 +73,14 @@ const changeListTitle = (title: string) => {
   store.updateListTitle(props.list.id, title)
 }
 
-const checkIsCardHoveringOverDeleteZone = (evt) => {
+const { updateHoverDeleteZoneStatus, updateCardHeldStatus } =
+  useCardInteractionState()
+const checkIfCardHoveringDeleteZone = (evt) => {
   // console.log(evt.related)
   if (evt.related && evt.related.classList.contains('delete-zone')) {
-    store.setCardHoverStatus(true)
+    updateHoverDeleteZoneStatus(true)
   } else {
-    store.setCardHoverStatus(false)
+    updateHoverDeleteZoneStatus(false)
   }
 }
 </script>
