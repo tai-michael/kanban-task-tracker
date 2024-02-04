@@ -1,5 +1,9 @@
 <template>
-  <span v-if="!isEditingTitle" @click="toggleEditState">
+  <span
+    v-if="!isEditingTitle"
+    @click="toggleEditState"
+    class="cursor-pointer w-full"
+  >
     {{ title }}
   </span>
 

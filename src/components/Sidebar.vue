@@ -77,4 +77,23 @@ const toggleSidebar = () => {
 .show-sidebar-btn:hover {
   background-color: var(--main-purple-hover);
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+@media (min-width: 481px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+}
 </style>

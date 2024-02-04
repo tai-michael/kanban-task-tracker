@@ -6,7 +6,7 @@
   </transition>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // const onEnter = (el, done) => {
 //   const delay = 2000 // Delay in milliseconds
 //   setTimeout(() => {
