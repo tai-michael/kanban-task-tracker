@@ -94,12 +94,13 @@ const fetchBoardsCollection = async (id: string) => {
     console.error('Error fetching data:', err)
   }
 }
-onMounted(async () => {
+const fetchAndHydrateBoards = async () => {
   fetchingBoardsFromBackend.value = true
   const data = await fetchBoardsCollection(auth.currentUser.uid)
   boardStore.hydrateBoards(data)
   fetchingBoardsFromBackend.value = false
-})
+}
+fetchAndHydrateBoards()
 
 const isInitialLoad = ref(true)
 watch(
