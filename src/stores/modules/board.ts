@@ -78,6 +78,7 @@ export const useBoardStore = defineStore('board', () => {
       }
     }
   }
+  const isCardHoveringOverDeleteZone = ref(false)
   const removeBoardFromSingleBoardsCollection = () => {
     deleteDoc(doc(db, 'boards_single', board.value.id))
   }
@@ -134,6 +135,7 @@ export const useBoardStore = defineStore('board', () => {
     boards,
     board,
     isCreatingNewBoard,
+    isCardHoveringOverDeleteZone,
 
     addBoard,
     deleteBoard,
@@ -147,5 +149,6 @@ export const useBoardStore = defineStore('board', () => {
     updateListTitle,
     addCard,
     removeCard,
+    setCardHoverStatus,
   }
 })
