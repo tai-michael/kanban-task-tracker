@@ -3,13 +3,6 @@
     Loading...
   </div>
   <div v-else>
-    <div
-      v-if="boardStore.boards?.length > 0"
-      class="hidden xs:flex xs:justify-center gap-x-2"
-    >
-      <BoardSearch />
-    </div>
-
     <ul
       class="xs:mt-5"
       :class="{
@@ -46,34 +39,23 @@
       </li>
     </ul>
 
-    <button
-      v-if="boardStore.boards?.length > 0"
-      @click="emit('boardComposerTriggered')"
-      type="button"
-      class="flex items-center gap-x-4 w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)] py-3 pl-8 xs:mb-3 xs:mt-0 hover-effect"
-      :class="{
-        'mt-2': boardStore.boards?.length > 9,
-      }"
-    >
-      <BoardIcon :color="'var(--main-purple)'" />
-      <span class="font-bold text-[var(--main-purple)]"
-        >+ Create new board</span
-      >
-    </button>
+    <CreateBoardButton v-if="isMobileView" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, inject, computed } from 'vue'
-import BoardSearch from '@/components/BoardSearch.vue'
+import { ref, computed, inject, defineAsyncComponent } from 'vue'
 import BoardIcon from '@/assets/icons/icon-board.vue'
 import { useBoardStore, useCardStore, useSearchStore } from '@/stores'
 import { useRoute } from 'vue-router'
+const CreateBoardButton = defineAsyncComponent(
+  () => import('@/components/CreateBoardButton.vue')
+)
 const route = useRoute()
 const boardStore = useBoardStore()
 const cardStore = useCardStore()
 const searchStore = useSearchStore()
-const emit = defineEmits(['boardLinkClicked', 'boardComposerTriggered'])
+const emit = defineEmits(['boardLinkClicked'])
 const isMobileView = inject('isMobileView')
 const fetchingBoardsFromBackend = inject('fetchingBoardsFromBackend')
 

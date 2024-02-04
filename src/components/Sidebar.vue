@@ -13,9 +13,19 @@
       />
     </div>
 
+    <div
+      v-if="boardStore.boards?.length > 0"
+      class="hidden xs:flex xs:justify-center gap-x-2"
+    >
+      <BoardSearch />
+    </div>
+
     <div class="overflow-auto relative pt-3.5">
       <BoardSelector @board-link-clicked="emit('boardLinkClicked')" />
     </div>
+
+    <CreateBoardButton />
+
     <div class="flex flex-col mt-auto xs:pt-3">
       <DarkmodeToggle class="m-4 xs:my-0 xs:mx-6 h-12 ml-6 mr-6" />
       <HideSidebarButton
@@ -40,17 +50,23 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
 import BoardSelector from '@/components/BoardSelector.vue'
+import BoardSearch from '@/components/BoardSearch.vue'
 import DarkmodeToggle from '@/components/DarkmodeToggle.vue'
 import HideSidebarButton from '@/components/HideSidebarButton.vue'
 import LogoDark from '@/assets/images/logo-dark.svg'
 import ShowSidebar from '@/assets/icons/icon-show-sidebar.svg'
 import { useLocalStorage } from '@vueuse/core'
 import { useRouter } from 'vue-router'
+import { useBoardStore } from '@/stores'
+const CreateBoardButton = defineAsyncComponent(
+  () => import('@/components/CreateBoardButton.vue')
+)
 const TransitionFade = defineAsyncComponent(
   () => import('@/components/transitions/TransitionFade.vue')
 )
 const router = useRouter()
-const emit = defineEmits(['boardLinkClicked', 'boardComposerTriggered'])
+const boardStore = useBoardStore()
+const emit = defineEmits(['boardLinkClicked'])
 
 const isSidebarShown = useLocalStorage('is-sidebar-expanded', true)
 const toggleSidebar = () => {
