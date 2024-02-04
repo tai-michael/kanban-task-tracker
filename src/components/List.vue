@@ -1,11 +1,10 @@
 <template>
-  <div class="flex justify-between p-2">
   <div class="flex justify-between p-2 select-none my-handle">
     <Title :title="list.title" @title-edited="changeListTitle" />
     <button
       @click="store.removeList(props.list.id)"
       type="button"
-      class="bg-red-400"
+      class="bg-red-400 shrink-0"
     >
       Delete List
     </button>
@@ -37,7 +36,7 @@
     </div>
   </VueDraggable>
 
-  <div class="px-2 pt-2">
+  <div class="px-2 pt-2 select-none">
     <CardComposer :listId="list.id" />
   </div>
 </template>

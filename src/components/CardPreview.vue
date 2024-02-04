@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul class="select-none">
     <li>{{ card.title }}</li>
     <li class="flex gap-x-2 items-center">
       <button
