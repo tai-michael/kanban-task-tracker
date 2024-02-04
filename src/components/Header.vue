@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header :class="boardStore.isHoldingCard ? 'px-0' : 'px-1.5'">
     <div
       v-if="route.name === 'home'"
       class="flex justify-between gap-x-2 xs:hidden"
@@ -19,7 +19,11 @@
 
     <div
       v-else-if="route.name === 'board' || route.name === 'card'"
-      class="flex w-full max-w-[100%] items-center justify-between gap-x-3"
+      class="flex h-full items-center justify-center transition-colors duration-100 ease-in-out"
+      :class="{
+        'bg-[hsla(0,100%,80%)]':
+          boardStore.isHoldingCard && boardStore.isCardHoveringOverDeleteZone,
+      }"
     >
       <div
         v-if="!boardStore.isHoldingCard || !isMobileView"
