@@ -10,22 +10,9 @@
     </button>
   </div>
 
-  <!-- TODO place these inside computed -->
   <VueDraggable
     v-model="list.cards"
-    group="cards"
-    :delay="200"
-    :delay-on-touch-only="true"
-    :animation="150"
-    :fallback-tolerance="3"
-    :revert-on-spill="true"
-    :force-fallback="true"
-    :scroll="true"
-    :scroll-sensitivity="90"
-    :bubble-scroll="true"
-    :chosen-class="isMobileView ? 'tilted' : ''"
-    drag-class="tilted"
-    ghost-class="ghost"
+    v-bind="draggableOptions"
     class="space-y-3 list-cards"
     @move="checkIfCardHoveringDeleteZone"
     @choose="updateCardHeldStatus(true)"
@@ -46,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, inject, ref } from 'vue'
+import { computed, defineAsyncComponent, inject, ref } from 'vue'
 import Title from '@/components/Title.vue'
 import { useRouter } from 'vue-router'
 import { useBoardStore } from '@/stores'
@@ -62,8 +49,25 @@ const store = useBoardStore()
 const router = useRouter()
 const props = defineProps(['list'])
 const isMobileView = inject('isMobileView')
-const emit = defineEmits(['cardSelected'])
+const draggableOptions = computed(() => {
+  return {
+    group: 'cards',
+    delay: 200,
+    delayOnTouchOnly: true,
+    animation: 150,
+    fallbackTolerance: 3,
+    revertOnSpill: true,
+    forceFallback: true,
+    scroll: true,
+    scrollSensitivity: 90,
+    bubbleScroll: true,
+    chosenClass: isMobileView.value ? 'tilted' : '',
+    dragClass: 'tilted',
+    ghostClass: 'ghost',
+  }
+})
 
+const emit = defineEmits(['cardSelected'])
 const handleCardSelection = (cardId: string) => {
   emit('cardSelected')
   router.push(`/card/${cardId}`)

@@ -3,15 +3,8 @@
   <div class="flex px-4">
     <VueDraggable
       v-model="store.board.lists"
-      ref="listsEl"
-      group="lists"
-      :delay="200"
-      :delay-on-touch-only="true"
-      :animation="150"
-      drag-class="tilted"
-      ghost-class="ghost"
+      v-bind="draggableOptions"
       class="flex gap-x-4"
-      handle=".my-handle"
     >
       <div
         v-for="list in store.board.lists"
@@ -27,10 +20,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, watch } from 'vue'
+import { computed, defineAsyncComponent, watch } from 'vue'
 import { useBoardStore } from '@/stores'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
-// import draggable from 'vuedraggable'
 import { VueDraggable } from 'vue-draggable-plus'
 
 const List = defineAsyncComponent(() => import('@/components/List.vue'))
@@ -38,6 +30,18 @@ const ListComposer = defineAsyncComponent(
   () => import('@/components/ListComposer.vue')
 )
 const store = useBoardStore()
+
+const draggableOptions = computed(() => {
+  return {
+    group: 'lists',
+    delay: 200,
+    delayOnTouchOnly: true,
+    animation: 150,
+    handle: '.my-handle',
+    dragClass: 'tilted',
+    ghostClass: 'ghost',
+  }
+})
 
 watch(
   () => store.board,
