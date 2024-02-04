@@ -13,7 +13,7 @@
     <span>Welcome to Kanban! Get started with a board.</span>
 
     <button
-      @click="emit('boardComposerTriggered')"
+      @click="toggleModal"
       type="button"
       class="flex justify-center items-center mt-6 py-3 gap-x-4 w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)] bg-[var(--main-purple)] rounded-full hover:bg-[var(--main-purple-hover)]"
     >
@@ -24,9 +24,10 @@
 </template>
 
 <script setup lang="ts">
+import useModalToggler from '@/composables/useModalToggler'
 import { useBoardStore } from '@/stores'
 import BoardIcon from '@/assets/icons/icon-board.vue'
 const boardStore = useBoardStore()
 defineProps(['isMobileView'])
-const emit = defineEmits(['boardComposerTriggered'])
+const { toggleModal } = useModalToggler('boardComposer')
 </script>

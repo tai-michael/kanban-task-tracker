@@ -32,7 +32,6 @@ const boardTitle = ref('')
 const handleCreateBoard = async () => {
   const boardId = await createAndAddBoard(boardTitle.value)
   router.push(`/board/${boardId}`)
-  store.toggleBoardComposer()
 }
 </script>
 

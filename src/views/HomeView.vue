@@ -1,9 +1,6 @@
 <template>
   <main class="flex w-full h-[100vh] relative">
-    <Sidebar
-      v-if="!isMobileView"
-      @board-composer-triggered="toggleBoardComposer"
-    />
+    <Sidebar v-if="!isMobileView" />
 
     <!-- NOTE might have to remove the media queries eventually if I need transition animations for mobile -->
     <div
@@ -24,16 +21,9 @@
         <div v-if="fetchingBoardsFromBackend">Loading...</div>
 
         <!-- TODO maybe redo the css of the board composer so that it doesn't look off-centered in desktop mode when there's no other board around. Consider hiding the sidebar when theres nothing. -->
-        <BoardGreeting
-          v-else
-          :is-mobile-view="isMobileView"
-          @board-composer-triggered="toggleBoardComposer"
-        />
+        <BoardGreeting v-else :is-mobile-view="isMobileView" />
 
-        <BoardSelector
-          v-if="isMobileView && boardStore.boards?.length > 0"
-          @board-composer-triggered="toggleBoardComposer"
-        />
+        <BoardSelector v-if="isMobileView && boardStore.boards?.length > 0" />
       </div>
 
       <router-view></router-view>
@@ -52,16 +42,17 @@
 <script setup lang="ts">
 import {
   ref,
-  onMounted,
   watch,
   computed,
-  defineAsyncComponent,
+  onMounted,
   provide,
+  defineAsyncComponent,
 } from 'vue'
 import Sidebar from '@/components/Sidebar.vue'
+import useModalToggler from '@/composables/useModalToggler'
+import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import { db, auth } from '@/firebaseInit'
 import { doc, getDoc } from 'firebase/firestore'
-import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import { useBoardStore } from '@/stores'
 import { useRoute } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
@@ -128,10 +119,12 @@ watch(
   { deep: true }
 )
 
-const boardComposerModal = ref<InstanceType<typeof ModalWrapper>>()
-const toggleBoardComposer = () => {
-  boardComposerModal.value?.showModal()
-}
+const boardComposerModal = ref(null)
+const { setModalRef: setBoardComposerModalRef } =
+  useModalToggler('boardComposer')
+onMounted(() => {
+  setBoardComposerModalRef(boardComposerModal)
+})
 
 const { width } = useWindowSize()
 const isMobileView = computed(() => width.value <= 480)

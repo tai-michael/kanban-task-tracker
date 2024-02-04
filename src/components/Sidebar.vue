@@ -14,10 +14,7 @@
     </div>
 
     <div class="overflow-auto relative pt-3.5">
-      <BoardSelector
-        @board-link-clicked="emit('boardLinkClicked')"
-        @board-composer-triggered="emit('boardComposerTriggered')"
-      />
+      <BoardSelector @board-link-clicked="emit('boardLinkClicked')" />
     </div>
     <div class="flex flex-col mt-auto xs:pt-3">
       <DarkmodeToggle class="m-4 xs:my-0 xs:mx-6 h-12 ml-6 mr-6" />
