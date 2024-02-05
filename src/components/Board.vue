@@ -9,13 +9,15 @@
       <div
         v-for="list in store.board.lists"
         :key="list.id"
-        class="w-[304px] h-fit border-2 rounded pb-2"
+        class="w-[304px] h-fit border-2 rounded pb-2 snap-center xs:snap-align-none"
       >
         <List :list="list" @card-selected="$emit('card-selected')"></List>
       </div>
     </VueDraggable>
 
-    <ListComposer />
+    <div class="snap-center xs:snap-align-none">
+      <ListComposer />
+    </div>
   </div>
 </template>
 

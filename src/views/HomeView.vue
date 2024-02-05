@@ -5,7 +5,7 @@
     <!-- NOTE might have to remove the media queries eventually if I need transition animations for mobile -->
     <div
       class="flex-grow overflow-x-auto bg-[var(--light-gray-light-bg)] xs:transition-ml xs:duration-300"
-      :class="isSidebarShown ? 'xs:ml-[var(--sidebar-width)]' : 'xs:ml-0'"
+      :class="mainContentClass"
     >
       <Header
         v-if="isMobileView || route.name === 'board' || route.name === 'card'"
@@ -51,6 +51,7 @@ import {
 import Sidebar from '@/components/Sidebar.vue'
 import useModalToggler from '@/composables/useModalToggler'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
+import useCardInteractionState from '@/composables/useCardInteractionState'
 import { db, auth } from '@/firebaseInit'
 import { doc, getDoc } from 'firebase/firestore'
 import { useBoardStore } from '@/stores'
@@ -72,7 +73,6 @@ const BoardComposer = defineAsyncComponent(
 )
 const route = useRoute()
 const boardStore = useBoardStore()
-const isSidebarShown = useLocalStorage('is-sidebar-expanded', true)
 
 const fetchingBoardsFromBackend = ref(false)
 provide('fetchingBoardsFromBackend', fetchingBoardsFromBackend)
@@ -135,6 +135,22 @@ watch(isMobileView, (isMobile) => {
   }
 })
 provide('isMobileView', isMobileView)
+
+const isSidebarShown = useLocalStorage('is-sidebar-expanded', true)
+const { isCardHeld } = useCardInteractionState()
+const mainContentClass = computed(() => {
+  let classes = []
+
+  isSidebarShown.value
+    ? classes.push('xs:ml-[var(--sidebar-width)]')
+    : classes.push('xs:ml-0')
+
+  if (isMobileView.value && !isCardHeld.value) {
+    classes.push('snap-x', 'snap-mandatory', 'snap-always')
+  }
+
+  return classes.join(' ')
+})
 </script>
 
 <style scoped lang="scss"></style>
