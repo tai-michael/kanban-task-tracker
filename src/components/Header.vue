@@ -7,10 +7,28 @@
       <div v-if="!searchStore.isSearching" class="flex items-center gap-x-2">
         <!-- TODO Add sidebar for hamburger menu (including slide in and out transitions; menu should have user profile button and darkmode toggle. Not sure what else.) -->
         <div class="flex w-10 h-10">
-          <button type="button" class="icon-button">
+          <button @click="toggleMenu" type="button" class="icon-button">
             <MenuIcon :fill="'black'" class="w-7 h-7" />
           </button>
         </div>
+
+        <div v-if="isOpen" @click="toggleMenu" class="overlay"></div>
+
+        <TransitionFadeAndSlide>
+          <div v-if="isOpen" class="hamburger-menu">
+            <button
+              @click="toggleMenu"
+              class="absolute right-5 top-5 py-1 px-4 bg-slate-400"
+            >
+              X
+            </button>
+            <ul>
+              <li>Toggle darkmode</li>
+              <li>Sign out</li>
+            </ul>
+          </div>
+        </TransitionFadeAndSlide>
+
         <span class="font-bold text-lg">Boards</span>
       </div>
 
@@ -64,9 +82,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue'
+import { computed, inject, ref } from 'vue'
 import Title from '@/components/Title.vue'
 import BoardSearch from '@/components/BoardSearch.vue'
+import TransitionFadeAndSlide from '@/components/transitions/TransitionFadeAndSlide.vue'
 import MenuIcon from '@/assets/icons/icon-menu.vue'
 import BackArrowIcon from '@/assets/icons/icon-arrow-back.vue'
 import EllipsisMenu from '@/components/EllipsisMenu.vue'
@@ -81,6 +100,12 @@ const router = useRouter()
 const boardStore = useBoardStore()
 const searchStore = useSearchStore()
 const emit = defineEmits(['boardSelectorTriggered'])
+
+const isOpen = ref(false)
+const toggleMenu = () => {
+  isOpen.value = !isOpen.value
+  // console.log(isOpen.value)
+}
 
 const changeBoardTitle = (title: string) => {
   boardStore.updateBoardTitle(title)
@@ -115,6 +140,28 @@ header {
   height: var(--header-height-mobile);
   margin-bottom: 0.75rem;
   background-color: white;
+}
+
+.hamburger-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  padding: 3rem;
+  width: 50vh;
+  height: 100vh;
+  z-index: 999999;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(177, 177, 177);
+  opacity: 0.25;
+  height: 100vh;
+  width: 100vh;
+  z-index: 50;
 }
 
 .title {
