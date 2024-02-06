@@ -61,7 +61,7 @@ const fetchingBoardsFromBackend = inject('fetchingBoardsFromBackend')
 
 const sortedBoards = computed(() => {
   return boardStore.boards.filter((board) =>
-    board.title.includes(searchStore.searchInput)
+    board.title.toLowerCase().includes(searchStore.searchInput)
   )
 })
 

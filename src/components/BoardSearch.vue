@@ -54,7 +54,7 @@ const searchInput = computed({
   },
 })
 const setDebouncedSearchInput = debounce((input: string) => {
-  store.setSearchInput(input)
+  store.setSearchInput(input.toLowerCase())
 }, 200)
 
 const beginSearch = () => {
