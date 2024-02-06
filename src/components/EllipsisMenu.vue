@@ -23,10 +23,11 @@
     </div>
   </div>
 
+  <!-- NOTE the w-85vw is necessary to expand the form to the extent of the max-w before the form's content loads in (there is a delay for whatever reason). The '85' also essentially provides dynamic margins in mobile view -->
   <ModalWrapper
     ref="modal"
     :show-close-button="true"
-    :classes="'flex flex-col gap-y-6 xs:max-w-[480px] p-6 xs:px-8 xs:pt-8 xs:pb-10'"
+    :form-classes="'flex flex-col gap-y-6 w-[85vw] xs:max-w-[480px] min-h-[260px] p-6 xs:px-8 xs:pt-8 xs:pb-10'"
   >
     <DeleteConfirmation
       @cancel-triggered="toggleModal"

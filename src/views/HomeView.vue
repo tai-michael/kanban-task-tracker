@@ -32,7 +32,7 @@
     <ModalWrapper
       ref="boardComposerModal"
       :show-close-button="true"
-      :classes="'flex flex-col gap-y-6 w-[85vw] max-w-[350px] xs:w-[350px] xs:max-w-[unset] p-6 xs:px-8 xs:pt-8 xs:pb-10'"
+      :form-classes="'flex flex-col gap-y-6 w-[85vw] max-w-[350px] h-[198.5px] xs:h-[222.5px] p-6 xs:px-8 xs:pt-8 xs:pb-10'"
     >
       <BoardComposer
     /></ModalWrapper>

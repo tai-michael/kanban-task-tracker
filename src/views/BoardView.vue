@@ -9,12 +9,13 @@
       @card-selected="modal?.showModal()"
     />
 
+    <!-- TODO eventually adjust to actual height of empty card -->
     <ModalWrapper
       ref="modal"
       :loading="isFetchingCard"
       :show-close-button="true"
       @close-triggered="router.push(`/board/${boardStore.board?.id}`)"
-      :classes="'p-5 w-[320px] xs:w-[400px] min-h-[300px]'"
+      :form-classes="'p-5 w-[320px] xs:w-[400px] min-h-[300px]'"
     >
       <Card
         v-if="!isFetchingCard && Object.keys(cardStore.cardDetails).length"
