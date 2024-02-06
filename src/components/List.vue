@@ -25,19 +25,31 @@
         class="cursor-pointer"
       />
     </div>
+
+    <CardComposer
+      v-if="isCreatingCard"
+      :listId="list.id"
+      :is-creating-card="isCreatingCard"
+      @exit-card-composer="toggleCardComposer"
+    />
   </VueDraggable>
 
-  <div class="px-2 pt-2 select-none">
-    <CardComposer :listId="list.id" />
-  </div>
+  <button
+    v-if="!isCreatingCard"
+    @click.stop="toggleCardComposer"
+    type="button"
+    class="ml-2 px-2 border-2"
+  >
+    + Add a card
+  </button>
 </template>
 
 <script setup lang="ts">
 import { computed, defineAsyncComponent, inject, ref } from 'vue'
 import Title from '@/components/Title.vue'
+import useCardInteractionState from '@/composables/useCardInteractionState'
 import { useRouter } from 'vue-router'
 import { useBoardStore } from '@/stores'
-import useCardInteractionState from '@/composables/useCardInteractionState'
 import { VueDraggable } from 'vue-draggable-plus'
 const CardPreview = defineAsyncComponent(
   () => import('@/components/CardPreview.vue')
@@ -48,6 +60,12 @@ const CardComposer = defineAsyncComponent(
 const store = useBoardStore()
 const router = useRouter()
 const props = defineProps(['list'])
+
+const isCreatingCard = ref(false)
+const toggleCardComposer = () => {
+  isCreatingCard.value = !isCreatingCard.value
+}
+
 const isMobileView = inject('isMobileView')
 const draggableOptions = computed(() => {
   return {
