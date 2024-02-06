@@ -55,7 +55,9 @@
         ghost-class="ghost"
         class="delete-container"
       >
-        <div class="delete-zone">Drag here to delete</div>
+        <div class="delete-zone">
+          <DeleteIcon /><span>Drag here to delete</span>
+        </div>
       </VueDraggable>
     </div>
   </header>
@@ -65,9 +67,10 @@
 import { computed, inject } from 'vue'
 import Title from '@/components/Title.vue'
 import BoardSearch from '@/components/BoardSearch.vue'
-import EllipsisMenu from '@/components/EllipsisMenu.vue'
 import MenuIcon from '@/assets/icons/icon-menu.vue'
 import BackArrowIcon from '@/assets/icons/icon-arrow-back.vue'
+import EllipsisMenu from '@/components/EllipsisMenu.vue'
+import DeleteIcon from '@/assets/icons/icon-delete.vue'
 import { useBoardStore, useSearchStore } from '@/stores'
 import { useRouter, useRoute } from 'vue-router'
 import useCardInteractionState from '@/composables/useCardInteractionState'
@@ -144,6 +147,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  column-gap: 0.5rem;
   position: absolute;
   top: 0;
   right: 0;
