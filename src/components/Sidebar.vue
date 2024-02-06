@@ -15,19 +15,19 @@
 
     <div
       v-if="boardStore.boards?.length > 0"
-      class="hidden xs:flex xs:justify-center gap-x-2"
+      class="hidden xs:flex xs:justify-center mb-4"
     >
       <BoardSearch />
     </div>
 
-    <div class="overflow-auto relative pt-3.5">
+    <div class="overflow-auto relative">
       <BoardSelector @board-link-clicked="emit('boardLinkClicked')" />
     </div>
 
     <CreateBoardButton />
 
     <div class="flex flex-col mt-auto xs:pt-3">
-      <DarkmodeToggle class="m-4 xs:my-0 xs:mx-6 h-12 ml-6 mr-6" />
+      <DarkmodeToggle class="h-12 my-4 mx-6 xs:my-0 xs:mx-6" />
       <HideSidebarButton
         @hide-sidebar-triggered="toggleSidebar"
         class="hidden xs:block xs:mr-6"

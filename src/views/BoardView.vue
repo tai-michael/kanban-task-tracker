@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-3">
     <!-- TODO change to loading bar under header instead -->
     <div v-if="isFetchingBoard && !Object.keys(boardStore.board).length">
       Loading board...

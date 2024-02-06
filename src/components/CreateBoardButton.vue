@@ -3,7 +3,7 @@
     v-if="boardStore.boards?.length > 0"
     @click="toggleModal"
     type="button"
-    class="flex items-center gap-x-4 w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)] py-3 pl-8 xs:mb-3 xs:mt-0 hover-effect"
+    class="flex items-center gap-x-4 w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)] py-3 pl-8 hover-effect"
     :class="{
       'mt-2': boardStore.boards?.length > 9,
     }"

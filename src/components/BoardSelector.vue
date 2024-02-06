@@ -4,7 +4,7 @@
   </div>
   <div v-else>
     <ul
-      class="xs:mt-5"
+      class="pt-1.5 xs:pt-0"
       :class="{
         'board-list-short': boardStore.boards?.length <= 3,
         'board-list-long': boardStore.boards?.length > 3,
