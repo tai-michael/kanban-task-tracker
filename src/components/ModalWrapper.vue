@@ -2,6 +2,7 @@
   <dialog
     ref="dialog"
     class="rounded-md"
+    :class="{ [props.dialogClasses]: props.dialogClasses && visible }"
     @click="handleBackdropClick"
     @close="visible = false"
   >
@@ -10,7 +11,7 @@
         v-if="visible"
         method="dialog"
         class="relative"
-        :class="{ [props.classes]: props.classes }"
+        :class="{ [props.formClasses]: props.formClasses }"
       >
         <button
           v-if="props.showCloseButton"
@@ -36,7 +37,11 @@ import CrossIcon from '@/assets/icons/icon-cross.svg'
 
 const dialog = ref<HTMLDialogElement>() // backdrop element
 const props = defineProps({
-  classes: {
+  dialogClasses: {
+    type: String,
+    default: '',
+  },
+  formClasses: {
     type: String,
     default: '',
   },
