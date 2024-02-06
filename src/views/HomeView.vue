@@ -4,6 +4,11 @@
 
     <!-- NOTE might have to remove the media queries eventually if I need transition animations for mobile -->
     <div
+      ref="boardContainer"
+      @mousedown="startDragging"
+      @mouseup="stopDragging"
+      @mouseleave="stopDragging"
+      @mousemove="dragBackground"
       class="flex-grow overflow-x-auto bg-[var(--light-gray-light-bg)] xs:transition-ml xs:duration-300"
       :class="mainContentClass"
     >
@@ -47,11 +52,13 @@ import {
   onMounted,
   provide,
   defineAsyncComponent,
+  type Ref,
 } from 'vue'
 import Sidebar from '@/components/Sidebar.vue'
 import useModalToggler from '@/composables/useModalToggler'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import useCardInteractionState from '@/composables/useCardInteractionState'
+import useBackgroundDrag from '@/composables/useBackgroundDrag'
 import { db, auth } from '@/firebaseInit'
 import { doc, getDoc } from 'firebase/firestore'
 import { useBoardStore } from '@/stores'
@@ -151,6 +158,19 @@ const mainContentClass = computed(() => {
 
   return classes.join(' ')
 })
+
+const boardContainer: Ref<HTMLElement | null> = ref(null)
+const shouldDrag = (event) => {
+  return (
+    event.target === boardContainer.value ||
+    event.target.classList.contains('list-container') ||
+    event.target.classList.contains('list-composer-container')
+  )
+}
+const { startDragging, stopDragging, dragBackground } = useBackgroundDrag(
+  boardContainer,
+  shouldDrag
+)
 </script>
 
 <style scoped lang="scss"></style>

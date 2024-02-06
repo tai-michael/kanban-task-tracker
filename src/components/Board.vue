@@ -4,7 +4,7 @@
     <VueDraggable
       v-model="store.board.lists"
       v-bind="draggableOptions"
-      class="flex gap-x-4"
+      class="list-container flex gap-x-4"
     >
       <div
         v-for="list in store.board.lists"
@@ -15,7 +15,7 @@
       </div>
     </VueDraggable>
 
-    <div class="snap-center xs:snap-align-none">
+    <div class="list-composer-container snap-center xs:snap-align-none">
       <ListComposer />
     </div>
   </div>
