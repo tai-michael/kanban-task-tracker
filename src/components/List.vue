@@ -1,7 +1,10 @@
 <template>
   <div class="flex justify-between p-2 select-none my-handle">
-    <Title :title="list.title" @title-edited="changeListTitle" />
-    <button
+    <Title
+      :title="list.title"
+      @title-edited="changeListTitle"
+      class="overflow-hidden overflow-ellipsis whitespace-nowrap font-bold py-1.5 pr-2 pl-3"
+    />
       @click="store.removeList(props.list.id)"
       type="button"
       class="bg-red-400 shrink-0"
