@@ -11,9 +11,11 @@
     <div v-if="isOpen" class="menu">
       <button
         @click="toggleMenu"
-        class="absolute right-5 top-5 py-1 px-4 bg-slate-400"
+        type="button"
+        aria-label="Close menu"
+        class="absolute top-2.5 right-2.5 z-10 p-2 rounded-full hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)] transition-colors duration-100"
       >
-        X
+        <img :src="CrossIcon" />
       </button>
       <ul>
         <li>Darkmode toggle</li>
@@ -27,6 +29,7 @@
 import { ref } from 'vue'
 import TransitionFadeAndSlide from '@/components/transitions/TransitionFadeAndSlide.vue'
 import MenuIcon from '@/assets/icons/icon-menu.vue'
+import CrossIcon from '@/assets/icons/icon-cross.svg'
 const isOpen = ref(false)
 const toggleMenu = () => {
   isOpen.value = !isOpen.value
@@ -49,10 +52,9 @@ const toggleMenu = () => {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgb(177, 177, 177);
-  opacity: 0.25;
+  background-color: rgba(0, 0, 0, 0.4);
   height: 100vh;
-  width: 100vh;
+  width: 100%;
   z-index: 9;
 }
 </style>
