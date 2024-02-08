@@ -47,6 +47,7 @@
         v-if="isCardHeld && isMobileView"
         v-model="deleteZone"
         :group="deleteOptions"
+        @add="updateHoverDeleteZoneStatus(false)"
         ghost-class="ghost"
         class="delete-container"
       >
@@ -86,7 +87,8 @@ const handleReturnToBoards = () => {
   if (isMobileView.value) boardStore.clearBoard()
 }
 
-const { isCardHeld, isHoveringDeleteZone } = useCardInteractionState()
+const { isCardHeld, isHoveringDeleteZone, updateHoverDeleteZoneStatus } =
+  useCardInteractionState()
 
 const deleteZone = []
 const deleteOptions = computed(() => {

@@ -38,7 +38,7 @@
     v-if="!isCreatingCard"
     @click.stop="toggleCardComposer"
     type="button"
-    class="ml-2 px-2 border-2"
+    class="mt-2 ml-2 px-2 border-2"
   >
     + Add a card
   </button>
