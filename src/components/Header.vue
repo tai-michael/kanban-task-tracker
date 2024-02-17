@@ -111,6 +111,7 @@ header {
   width: 100%;
   height: var(--header-height-mobile);
   background-color: white;
+  z-index: 10;
 }
 
 .title {
