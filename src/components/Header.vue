@@ -40,7 +40,13 @@
           class="title"
         />
 
-        <EllipsisMenu v-if="Object.keys(boardStore.board).length" />
+        <EllipsisMenu
+          v-if="Object.keys(boardStore.board).length"
+          :delete-button-label="deleteButtonLabel"
+          :delete-confirmation-header="deleteConfirmationHeader"
+          :delete-confirmation-body="deleteConfirmationBody"
+          @delete-confirmed="boardStore.deleteBoard"
+        />
       </div>
 
       <VueDraggable
@@ -82,6 +88,12 @@ const changeBoardTitle = (title: string) => {
   boardStore.updateBoardTitle(title)
 }
 
+const deleteButtonLabel = 'Delete board'
+const deleteConfirmationHeader = 'Delete this board?'
+const deleteConfirmationBody = computed(() => {
+  return `Are you sure you want to delete the ‘${boardStore.board?.title}’ board? This action will remove all lists and cards and cannot be reversed.`
+})
+
 const handleReturnToBoards = () => {
   router.push({ name: 'home' })
   if (isMobileView.value) boardStore.clearBoard()
@@ -111,7 +123,7 @@ header {
   width: 100%;
   height: var(--header-height-mobile);
   background-color: white;
-  z-index: 10;
+  z-index: 9;
 }
 
 .title {

@@ -16,7 +16,9 @@
       <div class="ellipsis-popover">
         <div @click="toggleModal" class="ellipsis-popover__button">
           <DeleteIcon />
-          <button type="button" class="select-none">Delete Board</button>
+          <button type="button" class="select-none">
+            {{ props.deleteButtonLabel }}
+          </button>
         </div>
         <!-- <button class="ellipsis-popover__button">Change Title</button> -->
       </div>
@@ -33,12 +35,8 @@
       @cancel-triggered="toggleModal"
       @delete-triggered="handleDeleteBoard"
     >
-      <template #header>Delete this board?</template>
-      <template #body>
-        Are you sure you want to delete the ‘{{ boardStore.board?.title }}’
-        board? This action will remove all lists and cards and cannot be
-        reversed.</template
-      >
+      <template #header>{{ props.deleteConfirmationHeader }}</template>
+      <template #body> {{ props.deleteConfirmationBody }}</template>
     </DeleteConfirmation>
   </ModalWrapper>
 </template>
@@ -47,14 +45,17 @@
 import { ref, defineAsyncComponent } from 'vue'
 import EllipsisIcon from '@/assets/icons/icon-vertical-ellipsis.svg'
 import DeleteIcon from '@/assets/icons/icon-delete.vue'
-import { useBoardStore } from '@/stores'
 const ModalWrapper = defineAsyncComponent(
   () => import('@/components/ModalWrapper.vue')
 )
 const DeleteConfirmation = defineAsyncComponent(
   () => import('@/components/DeleteConfirmation.vue')
 )
-const boardStore = useBoardStore()
+const props = defineProps([
+  'deleteButtonLabel',
+  'deleteConfirmationHeader',
+  'deleteConfirmationBody',
+])
 
 const isEllipsisMenuOpen = ref(false)
 const toggleEllipsisMenu = () => {
@@ -69,8 +70,9 @@ const toggleModal = () => {
   else modal.value?.showModal()
 }
 
+const emit = defineEmits(['deleteConfirmed'])
 const handleDeleteBoard = () => {
-  boardStore.deleteBoard()
+  emit('deleteConfirmed')
   toggleEllipsisMenu()
   // REVIEW maybe add toast for this, though probably unnecessary
 }
@@ -83,7 +85,7 @@ const handleDeleteBoard = () => {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10;
+  z-index: 9;
 }
 
 .ellipsis-popover {

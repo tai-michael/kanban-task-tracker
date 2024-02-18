@@ -5,12 +5,13 @@
       @title-edited="changeListTitle"
       class="overflow-hidden overflow-ellipsis whitespace-nowrap font-bold py-1.5 pr-2 pl-3"
     />
-      @click="store.removeList(props.list.id)"
-      type="button"
-      class="bg-red-400 shrink-0"
-    >
-      Delete List
-    </button>
+
+    <EllipsisMenu
+      :delete-button-label="deleteButtonLabel"
+      :delete-confirmation-header="deleteConfirmationHeader"
+      :delete-confirmation-body="deleteConfirmationBody"
+      @delete-confirmed="store.removeList(props.list.id)"
+    />
   </div>
 
   <VueDraggable
@@ -50,6 +51,7 @@
 <script setup lang="ts">
 import { computed, defineAsyncComponent, inject, ref } from 'vue'
 import Title from '@/components/Title.vue'
+import EllipsisMenu from '@/components/EllipsisMenu.vue'
 import useCardInteractionState from '@/composables/useCardInteractionState'
 import { useRouter } from 'vue-router'
 import { useBoardStore } from '@/stores'
@@ -63,6 +65,13 @@ const CardComposer = defineAsyncComponent(
 const store = useBoardStore()
 const router = useRouter()
 const props = defineProps(['list'])
+
+const deleteButtonLabel = 'Delete list'
+const deleteConfirmationHeader = 'Delete this list?'
+const deleteConfirmationBody = computed(() => {
+  return `Are you sure you want to delete the ‘${props.list.title}’ list and
+        its cards? This action cannot be reversed.`
+})
 
 const isCreatingCard = ref(false)
 const toggleCardComposer = () => {
