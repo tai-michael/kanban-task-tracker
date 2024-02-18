@@ -4,7 +4,7 @@
     <VueDraggable
       v-model="store.board.lists"
       v-bind="draggableOptions"
-      class="list-container flex gap-x-4"
+      class="lists-container flex gap-x-4"
     >
       <div
         v-for="list in store.board.lists"

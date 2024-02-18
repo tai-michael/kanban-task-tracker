@@ -163,7 +163,7 @@ const boardContainer: Ref<HTMLElement | null> = ref(null)
 const shouldDrag = (event) => {
   return (
     event.target === boardContainer.value ||
-    event.target.classList.contains('list-container') ||
+    event.target.classList.contains('lists-container') ||
     event.target.classList.contains('list-composer-container')
   )
 }
