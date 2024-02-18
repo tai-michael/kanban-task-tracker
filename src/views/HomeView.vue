@@ -9,7 +9,7 @@
       @mouseup="stopDragging"
       @mouseleave="stopDragging"
       @mousemove="dragBackground"
-      class="flex-grow overflow-x-auto bg-[var(--light-gray-light-bg)] xs:transition-ml xs:duration-300"
+      class="board-container flex-grow overflow-x-auto bg-[var(--light-gray-light-bg)] xs:transition-ml xs:duration-300"
       :class="mainContentClass"
     >
       <Header

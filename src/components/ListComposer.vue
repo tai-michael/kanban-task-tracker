@@ -41,22 +41,42 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, type Ref } from 'vue'
+import { onMounted, onUnmounted, nextTick, inject, ref, type Ref } from 'vue'
 import createAndAddList from '@/composables/createAndAddList'
+const isMobileView = inject('isMobileView')
 const isCreatingList = ref(false)
 const newListTitle = ref('')
-const composer: Ref<HTMLElement | null> = ref(null)
-
-const processListCreation = () => {
+const processListCreation = async () => {
   if (!newListTitle.value) return
   createAndAddList(newListTitle.value)
   newListTitle.value = ''
   hideListComposer()
+
+  await nextTick()
+  if (isMobileView.value) {
+    const listsContainer = document.querySelector('.lists-container')
+    const newestList =
+      listsContainer.children[listsContainer.children.length - 1]
+    newestList.scrollIntoView({ behavior: 'smooth' })
+  } else {
+    // In desktop view, the screen is wide enough such that the new list will always be in view
+    const boardContainer = document.querySelector('.board-container')
+    boardContainer.scrollLeft = boardContainer.scrollWidth
+  }
 }
 
-const showListComposer = () => {
+const showListComposer = async () => {
   isCreatingList.value = true
+
+  await nextTick()
+  const boardContainer = document.querySelector('.board-container')
+  boardContainer.scrollTo({
+    left: boardContainer.scrollWidth,
+    behavior: 'smooth',
+  })
 }
+
+const composer: Ref<HTMLElement | null> = ref(null)
 const hideListComposer = () => {
   isCreatingList.value = false
 }
