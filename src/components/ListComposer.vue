@@ -9,6 +9,7 @@
           @keyup.esc="hideListComposer"
           placeholder="Enter a list title"
           class="w-full"
+          ref="inputRef"
         />
       </div>
       <div class="flex gap-x-3">
@@ -43,14 +44,17 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, nextTick, inject, ref, type Ref } from 'vue'
 import createAndAddList from '@/composables/createAndAddList'
-const isMobileView = inject('isMobileView')
 const isCreatingList = ref(false)
 const newListTitle = ref('')
+const isMobileView = inject('isMobileView')
+const inputRef = ref()
 const processListCreation = async () => {
   if (!newListTitle.value) return
   createAndAddList(newListTitle.value)
   newListTitle.value = ''
-  hideListComposer()
+
+  if (isMobileView.value) hideListComposer()
+  else inputRef.value.focus()
 
   await nextTick()
   if (isMobileView.value) {
