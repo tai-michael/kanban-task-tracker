@@ -2,7 +2,12 @@
   <dialog
     ref="dialog"
     class="rounded-md"
-    :class="{ [props.dialogClasses]: props.dialogClasses && visible }"
+    :class="[
+      {
+        [props.dialogClasses]: props.dialogClasses && visible,
+        'box-shadow': visible,
+      },
+    ]"
     @click="handleBackdropClick"
     @close="visible = false"
   >
@@ -113,10 +118,13 @@ dialog {
   position: fixed;
   inset: 0;
   margin: auto;
-  box-shadow: var(--box-shadow-heavy);
 }
 
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.box-shadow {
+  box-shadow: var(--box-shadow-heavy);
 }
 </style>
