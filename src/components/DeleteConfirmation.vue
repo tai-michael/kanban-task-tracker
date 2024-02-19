@@ -7,7 +7,7 @@
     <slot name="body"></slot>
   </span>
 
-  <div class="flex gap-x-4 gap-y-4 flex-wrap xs:flex-nowrap">
+  <div class="flex gap-x-4 gap-y-4 flex-wrap-reverse xs:flex-nowrap">
     <button
       @click="emit('cancelTriggered')"
       type="button"
