@@ -4,10 +4,7 @@
       @click="toggleEllipsisMenu"
       :class="['icon-button', { 'icon-button--selected': isEllipsisMenuOpen }]"
     >
-      <img
-        :src="EllipsisIcon"
-        class="w-[3.7px] h-[16px] xs:w-[5px] xs:h-[20px]"
-      />
+      <img :src="EllipsisIcon" class="w-[20px] h-[20px]" />
     </button>
 
     <div v-if="isEllipsisMenuOpen">
@@ -43,7 +40,7 @@
 
 <script setup lang="ts">
 import { ref, defineAsyncComponent } from 'vue'
-import EllipsisIcon from '@/assets/icons/icon-vertical-ellipsis.svg'
+import EllipsisIcon from '@/assets/icons/icon-horizontal-ellipsis.svg'
 import DeleteIcon from '@/assets/icons/icon-delete.vue'
 const ModalWrapper = defineAsyncComponent(
   () => import('@/components/ModalWrapper.vue')
