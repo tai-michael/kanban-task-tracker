@@ -85,7 +85,7 @@ const handleDeleteBoard = () => {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9;
+  z-index: var(--z-backdrop);
 }
 
 .ellipsis-popover {
@@ -100,7 +100,7 @@ const handleDeleteBoard = () => {
   background-color: white;
   border-radius: 0.375rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  z-index: 10;
+  z-index: var(--z-popover);
   overflow: clip;
 
   &__button {

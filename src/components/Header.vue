@@ -123,7 +123,7 @@ header {
   width: 100%;
   height: var(--header-height-mobile);
   background-color: white;
-  z-index: 9;
+  z-index: var(--z-header);
 }
 
 .title {

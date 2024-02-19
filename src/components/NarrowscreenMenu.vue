@@ -45,7 +45,7 @@ const toggleMenu = () => {
   padding: 3rem;
   width: 50vh;
   height: 100vh;
-  z-index: 10;
+  z-index: var(--z-popover);
 }
 
 .backdrop {
@@ -55,6 +55,6 @@ const toggleMenu = () => {
   background-color: rgba(0, 0, 0, 0.4);
   height: 100vh;
   width: 100%;
-  z-index: 9;
+  z-index: var(--z-backdrop);
 }
 </style>
