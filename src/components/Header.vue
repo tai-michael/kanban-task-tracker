@@ -124,6 +124,7 @@ header {
   height: var(--header-height-mobile);
   background-color: white;
   z-index: var(--z-header);
+  border-bottom: 1px solid var(--lines-light);
 }
 
 .title {
