@@ -34,8 +34,10 @@
   --z-header: 10;
   --z-backdrop: 20;
   --z-popover: 30;
-  --box-shadow-heavy: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  /* --box-shadow-blurry: 0px 4px 6px 0px #364e7e1a; */
+  --box-shadow-light: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;
+  --box-shadow-heavy: 0px -2px 2px rgba(9, 30, 66, 0.03),
+    0px 4px 4px rgba(9, 30, 66, 0.15), 0px 3px 3px rgba(9, 30, 66, 0.2);
 
   /* --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
