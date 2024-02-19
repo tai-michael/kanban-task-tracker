@@ -38,14 +38,16 @@
     />
   </VueDraggable>
 
-  <button
-    v-if="!isCreatingCard"
-    @click.stop="toggleCardComposer"
-    type="button"
-    class="mt-2 ml-2 px-2 border-2"
-  >
-    + Add a card
-  </button>
+  <div class="pt-2 px-2">
+    <button
+      v-if="!isCreatingCard"
+      @click.stop="toggleCardComposer"
+      type="button"
+      class="flex just w-full py-2 pl-4 rounded-lg bg-[hsl(110,34.5%,98.5%)] hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
+    >
+      + Add a card
+    </button>
+  </div>
 </template>
 
 <script setup lang="ts">
