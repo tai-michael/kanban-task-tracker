@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between p-2 select-none my-handle">
+  <div class="flex justify-between gap-x-2 p-2 select-none my-handle">
     <Title
       :title="list.title"
       @title-edited="changeListTitle"
@@ -125,7 +125,7 @@ const checkIfCardHoveringDeleteZone = (evt) => {
   padding: 2px 4px;
   overflow-y: auto;
   overflow-x: clip;
-  max-height: calc(100svh - (var(--header-height-mobile) * 2 + 3rem));
+  max-height: calc(100svh - (var(--header-height-mobile) * 2 + 5rem));
 }
 
 .tilted > * {
@@ -158,7 +158,7 @@ const checkIfCardHoveringDeleteZone = (evt) => {
 @media (min-width: 481px) {
   .list-cards {
     @media (min-width: 481px) {
-      max-height: calc(100svh - (var(--header-height-desktop) * 2 + 1.5rem));
+      max-height: calc(100svh - (var(--header-height-desktop) * 2 + 3.5rem));
     }
   }
 

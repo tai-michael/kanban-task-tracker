@@ -9,7 +9,7 @@
       <div
         v-for="list in store.board.lists"
         :key="list.id"
-        class="w-[304px] h-fit border-2 rounded pb-2 snap-center xs:snap-align-none"
+        class="w-[304px] h-fit rounded pb-2 snap-center xs:snap-align-none bg-[hsl(220,69%,98.5%)] box-shadow"
       >
         <List :list="list" @card-selected="$emit('card-selected')"></List>
       </div>
@@ -56,6 +56,10 @@ watch(
 </script>
 
 <style scoped lang="scss">
+.box-shadow {
+  box-shadow: var(--box-shadow-light);
+}
+
 .tilted > * {
   transform: rotate(3deg);
 }
