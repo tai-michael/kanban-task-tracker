@@ -87,7 +87,7 @@ const handleDeleteBoard = () => {
 
 .ellipsis-popover {
   position: absolute;
-  top: 100%;
+  top: 110%;
   right: 0;
   width: 200px;
   display: flex;
@@ -96,7 +96,7 @@ const handleDeleteBoard = () => {
   align-items: stretch;
   background-color: white;
   border-radius: 0.375rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--box-shadow-heavy);
   z-index: var(--z-popover);
   overflow: clip;
 
