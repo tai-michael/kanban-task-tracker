@@ -49,7 +49,10 @@
       type="button"
       class="flex items-center gap-x-2 w-full py-2 pl-4 rounded-lg bg-[hsl(110,34.5%,98.5%)] hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
     >
-      + Add a card
+      <PlusIcon :color="'var(--medium-gray)'" /><span
+        class="font-medium text-[var(--medium-gray)]"
+        >Add a card</span
+      >
     </button>
   </div>
 </template>
@@ -58,6 +61,7 @@
 import { computed, defineAsyncComponent, inject, ref } from 'vue'
 import Title from '@/components/Title.vue'
 import EllipsisMenu from '@/components/EllipsisMenu.vue'
+import PlusIcon from '@/assets/icons/icon-add.vue'
 import useCardInteractionState from '@/composables/useCardInteractionState'
 import { useRouter } from 'vue-router'
 import { useBoardStore } from '@/stores'
