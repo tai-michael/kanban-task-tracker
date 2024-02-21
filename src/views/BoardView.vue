@@ -1,9 +1,9 @@
 <template>
   <div class="mt-3">
     <!-- TODO change to loading bar under header instead -->
-    <div v-if="isFetchingBoard && !Object.keys(boardStore.board).length">
-      Loading board...
-    </div>
+    <!-- <div v-if="isFetchingBoard && !Object.keys(boardStore.board).length">
+      <SpinnerCircle/>
+    </div> -->
     <Board
       v-if="Object.keys(boardStore.board).length"
       @card-selected="modal?.showModal()"
@@ -34,6 +34,9 @@ import { useRouter } from 'vue-router'
 import ModalWrapper from '@/components/ModalWrapper.vue'
 const Board = defineAsyncComponent(() => import('@/components/Board.vue'))
 const Card = defineAsyncComponent(() => import('@/components/Card.vue'))
+// const SpinnerCircle = defineAsyncComponent(
+//   () => import('@/assets/spinner-circle.vue')
+// )
 const router = useRouter()
 const cardStore = useCardStore()
 const boardStore = useBoardStore()

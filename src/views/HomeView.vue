@@ -23,10 +23,15 @@
           'items-stretch': isMobileView && boardStore.boards?.length > 0,
         }"
       >
-        <div v-if="fetchingBoardsFromBackend">Loading...</div>
+        <!-- <div v-if="fetchingBoardsFromBackend" class="absolute top-[45%]">
+          <SpinnerCircle />
+        </div> -->
 
         <!-- TODO maybe redo the css of the board composer so that it doesn't look off-centered in desktop mode when there's no other board around. Consider hiding the sidebar when theres nothing. -->
-        <BoardGreeting v-else :is-mobile-view="isMobileView" />
+        <BoardGreeting
+          v-if="!fetchingBoardsFromBackend"
+          :is-mobile-view="isMobileView"
+        />
 
         <BoardSelector v-if="isMobileView && boardStore.boards?.length > 0" />
       </div>
@@ -78,6 +83,9 @@ const BoardSelector = defineAsyncComponent(
 const BoardComposer = defineAsyncComponent(
   () => import('@/components/BoardComposer.vue')
 )
+// const SpinnerCircle = defineAsyncComponent(
+//   () => import('@/assets/spinner-circle.vue')
+// )
 const route = useRoute()
 const boardStore = useBoardStore()
 
