@@ -18,6 +18,7 @@
     v-model="list.cards"
     v-bind="draggableOptions"
     class="space-y-3 list-cards"
+    :class="{ 'increased-height': isCreatingCard, '!py-0': !list.cards.length }"
     @move="checkIfCardHoveringDeleteZone"
     @choose="updateCardHeldStatus(true)"
     @unchoose="updateCardHeldStatus(false)"
@@ -38,12 +39,15 @@
     />
   </VueDraggable>
 
-  <div class="pt-2 px-2">
+  <div
+    v-if="!isCreatingCard"
+    class="pt-2 px-2"
+    :class="{ 'pt-0': !list.cards.length }"
+  >
     <button
-      v-if="!isCreatingCard"
-      @click.stop="toggleCardComposer"
+      @click="toggleCardComposer"
       type="button"
-      class="flex just w-full py-2 pl-4 rounded-lg bg-[hsl(110,34.5%,98.5%)] hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
+      class="flex items-center gap-x-2 w-full py-2 pl-4 rounded-lg bg-[hsl(110,34.5%,98.5%)] hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
     >
       + Add a card
     </button>
@@ -130,6 +134,10 @@ const checkIfCardHoveringDeleteZone = (evt) => {
   max-height: calc(100svh - (var(--header-height-mobile) * 2 + 5rem));
 }
 
+.increased-height {
+  max-height: calc(100svh - (var(--header-height-mobile) * 2 + 2.05rem));
+}
+
 .tilted > * {
   transform: rotate(3deg);
 }
@@ -159,9 +167,11 @@ const checkIfCardHoveringDeleteZone = (evt) => {
 
 @media (min-width: 481px) {
   .list-cards {
-    @media (min-width: 481px) {
-      max-height: calc(100svh - (var(--header-height-desktop) * 2 + 3.5rem));
-    }
+    max-height: calc(100svh - (var(--header-height-desktop) * 2 + 3.5rem));
+  }
+
+  .increased-height {
+    max-height: calc(100svh - (var(--header-height-desktop) * 2 + 0.55rem));
   }
 
   ::-webkit-scrollbar {
