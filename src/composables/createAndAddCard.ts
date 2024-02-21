@@ -27,7 +27,8 @@ export default async function (listId: string, title: string) {
     attachments: [],
   }
 
-  await updateFirestoreDoc('cards', cardId, cardDetails, false)
+  // await updateFirestoreDoc('cards', cardId, cardDetails, false)
+  updateFirestoreDoc('cards', cardId, cardDetails, false)
   boardStore.addCard(listId, cardSummary)
   cardStore.memoizeCard(cardDetails)
 }
