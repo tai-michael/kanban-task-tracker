@@ -8,7 +8,7 @@
       @mouseleave="hovered = false"
     >
       <HideSidebarIcon
-        :color="`${hovered ? 'var(--main-purple)' : 'var(--medium-gray)'}`"
+        :color="hovered ? 'var(--main-purple)' : 'var(--medium-gray)'"
       />
       <span class="text-[var(--medium-gray)] font-bold">Hide Sidebar</span>
     </button>
