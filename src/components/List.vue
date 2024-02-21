@@ -14,6 +14,7 @@
     />
   </div>
 
+  <!-- FIXME sometimes, a card drags a sibling into the container (even tho either it or the sibling is not deleted, as discovered upon refresh). Probably need to record on shadowplay to discover cause -->
   <VueDraggable
     v-model="list.cards"
     v-bind="draggableOptions"
@@ -104,6 +105,7 @@ const draggableOptions = computed(() => {
     chosenClass: isMobileView.value ? 'tilted' : '',
     dragClass: 'tilted',
     ghostClass: 'ghost',
+    disabled: isCreatingCard.value ? true : false,
   }
 })
 
