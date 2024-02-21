@@ -12,18 +12,18 @@
           ref="inputRef"
         />
       </div>
-      <div class="flex gap-x-3">
+      <div class="flex gap-x-1.5">
         <button
           @click="processListCreation"
           type="submit"
-          class="pl-2 pr-2 rounded bg-blue-300 hover:bg-blue-200"
+          class="px-4 rounded text-white bg-[var(--main-purple)] hover:bg-[var(--main-purple-hover)] active:bg-[var(--main-purple-hover)]"
         >
-          Save
+          Add list
         </button>
         <button
           @click="hideListComposer"
           type="button"
-          class="pl-2 pr-2 rounded hover:bg-gray-200"
+          class="p-2.5 rounded hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
         >
           X
         </button>
@@ -34,7 +34,9 @@
       v-else
       @click.stop="showListComposer"
       type="button"
-      class="w-full bg-green-400"
+      class="flex items-center justify-center gap-x-2 w-full py-2 rounded bg-[var(--main-purple)] hover:bg-[var(--main-purple-hover)] active:bg-[var(--main-purple-hover)] text-white"
+      @mouseover="hovered = true"
+      @mouseleave="hovered = false"
     >
       + Add a new list
     </button>
@@ -47,6 +49,7 @@ import createAndAddList from '@/composables/createAndAddList'
 const isCreatingList = ref(false)
 const newListTitle = ref('')
 const isMobileView = inject('isMobileView')
+const hovered = ref(false)
 const inputRef = ref()
 const processListCreation = async () => {
   if (!newListTitle.value) return
@@ -71,6 +74,7 @@ const processListCreation = async () => {
 
 const showListComposer = async () => {
   isCreatingList.value = true
+  hovered.value = false
 
   await nextTick()
   const boardContainer = document.querySelector('.board-container')
@@ -104,18 +108,26 @@ onUnmounted(() => {
   min-height: 24px;
 
   input {
-    padding: 4px 8px;
-    border-radius: 8px;
+    padding: 8px;
   }
 }
 
 .list-composer {
   display: flex;
   flex-direction: column;
-  row-gap: 8px;
-  background: rgb(212, 212, 212);
-  border-radius: 8px;
-  border: black 1px solid;
+  row-gap: 10px;
   padding: 8px;
+  border-radius: 4px;
+  background-color: hsl(220 69% 98.5%);
+  box-shadow: var(--box-shadow-light);
+}
+
+.background-light-gray {
+  background: linear-gradient(
+    180deg,
+    #e9effa 0%,
+    rgba(233, 239, 250, 0.5) 100%
+  );
+  // background-color: #ffffff3d; // opaque background alternative
 }
 </style>
