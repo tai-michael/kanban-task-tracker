@@ -181,4 +181,16 @@ const { startDragging, stopDragging, dragBackground } = useBackgroundDrag(
 )
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@media (max-width: 480px) {
+  ::-webkit-scrollbar {
+    // NOTE setting a height prevents scrollbar from disappearing in chrome devtools view
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
+}
+</style>

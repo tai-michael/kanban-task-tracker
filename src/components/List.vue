@@ -159,6 +159,7 @@ const checkIfCardHoveringDeleteZone = (evt) => {
 }
 
 ::-webkit-scrollbar {
+  // NOTE setting a width prevents scrollbar from disappearing in chrome devtools view
   width: 4px;
 }
 
