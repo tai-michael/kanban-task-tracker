@@ -1,46 +1,41 @@
 <template>
-  <div v-if="isMobileView && fetchingBoardsFromBackend" class="flex h-full">
-    Loading...
-  </div>
-  <div v-else>
-    <ul
-      class="pt-1.5 xs:pt-0"
-      :class="{
-        'board-list-short': boardStore.boards?.length <= 3,
-        'board-list-long': boardStore.boards?.length > 3,
-        'mobile-border': boardStore.boards?.length > 9,
-      }"
+  <ul
+    class="pt-1.5 xs:pt-0"
+    :class="{
+      'board-list-short': boardStore.boards?.length <= 3,
+      'board-list-long': boardStore.boards?.length > 3,
+      'mobile-border': boardStore.boards?.length > 9,
+    }"
+  >
+    <li
+      v-for="board in sortedBoards"
+      :key="board.id"
+      :title="board.title"
+      class="w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)]"
     >
-      <li
-        v-for="board in sortedBoards"
-        :key="board.id"
-        :title="board.title"
-        class="w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)]"
+      <router-link
+        :to="`/board/${board.id}`"
+        @mouseenter="onMouseEnterBoardLink(board.id)"
+        @mouseleave="onMouseLeaveBoardLink"
+        class="flex items-center gap-x-4 p-3 pl-8"
+        :class="[
+          {
+            'active-board': checkIfBoardActive(board.id),
+            'hover-effect': board.id !== route.params.boardId,
+          },
+        ]"
+        @click="emit('boardLinkClicked')"
       >
-        <router-link
-          :to="`/board/${board.id}`"
-          @mouseenter="onMouseEnterBoardLink(board.id)"
-          @mouseleave="onMouseLeaveBoardLink"
-          class="flex items-center gap-x-4 p-3 pl-8"
-          :class="[
-            {
-              'active-board': checkIfBoardActive(board.id),
-              'hover-effect': board.id !== route.params.boardId,
-            },
-          ]"
-          @click="emit('boardLinkClicked')"
-        >
-          <BoardIcon :color="getBoardIconColor(board.id)" />
-          <span
-            class="truncate whitespace-nowrap font-bold text-[var(--medium-gray)] max-w-[calc(var(--sidebar-navbtn-width-mobile)-80px)] xs:max-w-[calc(var(--sidebar-navbtn-width-desktop)-80px)]"
-            >{{ board.title }}</span
-          ></router-link
-        >
-      </li>
-    </ul>
+        <BoardIcon :color="getBoardIconColor(board.id)" />
+        <span
+          class="truncate whitespace-nowrap font-bold text-[var(--medium-gray)] max-w-[calc(var(--sidebar-navbtn-width-mobile)-80px)] xs:max-w-[calc(var(--sidebar-navbtn-width-desktop)-80px)]"
+          >{{ board.title }}</span
+        ></router-link
+      >
+    </li>
+  </ul>
 
-    <CreateBoardButton v-if="isMobileView" />
-  </div>
+  <CreateBoardButton v-if="isMobileView" />
 </template>
 
 <script setup lang="ts">
@@ -57,7 +52,6 @@ const cardStore = useCardStore()
 const searchStore = useSearchStore()
 const emit = defineEmits(['boardLinkClicked'])
 const isMobileView = inject('isMobileView')
-const fetchingBoardsFromBackend = inject('fetchingBoardsFromBackend')
 
 const sortedBoards = computed(() => {
   return boardStore.boards.filter((board) =>
