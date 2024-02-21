@@ -87,6 +87,10 @@ ul {
   background: white;
   box-shadow: var(--box-shadow-light);
 
+  &:first-child {
+    margin-top: 0px;
+  }
+
   &:last-child {
     margin-bottom: 0px;
   }
