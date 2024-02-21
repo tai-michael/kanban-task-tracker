@@ -20,7 +20,9 @@
       }"
     >
       <div
-        v-if="!isCardHeld || !isMobileView"
+        v-if="
+          Object.keys(boardStore.board).length && (!isMobileView || !isCardHeld)
+        "
         class="flex w-full items-center gap-x-3"
       >
         <div class="flex shrink-0 w-10 h-10 xs:hidden">
@@ -34,14 +36,12 @@
         </div>
 
         <Title
-          v-if="boardStore.board?.title"
           :title="boardStore.board.title"
           @title-edited="changeBoardTitle"
           class="title"
         />
 
         <EllipsisMenu
-          v-if="Object.keys(boardStore.board).length"
           :delete-button-label="deleteButtonLabel"
           :delete-confirmation-header="deleteConfirmationHeader"
           :delete-confirmation-body="deleteConfirmationBody"
