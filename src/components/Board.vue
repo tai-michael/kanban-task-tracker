@@ -5,33 +5,43 @@
       v-model="store.board.lists"
       v-bind="draggableOptions"
       class="lists-container flex gap-x-4"
+      @choose="updateListHeldStatus(true)"
+      @unchoose="updateListHeldStatus(false)"
     >
       <div
         v-for="list in store.board.lists"
         :key="list.id"
-        class="w-[304px] h-fit rounded pb-2 snap-center xs:snap-align-none bg-[hsl(220,69%,98.5%)] box-shadow"
+        class="w-[304px] h-fit rounded pb-2 xs:snap-align-none bg-[hsl(220,69%,98.5%)] box-shadow"
+        :class="{ 'snap-center': !isListHeld }"
       >
         <List :list="list" @card-selected="$emit('card-selected')"></List>
       </div>
     </VueDraggable>
 
-    <div class="list-composer-container snap-center xs:snap-align-none">
+    <div
+      class="list-composer-container xs:snap-align-none"
+      :class="{ 'snap-center': !isListHeld }"
+    >
       <ListComposer />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, defineAsyncComponent, watch } from 'vue'
+import { ref, computed, watch, defineAsyncComponent } from 'vue'
 import { useBoardStore } from '@/stores'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import { VueDraggable } from 'vue-draggable-plus'
-
 const List = defineAsyncComponent(() => import('@/components/List.vue'))
 const ListComposer = defineAsyncComponent(
   () => import('@/components/ListComposer.vue')
 )
 const store = useBoardStore()
+
+const isListHeld = ref(false)
+const updateListHeldStatus = (isHeld: boolean) => {
+  isListHeld.value = isHeld
+}
 
 const draggableOptions = computed(() => {
   return {
@@ -39,6 +49,8 @@ const draggableOptions = computed(() => {
     delay: 200,
     delayOnTouchOnly: true,
     animation: 150,
+    forceFallback: true, // allows horizontal scrolling while dragging
+    scrollSensitivity: 100,
     handle: '.my-handle',
     dragClass: 'tilted',
     ghostClass: 'ghost',
