@@ -1,7 +1,8 @@
 <template>
-  <ul class="select-none">
-    <li>{{ card.title }}</li>
-    <li class="flex gap-x-2 items-center">
+  <ul class="select-none" :class="{ 'custom-outline': !isCardHeld }">
+    <li class="leading-5 mb-1.5">{{ card.title }}</li>
+
+    <li class="flex flex-wrap gap-x-2 items-center *:mb-1">
       <button
         v-if="formattedDueDate"
         type="button"
@@ -21,18 +22,29 @@
             :checked="card.is_completed"
             @click.stop="store.toggleCardCompleted(card.id)"
           />
-          <span v-show="!hover">🕓</span>
+          <ClockIcon
+            v-show="!hover"
+            :color="
+              isOverdue || card.is_completed ? 'white' : 'var(--dark-gray-blue)'
+            "
+          />
         </div>
-        {{ formattedDueDate }}
+        <span class="text-[var(--dark-gray-blue)]">
+          {{ formattedDueDate }}
+        </span>
       </button>
-
-      <span v-if="card.attachments_total">📎 {{ card.attachments_total }}</span>
 
       <span
         v-if="checklistProgress"
-        class="checklist-progress"
+        class="card-status text-[var(--dark-gray-blue)]"
         :class="{ 'checklist-completed': allChecklistItemsCompleted }"
-        >✅ {{ checklistProgress }}</span
+        ><CheckSquareIcon /> {{ checklistProgress }}</span
+      >
+
+      <span
+        v-if="card.attachments_total"
+        class="card-status text-[var(--dark-gray-blue)]"
+        ><AttachmentIcon /> {{ card.attachments_total }}</span
       >
     </li>
   </ul>
@@ -41,6 +53,11 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useCardStore } from '@/stores'
+import ClockIcon from '@/assets/icons/icon-clock.vue'
+import CheckSquareIcon from '@/assets/icons/icon-check-square.vue'
+import AttachmentIcon from '@/assets/icons/icon-attachment.vue'
+import useCardInteractionState from '@/composables/useCardInteractionState'
+const { isCardHeld } = useCardInteractionState()
 const store = useCardStore()
 const props = defineProps(['card'])
 // NOTE Firestore automatically converts all Date objects to firestore timestamp objects (no way to really avoid this), which means when reloading the page, we will receive timestamp objects for dates, which need to be converted to Date objects. Meanwhile, the VueDatePicker only exports data as Date objects, which do not require conversion.
@@ -96,21 +113,23 @@ ul {
   }
 }
 
-// li {
-//   font-style: italic;
-// }
+.custom-outline:hover {
+  outline: 2px solid var(--main-purple);
+}
 
 .due-date-button,
-.checklist-progress {
-  padding: 2px 4px;
-  border-radius: 8px;
+.card-status {
+  display: flex;
+  align-items: center;
+  column-gap: 0.35rem;
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 .due-date-button {
   display: flex;
   column-gap: 4px;
   background: none;
   border: none;
-  color: inherit;
   cursor: pointer;
 }
 
@@ -119,20 +138,29 @@ ul {
     display: inline;
   }
 
-  .due-date-button span {
-    display: none; /* Hide the clock icon */
-  }
+  // .due-date-button span {
+  //   display: none; /* Hide the clock icon */
+  // }
 }
 
 .overdue {
-  background-color: rgb(255, 94, 0);
+  background-color: rgb(255, 85, 85);
+  span {
+    color: white;
+  }
+
+  &:hover {
+    background-color: rgb(255, 130, 130);
+  }
 }
 
-.card-completed {
-  background-color: rgb(0, 255, 13);
-}
-
+.card-completed,
 .checklist-completed {
-  background-color: rgb(0, 255, 13);
+  background-color: #259c6b;
+  color: white;
+}
+
+.card-completed:hover {
+  background-color: #34c086;
 }
 </style>
