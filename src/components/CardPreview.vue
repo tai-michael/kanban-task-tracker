@@ -29,7 +29,7 @@
             "
           />
         </div>
-        <span class="text-[var(--dark-gray-blue)]">
+        <span v-if="formattedDueDate" class="text-[var(--dark-gray-blue)]">
           {{ formattedDueDate }}
         </span>
       </button>
@@ -63,8 +63,18 @@ const props = defineProps(['card'])
 // NOTE Firestore automatically converts all Date objects to firestore timestamp objects (no way to really avoid this), which means when reloading the page, we will receive timestamp objects for dates, which need to be converted to Date objects. Meanwhile, the VueDatePicker only exports data as Date objects, which do not require conversion.
 const formatDate = (date) => {
   if (!date) return ''
-  const d = date.seconds ? new Date(date.seconds * 1000) : date
-  return isNaN(d.getTime()) ? '' : `${d.getMonth() + 1}/${d.getDate()}`
+  // NOTE Returns the date as, for example, '3/14' instead of 'Mar 14'
+  // const d = date.seconds ? new Date(date.seconds * 1000) : date
+  // return isNaN(d.getTime()) ? '' : `${d.getMonth() + 1}/${d.getDate()}`
+
+  const d = date.seconds ? new Date(date.seconds * 1000) : new Date(date)
+  if (isNaN(d.getTime())) return ''
+  // return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+  const formatter = new Intl.DateTimeFormat(navigator.language, {
+    month: 'short',
+    day: 'numeric',
+  })
+  return formatter.format(d)
 }
 
 const formattedDueDate = computed(() => formatDate(props.card.due_date))
