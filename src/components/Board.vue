@@ -31,6 +31,7 @@
 import { ref, computed, watch, defineAsyncComponent } from 'vue'
 import { useBoardStore } from '@/stores'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
+import useEllipsisMenuState from '@/composables/useEllipsisMenuState'
 import { VueDraggable } from 'vue-draggable-plus'
 const List = defineAsyncComponent(() => import('@/components/List.vue'))
 const ListComposer = defineAsyncComponent(
@@ -43,6 +44,7 @@ const updateListHeldStatus = (isHeld: boolean) => {
   isListHeld.value = isHeld
 }
 
+const { isEllipsisMenuActive } = useEllipsisMenuState()
 const draggableOptions = computed(() => {
   return {
     group: 'lists',
@@ -53,6 +55,7 @@ const draggableOptions = computed(() => {
     handle: '.my-handle',
     dragClass: 'tilted',
     ghostClass: 'ghost',
+    disabled: isEllipsisMenuActive.value ? true : false,
   }
 })
 

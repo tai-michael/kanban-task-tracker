@@ -42,6 +42,7 @@
 import { ref, defineAsyncComponent } from 'vue'
 import EllipsisIcon from '@/assets/icons/icon-horizontal-ellipsis.svg'
 import DeleteIcon from '@/assets/icons/icon-delete.vue'
+import useEllipsisMenuState from '@/composables/useEllipsisMenuState'
 const ModalWrapper = defineAsyncComponent(
   () => import('@/components/ModalWrapper.vue')
 )
@@ -53,10 +54,13 @@ const props = defineProps([
   'deleteConfirmationHeader',
   'deleteConfirmationBody',
 ])
+const { updateEllipsisMenuStatus } = useEllipsisMenuState()
 
 const isEllipsisMenuOpen = ref(false)
 const toggleEllipsisMenu = () => {
   isEllipsisMenuOpen.value = !isEllipsisMenuOpen.value
+  // NOTE prevents list from being draggable while ellipsis menu's open
+  updateEllipsisMenuStatus(isEllipsisMenuOpen.value)
 }
 
 const modal = ref<InstanceType<typeof ModalWrapper>>()
