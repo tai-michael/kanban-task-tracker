@@ -14,7 +14,9 @@
         class="w-[304px] h-fit rounded pb-2 xs:snap-align-none bg-[hsl(220,69%,98.5%)] box-shadow"
         :class="{ 'snap-center': !isListHeld }"
       >
-        <List :list="list" @card-selected="$emit('card-selected')"></List>
+        <div class="list-container">
+          <List :list="list" @card-selected="$emit('card-selected')"></List>
+        </div>
       </div>
     </VueDraggable>
 
@@ -56,6 +58,7 @@ const draggableOptions = computed(() => {
     dragClass: 'tilted',
     ghostClass: 'ghost',
     disabled: isEllipsisMenuActive.value ? true : false,
+    // chosenClass: 'tilted', // REVIEW this doesn't work because of some strange interaction with scroll-snap
   }
 })
 
@@ -74,8 +77,13 @@ watch(
   box-shadow: var(--box-shadow-light);
 }
 
-.tilted > * {
+.tilted {
   transform: rotate(3deg);
+
+  .list-container {
+    // NOTE nested components also rotate once more when when the list is dragged, so this is needed to prevent that
+    transform: unset;
+  }
 }
 
 .ghost {
