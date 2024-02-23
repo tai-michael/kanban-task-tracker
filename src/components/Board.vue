@@ -48,9 +48,8 @@ const draggableOptions = computed(() => {
     group: 'lists',
     delay: 200,
     delayOnTouchOnly: true,
-    animation: 150,
     forceFallback: true, // allows horizontal scrolling while dragging
-    scrollSensitivity: 100,
+    scrollSensitivity: 110,
     handle: '.my-handle',
     dragClass: 'tilted',
     ghostClass: 'ghost',
