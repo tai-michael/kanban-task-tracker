@@ -15,7 +15,8 @@
       :loading="isFetchingCard"
       :show-close-button="true"
       @close-triggered="router.push(`/board/${boardStore.board?.id}`)"
-      :form-classes="'p-5 min-h-[550px] min-w-[90vw] xs:min-w-[432px] sm:min-w-[550px]'"
+      :dialog-classes="'min-w-[100svw] min-h-[100svh] rounded-none xs: xs:min-w-[480px] xs:min-h-[550px] xs:rounded-md'"
+      :form-classes="'p-5 xs:min-w-[480px] sm:min-w-[550px]'"
     >
       <Card
         v-if="!isFetchingCard && Object.keys(cardStore.cardDetails).length"
