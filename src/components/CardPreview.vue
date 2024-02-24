@@ -41,11 +41,12 @@
         ><CheckSquareIcon /> {{ checklistProgress }}</span
       >
 
-      <span
-        v-if="card.attachments_total"
-        class="card-status text-[var(--dark-gray-blue)]"
-        ><AttachmentIcon /> {{ card.attachments_total }}</span
-      >
+      <div v-if="card.attachments_total" class="card-status">
+        <AttachmentIcon :color="'hsla(218, 24%, 35%, 80%)'" /><span
+          class="text-[var(--dark-gray-blue)]"
+          >{{ card.attachments_total }}</span
+        >
+      </div>
     </li>
   </ul>
 </template>
