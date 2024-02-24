@@ -1,16 +1,17 @@
 <template>
-  <!-- <button
-    type="button"
-    @click="emit('closeClicked')"
-    class="absolute top-0 right-0"
-  >
-    <img :src="CrossIcon" />
-  </button> -->
+  <div class="absolute top-1 xs:top-1.5 left-3 xs:left-2.5">
+    <EllipsisMenu
+      :delete-button-label="deleteButtonLabel"
+      :delete-confirmation-header="deleteConfirmationHeader"
+      :delete-confirmation-body="deleteConfirmationBody"
+      @delete-confirmed="deleteCardAndCloseModal"
+      :popover-classes="'left-0'"
+    />
+  </div>
 
-  <button type="button" @click="deleteCardAndCloseModal" class="ml-4">
-    Delete card
-  </button>
-  <ul class="flex flex-col w-full gap-y-3 h-full">
+  <div class="p-6 border-b xs:border-0"></div>
+
+  <ul class="flex flex-col w-full gap-y-3 h-full p-5">
     <Title :title="store.cardSummary?.title" @title-edited="changeCardTitle" />
     <CardDatePicker />
     <CardDescription />
@@ -21,9 +22,10 @@
 
 <script setup lang="ts">
 import { watch, onMounted, defineAsyncComponent, onUnmounted } from 'vue'
-import { useCardStore } from '@/stores'
+import EllipsisMenu from '@/components/EllipsisMenu.vue'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import deleteCard from '@/composables/deleteCard'
+import { useCardStore } from '@/stores'
 const CardChecklist = defineAsyncComponent(
   () => import('@/components/card-details/CardChecklist.vue')
 )
@@ -38,6 +40,10 @@ const CardAttachments = defineAsyncComponent(
 )
 const Title = defineAsyncComponent(() => import('@/components/Title.vue'))
 const store = useCardStore()
+
+const deleteButtonLabel = 'Delete card'
+const deleteConfirmationHeader = 'Delete this card?'
+const deleteConfirmationBody = `Are you sure you want to delete this card? This action cannot be reversed.`
 
 const changeCardTitle = (title: string) => {
   store.updateCardTitle(title)

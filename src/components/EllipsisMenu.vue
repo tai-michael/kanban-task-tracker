@@ -1,7 +1,7 @@
 <template>
   <div class="flex shrink-0 w-10 h-10 relative">
     <button
-      @click="toggleEllipsisMenu"
+      @click.prevent="toggleEllipsisMenu"
       :class="['icon-button', { 'icon-button--selected': isEllipsisMenuOpen }]"
     >
       <img :src="EllipsisIcon" class="w-[20px] h-[20px]" />
@@ -10,7 +10,10 @@
     <div v-if="isEllipsisMenuOpen">
       <div class="backdrop" @click="toggleEllipsisMenu"></div>
 
-      <div class="ellipsis-popover">
+      <div
+        class="ellipsis-popover"
+        :class="{ [popoverClasses]: props.popoverClasses }"
+      >
         <div @click="toggleModal" class="ellipsis-popover__button">
           <DeleteIcon />
           <button type="button" class="select-none">
@@ -53,6 +56,7 @@ const props = defineProps([
   'deleteButtonLabel',
   'deleteConfirmationHeader',
   'deleteConfirmationBody',
+  'popoverClasses',
 ])
 const { updateEllipsisMenuStatus } = useEllipsisMenuState()
 

@@ -6,17 +6,17 @@
     </div> -->
     <Board
       v-if="Object.keys(boardStore.board).length"
-      @card-selected="modal?.showModal()"
+      @card-selected="cardModal?.showModal()"
     />
 
     <!-- TODO eventually adjust to actual height of empty card -->
     <ModalWrapper
-      ref="modal"
+      ref="cardModal"
       :loading="isFetchingCard"
       :show-close-button="true"
       @close-triggered="router.push(`/board/${boardStore.board?.id}`)"
       :dialog-classes="'min-w-[100svw] min-h-[100svh] rounded-none xs: xs:min-w-[480px] xs:min-h-[550px] xs:rounded-md'"
-      :form-classes="'p-5 xs:min-w-[480px] sm:min-w-[550px]'"
+      :form-classes="'xs:min-w-[480px] sm:min-w-[550px]'"
     >
       <Card
         v-if="!isFetchingCard && Object.keys(cardStore.cardDetails).length"
@@ -136,7 +136,7 @@ onBeforeMount(async () => {
   if (props.cardId) {
     isFetchingCard.value = true
     await fetchCard(props.cardId)
-    modal.value?.showModal()
+    cardModal.value?.showModal()
   }
   await fetchBoardData(boardId.value)
 
@@ -144,9 +144,9 @@ onBeforeMount(async () => {
   isFetchingCard.value = false
 })
 
-const modal = ref<InstanceType<typeof ModalWrapper>>()
+const cardModal = ref<InstanceType<typeof ModalWrapper>>()
 const closeModalAndReturnToBoard = () => {
-  modal.value?.close()
+  cardModal.value?.close()
   router.push(`/board/${boardStore.board?.id}`)
 }
 </script>
