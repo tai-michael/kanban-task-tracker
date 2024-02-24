@@ -114,7 +114,7 @@ defineExpose({
 
 <style scoped lang="scss">
 dialog {
-  display: grid;
+  // display: grid;
   position: fixed;
   inset: 0;
   margin: auto;
