@@ -13,6 +13,8 @@
       time-picker-inline
       select-text="Save"
       ref="datePicker"
+      position="left"
+      :dark="isDark ? true : false"
     >
       <template #trigger>
         <div>
@@ -43,8 +45,10 @@ import { ref, computed, watch } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import type { DatePickerInstance } from '@vuepic/vue-datepicker'
+import { useDark } from '@vueuse/core'
 import { useCardStore } from '@/stores'
 const store = useCardStore()
+const isDark = useDark()
 
 const selectedDate = ref(null)
 selectedDate.value = store.cardSummary?.due_date?.seconds
