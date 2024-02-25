@@ -9,10 +9,16 @@
     />
   </div>
 
-  <div class="p-6 border-b xs:border-0"></div>
+  <div
+    class="h-12 bg-[var(--light-gray-light-bg)] xs:bg-[unset] border-b xs:border-0"
+  ></div>
 
-  <ul class="flex flex-col w-full gap-y-3 h-full p-5">
-    <Title :title="store.cardSummary?.title" @title-edited="changeCardTitle" />
+  <ul class="flex flex-col w-full gap-y-3 h-full pb-5 px-5 pt-2 xs:pt-0">
+    <Title
+      :title="store.cardSummary?.title"
+      @title-edited="changeCardTitle"
+      class="py-1.5 text-lg font-bold"
+    />
     <CardDatePicker />
     <CardDescription />
     <CardChecklist />
