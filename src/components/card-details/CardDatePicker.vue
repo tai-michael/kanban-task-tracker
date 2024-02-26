@@ -6,6 +6,11 @@
       type="checkbox"
       :checked="store.cardSummary?.is_completed"
       @click="store.toggleCardCompleted(store.cardSummary.id)"
+      :title="
+        store.cardSummary?.is_completed
+          ? 'This card is complete.'
+          : 'This card is past due.'
+      "
     />
 
     <div
