@@ -7,6 +7,15 @@
       :checked="store.cardSummary?.is_completed"
       @click="store.toggleCardCompleted(store.cardSummary.id)"
     />
+
+    <div
+      class="backdrop"
+      v-if="isMobileView && isDatePickerOpen"
+      @wheel.prevent
+      @touchmove.prevent
+      @scroll.prevent
+    ></div>
+
     <VueDatePicker
       ref="datePicker"
       v-model="selectedDate"
@@ -88,6 +97,11 @@ const isDark = useDark()
 const isMobileView = inject('isMobileView')
 const customCalenderPosition = () => ({ top: 44, left: -30 })
 
+const isDatePickerOpen = ref(false)
+const toggleBackdrop = () => {
+  isDatePickerOpen.value = !isDatePickerOpen.value
+}
+
 const selectedDate = ref(null)
 selectedDate.value = store.cardSummary?.due_date?.seconds
   ? new Date(store.cardSummary?.due_date.seconds * 1000)
@@ -145,5 +159,15 @@ const isOverdue = computed(() => {
   --dp-menu-padding: 40px 10px 0 10px;
   --dp-font-family: var(--font-family);
   --dp-font-size: 14px;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 100%;
+  z-index: var(--z-backdrop);
 }
 </style>
