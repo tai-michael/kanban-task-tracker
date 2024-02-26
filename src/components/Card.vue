@@ -13,11 +13,11 @@
     class="h-12 bg-[var(--light-gray-light-bg)] xs:bg-[unset] border-b xs:border-0"
   ></div>
 
-  <ul class="flex flex-col w-full gap-y-3 h-full pb-5 px-5 pt-2 xs:pt-0">
+  <ul class="flex flex-col w-full h-full pb-5 px-5 pt-2 xs:pt-0">
     <Title
       :title="store.cardSummary?.title"
       @title-edited="changeCardTitle"
-      class="py-1.5 text-lg font-bold"
+      class="py-1.5 text-lg font-bold mb-2"
     />
     <CardDatePicker />
     <CardDescription />
