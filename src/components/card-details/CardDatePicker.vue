@@ -8,27 +8,28 @@
       @click="store.toggleCardCompleted(store.cardSummary.id)"
     />
     <VueDatePicker
+      ref="datePicker"
       v-model="selectedDate"
+      @open="toggleBackdrop"
+      @closed="toggleBackdrop"
       @update:model-value="handleDateSelected"
       time-picker-inline
       select-text="Save"
-      ref="datePicker"
-      position="left"
+      :teleport-center="isMobileView ? true : false"
+      :alt-position="customCalenderPosition"
       :dark="isDark ? true : false"
     >
       <template #trigger>
-        <div>
-          <input
-            :value="formattedDueDate"
-            type="text"
-            readonly
-            placeholder="Select Date"
-            class="w-[130px] p-1 border-2 cursor-pointer"
-          />
-        </div>
+        <input
+          :value="formattedDueDate"
+          type="text"
+          readonly
+          placeholder="Select Date"
+          class="w-[120px] py-1 px-2 border-2 cursor-pointer"
+        />
       </template>
 
-      <template #action-buttons class="relative">
+      <template #action-buttons class="relative z-[var(--z-popover)]">
         <span class="absolute top-[12px] left-[43%] font-semibold">Dates</span>
 
         <button
@@ -58,20 +59,24 @@
         </div>
       </template>
     </VueDatePicker>
-    <span v-if="isCompleted" class="bg-green-300 p-1 flex items-center"
-      >Completed</span
-    >
-    <span v-if="isOverdue" class="bg-red-400 p-1 flex items-center"
-      >Overdue</span
-    >
-    <!-- <button v-if="selectedDate" @click="handleClearDueDate" type="button">
-      Remove
-    </button> -->
+
+    <div class="flex items-center justify-center">
+      <span
+        v-if="isCompleted"
+        class="bg-[#1f845a] text-white px-1.5 flex items-center rounded h-[85%]"
+        >Completed</span
+      >
+      <span
+        v-if="isOverdue"
+        class="bg-[#ffeceb] text-[#ae2a19] px-1.5 flex items-center rounded h-[87%]"
+        >Overdue</span
+      >
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, inject } from 'vue'
 import CrossIcon from '@/assets/icons/icon-cross.svg'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -80,6 +85,8 @@ import { useDark } from '@vueuse/core'
 import { useCardStore } from '@/stores'
 const store = useCardStore()
 const isDark = useDark()
+const isMobileView = inject('isMobileView')
+const customCalenderPosition = () => ({ top: 44, left: -30 })
 
 const selectedDate = ref(null)
 selectedDate.value = store.cardSummary?.due_date?.seconds
@@ -133,7 +140,8 @@ const isOverdue = computed(() => {
 
 <style scoped lang="scss">
 .dp__main {
-  width: 130px !important;
+  width: 120px !important;
+  --dp-menu-min-width: 300px;
   --dp-menu-padding: 40px 10px 0 10px;
   --dp-font-family: var(--font-family);
   --dp-font-size: 14px;
