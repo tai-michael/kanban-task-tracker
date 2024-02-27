@@ -25,25 +25,27 @@
           <ClockIcon
             v-show="!hover"
             :color="
-              isOverdue || card.is_completed ? 'white' : 'var(--dark-gray-blue)'
+              isOverdue || card.is_completed
+                ? 'white'
+                : 'var(--card-text-subtle)'
             "
           />
         </div>
-        <span v-if="formattedDueDate" class="text-[var(--dark-gray-blue)]">
+        <span v-if="formattedDueDate" class="text-[var(--card-text-subtle)]">
           {{ formattedDueDate }}
         </span>
       </button>
 
       <span
         v-if="checklistProgress"
-        class="card-status text-[var(--dark-gray-blue)]"
+        class="card-status text-[var(--card-text-subtle)]"
         :class="{ 'checklist-completed': allChecklistItemsCompleted }"
         ><CheckSquareIcon /> {{ checklistProgress }}</span
       >
 
       <div v-if="card.attachments_total" class="card-status">
         <AttachmentIcon :color="'hsla(218, 24%, 35%, 80%)'" /><span
-          class="text-[var(--dark-gray-blue)]"
+          class="text-[var(--card-text-subtle)]"
           >{{ card.attachments_total }}</span
         >
       </div>
