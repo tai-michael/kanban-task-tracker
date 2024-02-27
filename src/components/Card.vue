@@ -14,12 +14,17 @@
   ></div>
 
   <ul class="flex flex-col w-full h-full pb-5 px-5 pt-2 xs:pt-0">
-    <Title
-      :title="store.cardSummary?.title"
-      @title-edited="changeCardTitle"
-      class="py-1.5 text-lg font-bold mb-2"
-    />
-    <CardDatePicker />
+    <div class="flex gap-x-2 mb-7">
+      <div class="mt-2 hidden xs:block">(Icon)</div>
+      <div class="w-full">
+        <Title
+          :title="store.cardSummary?.title"
+          @title-edited="changeCardTitle"
+          class="block max-w-[455px] mb-3 py-1.5 text-xl font-bold text-[var(--card-text)]"
+        />
+        <CardDatePicker />
+      </div>
+    </div>
     <CardDescription />
     <CardChecklist />
     <CardAttachments />

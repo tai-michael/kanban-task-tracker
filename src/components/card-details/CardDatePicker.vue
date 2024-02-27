@@ -178,7 +178,7 @@ const isOverdue = computed(() => {
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
-  height: 100%;
+  height: 100vh;
   width: 100%;
   z-index: var(--z-backdrop);
 }
