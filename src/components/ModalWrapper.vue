@@ -11,7 +11,15 @@
     @click="handleBackdropClick"
     @close="visible = false"
   >
-    <div class="dialog-content" @click.stop>
+    <div
+      class="dialog-content"
+      :class="[
+        {
+          [props.dialogContentClasses]: props.dialogContentClasses,
+        },
+      ]"
+      @click.stop
+    >
       <form
         v-if="visible"
         method="dialog"
@@ -43,6 +51,10 @@ import CrossIcon from '@/assets/icons/icon-cross.svg'
 const dialog = ref<HTMLDialogElement>() // backdrop element
 const props = defineProps({
   dialogClasses: {
+    type: String,
+    default: '',
+  },
+  dialogContentClasses: {
     type: String,
     default: '',
   },
