@@ -1,108 +1,125 @@
 <template>
-  <ul>
-    <li
-      v-for="item of store.cardDetails.checklist"
-      :key="item.id"
-      class="flex gap-x-3 border-2"
-    >
-      <input
-        type="checkbox"
-        @click.stop="store.toggleChecklistItemCompleted(item.id)"
-        :checked="item.is_completed"
-      />
-      <div class="flex justify-between gap-x-2 w-full">
-        <div
-          v-if="item.id === activeItemId"
-          class="flex flex-col gap-x-3 w-full"
+  <div class="flex gap-x-2 mb-7">
+    <div class="hidden xs:block">(Icon)</div>
+
+    <div class="w-full">
+      <label class="block mb-2 text-base font-semibold text-[var(--card-text)]"
+        >Checklist</label
+      >
+
+      <ul>
+        <li
+          v-for="item of store.cardDetails.checklist"
+          :key="item.id"
+          class="flex gap-x-3 border-2"
         >
           <input
-            class="flex"
-            v-model.trim="activeItemName"
-            v-focus="item.id === activeItemId"
-            @blur="storeUnsavedItemName(item.name)"
-            @keyup.enter="saveItemName(item.name)"
-            @keyup.esc="clearItemEdit(item.id, item.name)"
+            type="checkbox"
+            @click.stop="store.toggleChecklistItemCompleted(item.id)"
+            :checked="item.is_completed"
           />
-          <!-- NOTE 'mousedown' needed, as 'blur' triggers before 'click', meaning the button wouldn't exist in DOM, so its click would never trigger -->
-          <div class="flex justify-between">
-            <div>
+          <div class="flex justify-between gap-x-2 w-full">
+            <div
+              v-if="item.id === activeItemId"
+              class="flex flex-col gap-x-3 w-full"
+            >
+              <input
+                class="flex"
+                v-model.trim="activeItemName"
+                v-focus="item.id === activeItemId"
+                @blur="storeUnsavedItemName(item.name)"
+                @keyup.enter="saveItemName(item.name)"
+                @keyup.esc="clearItemEdit(item.id, item.name)"
+              />
+              <!-- NOTE 'mousedown' needed, as 'blur' triggers before 'click', meaning the button wouldn't exist in DOM, so its click would never trigger -->
+              <div class="flex justify-between">
+                <div>
+                  <button
+                    @mousedown="saveItemName(item.name)"
+                    type="submit"
+                    class="mr-3"
+                  >
+                    Save
+                  </button>
+                  <button
+                    @mousedown="clearItemEdit(item.id, item.name)"
+                    type="button"
+                  >
+                    X
+                  </button>
+                </div>
+                <button
+                  @mousedown="store.removeChecklistItem(item.id)"
+                  type="button"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+            <span
+              v-else
+              @click.stop="beginItemNameEdit(item)"
+              :class="{ 'line-through': item.is_completed }"
+            >
+              {{ item.name }}
+            </span>
+            <div
+              v-if="item.id !== activeItemId && item.unsaved_name"
+              class="flex gap-x-3"
+            >
+              <span>You have unsaved edits.</span>
               <button
-                @mousedown="saveItemName(item.name)"
-                type="submit"
-                class="mr-3"
+                @click="beginItemNameEdit(item)"
+                type="button"
+                class="underline"
               >
-                Save
+                View edits
               </button>
               <button
-                @mousedown="clearItemEdit(item.id, item.name)"
+                @click="clearItemEdit(item.id, item.name)"
                 type="button"
+                class="underline"
               >
-                X
+                Discard
               </button>
             </div>
             <button
-              @mousedown="store.removeChecklistItem(item.id)"
+              v-if="item.id !== activeItemId"
+              @click="store.removeChecklistItem(item.id)"
               type="button"
             >
               Delete
             </button>
           </div>
-        </div>
-        <span
-          v-else
-          @click.stop="beginItemNameEdit(item)"
-          :class="{ 'line-through': item.is_completed }"
-        >
-          {{ item.name }}
-        </span>
-        <div
-          v-if="item.id !== activeItemId && item.unsaved_name"
-          class="flex gap-x-3"
-        >
-          <span>You have unsaved edits.</span>
-          <button
-            @click="beginItemNameEdit(item)"
-            type="button"
-            class="underline"
-          >
-            View edits
+        </li>
+      </ul>
+
+      <div v-if="isCreatingItem" class="flex flex-col w-full">
+        <input
+          v-model.trim="newItemName"
+          v-focus="isCreatingItem"
+          @blur="processItemCreation"
+          placeholder="Add an item"
+          class="w-full"
+        />
+        <div>
+          <button @mousedown="processItemCreation" type="submit" class="mr-2">
+            Add
           </button>
-          <button
-            @click="clearItemEdit(item.id, item.name)"
-            type="button"
-            class="underline"
-          >
-            Discard
-          </button>
+          <button @mousedown="exitItemCreation" type="button">Cancel</button>
         </div>
-        <button
-          v-if="item.id !== activeItemId"
-          @click="store.removeChecklistItem(item.id)"
-          type="button"
-        >
-          Delete
-        </button>
       </div>
-    </li>
-  </ul>
-  <div v-if="isCreatingItem" class="flex flex-col w-full">
-    <input
-      v-model.trim="newItemName"
-      v-focus="isCreatingItem"
-      @blur="processItemCreation"
-      placeholder="Add an item"
-      class="w-full"
-    />
-    <div>
-      <button @mousedown="processItemCreation" type="submit" class="mr-2">
-        Add
+
+      <button
+        v-else
+        @click="isCreatingItem = true"
+        type="button"
+        class="border-2"
+      >
+        Add a checklist item
       </button>
-      <button @mousedown="exitItemCreation" type="button">Cancel</button>
     </div>
   </div>
-  <button v-else @click="isCreatingItem = true" type="button" class="border-2">
-    Add a checklist item
-  </button>
 </template>
 
 <script setup lang="ts">
