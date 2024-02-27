@@ -1,45 +1,59 @@
 <template>
-  <div>
-    <input
-      type="file"
-      id="fileInput"
-      @change="uploadFile"
-      multiple
-      :accept="allowedFileTypes"
-      :disabled="isUploadingFile"
-      style="display: none"
-    />
-    <label
-      for="fileInput"
-      class="custom-file-input"
-      :class="{ disabled: isUploadingFile }"
-    >
-      <div v-if="!isUploadingFile">
-        <span class="mr-1">📎</span>Add attachment
-      </div>
-      <div v-else>Uploading...</div>
-    </label>
+  <!-- REVIEW consider making mobile view also mb-7 -->
+  <div class="flex gap-x-2 mb-7">
+    <div class="hidden xs:block">(Icon)</div>
 
-    <div v-if="uploadError">
-      <span class="text-red-600">{{ uploadError }}</span>
-    </div>
-
-    <ul v-if="store.cardDetails?.attachments.length">
-      <label>Attachments:</label>
-      <li
-        v-for="file in store.cardDetails?.attachments"
-        :key="file.storageName"
-        class="flex justify-between"
+    <div class="w-full">
+      <label class="block mb-2 text-base font-semibold text-[var(--card-text)]"
+        >Attachments</label
       >
-        <span :title="file.originalName" class="max-w-[200px] truncate block">{{
-          file.originalName
-        }}</span>
-        <div>
-          <a :href="file.url" target="_blank" download class="mr-2">Download</a>
-          <button @click="deleteFile(file)" type="button">Delete</button>
+
+      <input
+        type="file"
+        id="fileInput"
+        @change="uploadFile"
+        multiple
+        :accept="allowedFileTypes"
+        :disabled="isUploadingFile"
+        style="display: none"
+      />
+
+      <label
+        for="fileInput"
+        class="custom-file-input"
+        :class="{ disabled: isUploadingFile }"
+      >
+        <div v-if="!isUploadingFile">
+          <span class="mr-1">📎</span>Add attachment
         </div>
-      </li>
-    </ul>
+        <div v-else>Uploading...</div>
+      </label>
+
+      <div v-if="uploadError">
+        <span class="text-red-600">{{ uploadError }}</span>
+      </div>
+
+      <ul v-if="store.cardDetails?.attachments.length">
+        <label>Attachments:</label>
+        <li
+          v-for="file in store.cardDetails?.attachments"
+          :key="file.storageName"
+          class="flex justify-between"
+        >
+          <span
+            :title="file.originalName"
+            class="max-w-[200px] truncate block"
+            >{{ file.originalName }}</span
+          >
+          <div>
+            <a :href="file.url" target="_blank" download class="mr-2"
+              >Download</a
+            >
+            <button @click="deleteFile(file)" type="button">Delete</button>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
