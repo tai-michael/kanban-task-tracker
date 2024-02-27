@@ -154,3 +154,15 @@ body {
   font-size: 0.875rem;
   line-height: 1.5rem;
 }
+
+.dp__arrow_top {
+  display: none !important;
+}
+
+.dp__month_year_select {
+  font-weight: 600 !important;
+}
+
+.dp__calendar_header_item {
+  font-weight: 600 !important;
+}
