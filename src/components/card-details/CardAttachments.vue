@@ -1,7 +1,9 @@
 <template>
   <!-- REVIEW consider making mobile view also mb-7 -->
   <div class="flex gap-x-2 mb-7">
-    <div class="hidden xs:block">(Icon)</div>
+    <div class="hidden xs:block">
+      <AttachmentIcon :color="'hsla(218, 24%, 35%, 80%)'" />
+    </div>
 
     <div class="w-full">
       <label class="block mb-2 text-base font-semibold text-[var(--card-text)]"
@@ -58,7 +60,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref as vueRef, watch } from 'vue'
+import { defineAsyncComponent, ref as vueRef, watch } from 'vue'
+import AttachmentIcon from '@/assets/icons/icon-attachment.vue'
 import {
   ref as storageRef,
   uploadBytes,
