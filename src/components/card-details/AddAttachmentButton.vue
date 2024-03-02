@@ -89,6 +89,7 @@ const uploadFile = async (event) => {
 
   const filesSelected = event.target.files
   if (!filesSelected.length) {
+    isUploadingFile.value = false
     return
   }
 
