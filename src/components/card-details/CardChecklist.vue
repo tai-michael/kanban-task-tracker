@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-x-2 mb-7">
+  <div class="flex flex-col gap-x-2 mb-9">
     <div
       class="relative flex justify-between mb-1 ml-[var(--card-gutter-mobile)] xs:ml-[var(--card-gutter-desktop)]"
     >
@@ -15,90 +15,13 @@
     </div>
 
     <div class="xs:ml-[var(--card-gutter-desktop)]">
-      <ul>
+      <ul class="mb-3">
         <li
           v-for="item of store.cardDetails.checklist"
           :key="item.id"
-          class="flex gap-x-3 border-2"
+          class="flex first:border-t [&:not(:last-child)]:border-b"
         >
-          <input
-            type="checkbox"
-            @click.stop="store.toggleChecklistItemCompleted(item.id)"
-            :checked="item.is_completed"
-          />
-          <div class="flex justify-between gap-x-2 w-full">
-            <div
-              v-if="item.id === activeItemId"
-              class="flex flex-col gap-x-3 w-full"
-            >
-              <input
-                class="flex"
-                v-model.trim="activeItemName"
-                v-focus="item.id === activeItemId"
-                @blur="storeUnsavedItemName(item.name)"
-                @keyup.enter="saveItemName(item.name)"
-                @keyup.esc="clearItemEdit(item.id, item.name)"
-              />
-              <!-- NOTE 'mousedown' needed, as 'blur' triggers before 'click', meaning the button wouldn't exist in DOM, so its click would never trigger -->
-              <div class="flex justify-between">
-                <div>
-                  <button
-                    @mousedown="saveItemName(item.name)"
-                    type="submit"
-                    class="mr-3"
-                  >
-                    Save
-                  </button>
-                  <button
-                    @mousedown="clearItemEdit(item.id, item.name)"
-                    type="button"
-                  >
-                    X
-                  </button>
-                </div>
-                <button
-                  @mousedown="store.removeChecklistItem(item.id)"
-                  type="button"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-            <span
-              v-else
-              @click.stop="beginItemNameEdit(item)"
-              :class="{ 'line-through': item.is_completed }"
-            >
-              {{ item.name }}
-            </span>
-            <div
-              v-if="item.id !== activeItemId && item.unsaved_name"
-              class="flex gap-x-3"
-            >
-              <span>You have unsaved edits.</span>
-              <button
-                @click="beginItemNameEdit(item)"
-                type="button"
-                class="underline"
-              >
-                View edits
-              </button>
-              <button
-                @click="clearItemEdit(item.id, item.name)"
-                type="button"
-                class="underline"
-              >
-                Discard
-              </button>
-            </div>
-            <button
-              v-if="item.id !== activeItemId"
-              @click="store.removeChecklistItem(item.id)"
-              type="button"
-            >
-              Delete
-            </button>
-          </div>
+          <ChecklistItem :item="item" />
         </li>
       </ul>
 
@@ -122,7 +45,7 @@
         v-else
         @click="isCreatingItem = true"
         type="button"
-        class="inline-flex py-[6px] px-[16px] mt-2 rounded bg-[#091e420f] text-[var(--card-text)] font-medium"
+        class="inline-flex py-[6px] px-[16px] rounded font-medium bg-[var(--light-gray-button)] hover:bg-[var(--light-gray-button-hover)] text-[var(--card-text)] transition-colors duration-100 ease-in-out"
       >
         Add item
       </button>
@@ -132,6 +55,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import ChecklistItem from '@/components/card-details/ChecklistItem.vue'
 import CheckSquareIcon from '@/assets/icons/icon-check-square.vue'
 import { useCardStore } from '@/stores'
 import { v4 as uuidv4 } from 'uuid'
@@ -160,43 +84,6 @@ const exitItemCreation = () => {
   isCreatingItem.value = false
 }
 
-const activeItemId = ref('')
-const activeItemName = ref('')
-const beginItemNameEdit = (item: object) => {
-  activeItemId.value = item.id
-
-  item.unsaved_name
-    ? (activeItemName.value = item.unsaved_name)
-    : (activeItemName.value = item.name)
-}
-const storeUnsavedItemName = (existingName: string) => {
-  // only store if names are different
-  if (activeItemName.value && activeItemName.value !== existingName) {
-    store.storeUnsavedChecklistItemName(
-      activeItemId.value,
-      activeItemName.value
-    )
-  }
-  clearFocus()
-}
-const saveItemName = (existingName: string) => {
-  if (!activeItemName.value) return
-  if (activeItemName.value !== existingName) {
-    store.updateChecklistItemName(activeItemId.value, activeItemName.value)
-  }
-  clearItemEdit(activeItemId.value, existingName)
-}
-const clearItemEdit = (id: string, existingName: string) => {
-  if (activeItemName.value !== existingName) {
-    store.deleteUnsavedChecklistItemName(id)
-  }
-  clearFocus()
-}
-const clearFocus = () => {
-  activeItemId.value = ''
-  activeItemName.value = ''
-}
-
 const itemsCompleted = computed(
   () => store.cardDetails.checklist.filter((item) => item.is_completed).length
 )
@@ -206,6 +93,7 @@ watch(
     store.syncChecklistItemsCompleted(newValue)
   }
 )
+
 const itemsTotal = computed(() => store.cardDetails.checklist.length)
 watch(
   () => itemsTotal.value,
