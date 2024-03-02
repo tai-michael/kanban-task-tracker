@@ -14,14 +14,21 @@
   ></div>
 
   <ul class="flex flex-col w-full h-full pb-5 px-5 pt-2 xs:pt-0">
-    <div class="flex gap-x-2 mb-7">
-      <div class="mt-2 hidden xs:block">(Icon)</div>
-      <div class="w-full">
+    <div class="flex flex-col gap-x-2 mb-7">
+      <div
+        class="relative flex justify-between mb-1 ml-[var(--card-gutter-mobile)] xs:ml-[var(--card-gutter-desktop)]"
+      >
+        <div class="absolute top-[8px] left-[-35px]">
+          <CardIcon :color="'hsla(218, 24%, 35%, 75%)'" />
+        </div>
         <Title
           :title="store.cardSummary?.title"
           @title-edited="changeCardTitle"
           class="block max-w-[455px] mb-3 py-1.5 text-xl font-bold text-[var(--card-text)]"
         />
+      </div>
+
+      <div class="xs:ml-[var(--card-gutter-desktop)]">
         <CardDatePicker />
       </div>
     </div>
@@ -34,6 +41,7 @@
 <script setup lang="ts">
 import { watch, onMounted, defineAsyncComponent, onUnmounted } from 'vue'
 import EllipsisMenu from '@/components/EllipsisMenu.vue'
+import CardIcon from '@/assets/icons/icon-card.vue'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import deleteCard from '@/composables/deleteCard'
 import { useCardStore } from '@/stores'
