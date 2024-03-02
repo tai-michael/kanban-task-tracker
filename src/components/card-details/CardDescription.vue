@@ -1,11 +1,17 @@
 <template>
-  <div class="flex gap-x-2 mb-7">
-    <div class="hidden xs:block">(Icon)</div>
-    <div class="w-full">
+  <div class="flex flex-col gap-x-2 mb-7">
+    <div
+      class="relative flex justify-between mb-1 ml-[var(--card-gutter-mobile)] xs:ml-[var(--card-gutter-desktop)]"
+    >
+      <div class="absolute left-[-35px]">
+        <TextIcon class="w-6 h-6" :color="'hsla(218, 24%, 35%)'" />
+      </div>
       <label class="block mb-2 text-base font-semibold text-[var(--card-text)]"
         >Description</label
       >
+    </div>
 
+    <div class="xs:ml-[var(--card-gutter-desktop)]">
       <li
         v-if="!isEditingDescription"
         @click="isEditingDescription = true"
@@ -38,6 +44,7 @@
 
 <script setup lang="ts">
 import { ref, watch, onMounted, nextTick } from 'vue'
+import TextIcon from '@/assets/icons/icon-text.vue'
 import { useCardStore } from '@/stores'
 const store = useCardStore()
 const cardDescription = ref('')
@@ -73,7 +80,7 @@ onMounted(() => {
   padding: 8px 12px;
   background-color: #091e420f;
   font-weight: 500;
-  border-radius: 3px;
+  border-radius: 4px;
   color: var(--card-text);
   text-decoration: none;
 }
