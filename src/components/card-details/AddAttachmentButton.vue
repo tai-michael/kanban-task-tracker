@@ -21,6 +21,10 @@
       Add file
     </span>
 
+    <SpinnerCircle
+      v-if="isUploadingFile"
+      :spinner-classes="'absolute flex w-5 h-5 border-2 border-[var(--medium-gray)]'"
+    />
   </label>
 </template>
 
