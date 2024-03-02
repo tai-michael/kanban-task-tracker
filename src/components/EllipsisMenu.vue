@@ -14,13 +14,19 @@
         class="ellipsis-popover"
         :class="{ [popoverClasses]: props.popoverClasses }"
       >
-        <div @click="toggleModal" class="ellipsis-popover__button">
+        <button
+          v-if="props.deleteButtonLabel"
+          @click="toggleModal"
+          type="button"
+          class="ellipsis-popover__button"
+        >
           <DeleteIcon />
-          <button type="button" class="select-none">
+          <label>
             {{ props.deleteButtonLabel }}
-          </button>
-        </div>
+          </label>
+        </button>
         <!-- <button class="ellipsis-popover__button">Change Title</button> -->
+        <slot name="custom-buttons"></slot>
       </div>
     </div>
   </div>
@@ -33,7 +39,7 @@
   >
     <DeleteConfirmation
       @cancel-triggered="toggleModal"
-      @delete-triggered="handleDeleteBoard"
+      @delete-triggered="handleDelete"
     >
       <template #header>{{ props.deleteConfirmationHeader }}</template>
       <template #body> {{ props.deleteConfirmationBody }}</template>
@@ -66,6 +72,9 @@ const toggleEllipsisMenu = () => {
   // NOTE prevents list from being draggable while ellipsis menu's open
   updateEllipsisMenuStatus(isEllipsisMenuOpen.value)
 }
+defineExpose({
+  toggleEllipsisMenu, // Useful in case custom buttons are used
+})
 
 const modal = ref<InstanceType<typeof ModalWrapper>>()
 const toggleModal = () => {
@@ -76,7 +85,7 @@ const toggleModal = () => {
 }
 
 const emit = defineEmits(['deleteConfirmed'])
-const handleDeleteBoard = () => {
+const handleDelete = () => {
   emit('deleteConfirmed')
   toggleEllipsisMenu()
   // REVIEW maybe add toast for this, though probably unnecessary
