@@ -1,12 +1,20 @@
 <template>
-  <div class="flex gap-x-2 mb-7">
-    <div class="hidden xs:block">(Icon)</div>
-
-    <div class="w-full">
+  <div class="flex flex-col gap-x-2 mb-7">
+    <div
+      class="relative flex justify-between mb-1 ml-[var(--card-gutter-mobile)] xs:ml-[var(--card-gutter-desktop)]"
+    >
+      <div class="absolute left-[-35px]">
+        <CheckSquareIcon
+          class="!w-[22px] !h-[22px]"
+          :color="'hsla(218, 24%, 35%)'"
+        />
+      </div>
       <label class="block mb-2 text-base font-semibold text-[var(--card-text)]"
         >Checklist</label
       >
+    </div>
 
+    <div class="xs:ml-[var(--card-gutter-desktop)]">
       <ul>
         <li
           v-for="item of store.cardDetails.checklist"
@@ -114,9 +122,9 @@
         v-else
         @click="isCreatingItem = true"
         type="button"
-        class="border-2"
+        class="inline-flex py-[6px] px-[16px] mt-2 rounded bg-[#091e420f] text-[var(--card-text)] font-medium"
       >
-        Add a checklist item
+        Add item
       </button>
     </div>
   </div>
@@ -124,6 +132,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import CheckSquareIcon from '@/assets/icons/icon-check-square.vue'
 import { useCardStore } from '@/stores'
 import { v4 as uuidv4 } from 'uuid'
 const store = useCardStore()
