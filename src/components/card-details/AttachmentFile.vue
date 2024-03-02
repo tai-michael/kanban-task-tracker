@@ -10,6 +10,11 @@
       >{{ props.file.originalName }}</span
     >
 
+    <EllipsisMenu
+      ref="ellipsisMenuRef"
+      :popover-classes="'!top-[-85px] !right-[25px]'"
+    >
+      <template #custom-buttons>
         <div class="flex flex-col">
           <button
             @click="deleteFile(props.file)"
@@ -32,6 +37,8 @@
             <label class="select-none">Download</label>
           </a>
         </div>
+      </template>
+    </EllipsisMenu>
   </div>
 </template>
 
