@@ -10,28 +10,11 @@
   </div>
 
   <div
-    class="h-12 bg-[var(--light-gray-light-bg)] xs:bg-[unset] border-b xs:border-0"
+    class="h-12 bg-[var(--light-gray-light-bg)] border-b xs:bg-[unset] xs:border-0"
   ></div>
 
   <ul class="flex flex-col w-full h-full pb-5 px-5 pt-2 xs:pt-0">
-    <div class="flex flex-col gap-x-2 mb-7">
-      <div
-        class="relative flex justify-between mb-1 ml-[var(--card-gutter-mobile)] xs:ml-[var(--card-gutter-desktop)]"
-      >
-        <div class="absolute top-[8px] left-[-35px]">
-          <CardIcon :color="'hsla(218, 24%, 35%, 75%)'" />
-        </div>
-        <Title
-          :title="store.cardSummary?.title"
-          @title-edited="changeCardTitle"
-          class="block max-w-[455px] mb-3 py-1.5 text-xl font-bold text-[var(--card-text)]"
-        />
-      </div>
-
-      <div class="xs:ml-[var(--card-gutter-desktop)]">
-        <CardDatePicker />
-      </div>
-    </div>
+    <CardTitle />
     <CardDescription />
     <CardChecklist />
     <CardAttachments />
@@ -41,32 +24,26 @@
 <script setup lang="ts">
 import { watch, onMounted, defineAsyncComponent, onUnmounted } from 'vue'
 import EllipsisMenu from '@/components/EllipsisMenu.vue'
-import CardIcon from '@/assets/icons/icon-card.vue'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import deleteCard from '@/composables/deleteCard'
 import { useCardStore } from '@/stores'
-const CardChecklist = defineAsyncComponent(
-  () => import('@/components/card-details/CardChecklist.vue')
+const CardTitle = defineAsyncComponent(
+  () => import('@/components/card-details/CardTitle.vue')
 )
 const CardDescription = defineAsyncComponent(
   () => import('@/components/card-details/CardDescription.vue')
 )
-const CardDatePicker = defineAsyncComponent(
-  () => import('@/components/card-details/CardDatePicker.vue')
+const CardChecklist = defineAsyncComponent(
+  () => import('@/components/card-details/CardChecklist.vue')
 )
 const CardAttachments = defineAsyncComponent(
   () => import('@/components/card-details/CardAttachments.vue')
 )
-const Title = defineAsyncComponent(() => import('@/components/Title.vue'))
 const store = useCardStore()
 
 const deleteButtonLabel = 'Delete card'
 const deleteConfirmationHeader = 'Delete this card?'
 const deleteConfirmationBody = `Are you sure you want to delete this card? This action cannot be reversed.`
-
-const changeCardTitle = (title: string) => {
-  store.updateCardTitle(title)
-}
 
 const emit = defineEmits(['cardDeleted'])
 const deleteCardAndCloseModal = () => {
