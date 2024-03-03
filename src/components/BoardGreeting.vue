@@ -3,7 +3,7 @@
     v-if="!isMobileView && boardStore.boards?.length > 0"
     class="flex flex-col items-center mt-60"
   >
-    <span>Select a board or create a new one.</span>
+    <span class="font-medium">Select a board or create a new one.</span>
   </div>
 
   <div

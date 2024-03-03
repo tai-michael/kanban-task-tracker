@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-x-2 mb-7">
+  <div class="flex flex-col gap-x-2 mb-9">
     <div
       class="relative flex justify-between mb-1 ml-[var(--card-gutter-mobile)] xs:ml-[var(--card-gutter-desktop)]"
     >

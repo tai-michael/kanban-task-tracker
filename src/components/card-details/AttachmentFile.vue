@@ -6,7 +6,7 @@
     />
     <span
       :title="props.file.originalName"
-      class="max-w-[235px] xs:max-w-[430px] truncate w-full"
+      class="max-w-[235px] xs:max-w-[335px] sm:max-w-[430px] truncate w-full"
       >{{ props.file.originalName }}</span
     >
 
