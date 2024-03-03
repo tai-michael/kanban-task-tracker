@@ -8,11 +8,10 @@
         type="button"
         @mouseenter="hover = true"
         @mouseleave="hover = false"
-        class="due-date-button"
+        class="card-badge"
         :class="{
-          overdue: isOverdue,
-          'card-completed': card.is_completed,
-          'hover-show-checkbox': hover,
+          'bg-[#ff5555] hover:bg-[#ff8282]': isOverdue,
+          'bg-[#259c6b] hover:bg-[#34c086]': card.is_completed,
         }"
       >
         <div class="w-5">
@@ -31,19 +30,39 @@
             "
           />
         </div>
-        <span v-if="formattedDueDate" class="text-[var(--card-text-subtle)]">
+        <span
+          v-if="formattedDueDate"
+          :class="
+            isOverdue || card.is_completed
+              ? 'text-white'
+              : 'text-[var(--card-text-subtle)]'
+          "
+        >
           {{ formattedDueDate }}
         </span>
       </button>
 
-      <span
+      <div
         v-if="checklistProgress"
-        class="card-status text-[var(--card-text-subtle)]"
-        :class="{ 'checklist-completed': allChecklistItemsCompleted }"
-        ><CheckSquareIcon /> {{ checklistProgress }}</span
+        class="card-badge text-[var(--card-text-subtle)]"
+        :class="{ 'bg-[#259c6b]': allChecklistItemsCompleted }"
       >
+        <CheckSquareIcon
+          :color="
+            allChecklistItemsCompleted ? 'white' : 'var(--card-text-subtle)'
+          "
+        /><span
+          :class="
+            allChecklistItemsCompleted
+              ? 'text-[white]'
+              : 'text-[var(--card-text-subtle)]'
+          "
+        >
+          {{ checklistProgress }}</span
+        >
+      </div>
 
-      <div v-if="card.attachments_total" class="card-status">
+      <div v-if="card.attachments_total" class="card-badge">
         <AttachmentIcon :color="'hsla(218, 24%, 35%, 80%)'" /><span
           class="text-[var(--card-text-subtle)]"
           >{{ card.attachments_total }}</span
@@ -130,50 +149,11 @@ ul {
   outline: 2px solid var(--main-purple);
 }
 
-.due-date-button,
-.card-status {
+.card-badge {
   display: flex;
   align-items: center;
-  column-gap: 0.35rem;
+  column-gap: 4px;
   padding: 2px 6px;
   border-radius: 4px;
-}
-.due-date-button {
-  display: flex;
-  column-gap: 4px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-@media screen and (max-width: 768px) {
-  .due-date-button input[type='checkbox'] {
-    display: inline;
-  }
-
-  // .due-date-button span {
-  //   display: none; /* Hide the clock icon */
-  // }
-}
-
-.overdue {
-  background-color: rgb(255, 85, 85);
-  span {
-    color: white;
-  }
-
-  &:hover {
-    background-color: rgb(255, 130, 130);
-  }
-}
-
-.card-completed,
-.checklist-completed {
-  background-color: #259c6b;
-  color: white;
-}
-
-.card-completed:hover {
-  background-color: #34c086;
 }
 </style>
