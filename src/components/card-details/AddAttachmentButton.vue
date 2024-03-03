@@ -143,10 +143,16 @@ const uploadFile = async (event) => {
   justify-content: center;
   align-items: center;
   padding: 6px 16px;
-  background-color: #f0f0f0;
+  background-color: var(--light-gray-button);
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 0.75rem;
+  transition: background-color 0.1s ease-in-out;
+
+  &:hover,
+  &:active {
+    background-color: var(--light-gray-button-hover);
+  }
 }
 
 .custom-file-input.disabled {

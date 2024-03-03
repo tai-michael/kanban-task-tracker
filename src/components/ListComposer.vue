@@ -68,7 +68,7 @@ const processListCreation = async () => {
     const listsContainer = document.querySelector('.lists-container')
     const newestList =
       listsContainer.children[listsContainer.children.length - 1]
-    newestList.scrollIntoView({ behavior: 'smooth' })
+    newestList.scrollIntoView()
   } else {
     // In desktop view, the screen is wide enough such that the new list will always be in view
     const boardContainer = document.querySelector('.board-container')

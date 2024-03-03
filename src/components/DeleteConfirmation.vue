@@ -11,14 +11,14 @@
     <button
       @click="emit('cancelTriggered')"
       type="button"
-      class="modal-button text-[var(--main-purple)] bg-[var(--light-purple)] hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
+      class="modal-button text-[var(--main-purple)] bg-[var(--light-purple)] hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)] transition-colors duration-100 ease-in-out"
     >
       <slot name="cancel-button">Cancel</slot>
     </button>
     <button
       @click="emit('deleteTriggered')"
       type="button"
-      class="modal-button text-white bg-red-500 hover:bg-red-400 active:bg-red-300"
+      class="modal-button text-white bg-red-500 hover:bg-red-400 active:bg-red-300 transition-colors duration-100 ease-in-out"
     >
       <slot name="delete-button">Delete</slot>
     </button>

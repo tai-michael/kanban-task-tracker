@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-x-2 mb-7">
+  <div class="flex flex-col gap-x-2 mb-9">
     <div
       class="relative flex justify-between mb-1 ml-[var(--card-gutter-mobile)] xs:ml-[var(--card-gutter-desktop)]"
     >
@@ -78,10 +78,15 @@ onMounted(() => {
   display: block;
   min-height: 55px;
   padding: 8px 12px;
-  background-color: #091e420f;
+  background-color: var(--light-gray-button);
   font-weight: 500;
-  border-radius: 4px;
+  border-radius: 3px;
   color: var(--card-text);
   text-decoration: none;
+  transition: background-color 0.1s ease-in-out;
+
+  &:hover {
+    background-color: var(--light-gray-button-hover);
+  }
 }
 </style>
