@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-x-2 mb-9">
     <div
-      class="relative flex justify-between mb-1 ml-[var(--card-gutter-mobile)] xs:ml-[var(--card-gutter-desktop)]"
+      class="relative flex justify-between mb-2 ml-[var(--card-gutter-mobile)] xs:ml-[var(--card-gutter-desktop)]"
     >
       <div class="absolute left-[-35px]">
         <CheckSquareIcon
@@ -9,17 +9,17 @@
           :color="'hsla(218, 24%, 35%)'"
         />
       </div>
-      <label class="block mb-2 text-base font-semibold text-[var(--card-text)]"
+      <label class="block text-base font-semibold text-[var(--card-text)]"
         >Checklist</label
       >
     </div>
 
-    <div class="xs:ml-[var(--card-gutter-desktop)]">
-      <ul class="mb-3">
+    <div class="ml-1 xs:ml-[var(--card-gutter-desktop)]">
+      <ul class="mb-1">
         <li
           v-for="item of store.cardDetails.checklist"
           :key="item.id"
-          class="flex first:border-t [&:not(:last-child)]:border-b"
+          class="flex [&:not(:last-child)]:border-b"
         >
           <ChecklistItem :item="item" />
         </li>
@@ -31,13 +31,23 @@
           v-focus="isCreatingItem"
           @blur="processItemCreation"
           placeholder="Add an item"
-          class="w-full"
+          class="p-1.5 mb-3"
         />
         <div>
-          <button @mousedown="processItemCreation" type="submit" class="mr-2">
+          <button
+            @mousedown="processItemCreation"
+            type="submit"
+            class="mr-2 inline-flex py-[6px] px-[16px] rounded font-medium text-white bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] active:bg-[var(--medium-blue)] transition-colors duration-100 ease-in-out"
+          >
             Add
           </button>
-          <button @mousedown="exitItemCreation" type="button">Cancel</button>
+          <button
+            @mousedown="exitItemCreation"
+            type="button"
+            class="py-[6px] px-[16px] rounded font-medium text-[var(--card-text)] hover:bg-[var(--light-gray-button-hover)] active:bg-[var(--light-gray-button-hover)] transition-colors duration-100 ease-in-out"
+          >
+            Cancel
+          </button>
         </div>
       </div>
 
@@ -45,7 +55,7 @@
         v-else
         @click="isCreatingItem = true"
         type="button"
-        class="inline-flex py-[6px] px-[16px] rounded font-medium bg-[var(--light-gray-button)] hover:bg-[var(--light-gray-button-hover)] text-[var(--card-text)] transition-colors duration-100 ease-in-out"
+        class="inline-flex py-[6px] px-[16px] rounded font-medium text-[var(--card-text)] bg-[var(--light-gray-button)] hover:bg-[var(--light-gray-button-hover)] active:bg-[var(--light-gray-button-hover)] transition-colors duration-100 ease-in-out"
       >
         Add item
       </button>
