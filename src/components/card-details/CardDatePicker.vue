@@ -1,6 +1,6 @@
 <template>
   <label class="block mb-2 text-sm font-semibold text-[var(--card-text-subtle)]"
-    >Due date:</label
+    >Due date</label
   >
 
   <div class="flex gap-x-2">
@@ -24,74 +24,91 @@
       @scroll.prevent
     ></div>
 
-    <VueDatePicker
-      ref="datePicker"
-      v-model="selectedDate"
-      @open="toggleBackdrop"
-      @closed="toggleBackdrop"
-      @update:model-value="handleDateSelected"
-      time-picker-inline
-      select-text="Save"
-      :teleport-center="isMobileView ? true : false"
-      :alt-position="customCalenderPosition"
-      :dark="isDark ? true : false"
+    <div
+      class="flex gap-x-2 bg-[var(--light-gray-button)] p-1.5 rounded"
+      :class="{ 'p-0': !selectedDate }"
     >
-      <template #trigger>
-        <input
-          :value="formattedDueDate"
-          type="text"
-          readonly
-          placeholder="Select Date"
-          class="w-[130px] py-1 px-3 border-2 cursor-pointer"
-          :class="{ 'pl-5': !selectedDate }"
-        />
-      </template>
+      <VueDatePicker
+        ref="datePicker"
+        v-model="selectedDate"
+        @open="toggleBackdrop"
+        @closed="toggleBackdrop"
+        @update:model-value="handleDateSelected"
+        time-picker-inline
+        select-text="Save"
+        :teleport-center="isMobileView ? true : false"
+        :alt-position="customCalenderPosition"
+        :dark="isDark ? true : false"
+      >
+        <template #trigger>
+          <div
+            class="relative hover:outline hover:outline-1 hover:outline-offset-[6px] hover:rounded-[1px]"
+            :class="{
+              'hover:outline-offset-[unset]': selectedDate,
+            }"
+          >
+            <input
+              :value="formattedDueDate"
+              type="text"
+              readonly
+              placeholder="Select Date"
+              class="date-input w-[140px] py-1 px-3 cursor-pointer outline-none"
+              :class="{
+                'bg-transparent': !selectedDate,
+              }"
+            />
+          </div>
+        </template>
 
-      <template #action-buttons class="relative z-[var(--z-popover)]">
+        <template #action-buttons class="relative z-[var(--z-popover)]">
+          <span
+            class="absolute top-[13px] left-[43%] font-semibold text-[var(--card-text-subtle)]"
+            >Dates</span
+          >
+
+          <button
+            @click.prevent="datePicker?.closeMenu"
+            type="button"
+            class="absolute top-[8px] right-2 font-normal p-2.5 rounded hover:bg-[#f3f3f3] active:bg-[#f3f3f3]"
+          >
+            <img :src="CrossIcon" class="w-3 h-3" />
+          </button>
+
+          <div class="my-0.5">
+            <button
+              v-if="selectedDate"
+              type="button"
+              class="w-[75px] h-[35px] mr-1 rounded hover:bg-[#f3f3f3] active:bg-[#f3f3f3]"
+              @click.prevent="handleClearDueDate"
+            >
+              Remove
+            </button>
+            <button
+              type="button"
+              class="w-[65px] h-[35px] rounded text-white bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] active:bg-[var(--medium-blue)]"
+              @click.prevent="datePicker?.selectDate"
+            >
+              Save
+            </button>
+          </div>
+        </template>
+      </VueDatePicker>
+
+      <div
+        v-if="isCompleted || isOverdue"
+        class="flex items-center justify-center"
+      >
         <span
-          class="absolute top-[13px] left-[43%] font-semibold text-[var(--card-text-subtle)]"
-          >Dates</span
+          v-if="isCompleted"
+          class="bg-[#1f845a] text-white px-1.5 flex items-center rounded h-[85%]"
+          >Completed</span
         >
-
-        <button
-          @click.prevent="datePicker?.closeMenu"
-          type="button"
-          class="absolute top-[8px] right-2 font-normal p-2.5 rounded hover:bg-[#f3f3f3] active:bg-[#f3f3f3]"
+        <span
+          v-if="isOverdue"
+          class="bg-[#ffeceb] text-[#ae2a19] px-1.5 flex items-center rounded h-[87%]"
+          >Overdue</span
         >
-          <img :src="CrossIcon" class="w-3 h-3" />
-        </button>
-
-        <div class="my-0.5">
-          <button
-            v-if="selectedDate"
-            type="button"
-            class="w-[65px] h-[35px] mr-1 rounded hover:bg-[#f3f3f3] active:bg-[#f3f3f3]"
-            @click.prevent="handleClearDueDate"
-          >
-            Remove
-          </button>
-          <button
-            type="button"
-            class="w-[65px] h-[35px] rounded text-white bg-[#1976d2] hover:bg-[#1c8cfc] active:bg-[#1c8cfc]"
-            @click.prevent="datePicker?.selectDate"
-          >
-            Save
-          </button>
-        </div>
-      </template>
-    </VueDatePicker>
-
-    <div class="flex items-center justify-center">
-      <span
-        v-if="isCompleted"
-        class="bg-[#1f845a] text-white px-1.5 flex items-center rounded h-[85%]"
-        >Completed</span
-      >
-      <span
-        v-if="isOverdue"
-        class="bg-[#ffeceb] text-[#ae2a19] px-1.5 flex items-center rounded h-[87%]"
-        >Overdue</span
-      >
+      </div>
     </div>
   </div>
 </template>
@@ -107,7 +124,7 @@ import { useCardStore } from '@/stores'
 const store = useCardStore()
 const isDark = useDark()
 const isMobileView = inject('isMobileView')
-const customCalenderPosition = () => ({ top: 43, left: 0 })
+const customCalenderPosition = () => ({ top: 40, left: -6 })
 
 const isDatePickerOpen = ref(false)
 const toggleBackdrop = () => {
@@ -165,8 +182,13 @@ const isOverdue = computed(() => {
 </script>
 
 <style scoped lang="scss">
+.date-input::placeholder {
+  color: var(--card-text);
+}
+
 .dp__main {
-  width: 130px !important;
+  // width: 130px !important;
+  width: 140px !important;
   --dp-menu-min-width: 300px;
   --dp-menu-padding: 50px 10px 0 10px;
   --dp-font-family: var(--font-family);
