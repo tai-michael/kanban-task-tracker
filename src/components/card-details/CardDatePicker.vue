@@ -57,6 +57,13 @@
                 'bg-transparent': !selectedDate,
               }"
             />
+            <img
+              :src="DownIcon"
+              class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+              :class="{
+                'right-4': !selectedDate,
+              }"
+            />
           </div>
         </template>
 
@@ -116,6 +123,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, inject } from 'vue'
 import CrossIcon from '@/assets/icons/icon-cross.svg'
+import DownIcon from '@/assets/icons/icon-chevron-down.svg'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import type { DatePickerInstance } from '@vuepic/vue-datepicker'
