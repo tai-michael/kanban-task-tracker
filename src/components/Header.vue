@@ -122,9 +122,9 @@ header {
   justify-content: center;
   width: 100%;
   height: var(--header-height-mobile);
-  background-color: white;
+  background-color: var(--header-color);
   z-index: var(--z-header);
-  border-bottom: 1px solid var(--lines-light);
+  border-bottom: 1px solid var(--border);
 }
 
 .title {
