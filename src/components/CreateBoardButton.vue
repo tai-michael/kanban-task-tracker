@@ -23,7 +23,7 @@ const { toggleModal } = useModalToggler('boardComposer')
 
 <style scoped>
 .hover-effect:hover {
-  background-color: var(--light-purple);
+  background-color: var(--create-board-button-hover);
   border-radius: 0px 100px 100px 0px;
 
   span {

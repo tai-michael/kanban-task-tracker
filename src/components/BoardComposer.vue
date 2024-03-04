@@ -11,10 +11,11 @@
     @click="handleCreateBoard"
     type="submit"
     :disabled="!boardTitle"
-    :class="[
-      { '!bg-[#d3e5f779]': !boardTitle, 'cursor-not-allowed': !boardTitle },
-    ]"
-    class="modal-button bg-[#90bdfd] hover:bg-[#a5caff] active:bg-[#b3d4ff] transition-colors duration-100 ease-in-out"
+    class="modal-button text-white bg-[var(--main-purple)] hover:bg-[var(--main-purple-hover)] active:bg-[var(--main-purple--hover)] transition-colors duration-100 ease-in-out"
+    :class="{
+      '!text-[var(--main-purple)] !bg-[var(--main-purple-transparent)] cursor-not-allowed':
+        !boardTitle,
+    }"
   >
     Create
   </button>
