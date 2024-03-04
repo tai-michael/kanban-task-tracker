@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex flex-col shrink-0 bg-[var(--sidebar-background)] absolute top-0 bottom-0 left-0 xs:w-[var(--sidebar-width)] xs:border-r xs:border-r-[var(--lines-light)] transition-transform duration-300 ease-in-out"
+    class="flex flex-col shrink-0 bg-[var(--sidebar-bg)] absolute top-0 bottom-0 left-0 xs:w-[var(--sidebar-width)] xs:border-r xs:border-r-[var(--border)] transition-transform duration-300 ease-in-out"
     :class="isSidebarShown ? 'translate-x-0' : '-translate-x-full'"
   >
     <div
@@ -99,11 +99,12 @@ const toggleSidebar = () => {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--scrollbar-thumb-color);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-color);
   border-radius: 10px;
 }
 
