@@ -7,7 +7,7 @@
       class="hidden xs:flex items-center shrink-0 h-[var(--header-height-desktop)] pl-8"
     >
       <img
-        :src="LogoDark"
+        :src="isDark ? LogoLight : LogoDark"
         class="cursor-pointer w-[150px]"
         @click="router.push('/')"
       />
@@ -54,7 +54,9 @@ import BoardSearch from '@/components/BoardSearch.vue'
 import DarkmodeToggle from '@/components/DarkmodeToggle.vue'
 import HideSidebarButton from '@/components/HideSidebarButton.vue'
 import LogoDark from '@/assets/images/logo-dark.svg'
+import LogoLight from '@/assets/images/logo-light.svg'
 import ShowSidebar from '@/assets/icons/icon-show-sidebar.svg'
+import { useDark } from '@vueuse/core'
 import { useLocalStorage } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 import { useBoardStore } from '@/stores'
@@ -67,6 +69,7 @@ const TransitionFade = defineAsyncComponent(
 const router = useRouter()
 const boardStore = useBoardStore()
 const emit = defineEmits(['boardLinkClicked'])
+const isDark = useDark()
 
 const isSidebarShown = useLocalStorage('is-sidebar-expanded', true)
 const toggleSidebar = () => {
