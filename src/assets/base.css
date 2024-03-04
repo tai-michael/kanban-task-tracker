@@ -2,102 +2,6 @@
 /* @import '@fontsource/plus-jakarta-sans/400.css'; Specify weight */
 /* @import '@fontsource/plus-jakarta-sans/400-italic.css'; Specify weight and style */
 
-/* color palette from <https://github.com/vuejs/theme> */
-:root {
-  --main-purple: hsla(242, 48%, 58%);
-  --main-purple-hover: hsla(243, 100%, 82%);
-  --light-purple: hsla(242, 48%, 58%, 10%);
-  --icon-button-hover: hsla(242, 48%, 58%, 15%);
-  --icon-button-active: hsla(242, 48%, 58%, 25%);
-
-  --black: hsla(237, 100%, 4%);
-  --very-dark-gray-dark-bg: hsla(235, 16%, 15%);
-
-  --dark-gray: hsla(235, 12%, 19%);
-  --medium-gray: hsla(216, 15%, 57%);
-  --light-gray-light-bg: hsla(220, 69%, 97%);
-
-  --card-text: hsla(218, 54%, 20%);
-  --card-text-subtle: hsla(218, 24%, 35%);
-  --card-gutter-desktop: 40px;
-  --card-gutter-mobile: 35px;
-
-  --lines-dark: hsla(236, 11%, 27%);
-  --lines-light: hsla(221, 69%, 94%);
-
-  --red: hsla(0, 78%, 63%);
-  --red-hover: hsla(0, 100%, 80%);
-
-  --header-height-mobile: 4rem;
-  --header-height-desktop: 6rem;
-
-  --sidebar-background: hsla(0, 100%, 100%);
-  --sidebar-width: 300px;
-  --sidebar-navbtn-width-mobile: 290px;
-  --sidebar-navbtn-width-desktop: 275px;
-
-  --z-header: 10;
-  --z-backdrop: 20;
-  --z-popover: 30;
-  /* --box-shadow-blurry: 0px 4px 6px 0px #364e7e1a; */
-  --box-shadow-light: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;
-  --box-shadow-heavy: 0px -2px 2px rgba(9, 30, 66, 0.03),
-    0px 2px 2px rgba(9, 30, 66, 0.15), 0px 3px 3px rgba(9, 30, 66, 0.2);
-
-  /* --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: #2c3e50;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64); */
-
-  --font-family: 'Plus Jakarta Sans', Inter, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
-}
-
-/* semantic color variables for this project */
-/* :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
-} */
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
-} */
-
 *,
 *::before,
 *::after {
@@ -108,11 +12,6 @@
 
 body {
   min-height: 100vh;
-  /* color: var(--color-text);
-  background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s; */
   line-height: 1.6;
   font-family: var(--font-family);
   font-size: 15px;
@@ -125,6 +24,117 @@ body {
   height: 100vh;
   /* min-height: 100vh; */
 }
+
+/* color variables */
+:root {
+  --main-purple: hsla(242, 48%, 58%);
+  --main-purple-hover: hsla(243, 100%, 82%);
+  --main-purple-transparent: hsla(242, 48%, 58%, 10%);
+
+  --very-dark-gray: hsla(235, 16%, 15%, 1);
+  --dark-gray: hsla(235, 12%, 19%, 1);
+  --medium-gray: hsla(216, 15%, 57%);
+
+  --light-gray: hsla(218, 76%, 15%, 6%);
+  --light-gray-hover: hsla(218, 76%, 15%, 10%);
+  --very-light-gray: hsla(220, 69%, 97%);
+
+  --dark-blue: hsla(210, 79%, 46%);
+  --medium-blue: hsla(210, 97%, 55%);
+}
+
+:root {
+  --header-color: white;
+  --header-height-mobile: 4rem;
+  --header-height-desktop: 6rem;
+  --border: hsla(221, 69%, 94%);
+
+  --sidebar-bg: hsla(0, 100%, 100%);
+  --sidebar-width: 300px;
+  --sidebar-navbtn-width-mobile: 290px;
+  --sidebar-navbtn-width-desktop: 275px;
+  --sidebar-navbtn-hover: var(--main-purple-transparent);
+  --create-board-button-hover: var(--main-purple-transparent);
+  --hide-sidebar-button-hover: var(--main-purple-transparent);
+
+  --board-bg: var(--very-light-gray);
+  --sidebar-bg: var(--very-light-gray);
+  --darkmode-toggle-bg: var(--very-light-gray);
+  --card-mobile-header-bg: var(--very-light-gray);
+
+  --list-bg: hsl(220, 69%, 98.5%);
+  --scrollbar-track-color: var(--light-gray);
+  --scrollbar-thumb-color: rgba(0, 0, 0, 0.2);
+
+  --icon-button-hover: hsla(242, 48%, 58%, 15%);
+  --icon-button-active: hsla(242, 48%, 58%, 25%);
+
+  --title-color: black;
+  --card-preview-bg: white;
+  --card-preview-title: black;
+  --card-preview-overdue: hsla(0, 100%, 55%);
+  --card-preview-overdue-hover: hsla(0, 100%, 70%);
+  --card-preview-complete: hsla(155, 62%, 35%, 1);
+  --card-preview-complete-hover: hsla(155, 62%, 43%);
+  --card-preview-attachment-icon: hsla(218, 24%, 35%, 80%);
+
+  --card-primary-button: var(--dark-blue);
+  --card-primary-button-hover: var(--medium-blue);
+  --card-secondary-button: var(--light-gray);
+  --card-secondary-button-hover: var(--light-gray-hover);
+
+  --card-text: hsla(218, 54%, 20%);
+  --card-text-subtle: hsla(218, 24%, 35%);
+  --card-gutter-desktop: 40px;
+  --card-gutter-mobile: 35px;
+
+  --z-header: 10;
+  --z-backdrop: 20;
+  --z-popover: 30;
+  --box-shadow-light: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;
+  --box-shadow-heavy: 0px -2px 2px rgba(9, 30, 66, 0.03),
+    0px 2px 2px rgba(9, 30, 66, 0.15), 0px 3px 3px rgba(9, 30, 66, 0.2);
+  /* --box-shadow-blurry: 0px 4px 6px 0px #364e7e1a; */
+
+  --font-family: 'Plus Jakarta Sans', Inter, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+}
+
+.dark {
+  --header-color: var(--dark-gray);
+  --border: hsla(236, 11%, 27%);
+
+  --sidebar-bg: var(--dark-gray);
+  --sidebar-navbtn-hover: white;
+  --create-board-button-hover: white;
+  --hide-sidebar-button-hover: white;
+
+  --board-bg: var(--very-dark-gray);
+  --darkmode-toggle-bg: var(--very-dark-gray);
+  --card-mobile-header-bg: var(--very-dark-gray);
+
+  --list-bg: hsla(235, 12%, 19%, 70%);
+  --scrollbar-thumb-color: hsla(216, 15%, 57%, 25%);
+  --scrollbar-track-color: hsla(216, 15%, 57%, 5%);
+
+  --icon-button-hover: hsla(220, 69%, 97%, 10%);
+  --icon-button-active: hsla(220, 69%, 97%, 20%);
+
+  --title-color: white;
+  --card-preview-bg: hsla(235, 12%, 22%, 95%);
+  --card-preview-title: white;
+  --card-preview-attachment-icon: hsla(216, 15%, 50%);
+
+  --card-text-subtle: var(--medium-gray);
+}
+
+/* TODO see if I could merge this with .dark above */
+/* @media (prefers-color-scheme: dark) {
+  :root {
+
+  }
+} */
 
 .icon-button {
   width: 100%;
@@ -219,6 +229,6 @@ body {
 
   &__button:active,
   &__button:hover {
-    background-color: var(--light-purple);
+    background-color: var(--main-purple-transparent);
   }
 }
