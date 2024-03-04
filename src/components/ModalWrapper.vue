@@ -16,6 +16,7 @@
       :class="[
         {
           [props.dialogContentClasses]: props.dialogContentClasses,
+          grid: props.loading,
         },
       ]"
       @click.stop
@@ -36,9 +37,15 @@
           <img :src="CrossIcon" />
         </button>
 
-        <!-- TODO replace with spinner -->
-        <div v-if="props.loading">Loading...</div>
-        <slot v-else />
+        <div
+          v-if="props.loading"
+          class="w-full h-full flex justify-center items-center"
+        >
+          <SpinnerCircle
+            :spinner-classes="'flex w-14 h-14 border-4 border-[var(--main-purple-hover)]'"
+          />
+        </div>
+        <slot />
       </form>
     </div>
   </dialog>
@@ -47,6 +54,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import CrossIcon from '@/assets/icons/icon-cross.svg'
+import SpinnerCircle from '@/assets/spinner-circle.vue'
 
 const dialog = ref<HTMLDialogElement>() // backdrop element
 const props = defineProps({
@@ -130,6 +138,7 @@ dialog {
   position: fixed;
   inset: 0;
   margin: auto;
+  outline: none;
 }
 
 dialog::backdrop {

@@ -1,14 +1,14 @@
 <template>
   <div class="flex shrink-0 w-10 h-10 relative">
     <button
-      @click.prevent="toggleEllipsisMenu"
+      @mousedown.prevent="toggleEllipsisMenu"
       :class="['icon-button', { 'icon-button--selected': isEllipsisMenuOpen }]"
     >
       <img :src="EllipsisIcon" class="w-[20px] h-[20px]" />
     </button>
 
     <div v-if="isEllipsisMenuOpen">
-      <div class="backdrop" @click="toggleEllipsisMenu"></div>
+      <div class="backdrop" @mousedown="toggleEllipsisMenu"></div>
 
       <div
         class="ellipsis-popover"
@@ -16,7 +16,7 @@
       >
         <button
           v-if="props.deleteButtonLabel"
-          @click="toggleModal"
+          @mousedown="toggleModal"
           type="button"
           class="ellipsis-popover__button"
         >
