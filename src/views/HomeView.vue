@@ -9,7 +9,7 @@
       @mouseup="stopDragging"
       @mouseleave="stopDragging"
       @mousemove="dragBackground"
-      class="board-container flex-grow overflow-x-auto bg-[var(--light-gray-light-bg)] xs:transition-ml xs:duration-300"
+      class="board-container flex-grow overflow-x-auto bg-[var(--board-bg)] xs:transition-ml xs:duration-300"
       :class="mainContentClass"
     >
       <Header
@@ -189,7 +189,7 @@ const { startDragging, stopDragging, dragBackground } = useBackgroundDrag(
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: var(--scrollbar-thumb-color);
     border-radius: 10px;
   }
 }

@@ -164,7 +164,8 @@ const checkIfCardHoveringDeleteZone = (evt) => {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
+  // background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--scrollbar-thumb-color);
   border-radius: 10px;
 }
 
@@ -185,7 +186,7 @@ const checkIfCardHoveringDeleteZone = (evt) => {
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background-color: #091e420f;
+    background-color: var(--scrollbar-track-color);
   }
 }
 </style>

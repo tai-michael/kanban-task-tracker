@@ -11,7 +11,7 @@
       <div
         v-for="list in store.board.lists"
         :key="list.id"
-        class="w-[304px] h-fit rounded pb-2 xs:snap-align-none bg-[hsl(220,69%,98.5%)] box-shadow"
+        class="w-[304px] h-fit rounded pb-2 xs:snap-align-none bg-[var(--list-bg)] box-shadow"
         :class="{ 'snap-center': !isListHeld }"
       >
         <div class="list-container">
