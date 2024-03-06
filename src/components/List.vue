@@ -48,10 +48,10 @@
     <button
       @click="toggleCardComposer"
       type="button"
-      class="flex items-center gap-x-2 w-full py-2 pl-4 rounded-lg bg-[hsl(110,34.5%,98.5%)] hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
+      class="flex items-center gap-x-2 w-full py-2 pl-4 rounded-lg bg-transparent hover:bg-[var(--add-card-button)] active:bg-[var(--add-card-button)]"
     >
-      <PlusIcon :color="'var(--medium-gray)'" /><span
-        class="font-medium text-[var(--medium-gray)]"
+      <PlusIcon :color="'var(--medium-dark-gray)'" /><span
+        class="font-medium text-[var(--medium-dark-gray)]"
         >Add a card</span
       >
     </button>
