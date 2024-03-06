@@ -1,6 +1,8 @@
 <template>
   <ul class="select-none" :class="{ 'custom-outline': !isCardHeld }">
-    <li class="leading-5 mb-1.5">{{ card.title }}</li>
+    <li class="leading-5 mb-1.5 text-[var(--card-preview-title)]">
+      {{ card.title }}
+    </li>
 
     <li class="flex flex-wrap gap-x-2 items-center *:mb-1">
       <button
@@ -10,8 +12,10 @@
         @mouseleave="hover = false"
         class="card-badge"
         :class="{
-          'bg-[#ff5555] hover:bg-[#ff8282]': isOverdue,
-          'bg-[#259c6b] hover:bg-[#34c086]': card.is_completed,
+          'bg-[var(--card-preview-overdue)] hover:bg-[var(--card-preview-overdue-hover)]':
+            isOverdue,
+          'bg-[var(--card-preview-complete)] hover:bg-[var(--card-preview-complete-hover)]':
+            card.is_completed,
         }"
       >
         <div class="w-5">
@@ -63,7 +67,7 @@
       </div>
 
       <div v-if="card.attachments_total" class="card-badge">
-        <AttachmentIcon :color="'hsla(218, 24%, 35%, 80%)'" /><span
+        <AttachmentIcon :color="'var(--card-preview-attachment-icon)'" /><span
           class="text-[var(--card-text-subtle)]"
           >{{ card.attachments_total }}</span
         >
@@ -133,7 +137,7 @@ ul {
   padding: 8px 12px 4px;
   margin: 8px 0px;
   border-radius: 8px;
-  background: white;
+  background: var(--card-preview-bg);
   box-shadow: var(--box-shadow-light);
 
   &:first-child {
