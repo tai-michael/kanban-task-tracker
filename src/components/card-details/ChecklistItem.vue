@@ -28,14 +28,14 @@
               <button
                 @mousedown="saveItemName(item.name)"
                 type="submit"
-                class="mr-1.5 inline-flex py-[6px] px-[16px] rounded font-medium bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] active:bg-[var(--medium-blue)] text-white transition-colors duration-100 ease-in-out"
+                class="mr-1.5 inline-flex py-[6px] px-[16px] rounded font-medium bg-[var(--card-primary-button)] hover:bg-[var(--card-primary-button-hover)] active:bg-[var(--card-primary-button-hover)] text-white transition-colors duration-100 ease-in-out"
               >
                 Save
               </button>
               <button
                 @mousedown="clearItemEdit(item.id, item.name)"
                 type="button"
-                class="flex items-center justify-center h-[34.5px] w-[34.5px] rounded hover:bg-[var(--light-gray-button-hover)] active:bg-[var(--light-gray-button-hover)] transition-colors duration-100 ease-in-out"
+                class="flex items-center justify-center h-[34.5px] w-[34.5px] rounded hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
               >
                 <img :src="CrossIcon" class="w-4 h-4" />
               </button>
@@ -44,7 +44,7 @@
             <button
               @mousedown="handleDeleteItem(item.id)"
               type="button"
-              class="px-2 rounded hover:bg-[var(--light-gray-button-hover)] active:bg-[var(--light-gray-button-hover)] transition-colors duration-100 ease-in-out"
+              class="px-2 rounded hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
             >
               <label class="font-medium select-none cursor-pointer"
                 >Delete item</label

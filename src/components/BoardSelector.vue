@@ -28,7 +28,7 @@
       >
         <BoardIcon :color="getBoardIconColor(board.id)" />
         <span
-          class="truncate whitespace-nowrap font-bold text-[var(--medium-gray)] max-w-[calc(var(--sidebar-navbtn-width-mobile)-80px)] xs:max-w-[calc(var(--sidebar-navbtn-width-desktop)-80px)]"
+          class="truncate whitespace-nowrap font-bold text-[var(--medium-dark-gray)] max-w-[calc(var(--sidebar-navbtn-width-mobile)-80px)] xs:max-w-[calc(var(--sidebar-navbtn-width-desktop)-80px)]"
           >{{ board.title }}</span
         ></router-link
       >
@@ -83,7 +83,7 @@ const getBoardIconColor = (boardId: string) => {
   } else if (boardId === hoveredBoardId.value) {
     return 'var(--main-purple)' // Hover color
   }
-  return 'var(--medium-gray)' // Default color
+  return 'var(--medium-dark-gray)' // Default color
 }
 </script>
 

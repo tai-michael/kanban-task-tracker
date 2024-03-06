@@ -22,7 +22,7 @@
       <div v-if="!store.cardDetails?.attachments.length">
         <AddAttachmentButton />
       </div>
-      <!-- REVIEW need to test how upload error actually looks, and possibly place in top div instead -->
+      <!-- TODO need to test how upload error actually looks, and possibly place in top div instead -->
       <div v-if="uploadErrorMessage">
         <span class="text-red-600">{{ uploadErrorMessage }}</span>
       </div>

@@ -23,7 +23,7 @@
 
     <SpinnerCircle
       v-if="isUploadingFile"
-      :spinner-classes="'absolute flex w-5 h-5 border-2 border-[var(--medium-gray)]'"
+      :spinner-classes="'absolute flex w-5 h-5 border-2 border-[var(--medium-dark-gray)]'"
     />
   </label>
 </template>
@@ -143,7 +143,7 @@ const uploadFile = async (event) => {
   justify-content: center;
   align-items: center;
   padding: 6px 16px;
-  background-color: var(--light-gray-button);
+  background-color: var(--card-secondary-button);
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 0.75rem;
@@ -151,7 +151,7 @@ const uploadFile = async (event) => {
 
   &:hover,
   &:active {
-    background-color: var(--light-gray-button-hover);
+    background-color: var(--card-secondary-button-hover);
   }
 }
 

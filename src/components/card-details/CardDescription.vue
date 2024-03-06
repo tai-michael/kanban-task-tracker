@@ -78,7 +78,7 @@ onMounted(() => {
   display: block;
   min-height: 55px;
   padding: 8px 12px;
-  background-color: var(--light-gray-button);
+  background-color: var(--card-secondary-button);
   font-weight: 500;
   border-radius: 3px;
   color: var(--card-text);
@@ -86,7 +86,7 @@ onMounted(() => {
   transition: background-color 0.1s ease-in-out;
 
   &:hover {
-    background-color: var(--light-gray-button-hover);
+    background-color: var(--card-secondary-button-hover);
   }
 }
 </style>

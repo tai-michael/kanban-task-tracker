@@ -25,7 +25,7 @@
     ></div>
 
     <div
-      class="flex gap-x-2 bg-[var(--light-gray-button)] p-1.5 rounded"
+      class="flex gap-x-2 bg-[var(--card-secondary-button)] p-1.5 rounded"
       :class="{ 'p-0': !selectedDate }"
     >
       <VueDatePicker
@@ -92,7 +92,7 @@
             </button>
             <button
               type="button"
-              class="w-[65px] h-[35px] rounded text-white bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] active:bg-[var(--medium-blue)]"
+              class="w-[65px] h-[35px] rounded text-white bg-[var(--card-primary-button)] hover:bg-[var(--card-primary-button-hover)] active:bg-[var(--card-primary-button-hover)]"
               @click.prevent="datePicker?.selectDate"
             >
               Save

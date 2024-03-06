@@ -8,9 +8,9 @@
       @mouseleave="hovered = false"
     >
       <HideSidebarIcon
-        :color="hovered ? 'var(--main-purple)' : 'var(--medium-gray)'"
+        :color="hovered ? 'var(--main-purple)' : 'var(--medium-dark-gray)'"
       />
-      <span class="text-[var(--medium-gray)] font-bold">Hide Sidebar</span>
+      <span class="text-[var(--medium-dark-gray)] font-bold">Hide Sidebar</span>
     </button>
     <div class="mt-3 ml-6">
       <button @click="signOut(auth)" type="button" class="mr-4">

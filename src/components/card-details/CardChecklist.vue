@@ -37,14 +37,14 @@
           <button
             @mousedown="processItemCreation"
             type="submit"
-            class="mr-2 inline-flex py-[6px] px-[16px] rounded font-medium text-white bg-[var(--dark-blue)] hover:bg-[var(--medium-blue)] active:bg-[var(--medium-blue)] transition-colors duration-100 ease-in-out"
+            class="mr-2 inline-flex py-[6px] px-[16px] rounded font-medium text-white bg-[var(--card-primary-button)] hover:bg-[var(--card-primary-button-hover)] active:bg-[var(--card-primary-button-hover)] transition-colors duration-100 ease-in-out"
           >
             Add
           </button>
           <button
             @mousedown="exitItemCreation"
             type="button"
-            class="py-[6px] px-[16px] rounded font-medium text-[var(--card-text)] hover:bg-[var(--light-gray-button-hover)] active:bg-[var(--light-gray-button-hover)] transition-colors duration-100 ease-in-out"
+            class="py-[6px] px-[16px] rounded font-medium text-[var(--card-text)] hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
           >
             Cancel
           </button>
@@ -55,7 +55,7 @@
         v-else
         @click="isCreatingItem = true"
         type="button"
-        class="inline-flex py-[6px] px-[16px] rounded font-medium text-[var(--card-text)] bg-[var(--light-gray-button)] hover:bg-[var(--light-gray-button-hover)] active:bg-[var(--light-gray-button-hover)] transition-colors duration-100 ease-in-out"
+        class="inline-flex py-[6px] px-[16px] rounded font-medium text-[var(--card-text)] bg-[var(--card-secondary-button)] hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
       >
         Add item
       </button>

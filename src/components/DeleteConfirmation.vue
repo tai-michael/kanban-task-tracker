@@ -3,7 +3,7 @@
     <slot name="header"></slot>
   </h2>
 
-  <span class="font-medium text-sm text-[var(--medium-gray)] leading-6">
+  <span class="font-medium text-sm text-[var(--medium-dark-gray)] leading-6">
     <slot name="body"></slot>
   </span>
 
@@ -11,7 +11,7 @@
     <button
       @click="emit('cancelTriggered')"
       type="button"
-      class="modal-button text-[var(--main-purple)] bg-[var(--light-purple)] hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)] transition-colors duration-100 ease-in-out"
+      class="modal-button text-[var(--main-purple)] bg-[var(--main-purple-transparent)] hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)] transition-colors duration-100 ease-in-out"
     >
       <slot name="cancel-button">Cancel</slot>
     </button>

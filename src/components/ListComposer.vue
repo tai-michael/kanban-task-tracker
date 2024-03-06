@@ -122,7 +122,7 @@ onUnmounted(() => {
   row-gap: 10px;
   padding: 8px;
   border-radius: 4px;
-  background-color: hsl(220 69% 98.5%);
+  background-color: var(--list-bg);
   box-shadow: var(--box-shadow-light);
 }
 
