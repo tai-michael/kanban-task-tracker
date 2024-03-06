@@ -33,7 +33,9 @@ body {
 
   --very-dark-gray: hsla(235, 16%, 15%, 1);
   --dark-gray: hsla(235, 12%, 19%, 1);
-  --medium-gray: hsla(216, 15%, 57%);
+  --medium-dark-gray: hsla(216, 15%, 57%);
+  --medium-gray: hsla(216, 15%, 57%, 25%);
+  --medium-light-gray: hsla(216, 15%, 57%, 5%);
 
   --light-gray: hsla(218, 76%, 15%, 6%);
   --light-gray-hover: hsla(218, 76%, 15%, 10%);
@@ -49,20 +51,22 @@ body {
   --header-height-desktop: 6rem;
   --border: hsla(221, 69%, 94%);
 
-  --sidebar-bg: hsla(0, 100%, 100%);
+  --sidebar-bg: white;
   --sidebar-width: 300px;
   --sidebar-navbtn-width-mobile: 290px;
   --sidebar-navbtn-width-desktop: 275px;
   --sidebar-navbtn-hover: var(--main-purple-transparent);
+  --search-input-bg: white;
+  --search-input-border-color: var(--medium-dark-gray);
   --create-board-button-hover: var(--main-purple-transparent);
   --hide-sidebar-button-hover: var(--main-purple-transparent);
 
   --board-bg: var(--very-light-gray);
-  --sidebar-bg: var(--very-light-gray);
   --darkmode-toggle-bg: var(--very-light-gray);
   --card-mobile-header-bg: var(--very-light-gray);
 
   --list-bg: hsl(220, 69%, 98.5%);
+  --add-card-button: var(--light-gray);
   --scrollbar-track-color: var(--light-gray);
   --scrollbar-thumb-color: rgba(0, 0, 0, 0.2);
 
@@ -107,6 +111,8 @@ body {
 
   --sidebar-bg: var(--dark-gray);
   --sidebar-navbtn-hover: white;
+  --search-input-bg: var(--medium-light-gray);
+  --search-input-border-color: var(--medium-gray);
   --create-board-button-hover: white;
   --hide-sidebar-button-hover: white;
 
@@ -115,8 +121,9 @@ body {
   --card-mobile-header-bg: var(--very-dark-gray);
 
   --list-bg: hsla(235, 12%, 19%, 70%);
-  --scrollbar-thumb-color: hsla(216, 15%, 57%, 25%);
-  --scrollbar-track-color: hsla(216, 15%, 57%, 5%);
+  --add-card-button: hsla(220, 69%, 97%, 10%);
+  --scrollbar-thumb-color: var(--medium-gray);
+  --scrollbar-track-color: var(--medium-light-gray);
 
   --icon-button-hover: hsla(220, 69%, 97%, 10%);
   --icon-button-active: hsla(220, 69%, 97%, 20%);
@@ -126,15 +133,8 @@ body {
   --card-preview-title: white;
   --card-preview-attachment-icon: hsla(216, 15%, 50%);
 
-  --card-text-subtle: var(--medium-gray);
+  --card-text-subtle: var(--medium-dark-gray);
 }
-
-/* TODO see if I could merge this with .dark above */
-/* @media (prefers-color-scheme: dark) {
-  :root {
-
-  }
-} */
 
 .icon-button {
   width: 100%;
