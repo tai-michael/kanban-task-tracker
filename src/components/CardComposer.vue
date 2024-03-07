@@ -24,14 +24,14 @@
       type="button"
       class="p-2.5 rounded hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
     >
-      <img :src="CrossIcon" class="w-3.5 h-3.5" />
+      <CrossIcon class="w-3.5 h-3.5" />
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import CrossIcon from '@/assets/icons/icon-cross.svg'
+import CrossIcon from '@/assets/icons/icon-cross.vue'
 import createAndAddCard from '@/composables/createAndAddCard'
 // TODO add 'required' to all required props in project
 const props = defineProps(['listId', 'isCreatingCard'])

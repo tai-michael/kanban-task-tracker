@@ -34,7 +34,7 @@
           aria-label="Close modal"
           class="absolute top-2 right-2 z-10 p-2 rounded-full hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)] transition-colors duration-100"
         >
-          <img :src="CrossIcon" />
+          <CrossIcon />
         </button>
 
         <div
@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
-import CrossIcon from '@/assets/icons/icon-cross.svg'
+import CrossIcon from '@/assets/icons/icon-cross.vue'
 import SpinnerCircle from '@/assets/spinner-circle.vue'
 
 const dialog = ref<HTMLDialogElement>() // backdrop element

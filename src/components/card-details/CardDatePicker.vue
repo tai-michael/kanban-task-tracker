@@ -78,7 +78,7 @@
             type="button"
             class="absolute top-[8px] right-2 font-normal p-2.5 rounded hover:bg-[#f3f3f3] active:bg-[#f3f3f3]"
           >
-            <img :src="CrossIcon" class="w-3 h-3" />
+            <CrossIcon class="w-3 h-3" />
           </button>
 
           <div class="my-0.5">
@@ -122,7 +122,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, inject } from 'vue'
-import CrossIcon from '@/assets/icons/icon-cross.svg'
+import CrossIcon from '@/assets/icons/icon-cross.vue'
 import DownIcon from '@/assets/icons/icon-chevron-down.svg'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'

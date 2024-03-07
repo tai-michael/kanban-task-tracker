@@ -25,7 +25,7 @@
           type="button"
           class="p-2.5 rounded hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
         >
-          <img :src="CrossIcon" class="w-3.5 h-3.5" />
+          <CrossIcon class="w-3.5 h-3.5" />
         </button>
       </div>
     </div>
@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, nextTick, inject, ref, type Ref } from 'vue'
-import CrossIcon from '@/assets/icons/icon-cross.svg'
+import CrossIcon from '@/assets/icons/icon-cross.vue'
 import PlusIcon from '@/assets/icons/icon-add.vue'
 import createAndAddList from '@/composables/createAndAddList'
 const isCreatingList = ref(false)

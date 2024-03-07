@@ -4,7 +4,7 @@
       @mousedown.prevent="toggleEllipsisMenu"
       :class="['icon-button', { 'icon-button--selected': isEllipsisMenuOpen }]"
     >
-      <img :src="EllipsisIcon" class="w-[20px] h-[20px]" />
+      <EllipsisIcon class="w-[20px] h-[20px]" />
     </button>
 
     <div v-if="isEllipsisMenuOpen">
@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import { ref, defineAsyncComponent } from 'vue'
-import EllipsisIcon from '@/assets/icons/icon-horizontal-ellipsis.svg'
+import EllipsisIcon from '@/assets/icons/icon-horizontal-ellipsis.vue'
 import DeleteIcon from '@/assets/icons/icon-delete.vue'
 import useEllipsisMenuState from '@/composables/useEllipsisMenuState'
 const ModalWrapper = defineAsyncComponent(

@@ -30,7 +30,7 @@
         type="button"
         class="flex items-center justify-center w-full h-full"
       >
-        <img :src="CrossIcon" class="w-4 h-4" />
+        <CrossIcon class="w-4 h-4" />
       </button>
     </div>
   </div>
@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { ref, nextTick, inject, computed } from 'vue'
 import SearchIcon from '@/assets/icons/icon-search.vue'
-import CrossIcon from '@/assets/icons/icon-cross.svg'
+import CrossIcon from '@/assets/icons/icon-cross.vue'
 import { useSearchStore } from '@/stores'
 import debounce from 'lodash/debounce'
 const store = useSearchStore()

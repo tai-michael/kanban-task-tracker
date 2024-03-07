@@ -31,7 +31,7 @@
             type="button"
             class="icon-button"
           >
-            <BackArrowIcon :color="'black'" class="w-8 h-8" />
+            <BackArrowIcon class="w-8 h-8" />
           </button>
         </div>
 

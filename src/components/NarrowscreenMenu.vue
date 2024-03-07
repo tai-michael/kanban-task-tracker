@@ -15,11 +15,12 @@
         aria-label="Close menu"
         class="absolute top-2.5 right-2.5 z-10 p-2 rounded-full hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)] transition-colors duration-100"
       >
-        <img :src="CrossIcon" />
+        <CrossIcon />
       </button>
-      <ul>
-        <li>Darkmode toggle</li>
+
+      <ul class="flex flex-col gap-y-6 mt-5">
         <li>(User profile button)</li>
+        <li><DarkmodeToggle class="h-12" /></li>
       </ul>
     </div>
   </TransitionFadeAndSlide>
@@ -27,9 +28,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import DarkmodeToggle from '@/components/DarkmodeToggle.vue'
 import TransitionFadeAndSlide from '@/components/transitions/TransitionFadeAndSlide.vue'
 import MenuIcon from '@/assets/icons/icon-menu.vue'
-import CrossIcon from '@/assets/icons/icon-cross.svg'
+import CrossIcon from '@/assets/icons/icon-cross.vue'
 const isOpen = ref(false)
 const toggleMenu = () => {
   isOpen.value = !isOpen.value

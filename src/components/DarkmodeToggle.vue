@@ -2,7 +2,7 @@
   <div
     class="flex justify-center items-center bg-[var(--darkmode-toggle-bg)] rounded-md"
   >
-    <img :src="SunIcon" class="mr-6" />
+    <SunIcon class="mr-6" />
     <label
       class="relative w-10 h-5 bg-[var(--main-purple)] rounded-full cursor-pointer hover:bg-[var(--main-purple-hover)]"
       for="dark-toggle"
@@ -17,14 +17,14 @@
       <div class="dot"></div>
     </label>
 
-    <img :src="MoonIcon" class="ml-6" />
+    <MoonIcon class="ml-6" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useDark } from '@vueuse/core'
-import MoonIcon from '@/assets/icons/icon-dark-theme.svg'
-import SunIcon from '@/assets/icons/icon-light-theme.svg'
+import MoonIcon from '@/assets/icons/icon-dark-theme.vue'
+import SunIcon from '@/assets/icons/icon-light-theme.vue'
 
 const isDark = useDark()
 </script>

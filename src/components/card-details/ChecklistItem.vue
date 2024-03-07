@@ -37,7 +37,7 @@
                 type="button"
                 class="flex items-center justify-center h-[34.5px] w-[34.5px] rounded hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
               >
-                <img :src="CrossIcon" class="w-4 h-4" />
+                <CrossIcon class="w-4 h-4" />
               </button>
             </div>
 
@@ -113,7 +113,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import EllipsisMenu from '@/components/EllipsisMenu.vue'
-import CrossIcon from '@/assets/icons/icon-cross.svg'
+import CrossIcon from '@/assets/icons/icon-cross.vue'
 import DeleteIcon from '@/assets/icons/icon-delete.vue'
 import { useCardStore } from '@/stores'
 const store = useCardStore()
