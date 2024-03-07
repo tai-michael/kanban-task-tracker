@@ -6,13 +6,13 @@
       v-model="searchInput"
       @blur="handleBlur"
       placeholder="Search boards"
-      class="w-full xs:w-[250px] mx-3 px-2 border-2"
+      class="w-full xs:w-[250px] mx-3 px-2 border rounded xs:rounded-lg"
     />
     <input
       v-else
       @click="beginSearch"
       placeholder="Search boards"
-      class="hidden xs:block w-full xs:w-[250px] mx-3 px-2 border-2"
+      class="hidden xs:block w-full xs:w-[250px] mx-3 px-2 bg-[var(--search-input-bg)] border border-[var(--search-input-border-color)] rounded xs:rounded-lg"
     />
 
     <div class="flex shrink-0 absolute top-0 right-3 w-12 h-10">
