@@ -120,7 +120,7 @@ const getBoardIconColor = (boardId: string) => {
   max-height: 32.5em;
 }
 .mobile-border {
-  border-bottom: 1px solid rgb(223, 223, 223);
+  border-bottom: 1px solid var(--border);
 }
 
 @media (min-width: 481px) {

@@ -2,7 +2,7 @@
   <span
     v-if="!isEditingTitle"
     @click="toggleEditState"
-    class="cursor-pointer w-full"
+    class="cursor-pointer w-full text-[var(--title-color)]"
   >
     {{ title }}
   </span>

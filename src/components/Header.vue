@@ -6,7 +6,7 @@
     >
       <div v-if="!searchStore.isSearching" class="flex items-center gap-x-2">
         <NarrowscreenMenu />
-        <span class="font-bold text-lg">Boards</span>
+        <span class="font-bold text-lg dark:text-white">Boards</span>
       </div>
 
       <BoardSearch v-if="boardStore.boards?.length > 0" />
