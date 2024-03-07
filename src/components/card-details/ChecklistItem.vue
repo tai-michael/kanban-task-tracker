@@ -75,7 +75,9 @@
                 type="button"
                 class="ellipsis-popover__button p-3"
               >
-                <DeleteIcon />
+                <DeleteIcon
+                  class="text-black dark:text-[var(--medium-dark-gray)]"
+                />
                 <label class="select-none">Delete</label>
               </button>
             </div>

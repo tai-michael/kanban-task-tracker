@@ -58,7 +58,9 @@
         class="delete-container"
       >
         <div class="delete-zone">
-          <DeleteIcon /><span>Drag here to delete</span>
+          <DeleteIcon
+            class="text-black dark:text-[var(--medium-dark-gray)]"
+          /><span>Drag here to delete</span>
         </div>
       </VueDraggable>
     </div>

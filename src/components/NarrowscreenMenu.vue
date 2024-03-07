@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-10 h-10">
     <button @click="toggleMenu" type="button" class="icon-button">
-      <MenuIcon :fill="'black'" class="w-7 h-7" />
+      <MenuIcon class="w-7 h-7" />
     </button>
   </div>
 

@@ -3,7 +3,7 @@
     xmlns="http://www.w3.org/2000/svg"
     width="16"
     height="16"
-    :fill="color"
+    fill="var(--medium-dark-gray)"
     class="bi bi-search"
     viewBox="0 0 16 16"
   >
@@ -12,7 +12,3 @@
     />
   </svg>
 </template>
-
-<script setup lang="ts">
-defineProps(['color'])
-</script>
