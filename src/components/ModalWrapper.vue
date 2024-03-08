@@ -1,7 +1,7 @@
 <template>
   <dialog
     ref="dialog"
-    class="rounded-md"
+    class="rounded-md dark:bg-[var(--dark-gray)]"
     :class="[
       {
         [props.dialogClasses]: props.dialogClasses && visible,
@@ -12,7 +12,7 @@
     @close="visible = false"
   >
     <div
-      class="dialog-content"
+      class="dialog-content dark:bg-[var(--dark-gray)]"
       :class="[
         {
           [props.dialogContentClasses]: props.dialogContentClasses,
@@ -24,7 +24,7 @@
       <form
         v-if="visible"
         method="dialog"
-        class="relative"
+        class="relative dark:bg-[var(--dark-gray)]"
         :class="{ [props.formClasses]: props.formClasses }"
       >
         <button
