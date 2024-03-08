@@ -1,5 +1,7 @@
 <template>
-  <h2 class="text-lg font-bold select-none text-[#0a0404]">Create board</h2>
+  <h2 class="text-lg font-bold select-none text-[#0a0404] dark:text-[white]">
+    Create board
+  </h2>
 
   <input
     v-model.trim="boardTitle"
@@ -11,9 +13,9 @@
     @click="handleCreateBoard"
     type="submit"
     :disabled="!boardTitle"
-    class="modal-button text-white bg-[var(--main-purple)] hover:bg-[var(--main-purple-hover)] active:bg-[var(--main-purple--hover)] transition-colors duration-100 ease-in-out"
+    class="modal-button text-white font-semibold bg-[var(--main-purple)] hover:bg-[var(--main-purple-hover)] active:bg-[var(--main-purple--hover)] transition-colors duration-100 ease-in-out"
     :class="{
-      '!text-[var(--main-purple)] !bg-[var(--main-purple-transparent)] cursor-not-allowed':
+      '!text-[var(--main-purple-hover)] !bg-[var(--main-purple-transparent)] cursor-not-allowed':
         !boardTitle,
     }"
   >
