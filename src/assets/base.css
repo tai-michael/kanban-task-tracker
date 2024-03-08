@@ -232,3 +232,15 @@ body {
     background-color: var(--main-purple-transparent);
   }
 }
+
+html.dark {
+  .ellipsis-popover {
+    background-color: var(--very-dark-gray);
+    border: 1px rgb(49, 49, 49) solid;
+
+    &__button {
+      background-color: var(--very-dark-gray);
+      color: var(--medium-dark-gray);
+    }
+  }
+}
