@@ -1,5 +1,6 @@
 <template>
-  <label class="block mb-2 text-sm font-semibold text-[var(--card-text-subtle)]"
+  <label
+    class="block mb-2 text-sm font-semibold text-[var(--card-text-subtle)] dark:text-white"
     >Due date</label
   >
 
