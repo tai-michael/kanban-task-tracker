@@ -4,7 +4,7 @@
       class="relative flex justify-between mb-1 ml-[var(--card-gutter-mobile)] xs:ml-[var(--card-gutter-desktop)]"
     >
       <div class="absolute left-[-35px]">
-        <TextIcon class="w-6 h-6" :color="'hsla(218, 24%, 35%)'" />
+        <TextIcon class="w-6 h-6 text-[var(--card-text-subtle)]" />
       </div>
       <label class="block mb-2 text-base font-semibold text-[var(--card-text)]"
         >Description</label
@@ -24,7 +24,7 @@
           Enter a description for this card...
         </span>
 
-        <span v-else class="break-words">
+        <span v-else class="break-words dark:text-[var(--card-text-subtle)]">
           {{ store.cardDetails.description }}
         </span>
       </li>
@@ -87,6 +87,15 @@ onMounted(() => {
 
   &:hover {
     background-color: var(--card-secondary-button-hover);
+  }
+}
+
+.dark .fake-text-area {
+  background-color: var(--darkest-gray);
+  color: var(--card-text-subtle);
+
+  &:hover {
+    background-color: var(--darkest-gray-hover);
   }
 }
 </style>
