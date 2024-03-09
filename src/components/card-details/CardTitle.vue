@@ -4,7 +4,9 @@
       class="relative flex justify-between mb-1 ml-[var(--card-gutter-mobile)] xs:ml-[var(--card-gutter-desktop)]"
     >
       <div class="absolute top-[8px] left-[-35px]">
-        <CardIcon :color="'hsla(218, 24%, 35%, 75%)'" />
+        <CardIcon
+          class="text-[hsla(0,0%,35%,75%)] dark:text-[var(--card-text-subtle)]"
+        />
       </div>
       <Title
         :title="store.cardSummary?.title"
