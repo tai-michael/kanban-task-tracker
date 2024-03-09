@@ -46,7 +46,8 @@
               type="button"
               class="px-2 rounded hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
             >
-              <label class="font-medium select-none cursor-pointer"
+              <label
+                class="font-medium dark:text-[var(--card-text-subtle)] select-none cursor-pointer"
                 >Delete item</label
               >
             </button>
@@ -56,7 +57,7 @@
         <span
           v-else
           @click.stop="beginItemNameEdit(item)"
-          class="max-w-[235px] xs:max-w-[310px] sm:max-w-[400px] truncate"
+          class="max-w-[235px] xs:max-w-[310px] sm:max-w-[400px] truncate dark:text-[var(--card-text)]"
           :class="{ 'line-through': item.is_completed }"
           :title="item.name"
         >
@@ -87,7 +88,7 @@
 
       <div
         v-if="item.id !== activeItemId && item.unsaved_name"
-        class="flex flex-col gap-x-4 xs:flex-row xs:gap-x-2"
+        class="flex flex-col gap-x-4 xs:flex-row xs:gap-x-2 dark:text-[var(--card-text-subtle)]"
       >
         <span class="xs:max-w-[unset]">You have unsaved edits.</span>
         <div class="flex gap-x-1.5 mt-2 xs:mt-0">

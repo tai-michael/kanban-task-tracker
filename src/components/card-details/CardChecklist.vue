@@ -5,8 +5,7 @@
     >
       <div class="absolute left-[-35px]">
         <CheckSquareIcon
-          class="!w-[22px] !h-[22px]"
-          :color="'hsla(218, 24%, 35%)'"
+          class="!w-[22px] !h-[22px] text-[var(--card-text-subtle)]"
         />
       </div>
       <label class="block text-base font-semibold text-[var(--card-text)]"
@@ -19,7 +18,7 @@
         <li
           v-for="item of store.cardDetails.checklist"
           :key="item.id"
-          class="flex [&:not(:last-child)]:border-b"
+          class="flex [&:not(:last-child)]:border-b dark:[&:not(:last-child)]:border-b-gray-500"
         >
           <ChecklistItem :item="item" />
         </li>
