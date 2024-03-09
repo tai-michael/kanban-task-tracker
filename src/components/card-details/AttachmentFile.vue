@@ -1,12 +1,11 @@
 <template>
   <div class="flex justify-between items-center py-2">
     <AttachmentIcon
-      :color="'hsla(218, 24%, 35%, 80%)'"
-      class="block xs:hidden !w-6 !h-6"
+      class="block xs:hidden !w-6 !h-6 text-[hsla(0,0%,35%,75%)] dark:text-[var(--card-text-subtle)]"
     />
     <span
       :title="props.file.originalName"
-      class="max-w-[235px] xs:max-w-[335px] sm:max-w-[430px] truncate w-full"
+      class="max-w-[235px] xs:max-w-[335px] sm:max-w-[430px] truncate w-full dark:text-[var(--card-text)]"
       >{{ props.file.originalName }}</span
     >
 

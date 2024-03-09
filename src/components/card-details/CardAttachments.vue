@@ -1,10 +1,12 @@
 <template>
-  <div class="flex flex-col gap-x-2 mb-9">
+  <div class="flex flex-col gap-x-2 mb-2">
     <div
       class="relative flex justify-between mb-1 ml-[var(--card-gutter-mobile)] xs:ml-[var(--card-gutter-desktop)]"
     >
       <div class="absolute left-[-35px]">
-        <AttachmentIcon class="!w-6 !h-6" :color="'hsla(218, 24%, 35%, 80%)'" />
+        <AttachmentIcon
+          class="!w-6 !h-6 text-[hsla(0,0%,35%,75%)] dark:text-[var(--card-text-subtle)]"
+        />
       </div>
       <label class="block mb-2 text-base font-semibold text-[var(--card-text)]"
         >Attachments</label
@@ -31,7 +33,7 @@
         <li
           v-for="file in store.cardDetails?.attachments"
           :key="file.storageName"
-          class="first:border-t [&:not(:last-child)]:border-b"
+          class="first:border-t dark:border-t-gray-500 [&:not(:last-child)]:border-b dark:[&:not(:last-child)]:border-b-gray-500"
         >
           <AttachmentFile :file="file" />
         </li>
