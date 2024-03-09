@@ -45,9 +45,13 @@ const toggleMenu = () => {
   left: 0;
   background-color: white;
   padding: 3rem;
-  width: 50vh;
+  width: 45vh;
   height: 100vh;
   z-index: var(--z-popover);
+}
+
+.dark .menu {
+  background-color: hsla(235, 12%, 21%, 1);
 }
 
 .backdrop {

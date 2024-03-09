@@ -10,10 +10,10 @@
   </div>
 
   <div
-    class="h-12 bg-[var(--card-mobile-header-bg)] border-b xs:bg-[unset] xs:border-0"
+    class="h-12 bg-[var(--card-mobile-header-bg)] border-b dark:border-b-gray-700 xs:bg-[unset] xs:border-0"
   ></div>
 
-  <ul class="flex flex-col w-full h-full pb-5 px-5 pt-2 xs:pt-0">
+  <ul class="flex flex-col w-full h-full pb-5 px-5 pt-2 xs:pt-1">
     <CardTitle />
     <CardDescription />
     <CardChecklist />

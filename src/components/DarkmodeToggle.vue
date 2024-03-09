@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-center items-center bg-[var(--darkmode-toggle-bg)] rounded-md"
+    class="flex justify-center items-center bg-[var(--darkmode-toggle-bg)] dark:bg-[var(--darkest-gray)] dark:xs:bg-[var(--darkmode-toggle-bg)] rounded-md"
   >
     <SunIcon class="mr-6" />
     <label
