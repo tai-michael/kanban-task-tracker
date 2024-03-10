@@ -20,10 +20,8 @@
             type="button"
             class="ellipsis-popover__button p-3"
           >
-            <DeleteIcon
-              class="text-black dark:text-[var(--medium-dark-gray)]"
-            />
-            <label class="select-none">Delete</label>
+            <DeleteIcon class="text-[var(--red)]" />
+            <label class="select-none text-[var(--red)]">Delete</label>
           </button>
 
           <a
