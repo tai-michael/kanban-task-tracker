@@ -8,7 +8,8 @@
         'box-shadow': visible,
       },
     ]"
-    @click="handleBackdropClick"
+    @mousedown="handleBackdropClick"
+    @touchstart="handleBackdropClick"
     @close="visible = false"
   >
     <div
@@ -32,7 +33,7 @@
           @click="handleCloseTriggered"
           type="button"
           aria-label="Close modal"
-          class="absolute top-2 right-2 z-10 p-2 rounded-full hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)] transition-colors duration-100"
+          class="absolute top-1 xs:top-2 right-2 z-10 flex justify-center items-center rounded-full hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)] transition-colors duration-100 w-10 h-10"
         >
           <CrossIcon />
         </button>
@@ -102,8 +103,8 @@ const handleCloseTriggered = () => {
   emit('closeTriggered')
 }
 
-const handleBackdropClick = (event) => {
-  // Closes dialog if backdrop element is clicked
+const handleBackdropClick = (event: MouseEvent | TouchEvent) => {
+  // Closes dialog if backdrop element is clicked/pressed
   if (event.target === dialog.value) {
     close()
     emit('closeTriggered')
