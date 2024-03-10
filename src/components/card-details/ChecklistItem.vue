@@ -23,8 +23,8 @@
             v-model.trim="activeItemName"
             v-focus="item.id === activeItemId"
             @blur="storeUnsavedItemName(item.name)"
-            @keyup.enter="saveItemName(item.name)"
-            @keyup.esc="clearItemEdit(item.id, item.name)"
+            @keydown.enter="saveItemName(item.name)"
+            @keydown.esc.prevent="clearItemEdit(item.id, item.name)"
             class="p-1.5"
           />
 
