@@ -1,17 +1,23 @@
 <template>
-  <div class="flex w-full py-2 gap-x-4 relative">
+  <div
+    class="flex w-full py-2 pl-4 pr-2 gap-x-4 my-1 relative bg-[hsla(242,48%,58%,25%)] rounded"
+    :class="{
+      '!bg-[var(--very-light-gray)] dark:!bg-[var(--darkest-gray)]':
+        item.is_completed,
+    }"
+  >
     <input
       type="checkbox"
       @click.stop="store.toggleChecklistItemCompleted(item.id)"
       :checked="item.is_completed"
-      class="absolute top-[21px]"
+      class="absolute top-[20px] accent-[var(--main-purple)] w-4 h-4"
     />
 
-    <div class="flex flex-col w-full ml-7">
+    <div class="flex flex-col gap-y-1 w-full ml-7">
       <div class="flex gap-y-3 w-full justify-between items-center">
         <div
           v-if="item.id === activeItemId"
-          class="w-full flex flex-col gap-y-3"
+          class="w-full flex flex-col gap-y-2"
         >
           <input
             v-model.trim="activeItemName"
@@ -37,17 +43,17 @@
                 type="button"
                 class="flex items-center justify-center h-[34.5px] w-[34.5px] rounded hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
               >
-                <CrossIcon class="w-4 h-4" />
+                <CrossIcon />
               </button>
             </div>
 
             <button
               @mousedown="handleDeleteItem(item.id)"
               type="button"
-              class="px-2 rounded hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
+              class="px-3 rounded hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
             >
               <label
-                class="font-medium dark:text-[var(--card-text-subtle)] select-none cursor-pointer"
+                class="font-medium text-[var(--red)] select-none cursor-pointer"
                 >Delete item</label
               >
             </button>
@@ -57,8 +63,10 @@
         <span
           v-else
           @click.stop="beginItemNameEdit(item)"
-          class="max-w-[235px] xs:max-w-[310px] sm:max-w-[400px] truncate dark:text-[var(--card-text)]"
-          :class="{ 'line-through': item.is_completed }"
+          class="max-w-[220px] xs:max-w-[266px] sm:max-w-[380px] break-words font-bold dark:text-[var(--card-text)] text-sm"
+          :class="{
+            'line-through opacity-50': item.is_completed,
+          }"
           :title="item.name"
         >
           {{ item.name }}
@@ -86,14 +94,14 @@
 
       <div
         v-if="item.id !== activeItemId && item.unsaved_name"
-        class="flex flex-col gap-x-4 xs:flex-row xs:gap-x-2 dark:text-[var(--card-text-subtle)]"
+        class="flex flex-col gap-x-4 xs:flex-row xs:gap-x-2 text-[var(--card-text-subtle)]"
       >
         <span class="xs:max-w-[unset]">You have unsaved edits.</span>
         <div class="flex gap-x-1.5 mt-2 xs:mt-0">
           <button
             @click="beginItemNameEdit(item)"
             type="button"
-            class="underline"
+            class="underline hover:text-[hsla(242,48%,58%,70%)] dark:hover:text-white"
           >
             View edits
           </button>
@@ -101,7 +109,7 @@
           <button
             @click="clearItemEdit(item.id, item.name)"
             type="button"
-            class="underline"
+            class="underline hover:text-[hsla(242,48%,58%,70%)] dark:hover:text-white"
           >
             Discard
           </button>
