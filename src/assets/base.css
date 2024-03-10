@@ -31,18 +31,22 @@ body {
   --main-purple-hover: hsla(243, 100%, 82%);
   --main-purple-transparent: hsla(242, 48%, 58%, 10%);
 
-  --very-dark-gray: hsla(235, 16%, 15%, 1);
+  --darkest-gray: hsla(235, 16%, 15%, 1);
+  --darkest-gray-hover: hsla(235, 16%, 17%);
   --dark-gray: hsla(235, 12%, 19%, 1);
   --medium-dark-gray: hsla(216, 15%, 57%);
   --medium-gray: hsla(216, 15%, 57%, 25%);
-  --medium-light-gray: hsla(216, 15%, 57%, 5%);
+  --medium-light-transparent: hsla(216, 15%, 57%, 5%);
+  --medium-light-gray: hsla(216, 15%, 57%, 35%);
 
-  --light-gray: hsla(218, 76%, 15%, 6%);
-  --light-gray-hover: hsla(218, 76%, 15%, 10%);
+  --light-gray: hsla(220, 69%, 15%, 6%);
+  --light-gray-hover: hsla(220, 69%, 15%, 10%);
   --very-light-gray: hsla(220, 69%, 97%);
 
   --dark-blue: hsla(210, 79%, 46%);
   --medium-blue: hsla(210, 97%, 55%);
+
+  --red: hsla(0, 78%, 63%, 1);
 }
 
 :root {
@@ -111,19 +115,19 @@ body {
 
   --sidebar-bg: var(--dark-gray);
   --sidebar-navbtn-hover: white;
-  --search-input-bg: var(--medium-light-gray);
+  --search-input-bg: var(--medium-light-transparent);
   --search-input-border-color: var(--medium-gray);
   --create-board-button-hover: white;
   --hide-sidebar-button-hover: white;
 
-  --board-bg: var(--very-dark-gray);
-  --darkmode-toggle-bg: var(--very-dark-gray);
-  --card-mobile-header-bg: var(--very-dark-gray);
+  --board-bg: var(--darkest-gray);
+  --darkmode-toggle-bg: var(--darkest-gray);
+  --card-mobile-header-bg: var(--darkest-gray);
 
   --list-bg: hsla(235, 12%, 19%, 70%);
   --add-card-button: hsla(220, 69%, 97%, 10%);
   --scrollbar-thumb-color: var(--medium-gray);
-  --scrollbar-track-color: var(--medium-light-gray);
+  --scrollbar-track-color: var(--medium-light-transparent);
 
   --icon-button-hover: hsla(220, 69%, 97%, 10%);
   --icon-button-active: hsla(220, 69%, 97%, 20%);
@@ -133,6 +137,12 @@ body {
   --card-preview-title: white;
   --card-preview-attachment-icon: hsla(216, 15%, 50%);
 
+  --card-primary-button: var(--dark-blue);
+  --card-primary-button-hover: var(--medium-blue);
+  --card-secondary-button: var(--medium-gray);
+  --card-secondary-button-hover: var(--medium-light-gray);
+
+  --card-text: white;
   --card-text-subtle: var(--medium-dark-gray);
 }
 
@@ -233,14 +243,20 @@ body {
   }
 }
 
-html.dark {
-  .ellipsis-popover {
-    background-color: var(--very-dark-gray);
-    border: 1px rgb(49, 49, 49) solid;
+.dark .ellipsis-popover {
+  background-color: var(--darkest-gray);
+  border: 1px rgb(49, 49, 49) solid;
 
-    &__button {
-      background-color: var(--very-dark-gray);
-      color: var(--medium-dark-gray);
+  &__button {
+    background-color: var(--darkest-gray);
+    color: var(--medium-dark-gray);
+
+    &:not(:last-child) {
+      border-bottom: 1px solid theme('colors.gray.500');
     }
+  }
+
+  &__button:hover {
+    background-color: var(--darkest-gray-hover);
   }
 }
