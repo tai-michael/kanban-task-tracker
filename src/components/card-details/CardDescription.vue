@@ -11,7 +11,7 @@
       >
     </div>
 
-    <div class="xs:ml-[var(--card-gutter-desktop)]">
+    <div class="xs:ml-[var(--card-gutter-desktop)] flex flex-col">
       <li
         v-if="!isEditingDescription"
         @click="isEditingDescription = true"
@@ -24,20 +24,44 @@
           Enter a description for this card...
         </span>
 
-        <span v-else class="break-words dark:text-[var(--card-text-subtle)]">
+        <span v-else class="break-words text-[var(--card-text-subtle)]">
           {{ store.cardDetails.description }}
         </span>
       </li>
 
-      <textarea
-        v-else
-        ref="textArea"
-        v-model.trim="cardDescription"
-        v-focus="isEditingDescription"
-        @input="adjustTextAreaHeight"
-        @blur="changeCardDescription"
-        class="w-full resize-none py-3 px-4"
-      />
+      <div v-else class="flex flex-col gap-y-2">
+        <textarea
+          ref="textArea"
+          v-model.trim="cardDescription"
+          v-focus="isEditingDescription"
+          @focus="setDescription"
+          @input="adjustTextAreaHeight"
+          @blur="changeDescription"
+          @keydown.esc.prevent="cancelEditingDescription"
+          class="w-full resize-none py-3 px-4"
+        />
+
+        <div>
+          <button
+            @mousedown="changeDescription"
+            @keydown.enter.prevent="changeDescription"
+            @keydown.esc.prevent="cancelEditingDescription"
+            type="submit"
+            class="mr-2 inline-flex py-[6px] px-[16px] rounded font-medium text-white bg-[var(--card-primary-button)] hover:bg-[var(--card-primary-button-hover)] active:bg-[var(--card-primary-button-hover)] transition-colors duration-100 ease-in-out"
+          >
+            Save
+          </button>
+          <button
+            @mousedown="cancelEditingDescription"
+            @keydown.enter="cancelEditingDescription"
+            @keydown.esc.prevent="cancelEditingDescription"
+            type="button"
+            class="py-[6px] px-[10px] rounded font-medium text-[var(--card-text)] hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -58,14 +82,35 @@ const adjustTextAreaHeight = () => {
     }
   })
 }
+
 watch(isEditingDescription, (newValue) => {
   if (newValue) {
     adjustTextAreaHeight()
   }
 })
-const changeCardDescription = () => {
+
+const changeDescription = (event) => {
+  // NOTE tabbing while input is focused triggers blur, so the second set of conditions is used to prevent that and allow tabbing to buttons
+  if (
+    !isEditingDescription.value ||
+    (event.relatedTarget && event.relatedTarget.tagName === 'BUTTON')
+  ) {
+    return
+  }
+
   store.updateCardDescription(cardDescription.value)
   isEditingDescription.value = false
+}
+
+const cancelEditingDescription = () => {
+  cardDescription.value = ''
+  isEditingDescription.value = false
+}
+
+// NOTE canceling an edit clears the description, so this is a workaround
+const setDescription = () => {
+  if (cardDescription.value) return
+  cardDescription.value = store.cardDetails.description
 }
 
 onMounted(() => {
@@ -91,11 +136,11 @@ onMounted(() => {
 }
 
 .dark .fake-text-area {
-  background-color: var(--darkest-gray);
-  color: var(--card-text-subtle);
+  background-color: var(--card-secondary-button);
+  color: rgb(180, 180, 180);
 
   &:hover {
-    background-color: var(--darkest-gray-hover);
+    background-color: var(--card-secondary-button-hover);
   }
 }
 </style>

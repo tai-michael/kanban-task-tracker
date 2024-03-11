@@ -11,7 +11,7 @@
       <Title
         :title="store.cardSummary?.title"
         @title-edited="changeCardTitle"
-        class="block max-w-[455px] mb-3 py-1.5 text-xl font-bold text-[var(--card-text)]"
+        class="block max-w-[455px] mb-3 py-1.5 text-xl font-bold"
       />
     </div>
 
