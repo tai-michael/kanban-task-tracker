@@ -33,9 +33,10 @@
       <VueDatePicker
         ref="datePicker"
         v-model="selectedDate"
+        @update:model-value="handleDateSelected"
         @open="toggleBackdrop"
         @closed="toggleBackdrop"
-        @update:model-value="handleDateSelected"
+        @keydown.esc.prevent="datePicker?.closeMenu"
         time-picker-inline
         select-text="Save"
         :teleport-center="isMobileView ? true : false"
