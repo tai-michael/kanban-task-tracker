@@ -4,7 +4,7 @@
     >Due date</label
   >
 
-  <div class="flex gap-x-2">
+  <div class="flex items-center gap-x-2">
     <input
       v-if="selectedDate"
       type="checkbox"
@@ -15,6 +15,7 @@
           ? 'This card is complete.'
           : 'This card is past due.'
       "
+      class="accent-[var(--main-purple)] w-4 h-4"
     />
 
     <div
@@ -43,7 +44,7 @@
       >
         <template #trigger>
           <div
-            class="relative hover:outline hover:outline-1 hover:outline-offset-[6px] hover:rounded-[1px]"
+            class="relative hover:rounded-[1px] hover:outline hover:outline-1 hover:outline-offset-[6px] dark:hover:outline-gray-400"
             :class="{
               'hover:outline-offset-[unset]': selectedDate,
             }"
@@ -58,11 +59,11 @@
                 'bg-transparent': !selectedDate,
               }"
             />
-            <img
-              :src="DownIcon"
-              class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+            <DownIcon
+              class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-[var(--main-purple)]"
               :class="{
                 'right-4': !selectedDate,
+                'dark:text-[var(--main-purple-hover)]': !selectedDate,
               }"
             />
           </div>
@@ -77,16 +78,16 @@
           <button
             @click.prevent="datePicker?.closeMenu"
             type="button"
-            class="absolute top-[8px] right-2 font-normal p-2.5 rounded hover:bg-[#f3f3f3] active:bg-[#f3f3f3]"
+            class="absolute top-1.5 right-1.5 font-normal p-2.5 rounded-full hover:bg-[#f3f3f3] active:bg-[#f3f3f3] dark:hover:bg-[#484848] dark:active:bg-[#484848]"
           >
-            <CrossIcon class="w-3 h-3" />
+            <CrossIcon class="!w-4 !h-4" />
           </button>
 
           <div class="my-0.5">
             <button
               v-if="selectedDate"
               type="button"
-              class="w-[75px] h-[35px] mr-1 rounded hover:bg-[#f3f3f3] active:bg-[#f3f3f3]"
+              class="w-[75px] h-[35px] mr-1 rounded hover:bg-[#f3f3f3] active:bg-[#f3f3f3] dark:hover:bg-[#484848] dark:active:bg-[#484848]"
               @click.prevent="handleClearDueDate"
             >
               Remove
@@ -113,7 +114,7 @@
         >
         <span
           v-if="isOverdue"
-          class="bg-[#ffeceb] text-[#ae2a19] px-1.5 flex items-center rounded h-[87%]"
+          class="px-1.5 flex items-center rounded h-[87%] bg-[#ffeceb] text-[#ae2a19] dark:bg-[#ae2a19] dark:text-white"
           >Overdue</span
         >
       </div>
@@ -124,7 +125,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, inject } from 'vue'
 import CrossIcon from '@/assets/icons/icon-cross.vue'
-import DownIcon from '@/assets/icons/icon-chevron-down.svg'
+import DownIcon from '@/assets/icons/icon-chevron-down.vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import type { DatePickerInstance } from '@vuepic/vue-datepicker'
