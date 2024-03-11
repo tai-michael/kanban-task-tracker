@@ -18,19 +18,19 @@
         <li
           v-for="item of store.cardDetails.checklist"
           :key="item.id"
-          class="flex [&:not(:last-child)]:border-b dark:[&:not(:last-child)]:border-b-gray-500"
+          class="flex [&:last-child]:mb-2"
         >
           <ChecklistItem :item="item" />
         </li>
       </ul>
 
-      <div v-if="isCreatingItem" class="flex flex-col w-full">
+      <div v-if="isCreatingItem" class="flex flex-col gap-y-2 w-full">
         <input
           v-model.trim="newItemName"
           v-focus="isCreatingItem"
           @blur="processItemCreation"
           placeholder="Add an item"
-          class="p-1.5 mb-3"
+          class="p-1.5"
         />
         <div>
           <button
