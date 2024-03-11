@@ -24,6 +24,7 @@
       @wheel.prevent
       @touchmove.prevent
       @scroll.prevent
+      @touchstart.prevent
     ></div>
 
     <div
