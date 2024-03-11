@@ -29,12 +29,16 @@
           v-model.trim="newItemName"
           v-focus="isCreatingItem"
           @blur="processItemCreation"
+          @keydown.enter="processItemCreation"
+          @keydown.esc.prevent="exitItemCreation"
           placeholder="Add an item"
           class="p-1.5"
         />
         <div>
           <button
             @mousedown="processItemCreation"
+            @keydown.enter="processItemCreation"
+            @keydown.esc.prevent="exitItemCreation"
             type="submit"
             class="mr-2 inline-flex py-[6px] px-[16px] rounded font-medium text-white bg-[var(--card-primary-button)] hover:bg-[var(--card-primary-button-hover)] active:bg-[var(--card-primary-button-hover)] transition-colors duration-100 ease-in-out"
           >
@@ -42,6 +46,8 @@
           </button>
           <button
             @mousedown="exitItemCreation"
+            @keydown.enter="exitItemCreation"
+            @keydown.esc.prevent="exitItemCreation"
             type="button"
             class="py-[6px] px-[16px] rounded font-medium text-[var(--card-text)] hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
           >
@@ -72,7 +78,12 @@ const store = useCardStore()
 
 const isCreatingItem = ref(false)
 const newItemName = ref('')
-const processItemCreation = () => {
+const processItemCreation = (event) => {
+  // NOTE tabbing while input is focused triggers blur, so the conditional is used to prevent that and allow tabbing to buttons
+  if (event.relatedTarget && event.relatedTarget.tagName === 'BUTTON') {
+    return
+  }
+
   if (!newItemName.value) {
     isCreatingItem.value = false
     return
