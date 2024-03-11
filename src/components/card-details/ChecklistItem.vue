@@ -22,7 +22,7 @@
           <input
             v-model.trim="activeItemName"
             v-focus="item.id === activeItemId"
-            @blur="storeUnsavedItemName(item.name)"
+            @blur="storeUnsavedItemName($event, item.name)"
             @keydown.enter="saveItemName(item.name)"
             @keydown.esc.prevent="clearItemEdit(item.id, item.name)"
             class="p-1.5"
@@ -33,6 +33,8 @@
             <div class="flex">
               <button
                 @mousedown="saveItemName(item.name)"
+                @keydown.enter.prevent="saveItemName(item.name)"
+                @keydown.esc.prevent="clearItemEdit(item.id, item.name)"
                 type="submit"
                 class="mr-1.5 inline-flex py-[6px] px-[16px] rounded font-medium bg-[var(--card-primary-button)] hover:bg-[var(--card-primary-button-hover)] active:bg-[var(--card-primary-button-hover)] text-white transition-colors duration-100 ease-in-out"
               >
@@ -40,6 +42,8 @@
               </button>
               <button
                 @mousedown="clearItemEdit(item.id, item.name)"
+                @keydown.enter="clearItemEdit(item.id, item.name)"
+                @keydown.esc.prevent="clearItemEdit(item.id, item.name)"
                 type="button"
                 class="flex items-center justify-center h-[34.5px] w-[34.5px] rounded hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
               >
@@ -49,6 +53,8 @@
 
             <button
               @mousedown="handleDeleteItem(item.id)"
+              @keydown.enter="handleDeleteItem(item.id)"
+              @keydown.esc.prevent="clearItemEdit(item.id, item.name)"
               type="button"
               class="px-3 rounded hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
             >
@@ -138,7 +144,12 @@ const beginItemNameEdit = (item: object) => {
     : (activeItemName.value = item.name)
 }
 
-const storeUnsavedItemName = (existingName: string) => {
+const storeUnsavedItemName = (event, existingName: string) => {
+  // NOTE tabbing while input is focused triggers blur, so the conditional is used to prevent that and allow tabbing to buttons
+  if (event.relatedTarget && event.relatedTarget.tagName === 'BUTTON') {
+    return
+  }
+
   // only store if names are different
   if (activeItemName.value && activeItemName.value !== existingName) {
     store.storeUnsavedChecklistItemName(
