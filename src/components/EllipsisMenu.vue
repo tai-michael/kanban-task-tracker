@@ -7,35 +7,39 @@
       <EllipsisIcon class="w-[20px] h-[20px]" />
     </button>
 
-    <div v-if="isEllipsisMenuOpen">
-      <div class="backdrop" @mousedown="toggleEllipsisMenu"></div>
+    <div
+      v-if="isEllipsisMenuOpen"
+      class="backdrop"
+      @mousedown="toggleEllipsisMenu"
+    ></div>
 
-      <div
-        class="ellipsis-popover"
-        :class="{ [popoverClasses]: props.popoverClasses }"
-      >
-        <button
-          v-if="props.deleteButtonLabel"
-          @mousedown="toggleModal"
-          type="button"
-          class="ellipsis-popover__button"
+      <div v-if="isEllipsisMenuOpen">
+        <div
+          class="ellipsis-popover"
+          :class="{ [popoverClasses]: props.popoverClasses }"
         >
-          <DeleteIcon class="text-[var(--red)]" />
-          <label class="text-[var(--red)]">
-            {{ props.deleteButtonLabel }}
-          </label>
-        </button>
-        <!-- <button class="ellipsis-popover__button">Change Title</button> -->
-        <slot name="custom-buttons"></slot>
+          <button
+            v-if="props.deleteButtonLabel"
+            @mousedown="toggleModal"
+            type="button"
+            class="ellipsis-popover__button"
+          >
+            <DeleteIcon class="text-[var(--red)]" />
+            <label class="text-[var(--red)] font-medium">
+              {{ props.deleteButtonLabel }}
+            </label>
+          </button>
+          <!-- <button class="ellipsis-popover__button">Change Title</button> -->
+          <slot name="custom-buttons"></slot>
+        </div>
       </div>
-    </div>
   </div>
 
   <!-- NOTE the w-85vw is necessary to expand the form to the extent of the max-w before the form's content loads in (there is a delay for whatever reason). The '85' also essentially provides dynamic margins in mobile view -->
   <ModalWrapper
     ref="modal"
     :show-close-button="true"
-    :form-classes="'flex flex-col gap-y-6 w-[85vw] xs:max-w-[480px] min-h-[260px] xs:min-h-[236px] p-6 xs:px-8 xs:pt-8 xs:pb-10'"
+    :form-classes="'flex flex-col gap-y-6 w-[85vw] xs:max-w-[480px] min-h-[268px] xs:min-h-[236px] p-6 xs:px-8 xs:pt-8 xs:pb-10'"
   >
     <DeleteConfirmation
       @cancel-triggered="toggleModal"
@@ -48,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent } from 'vue'
+import { ref, defineAsyncComponent, watch } from 'vue'
 import EllipsisIcon from '@/assets/icons/icon-horizontal-ellipsis.vue'
 import DeleteIcon from '@/assets/icons/icon-delete.vue'
 import useEllipsisMenuState from '@/composables/useEllipsisMenuState'
@@ -90,6 +94,23 @@ const handleDelete = () => {
   toggleEllipsisMenu()
   // REVIEW maybe add toast for this, though probably unnecessary
 }
+
+const handleEscapePressed = (event: KeyboardEvent) => {
+  if (event.key === 'Escape' && isEllipsisMenuOpen.value) {
+    toggleEllipsisMenu()
+    event.preventDefault()
+  }
+}
+watch(
+  () => isEllipsisMenuOpen.value,
+  (newValue) => {
+    if (newValue) {
+      document.addEventListener('keydown', handleEscapePressed)
+    } else {
+      document.removeEventListener('keydown', handleEscapePressed)
+    }
+  }
+)
 </script>
 
 <style scoped lang="scss">
