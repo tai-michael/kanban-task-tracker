@@ -15,6 +15,7 @@
       <div class="flex gap-x-1.5">
         <button
           @click="processListCreation"
+          @keyup.esc="hideListComposer"
           type="submit"
           class="px-4 rounded text-white bg-[var(--main-purple)] hover:bg-[var(--main-purple-hover)] active:bg-[var(--main-purple-hover)]"
         >
@@ -22,6 +23,7 @@
         </button>
         <button
           @click="hideListComposer"
+          @keyup.esc="hideListComposer"
           type="button"
           class="p-2.5 rounded hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
         >
