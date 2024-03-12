@@ -15,6 +15,17 @@
     </span>
   </button>
 
+  <TransitionFade>
+    <div
+      ref="popover"
+      v-if="isPopoverOpen"
+      class="absolute bottom-14 left-5 flex items-center gap-x-2 w-[255px] py-3.5 px-5 rounded-md box-shadow-heavy cursor-pointer text-[var(--medium-dark-gray)] hover:text-[var(--main-purple)] bg-white hover:bg-[hsl(239,45%,96%)] dark:bg-[var(--darkest-gray)] dark:border dark:border-[var(--popover-border)] dark:hover:bg-[var(--darkest-gray-hover)] dark:hover:text-[hsl(239,5%,75%)] transition ease-out duration-200 opacity-100 translate-y-0"
+      @click="signOut(auth)"
+    >
+      <SignOutIcon />
+      <span class="font-semibold">Sign out</span>
+    </div>
+  </TransitionFade>
 </template>
 
 <script setup lang="ts">
