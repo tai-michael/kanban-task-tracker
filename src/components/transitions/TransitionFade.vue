@@ -1,22 +1,8 @@
 <template>
-  <!-- <transition name="fade" @enter="onEnter" @leave="onLeave"> -->
-  <!-- <transition name="fade" @enter="onEnter" mode="out-in"> -->
   <transition name="fade" mode="out-in">
     <slot></slot>
   </transition>
 </template>
-
-<script setup lang="ts">
-// const onEnter = (el, done) => {
-//   const delay = 2000 // Delay in milliseconds
-//   setTimeout(() => {
-//     el.style.opacity = 1
-//     done()
-//   }, delay)
-// }
-
-// onLeave()
-</script>
 
 <style>
 .fade-enter-from,
@@ -26,6 +12,8 @@
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s;
+  transition: opacity 0.2s;
+  /* z-index needed for smooth transition when popover appears over a modal */
+  z-index: var(--z-popover);
 }
 </style>
