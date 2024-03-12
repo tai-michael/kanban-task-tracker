@@ -68,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue'
+import { ref, computed, inject } from 'vue'
 import Title from '@/components/Title.vue'
 import BoardSearch from '@/components/BoardSearch.vue'
 import NarrowscreenMenu from '@/components/NarrowscreenMenu.vue'
