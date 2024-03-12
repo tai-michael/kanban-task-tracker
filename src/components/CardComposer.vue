@@ -14,6 +14,8 @@
   <div class="flex gap-x-1.5">
     <button
       @mousedown="processCardCreation"
+      @keyup.enter.prevent="processCardCreation"
+      @keyup.esc="resetCardCreationState"
       type="submit"
       class="px-4 rounded text-white bg-[var(--main-purple)] hover:bg-[var(--main-purple-hover)] active:bg-[var(--main-purple-hover)]"
     >
@@ -21,6 +23,8 @@
     </button>
     <button
       @mousedown="resetCardCreationState"
+      @keyup.enter="resetCardCreationState"
+      @keyup.esc="resetCardCreationState"
       type="button"
       class="p-2.5 rounded hover:bg-[var(--icon-button-hover)] active:bg-[var(--icon-button-active)]"
     >
@@ -40,8 +44,15 @@ const newCardTitle = ref('')
 
 // extra flag needed to prevent blur handler from triggering unnecessarily; props do not 'refresh' until the function has completed, so using props.isCreatingCard as the flag does not work
 const processingComplete = ref(false)
-const handleBlur = () => {
-  if (processingComplete.value) return
+const handleBlur = (event) => {
+  // NOTE tabbing while input is focused triggers blur, so the second set of conditions is used to prevent that and allow tabbing to buttons
+  if (
+    processingComplete.value ||
+    (event.relatedTarget && event.relatedTarget.tagName === 'BUTTON')
+  ) {
+    return
+  }
+
   processCardCreation()
 }
 
