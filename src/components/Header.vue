@@ -104,7 +104,7 @@ const handleReturnToBoards = () => {
 const { isCardHeld, isHoveringDeleteZone, updateHoverDeleteZoneStatus } =
   useCardInteractionState()
 
-const deleteZone = []
+const deleteZone = ref([])
 const deleteOptions = computed(() => {
   return {
     name: 'trash',
