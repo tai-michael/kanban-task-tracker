@@ -13,6 +13,7 @@
       @mousedown="toggleEllipsisMenu"
     ></div>
 
+    <TransitionFade>
       <div v-if="isEllipsisMenuOpen">
         <div
           class="ellipsis-popover"
@@ -33,6 +34,7 @@
           <slot name="custom-buttons"></slot>
         </div>
       </div>
+    </TransitionFade>
   </div>
 
   <!-- NOTE the w-85vw is necessary to expand the form to the extent of the max-w before the form's content loads in (there is a delay for whatever reason). The '85' also essentially provides dynamic margins in mobile view -->
@@ -55,6 +57,7 @@
 import { ref, defineAsyncComponent, watch } from 'vue'
 import EllipsisIcon from '@/assets/icons/icon-horizontal-ellipsis.vue'
 import DeleteIcon from '@/assets/icons/icon-delete.vue'
+import TransitionFade from '@/components/transitions/TransitionFade.vue'
 import useEllipsisMenuState from '@/composables/useEllipsisMenuState'
 const ModalWrapper = defineAsyncComponent(
   () => import('@/components/ModalWrapper.vue')
