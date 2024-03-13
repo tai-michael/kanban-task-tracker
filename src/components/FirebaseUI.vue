@@ -13,7 +13,7 @@ onMounted(() => {
   // console.log('Sign in view mounted')
   const uiConfig = {
     // Redirect route; necessary if 'signInSuccessWithAuthResult' set to true
-    signInSuccessUrl: 'http://localhost:5173/',
+    signInSuccessUrl: import.meta.env.VITE_SIGN_IN_SUCCESS_URL,
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
