@@ -27,7 +27,6 @@
           <SpinnerCircle />
         </div> -->
 
-        <!-- TODO maybe redo the css of the board composer so that it doesn't look off-centered in desktop mode when there's no other board around. Consider hiding the sidebar when theres nothing. -->
         <BoardGreeting
           v-if="!fetchingBoardsFromBackend"
           :is-mobile-view="isMobileView"

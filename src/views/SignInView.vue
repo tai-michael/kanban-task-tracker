@@ -1,49 +1,19 @@
 <template>
-  <!-- <PullRefresher /> -->
-  <!-- <div class="text-center">
-    <div class="mt-20 mb-10 text-3xl flex justify-center gap-3 items-end logo">
-      <img :src="logo" class="w-11 h-11" /> Say It Right
-    </div>
-  </div> -->
-  <div class="sign-in gap-y-6">
-    <!-- <div class="mt-20 mb-10 text-3xl flex justify-center gap-3 items-end logo"> -->
-    <img :src="logo" />
-    <!-- </div> -->
+  <div
+    class="flex h-full flex-col justify-center items-center gap-y-6 bg-[var(--very-light-gray)] dark:bg-[var(--dark-gray)]"
+  >
+    <img :src="isDark ? LogoLight : LogoDark" class="w-[150px]" />
     <FirebaseUI />
   </div>
 </template>
 
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
+import LogoDark from '@/assets/images/logo-dark.svg'
+import LogoLight from '@/assets/images/logo-light.svg'
+import { useDark } from '@vueuse/core'
 const FirebaseUI = defineAsyncComponent(
   () => import('@/components/FirebaseUI.vue')
 )
-// const PullRefresher = defineAsyncComponent(() => import('@/components/PullRefresher.vue'))
-const logo = new URL('@/assets/images/logo-dark.svg', import.meta.url).href
+const isDark = useDark()
 </script>
-
-<style scoped lang="scss">
-@media (min-width: 1024px) {
-  .sign-in {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-// ion-content {
-//   --background: #eef9f8;
-// }
-
-// body.dark {
-//   ion-content {
-//     --background: rgb(32, 32, 32);
-//   }
-// }
-
-// .logo {
-//   color: #25c7b1;
-// }
-</style>

@@ -1,15 +1,10 @@
 <template>
   <div class="mt-3">
-    <!-- TODO change to loading bar under header instead -->
-    <!-- <div v-if="isFetchingBoard && !Object.keys(boardStore.board).length">
-      <SpinnerCircle/>
-    </div> -->
     <Board
       v-if="Object.keys(boardStore.board).length"
       @card-selected="cardModal?.showModal()"
     />
 
-    <!-- TODO eventually adjust to actual height of empty card -->
     <ModalWrapper
       ref="cardModal"
       :loading="isFetchingCard"
