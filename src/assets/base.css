@@ -62,8 +62,6 @@ body {
   --sidebar-navbtn-hover: var(--main-purple-transparent);
   --search-input-bg: white;
   --search-input-border-color: var(--medium-dark-gray);
-  --create-board-button-hover: var(--main-purple-transparent);
-  --hide-sidebar-button-hover: var(--main-purple-transparent);
 
   --board-bg: var(--very-light-gray);
   --darkmode-toggle-bg: var(--very-light-gray);
@@ -117,8 +115,6 @@ body {
   --sidebar-navbtn-hover: white;
   --search-input-bg: var(--medium-light-transparent);
   --search-input-border-color: var(--medium-gray);
-  --create-board-button-hover: white;
-  --hide-sidebar-button-hover: white;
 
   --board-bg: var(--darkest-gray);
   --darkmode-toggle-bg: var(--darkest-gray);
@@ -144,6 +140,7 @@ body {
 
   --card-text: white;
   --card-text-subtle: var(--medium-dark-gray);
+  --popover-border: hsla(0, 0%, 24%);
 }
 
 .icon-button {
@@ -245,7 +242,7 @@ body {
 
 .dark .ellipsis-popover {
   background-color: var(--darkest-gray);
-  border: 1px rgb(49, 49, 49) solid;
+  border: 1px var(--popover-border) solid;
 
   &__button {
     background-color: var(--darkest-gray);
