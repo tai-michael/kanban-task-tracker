@@ -94,6 +94,8 @@ body {
   --card-gutter-desktop: 40px;
   --card-gutter-mobile: 35px;
 
+  --delete-zone: hsla(0, 100%, 80%);
+
   --z-header: 10;
   --z-backdrop: 20;
   --z-popover: 30;
@@ -140,6 +142,8 @@ body {
 
   --card-text: white;
   --card-text-subtle: var(--medium-dark-gray);
+
+  --delete-zone: hsla(0, 100%, 65%);
   --popover-border: hsla(0, 0%, 24%);
 }
 

@@ -16,7 +16,7 @@
       v-else-if="route.name === 'board' || route.name === 'card'"
       class="flex h-full items-center justify-center transition-colors duration-100 ease-in-out"
       :class="{
-        'bg-[hsla(0,100%,80%)]': isCardHeld && isHoveringDeleteZone,
+        'bg-[var(--delete-zone)]': isCardHeld && isHoveringDeleteZone,
       }"
     >
       <div
@@ -58,9 +58,7 @@
         class="delete-container"
       >
         <div class="delete-zone">
-          <DeleteIcon
-            class="text-black dark:text-[var(--medium-dark-gray)]"
-          /><span>Drag here to delete</span>
+          <DeleteIcon class="text-[black]" /><span>Drag here to delete</span>
         </div>
       </VueDraggable>
     </div>
@@ -149,10 +147,11 @@ header {
 }
 
 .delete-container {
-  background-color: hsla(0, 100%, 80%);
+  position: relative;
   height: 60%;
   width: 80%;
-  position: relative;
+  background-color: var(--delete-zone);
+  border-radius: 4px;
 }
 
 .delete-zone {
