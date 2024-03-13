@@ -18,8 +18,14 @@
         <CrossIcon />
       </button>
 
-      <ul class="flex flex-col gap-y-6 mt-5">
-        <li>(User profile button)</li>
+      <ul class="flex flex-col gap-y-4 mt-12">
+        <li
+          class="flex justify-center items-center gap-x-2 h-12 rounded-md cursor-pointer text-[var(--medium-dark-gray)] hover:text-[var(--main-purple)] bg-[var(--darkmode-toggle-bg)] hover:bg-[hsl(239,45%,96%)] dark:bg-[var(--darkest-gray)] dark:border-[rgb(49,49,49)] dark:hover:bg-[var(--darkest-gray-hover)] dark:hover:text-[hsl(239,5%,75%)]"
+          @click="signOut(auth)"
+        >
+          <SignOutIcon />
+          <span class="font-semibold">Sign out</span>
+        </li>
         <li><DarkmodeToggle class="h-12" /></li>
       </ul>
     </div>
@@ -32,6 +38,9 @@ import DarkmodeToggle from '@/components/DarkmodeToggle.vue'
 import TransitionFadeAndSlide from '@/components/transitions/TransitionFadeAndSlide.vue'
 import MenuIcon from '@/assets/icons/icon-menu.vue'
 import CrossIcon from '@/assets/icons/icon-cross.vue'
+import SignOutIcon from '@/assets/icons/icon-signout.vue'
+import { auth } from '@/firebaseInit'
+import { signOut } from 'firebase/auth'
 const isOpen = ref(false)
 const toggleMenu = () => {
   isOpen.value = !isOpen.value
@@ -44,7 +53,7 @@ const toggleMenu = () => {
   top: 0;
   left: 0;
   background-color: white;
-  padding: 3rem;
+  padding: 2.5rem;
   width: 45vh;
   height: 100vh;
   z-index: var(--z-popover);
