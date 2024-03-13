@@ -11,7 +11,7 @@
       <div
         v-for="list in store.board.lists"
         :key="list.id"
-        class="w-[304px] h-fit rounded pb-2 xs:snap-align-none bg-[var(--list-bg)] box-shadow"
+        class="w-[304px] h-fit rounded pb-2 xs:snap-align-none bg-[var(--list-bg)] box-shadow-light"
         :class="{ 'snap-center': !isListHeld }"
       >
         <div class="list-container">
@@ -54,6 +54,7 @@ const draggableOptions = computed(() => {
     delayOnTouchOnly: true,
     forceFallback: true, // allows horizontal scrolling while dragging
     scrollSensitivity: 110,
+    fallbackTolerance: 5,
     handle: '.my-handle',
     dragClass: 'tilted',
     ghostClass: 'ghost',
@@ -73,10 +74,6 @@ watch(
 </script>
 
 <style scoped lang="scss">
-.box-shadow {
-  box-shadow: var(--box-shadow-light);
-}
-
 .tilted {
   transform: rotate(3deg);
 
@@ -88,11 +85,19 @@ watch(
 
 .ghost {
   background-color: rgb(226, 226, 226);
-  border-radius: 8px;
+  border-radius: 4px;
+}
+
+.dark .ghost {
+  background-color: hsla(235, 12%, 19%, 20%);
 }
 
 .ghost > * {
   // visibility: hidden;
   opacity: 0.2;
+}
+
+.dark .ghost > * {
+  opacity: 0.1;
 }
 </style>
