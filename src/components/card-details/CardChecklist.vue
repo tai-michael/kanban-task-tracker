@@ -18,7 +18,7 @@
         <li
           v-for="item of store.cardDetails.checklist"
           :key="item.id"
-          class="flex [&:last-child]:mb-2"
+          class="flex [&:last-child]:mb-1.5"
         >
           <ChecklistItem :item="item" />
         </li>

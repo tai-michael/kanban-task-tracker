@@ -12,7 +12,9 @@
     v-if="!boardStore.boards?.length"
     class="flex flex-col items-center mt-44 xs:mt-60"
   >
-    <span>Welcome to Kanban! Get started with a board.</span>
+    <span class="font-semibold text-[var(--medium-dark-gray)]"
+      >Welcome to Kanban! Get started with a board.</span
+    >
 
     <button
       @click="toggleModal"

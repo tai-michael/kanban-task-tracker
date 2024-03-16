@@ -73,7 +73,7 @@
 
         <template #action-buttons class="relative z-[var(--z-popover)]">
           <span
-            class="absolute top-[13px] left-[43%] font-semibold text-[var(--card-text-subtle)]"
+            class="absolute top-[13px] left-[43%] font-semibold text-[var(--card-text-subtle)] dark:text-white"
             >Dates</span
           >
 
