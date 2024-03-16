@@ -21,7 +21,8 @@
         :class="[
           {
             'active-board': checkIfBoardActive(board.id),
-            'hover-effect': board.id !== route.params.boardId,
+            'hover:sidebar-navbtn-hover-effect':
+              board.id !== route.params.boardId,
           },
         ]"
         @click="emit('boardLinkClicked')"
@@ -97,15 +98,6 @@ const getBoardIconColor = (boardId: string) => {
   }
   span {
     color: white;
-  }
-}
-
-.hover-effect:hover {
-  background-color: var(--sidebar-navbtn-hover);
-  border-radius: 0px 100px 100px 0px;
-
-  span {
-    color: var(--main-purple);
   }
 }
 

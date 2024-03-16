@@ -10,7 +10,7 @@
       :loading="isFetchingCard"
       :show-close-button="true"
       @close-triggered="router.push(`/board/${boardStore.board?.id}`)"
-      :dialog-classes="'min-w-[100svw] min-h-[100svh] rounded-none xs:min-w-[unset] xs:w-[480px] sm:w-[575px] xs:min-h-[620px] xs:rounded-md'"
+      :dialog-classes="'min-w-[100svw] min-h-[100dvh] rounded-none xs:min-w-[unset] xs:w-[480px] sm:w-[575px] xs:min-h-[620px] xs:rounded-md'"
       :dialog-content-classes="'h-[100svh] xs:h-[unset] xs:min-h-[620px]'"
       :form-classes="'xs:min-w-[unset]'"
     >

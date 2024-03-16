@@ -5,7 +5,7 @@
     :class="[
       {
         [props.dialogClasses]: props.dialogClasses && visible,
-        'box-shadow': visible,
+        'box-shadow-heavy': visible,
       },
     ]"
     @mousedown="handleBackdropClick"
@@ -144,9 +144,5 @@ dialog {
 
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.4);
-}
-
-.box-shadow {
-  box-shadow: var(--box-shadow-heavy);
 }
 </style>

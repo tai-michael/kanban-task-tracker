@@ -1,11 +1,11 @@
 <template>
   <div class="absolute top-1 xs:top-1.5 left-3 xs:left-2.5">
     <EllipsisMenu
+      :popover-classes="'left-0'"
       :delete-button-label="deleteButtonLabel"
       :delete-confirmation-header="deleteConfirmationHeader"
       :delete-confirmation-body="deleteConfirmationBody"
       @delete-confirmed="deleteCardAndCloseModal"
-      :popover-classes="'left-0'"
     />
   </div>
 

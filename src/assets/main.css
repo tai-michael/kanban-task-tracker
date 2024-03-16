@@ -3,6 +3,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .sidebar-navbtn-hover-effect {
+    background-color: var(--sidebar-navbtn-hover);
+    border-radius: 0px 100px 100px 0px;
+
+    span {
+      color: var(--main-purple);
+    }
+  }
+
+  .box-shadow-light {
+    box-shadow: var(--box-shadow-light);
+  }
+
+  .box-shadow-heavy {
+    box-shadow: var(--box-shadow-heavy);
+  }
+}
+
 /* #app {
   max-width: 1280px;
   margin: 0 auto;

@@ -3,7 +3,7 @@
     v-if="boardStore.boards?.length > 0"
     @click="toggleModal"
     type="button"
-    class="flex items-center gap-x-4 w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)] py-3 pl-8 hover-effect"
+    class="flex items-center gap-x-4 w-[var(--sidebar-navbtn-width-mobile)] xs:w-[var(--sidebar-navbtn-width-desktop)] py-3 pl-8 hover:sidebar-navbtn-hover-effect"
     :class="{
       'mt-2': boardStore.boards?.length > 9,
     }"
@@ -20,14 +20,3 @@ import { useBoardStore } from '@/stores'
 const boardStore = useBoardStore()
 const { toggleModal } = useModalToggler('boardComposer')
 </script>
-
-<style scoped>
-.hover-effect:hover {
-  background-color: var(--create-board-button-hover);
-  border-radius: 0px 100px 100px 0px;
-
-  span {
-    color: var(--main-purple);
-  }
-}
-</style>
