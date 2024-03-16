@@ -80,7 +80,6 @@
 
         <EllipsisMenu
           v-if="item.id !== activeItemId"
-          ref="ellipsisMenuRef"
           :popover-classes="'!top-[-40px] !right-[25px]'"
         >
           <template #custom-buttons>
