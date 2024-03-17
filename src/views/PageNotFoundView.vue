@@ -1,7 +1,7 @@
 <template>
-  <div class="text-center flex flex-col items-center p-2">
-    <h1 class="font-bold text-2xl mb-4">Page not found</h1>
-    <span class="text-lg mb-4">{{ errMessage }}</span>
+  <div class="h-full flex flex-col items-center text-center pt-40 p-2 gap-y-6">
+    <h1 class="font-bold text-2xl">Page not found</h1>
+    <span class="text-lg mx-5">{{ errMessage }}</span>
     <button
       @click="router.push('/')"
       type="button"
