@@ -109,7 +109,7 @@ const getBoardIconColor = (boardId: string) => {
   max-height: 12em;
 }
 .board-list-long {
-  max-height: 32.5em;
+  max-height: 71vh;
 }
 .mobile-border {
   border-bottom: 1px solid var(--border);
