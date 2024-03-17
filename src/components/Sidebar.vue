@@ -26,12 +26,11 @@
 
     <CreateBoardButton />
 
-    <div class="flex flex-col mt-auto xs:pt-3">
-      <DarkmodeToggle class="h-12 my-4 mx-6 xs:my-0 xs:mx-6" />
-      <HideSidebarButton
-        @hide-sidebar-triggered="toggleSidebar"
-        class="hidden xs:block xs:mr-6"
-      />
+    <div class="relative flex flex-col mt-auto xs:pt-3 xs:mr-6">
+      <DarkmodeToggle class="h-12 my-4 xs:my-0 xs:ml-6" />
+      <HideSidebarButton @hide-sidebar-triggered="toggleSidebar" />
+      <UserProfileButton />
+      <!-- <router-link :to="`/admin`">Admin</router-link> -->
     </div>
   </nav>
 
@@ -53,6 +52,7 @@ import BoardSelector from '@/components/BoardSelector.vue'
 import BoardSearch from '@/components/BoardSearch.vue'
 import DarkmodeToggle from '@/components/DarkmodeToggle.vue'
 import HideSidebarButton from '@/components/HideSidebarButton.vue'
+import UserProfileButton from '@/components/UserProfileButton.vue'
 import LogoDark from '@/assets/images/logo-dark.svg'
 import LogoLight from '@/assets/images/logo-light.svg'
 import ShowSidebar from '@/assets/icons/icon-show-sidebar.svg'
@@ -83,8 +83,8 @@ const toggleSidebar = () => {
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: 2.1rem;
-  width: 56px;
+  bottom: 3.5rem;
+  width: 40px;
   height: 48px;
   border-radius: 0px 100px 100px 0px;
   background-color: var(--main-purple);
