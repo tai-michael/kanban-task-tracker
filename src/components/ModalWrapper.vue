@@ -106,6 +106,7 @@ const handleCloseTriggered = () => {
 const handleBackdropClick = (event: MouseEvent | TouchEvent) => {
   // Closes dialog if backdrop element is clicked/pressed
   if (event.target === dialog.value) {
+    event.preventDefault()
     close()
     emit('closeTriggered')
   }
