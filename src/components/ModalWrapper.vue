@@ -112,18 +112,18 @@ const handleBackdropClick = (event: MouseEvent | TouchEvent) => {
   }
 }
 
-const handleEscapePress = (event: KeyboardEvent) => {
+const handleEscapePressed = (event: KeyboardEvent) => {
   if (event.key === 'Escape' && visible.value) {
     emit('closeTriggered')
   }
 }
 
 onMounted(() => {
-  document.addEventListener('keydown', handleEscapePress)
+  document.addEventListener('keydown', handleEscapePressed)
 })
 
 onUnmounted(() => {
-  document.removeEventListener('keydown', handleEscapePress)
+  document.removeEventListener('keydown', handleEscapePressed)
 })
 
 defineExpose({
