@@ -93,8 +93,8 @@ const isMobileView = inject('isMobileView')
 const draggableOptions = computed(() => {
   return {
     group: 'cards',
-    delay: 200,
     delayOnTouchOnly: true,
+    delay: 200,
     animation: 150,
     fallbackTolerance: 3,
     revertOnSpill: true,

@@ -95,32 +95,10 @@ const uploadFile = async (event) => {
 
   try {
     for (const file of filesSelected) {
-      const fileType = file.type
-      const isValidType = allowedFileTypesArray.some((allowedType) => {
-        if (allowedType.endsWith('*')) {
-          // For generic types like 'image/*'
-          return fileType.startsWith(allowedType.replace('*', ''))
-        }
-        return fileType === allowedType
-      })
+      validateFileType(file, allowedFileTypesArray)
+      validateFileSize(file, maxFileSize)
 
-      if (!isValidType) {
-        throw new Error(`Invalid file type: ${fileType}`)
-      }
-
-      if (file.size > maxFileSize) {
-        throw new Error('File size exceeds the limit of 10MB.')
-      }
-
-      // In Firebase Storage, uploading a file with the same name to the same location overwrites the existing file, hence the workaround below
-      const storageFileName = `${Date.now()}-${file.name}`
-      const fileRef = storageRef(
-        storage,
-        `attachments/${auth.currentUser.uid}/${store.cardDetails?.boardId}/${store.cardDetails?.id}/${storageFileName}`
-      )
-      const snapshot = await uploadBytes(fileRef, file)
-      const url = await getDownloadURL(snapshot.ref)
-
+      const { storageFileName, url } = await uploadFileToFirebase(file)
       store.addAttachment({
         originalName: file.name,
         storageName: storageFileName,
@@ -132,6 +110,44 @@ const uploadFile = async (event) => {
     emit('errorRegistered', err.message)
   } finally {
     isUploadingFile.value = false
+  }
+}
+
+const validateFileType = (file, allowedFileTypesArray) => {
+  const fileType = file.type
+  const isValidType = allowedFileTypesArray.some((allowedType) => {
+    if (allowedType.endsWith('*')) {
+      // For generic types like 'image/*'
+      return fileType.startsWith(allowedType.replace('*', ''))
+    }
+    return fileType === allowedType
+  })
+
+  if (!isValidType) {
+    throw new Error(`Invalid file type: ${fileType}`)
+  }
+}
+
+const validateFileSize = (file, maxFileSize) => {
+  if (file.size > maxFileSize) {
+    throw new Error(
+      `File size exceeds the limit of ${maxFileSize / 1024 / 1024}MB.`
+    )
+  }
+}
+
+const uploadFileToFirebase = async (file) => {
+  try {
+    const storageFileName = `${Date.now()}-${file.name}`
+    const fileRef = storageRef(
+      storage,
+      `attachments/${auth.currentUser.uid}/${store.cardDetails?.boardId}/${store.cardDetails?.id}/${storageFileName}`
+    )
+    const snapshot = await uploadBytes(fileRef, file)
+    const url = await getDownloadURL(snapshot.ref)
+    return { storageFileName, url }
+  } catch (err) {
+    throw new Error(err.message || 'Failed to upload file to Firebase.')
   }
 }
 </script>
