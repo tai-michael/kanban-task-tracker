@@ -12,7 +12,7 @@ export default async function (listId: string, title: string) {
   const cardSummary = {
     id: cardId,
     title: title,
-    due_date: '',
+    due_date: null,
     is_completed: false,
     checklist_items_completed: 0,
     checklist_items_total: 0,

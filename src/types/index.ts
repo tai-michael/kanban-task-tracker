@@ -23,7 +23,7 @@ export interface List {
 export interface CardSummary {
   id: ID
   title: string
-  due_date: Date
+  due_date: Date | null
   is_completed: boolean
   checklist_items_completed: number
   checklist_items_total: number
