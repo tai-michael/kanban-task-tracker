@@ -5,7 +5,7 @@ import { auth } from './firebaseInit'
 import App from './App.vue'
 import router from './router'
 
-import './assets/main.css'
+import './assets/main.scss'
 
 let app: ReturnType<typeof createApp>
 
