@@ -24,8 +24,9 @@
       <div v-if="!store.cardDetails?.attachments.length">
         <AddAttachmentButton />
       </div>
-      <!-- TODO need to check UI on android and iPhone -->
-      <!-- TODO need to test how upload error actually looks, and possibly place in top div instead -->
+      <!-- TODO need to check UI on iPhone -->
+      <!-- TODO need to test how upload error actually looks, and possibly place in top div instead. Possibly also change the message saying one of the files you uploaded is over 10mb (if multiple files) -->
+      <!-- TODO change styling of buttons in card so that all are purple -->
       <div v-if="uploadErrorMessage">
         <span class="text-red-600">{{ uploadErrorMessage }}</span>
       </div>
