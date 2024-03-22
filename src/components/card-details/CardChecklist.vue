@@ -24,7 +24,11 @@
         </li>
       </ul>
 
-      <div v-if="isCreatingItem" class="flex flex-col gap-y-2 w-full">
+      <div
+        ref="itemComposerRef"
+        v-if="isCreatingItem"
+        class="flex flex-col gap-y-2 w-full"
+      >
         <input
           v-model.trim="newItemName"
           v-focus="isCreatingItem"
@@ -69,12 +73,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, inject, watch, nextTick } from 'vue'
 import ChecklistItem from '@/components/card-details/ChecklistItem.vue'
 import CheckSquareIcon from '@/assets/icons/icon-check-square.vue'
 import { useCardStore } from '@/stores'
 import { v4 as uuidv4 } from 'uuid'
 const store = useCardStore()
+const isMobileView = inject('isMobileView')
 
 const isCreatingItem = ref(false)
 const newItemName = ref('')
@@ -121,6 +126,19 @@ watch(
     store.syncChecklistItemsTotal(newValue)
   }
 )
+
+// Below necessary, as default mobile scroll behavior is buggy at times, especially if add item button is clicked at the very bottom of a long card.
+const itemComposerRef = ref(null)
+watch(isCreatingItem, async (newValue) => {
+  if (newValue && isMobileView.value) {
+    await nextTick()
+    setTimeout(() => {
+      itemComposerRef.value?.scrollIntoView({
+        block: 'center',
+      })
+    }, 200)
+  }
+})
 </script>
 
 <style scoped lang="scss"></style>
