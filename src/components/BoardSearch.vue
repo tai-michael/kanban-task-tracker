@@ -17,20 +17,20 @@
 
     <div class="flex shrink-0 absolute top-0 right-3 w-12 h-10">
       <button
-        v-if="!store.isSearching"
-        @click="beginSearch"
-        type="button"
-        class="flex items-center justify-center w-full h-full"
-      >
-        <SearchIcon class="w-5 h-5" />
-      </button>
-      <button
-        v-else
+        v-if="store.isSearching"
         @click="stopSearch"
         type="button"
         class="flex items-center justify-center w-full h-full"
       >
         <CrossIcon class="w-4 h-4" />
+      </button>
+      <button
+        v-else
+        @click="beginSearch"
+        type="button"
+        class="flex items-center justify-center w-full h-full"
+      >
+        <SearchIcon class="w-5 h-5" />
       </button>
     </div>
   </div>
