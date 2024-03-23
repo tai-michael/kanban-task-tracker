@@ -14,7 +14,11 @@
     </div>
 
     <div class="ml-1 xs:ml-[var(--card-gutter-desktop)]">
-      <ul class="mb-1">
+      <VueDraggable
+        v-model="store.cardDetails.checklist"
+        v-bind="draggableOptions"
+        class="mb-1"
+      >
         <li
           v-for="item of store.cardDetails.checklist"
           :key="item.id"
@@ -22,7 +26,7 @@
         >
           <ChecklistItem :item="item" />
         </li>
-      </ul>
+      </VueDraggable>
 
       <div
         ref="itemComposerRef"
@@ -78,8 +82,26 @@ import ChecklistItem from '@/components/card-details/ChecklistItem.vue'
 import CheckSquareIcon from '@/assets/icons/icon-check-square.vue'
 import { useCardStore } from '@/stores'
 import { v4 as uuidv4 } from 'uuid'
+import { VueDraggable } from 'vue-draggable-plus'
 const store = useCardStore()
 const isMobileView = inject('isMobileView')
+const draggableOptions = computed(() => {
+  return {
+    group: 'checklistItems',
+    delayOnTouchOnly: true,
+    delay: 200,
+    animation: 150,
+    fallbackTolerance: 3,
+    revertOnSpill: true,
+    forceFallback: true,
+    scroll: true,
+    scrollSensitivity: 90,
+    bubbleScroll: true,
+    chosenClass: isMobileView.value ? 'tilted' : '',
+    ghostClass: 'ghost',
+    disabled: isCreatingItem.value ? true : false,
+  }
+})
 
 const isCreatingItem = ref(false)
 const newItemName = ref('')
@@ -141,4 +163,8 @@ watch(isCreatingItem, async (newValue) => {
 })
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.ghost > * {
+  opacity: 0.5;
+}
+</style>
