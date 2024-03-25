@@ -98,6 +98,7 @@ const draggableOptions = computed(() => {
     scrollSensitivity: 90,
     bubbleScroll: true,
     chosenClass: isMobileView.value ? 'tilted' : '',
+    dragClass: isMobileView.value ? 'tilted' : '',
     ghostClass: 'ghost',
     disabled: isCreatingItem.value ? true : false,
   }
@@ -164,6 +165,10 @@ watch(isCreatingItem, async (newValue) => {
 </script>
 
 <style scoped lang="scss">
+.tilted > * {
+  transform: rotate(3deg);
+}
+
 .ghost > * {
   opacity: 0.5;
 }
