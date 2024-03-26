@@ -1,5 +1,8 @@
 <template>
-  <div id="firebaseui-auth-container"></div>
+  <div
+    id="firebaseui-auth-container"
+    class="flex justify-center items-center h-[127px]"
+  ></div>
 </template>
 
 <script setup lang="ts">
@@ -29,8 +32,9 @@ onMounted(() => {
       // uiShown: function () {
       //   // The widget is rendered.
       //   // Hide the loader.
-      //   document.getElementById('loader').style.display = 'none'
-      // }
+      //   // console.log('uiShown') // set breakpoint to inspect loading bar
+      //   // document.getElementById('loader').style.display = 'none'
+      // },
     },
   }
 
@@ -41,83 +45,76 @@ onMounted(() => {
   // ui.disableAutoSignIn()
 })
 </script>
-
-<style scoped lang="scss">
+<style lang="scss">
 .firebaseui-container {
-  width: 360px;
+  width: 280px;
 }
 
-// .firebaseui-card-header {
-//   border-bottom: none;
+// NOTE see https://github.com/firebase/firebaseui-web/issues/121
+.mdl-card .firebaseui-callback-indicator-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-width: 200px;
+}
+
+.mdl-card.firebaseui-container {
+  min-height: 2px;
+  background-color: transparent;
+}
+
+.mdl-shadow--2dp {
+  box-shadow: none;
+}
+
+.firebaseui-info-bar {
+  margin-top: 20px;
+}
+
+// div.mdl-progress::after {
+//   display: block;
+//   color: #a748ff;
+//   margin: 50px auto;
+//   content: 'Authenticating...';
+//   text-align: center;
 // }
 
-// body.dark {
-//   .firebaseui-container {
-//     background-color: rgb(32, 32, 32);
-//   }
+.firebaseui-callback-indicator-container .firebaseui-busy-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-purple);
+  margin: 0 50px;
+  width: 180px;
+}
 
-//   .firebaseui-title,
-//   .firebaseui-label,
-//   .firebaseui-textfield.mdl-textfield .firebaseui-input,
-//   .firebaseui-input-invalid,
-//   .firebaseui-id-secondary-link {
-//     color: white !important;
-//   }
+.mdl-progress.firebaseui-busy-indicator {
+  height: 3px;
+}
 
-//   .firebaseui-textfield.mdl-textfield .firebaseui-input {
-//     border-color: white;
-//   }
+.mdl-progress > .progressbar {
+  background-color: var(--main-purple) !important;
+}
 
-//   .mdl-textfield__input {
-//     border-bottom: 1px solid white;
-//   }
-// }
+.mdl-progress > .bufferbar {
+  background-image: linear-gradient(
+      90deg,
+      hsla(0, 0%, 100%, 0.7),
+      hsla(0, 0%, 100%, 0.7)
+    ),
+    linear-gradient(90deg, var(--main-purple), var(--main-purple)) !important;
+  z-index: 0;
+  left: 0;
+}
 
-// // NOTE see https://github.com/firebase/firebaseui-web/issues/121
-
-// .mdl-card .firebaseui-callback-indicator-container {
-//   height: 2px;
-// }
-
-// .mdl-card.firebaseui-container {
-//   min-height: 2px;
-// }
-
-// .mdl-shadow--2dp {
-//   box-shadow: none;
-// }
-
-// .firebaseui-info-bar {
-//   margin-top: 20px;
-// }
-
-// // div.mdl-progress::after {
-// //   display: block;
-// //   color: #48a1ff;
-// //   margin: 50px auto;
-// //   content: 'Authenticating...';
-// //   text-align: center;
-// // }
-
-// .mdl-progress > .progressbar {
-//   background-color: #25c7b1 !important;
-// }
-
-// // .mdl-progress > .bufferbar {
-// //   background-image: linear-gradient(90deg, hsla(0, 0%, 100%, 0.7), hsla(0, 0%, 100%, 0.7)),
-// //     linear-gradient(90deg, #25c7b1, #25c7b1) !important;
-// //   z-index: 0;
-// //   left: 0;
-// // }
-
-// // .mdl-progress:not(.mdl-progress--indeterminate) > .auxbar,
-// // .mdl-progress:not(.mdl-progress__indeterminate) > .auxbar {
-// //   background-image: linear-gradient(90deg, hsla(0, 0%, 100%, 0.9), hsla(0, 0%, 100%, 0.9)),
-// //     linear-gradient(90deg, #25c7b1, #25c7b1) !important;
-// // }
-
-// // .firebaseui-idp-button {
-// //   background-color: #6294ff !important;
-// //   color: white !important;
-// // }
+.mdl-progress:not(.mdl-progress--indeterminate) > .auxbar,
+.mdl-progress:not(.mdl-progress__indeterminate) > .auxbar {
+  background-image: linear-gradient(
+      90deg,
+      hsla(0, 0%, 100%, 0.9),
+      hsla(0, 0%, 100%, 0.9)
+    ),
+    linear-gradient(90deg, var(--main-purple), var(--main-purple)) !important;
+}
 </style>

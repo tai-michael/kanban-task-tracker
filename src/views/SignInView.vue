@@ -1,9 +1,13 @@
 <template>
   <div
-    class="flex h-full flex-col justify-center items-center gap-y-6 bg-[var(--very-light-gray)] dark:bg-[var(--dark-gray)]"
+    class="h-full flex justify-center items-center dark:bg-[var(--dark-gray)] bg-[var(--main-purple-transparent)]"
   >
-    <img :src="isDark ? LogoLight : LogoDark" class="w-[150px]" />
-    <FirebaseUI />
+    <div
+      class="flex flex-col items-center w-[290px] gap-y-6 border dark:border-[var(--main-purple)] rounded-lg pb-5 bg-white dark:bg-[var(--dark-gray)] px-1.5 bg-[var(--very-light-gray)] min-h-[235px]"
+    >
+      <img :src="isDark ? LogoLight : LogoDark" class="w-[150px] mt-9" />
+      <FirebaseUI />
+    </div>
   </div>
 </template>
 
