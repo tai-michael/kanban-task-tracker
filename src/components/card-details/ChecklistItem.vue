@@ -1,16 +1,12 @@
 <template>
   <div
-    class="flex w-full py-2 pl-4 pr-2 gap-x-4 my-1 relative bg-[hsla(242,48%,58%,25%)] rounded"
-    :class="{
-      '!bg-[var(--very-light-gray)] dark:!bg-[var(--darkest-gray)]':
-        item.is_completed,
-    }"
+    class="flex w-full py-2 pl-4 pr-2 gap-x-4 my-1 relative rounded bg-[var(--very-light-gray)] dark:bg-[var(--darkest-gray)] hover:!bg-[var(--main-purple-transparent-light)]"
   >
     <input
       type="checkbox"
       @click.stop="store.toggleChecklistItemCompleted(item.id)"
       :checked="item.is_completed"
-      class="absolute top-[20px] accent-[var(--main-purple)] w-4 h-4"
+      class="absolute top-[20px] accent-[var(--main-purple)] hover:accent-[hsla(242,58%,68%)] w-4 h-4"
     />
 
     <div class="flex flex-col gap-y-1 w-full ml-7">
