@@ -1,6 +1,10 @@
 <template>
   <div
-    class="flex w-full py-2 pl-4 pr-2 gap-x-4 my-1 relative rounded bg-[var(--very-light-gray)] dark:bg-[var(--darkest-gray)] hover:!bg-[var(--main-purple-transparent-light)]"
+    class="flex w-full py-2 pl-4 pr-2 gap-x-4 my-1 relative rounded bg-[var(--very-light-gray)] dark:bg-[var(--darkest-gray)]"
+    :class="{
+      'hover:!bg-[var(--main-purple-transparent-light)]':
+        item.id !== activeItemId,
+    }"
   >
     <input
       type="checkbox"
