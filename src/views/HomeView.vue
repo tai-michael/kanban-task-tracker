@@ -1,5 +1,5 @@
 <template>
-  <main class="flex w-full h-[100vh] relative">
+  <main class="flex w-full h-[100vh] relative bg-[var(--board-bg)]">
     <Sidebar v-if="!isMobileView" />
 
     <!-- NOTE might have to remove the media queries eventually if I need transition animations for mobile -->
