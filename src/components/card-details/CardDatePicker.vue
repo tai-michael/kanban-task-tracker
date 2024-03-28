@@ -46,7 +46,7 @@
       >
         <template #trigger>
           <div
-            class="relative hover:rounded-[1px] hover:outline hover:outline-1 hover:outline-offset-[6px] dark:hover:outline-gray-400"
+            class="relative hover:rounded-[2px] hover:outline hover:outline-1 hover:outline-offset-[6px] outline-[var(--main-purple)]"
             :class="{
               'hover:outline-offset-[unset]': selectedDate,
             }"

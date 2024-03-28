@@ -40,7 +40,7 @@
           @keydown.enter="processItemCreation"
           @keydown.esc.prevent="exitItemCreation"
           placeholder="Add an item"
-          class="p-1.5"
+          class="p-1.5 rounded focus:outline-none focus:ring-2 focus:ring-[var(--main-purple)]"
         />
         <div>
           <button

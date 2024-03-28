@@ -38,7 +38,7 @@
           @input="adjustTextAreaHeight"
           @blur="changeDescription"
           @keydown.esc.prevent="cancelEditingDescription"
-          class="w-full resize-none py-3 px-4"
+          class="w-full resize-none py-3 px-4 rounded focus:outline-none focus:ring-2 focus:ring-[var(--main-purple)]"
         />
 
         <div>

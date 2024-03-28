@@ -25,7 +25,7 @@
             @blur="storeUnsavedItemName($event, item.name)"
             @keydown.enter="saveItemName(item.name)"
             @keydown.esc.prevent="clearItemEdit(item.id, item.name)"
-            class="p-1.5"
+            class="py-1.5 px-2 rounded focus:outline-none focus:ring-2 focus:ring-[var(--main-purple)]"
           />
 
           <!-- NOTE 'mousedown' needed, as 'blur' triggers before 'click', meaning the button wouldn't exist in DOM, so its click would never trigger -->

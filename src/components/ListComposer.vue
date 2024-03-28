@@ -8,7 +8,7 @@
           @keyup.enter="processListCreation"
           @keyup.esc="hideListComposer"
           placeholder="Enter a list title"
-          class="w-full"
+          class="w-full rounded focus:outline-none focus:ring-2 focus:ring-[var(--main-purple)]"
           ref="inputRef"
         />
       </div>

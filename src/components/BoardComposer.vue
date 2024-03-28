@@ -6,7 +6,7 @@
   <input
     v-model.trim="boardTitle"
     v-focus
-    class="px-2 py-1.5 rounded-smh"
+    class="px-2 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-[var(--main-purple)]"
     placeholder="Enter a title"
   />
   <button

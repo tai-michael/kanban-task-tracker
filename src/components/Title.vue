@@ -16,7 +16,7 @@
     @keydown.enter.prevent="handleSubmit"
     @blur="handleSubmit"
     @keydown.esc.prevent="cancelEditingTitle"
-    class="w-full px-2 py-1.5"
+    class="w-full px-3 py-1.5 rounded focus:outline-none focus:ring-2 focus:ring-[var(--main-purple)]"
   />
 </template>
 
