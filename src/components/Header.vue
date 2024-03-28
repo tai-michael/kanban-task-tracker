@@ -138,7 +138,8 @@ header {
 @media (min-width: 481px) {
   header {
     height: var(--header-height-desktop);
-    padding: 0 16px;
+    padding-left: 24px;
+    padding-right: 16px;
   }
 
   .title {

@@ -114,7 +114,7 @@ onUnmounted(() => {
   min-height: 24px;
 
   input {
-    padding: 8px;
+    padding: 8px 12px;
   }
 }
 
