@@ -132,10 +132,12 @@ import DeleteIcon from '@/assets/icons/icon-delete.vue'
 import { useCardStore } from '@/stores'
 const store = useCardStore()
 defineProps(['item'])
+const emit = defineEmits(['isEditingItemName', 'stoppedEditingItemName'])
 
 const activeItemId = ref('')
 const activeItemName = ref('')
 const beginItemNameEdit = (item: object) => {
+  emit('isEditingItemName') // disables item dragging, allowing selection of text
   activeItemId.value = item.id
 
   item.unsaved_name
@@ -177,11 +179,13 @@ const clearItemEdit = (id: string, existingName: string) => {
 const clearFocus = () => {
   activeItemId.value = ''
   activeItemName.value = ''
+  emit('stoppedEditingItemName')
 }
 
 const handleDeleteItem = (id: string) => {
   store.removeChecklistItem(id)
   activeItemName.value = ''
+  emit('stoppedEditingItemName')
 }
 </script>
 

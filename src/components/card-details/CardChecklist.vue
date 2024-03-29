@@ -24,7 +24,11 @@
           :key="item.id"
           class="flex [&:last-child]:mb-1.5"
         >
-          <ChecklistItem :item="item" />
+          <ChecklistItem
+            :item="item"
+            @is-editing-item-name="isEditingItemName = true"
+            @stopped-editing-item-name="isEditingItemName = false"
+          />
         </li>
       </VueDraggable>
 
@@ -100,7 +104,7 @@ const draggableOptions = computed(() => {
     chosenClass: isMobileView.value ? 'tilted' : '',
     dragClass: isMobileView.value ? 'tilted' : 'dragged',
     ghostClass: 'ghost',
-    disabled: isCreatingItem.value ? true : false,
+    disabled: isCreatingItem.value || isEditingItemName.value ? true : false,
   }
 })
 
@@ -131,6 +135,8 @@ const exitItemCreation = () => {
   newItemName.value = ''
   isCreatingItem.value = false
 }
+
+const isEditingItemName = ref(false)
 
 const itemsCompleted = computed(
   () => store.cardDetails.checklist.filter((item) => item.is_completed).length
