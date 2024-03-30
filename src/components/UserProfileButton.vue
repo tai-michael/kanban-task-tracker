@@ -11,7 +11,7 @@
       {{ userInitials }}
     </label>
     <span class="font-bold text-[var(--medium-dark-gray)]">
-      {{ user?.displayName }}
+      {{ userDisplayName }}
     </span>
   </button>
 
@@ -29,18 +29,33 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import SignOutIcon from '@/assets/icons/icon-signout.vue'
 import TransitionFade from '@/components/transitions/TransitionFade.vue'
 import { auth, user } from '@/firebaseInit'
 import { signOut } from 'firebase/auth'
 
-const userInitials = computed(() => {
+const userInitials = ref('')
+const userDisplayName = ref('')
+
+// NOTE computed not used for user display name because it would display username as 'Guest account' momentarily after signing out but before redirecting to sign in view
+onMounted(() => {
   const name = user.value?.displayName
-  if (!name) return ''
+
+  if (!name) {
+    userInitials.value = 'G'
+    userDisplayName.value = 'Guest account'
+    return
+  }
+
+  userDisplayName.value = name
+
   const [firstName, lastName] = name.split(' ')
-  if (!lastName) return firstName.length > 2 ? firstName[0] : firstName
-  return firstName[0].toUpperCase() + lastName[0].toUpperCase()
+  if (!lastName) {
+    userInitials.value = firstName.length > 2 ? firstName[0] : firstName
+    return
+  }
+  userInitials.value = firstName[0].toUpperCase() + lastName[0].toUpperCase()
 })
 
 const isPopoverOpen = ref(false)
