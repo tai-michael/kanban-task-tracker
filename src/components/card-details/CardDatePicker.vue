@@ -207,6 +207,14 @@ const isOverdue = computed(() => {
   --dp-font-size: 14px;
 }
 
+:global(.dp__arrow_top) {
+  display: none;
+}
+
+:global(.dp__month_year_select),
+:global(.dp__calendar_header_item) {
+  font-weight: 600;
+}
 
 :global(.dp__theme_light),
 :global(.dp__theme_dark) {
