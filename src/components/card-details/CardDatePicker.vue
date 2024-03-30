@@ -207,6 +207,12 @@ const isOverdue = computed(() => {
   --dp-font-size: 14px;
 }
 
+
+:global(.dp__theme_light),
+:global(.dp__theme_dark) {
+  --dp-primary-color: var(--main-purple);
+}
+
 .backdrop {
   position: absolute;
   top: 0;

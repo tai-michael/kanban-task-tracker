@@ -117,4 +117,13 @@ onMounted(() => {
     ),
     linear-gradient(90deg, var(--main-purple), var(--main-purple)) !important;
 }
+
+.mdl-button--primary.mdl-button--primary {
+  color: var(--main-purple);
+}
+
+.mdl-button--raised.mdl-button--colored,
+.firebaseui-textfield.mdl-textfield .firebaseui-label::after {
+  background-color: var(--main-purple);
+}
 </style>
