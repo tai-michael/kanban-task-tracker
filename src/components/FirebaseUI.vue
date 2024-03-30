@@ -1,7 +1,7 @@
 <template>
   <div
     id="firebaseui-auth-container"
-    class="flex justify-center items-center h-[127px]"
+    class="flex justify-center items-center min-h-[127px]"
   ></div>
 </template>
 
@@ -125,5 +125,38 @@ onMounted(() => {
 .mdl-button--raised.mdl-button--colored,
 .firebaseui-textfield.mdl-textfield .firebaseui-label::after {
   background-color: var(--main-purple);
+}
+
+.firebaseui-idp-list {
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+}
+
+.firebaseui-text {
+  margin-bottom: 16px;
+}
+
+.dark {
+  .firebaseui-title,
+  .firebaseui-label,
+  .mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+  .mdl-textfield--floating-label.is-focused .mdl-textfield__label,
+  .firebaseui-input,
+  .firebaseui-text,
+  input.firebaseui-input-invalid {
+    color: rgb(207, 207, 226);
+  }
+
+  .firebaseui-textfield.mdl-textfield .firebaseui-input {
+    border-color: rgb(137, 137, 150);
+  }
+
+  .firebaseui-input-toggle-on {
+    background-image: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_white_24dp.png);
+  }
+
+  .firebaseui-input-toggle-off {
+    background-image: url(https://www.gstatic.com/images/icons/material/system/1x/visibility_off_white_24dp.png);
+  }
 }
 </style>
