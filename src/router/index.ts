@@ -31,11 +31,6 @@ const router = createRouter({
       component: () => import('@/views/SignInView.vue'),
     },
     {
-      path: '/admin',
-      name: 'admin',
-      component: () => import('@/views/AdminView.vue'),
-    },
-    {
       path: '/:pathMatch(.*)*',
       name: 'page-not-found',
       component: () => import('@/views/PageNotFoundView.vue'),

@@ -30,7 +30,6 @@
       <DarkmodeToggle class="h-12 my-4 xs:my-0 xs:ml-6" />
       <HideSidebarButton @hide-sidebar-triggered="toggleSidebar" />
       <UserProfileButton />
-      <!-- <router-link :to="`/admin`">Admin</router-link> -->
     </div>
   </nav>
 
