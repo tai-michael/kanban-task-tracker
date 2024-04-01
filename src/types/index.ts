@@ -1,6 +1,9 @@
 export type ID = string
 
-// export type Boards = Board[] // probably unnecessary
+export interface BoardsMeta {
+  userId: string
+  boards: BoardMeta[]
+}
 
 export interface BoardMeta {
   id: ID
@@ -8,8 +11,8 @@ export interface BoardMeta {
 }
 
 export interface BoardDetails {
-  created_by: ID
   id: ID
+  created_by: ID
   title: string
   lists: List[]
 }
