@@ -59,11 +59,12 @@ import {
   type Ref,
 } from 'vue'
 import Sidebar from '@/components/Sidebar.vue'
+import createAndAddExampleBoard from '@/composables/createAndAddExampleBoard'
 import useModalToggler from '@/composables/useModalToggler'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
 import useCardInteractionState from '@/composables/useCardInteractionState'
 import useBackgroundDrag from '@/composables/useBackgroundDrag'
-import { db, auth } from '@/firebaseInit'
+import { db, auth, user } from '@/firebaseInit'
 import { doc, getDoc } from 'firebase/firestore'
 import { useBoardStore } from '@/stores'
 import { useRoute } from 'vue-router'
@@ -88,6 +89,7 @@ const BoardComposer = defineAsyncComponent(
 const route = useRoute()
 const boardStore = useBoardStore()
 
+const errorFetchingBackendData = ref(false)
 const fetchingBoardsFromBackend = ref(false)
 provide('fetchingBoardsFromBackend', fetchingBoardsFromBackend)
 const fetchBoardsCollection = async (id: string) => {
@@ -97,12 +99,22 @@ const fetchBoardsCollection = async (id: string) => {
     return boardsDoc.data() ? boardsDoc.data().boards : []
   } catch (err) {
     console.error('Error fetching data:', err)
+    errorFetchingBackendData.value = true
   }
 }
 const fetchAndHydrateBoards = async () => {
   fetchingBoardsFromBackend.value = true
-  const data = await fetchBoardsCollection(auth.currentUser.uid)
+  errorFetchingBackendData.value = false
+
+  const justSignedInForFirstTime =
+    user.value?.metadata.creationTime === user.value?.metadata.lastSignInTime &&
+    Date.now() - Number(user.value?.metadata.createdAt) < 30000
+
+  let data = await fetchBoardsCollection(auth.currentUser.uid)
+  if (!data.length && justSignedInForFirstTime)
+    data = await createAndAddExampleBoard()
   boardStore.hydrateBoards(data)
+
   fetchingBoardsFromBackend.value = false
 }
 fetchAndHydrateBoards()
