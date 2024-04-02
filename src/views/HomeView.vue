@@ -34,9 +34,8 @@
         <BoardGreeting
           v-if="!fetchingBoardsFromBackend"
           :is-mobile-view="isMobileView"
+          :fetching-error="errorFetchingBackendData"
         />
-
-        <BoardSelector v-if="isMobileView && boardStore.boards?.length > 0" />
       </div>
 
       <router-view></router-view>
