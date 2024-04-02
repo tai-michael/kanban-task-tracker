@@ -23,9 +23,13 @@
           'items-stretch': isMobileView && boardStore.boards?.length > 0,
         }"
       >
-        <!-- <div v-if="fetchingBoardsFromBackend" class="absolute top-[45%]">
-          <SpinnerCircle />
-        </div> -->
+        <div v-if="fetchingBoardsFromBackend" class="absolute top-[45%]">
+          <SpinnerCircle
+            :spinner-classes="'flex w-14 h-14 border-4 border-[var(--main-purple-hover)]'"
+          />
+        </div>
+
+        <BoardSelector v-if="isMobileView && boardStore.boards?.length > 0" />
 
         <BoardGreeting
           v-if="!fetchingBoardsFromBackend"
@@ -83,9 +87,9 @@ const BoardSelector = defineAsyncComponent(
 const BoardComposer = defineAsyncComponent(
   () => import('@/components/BoardComposer.vue')
 )
-// const SpinnerCircle = defineAsyncComponent(
-//   () => import('@/assets/spinner-circle.vue')
-// )
+const SpinnerCircle = defineAsyncComponent(
+  () => import('@/assets/spinner-circle.vue')
+)
 const route = useRoute()
 const boardStore = useBoardStore()
 
