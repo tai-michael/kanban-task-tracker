@@ -1,7 +1,7 @@
 <template>
   <div class="flex shrink-0 w-10 h-10 relative">
     <button
-      @mousedown.prevent="toggleEllipsisMenu"
+      @mousedown="toggleEllipsisMenu"
       :class="['icon-button', { 'icon-button--selected': isEllipsisMenuOpen }]"
     >
       <EllipsisIcon class="w-[20px] h-[20px]" />
