@@ -1,6 +1,6 @@
 <template>
-  <!-- NOTE using optional chaining on the v-model breaks the wrapper -->
-  <div class="flex px-4">
+  <div class="flex" :class="store.board.lists.length ? 'px-4' : 'px-0'">
+    <!-- NOTE using optional chaining on the v-model breaks the wrapper -->
     <VueDraggable
       v-model="store.board.lists"
       v-bind="draggableOptions"
