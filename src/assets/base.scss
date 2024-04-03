@@ -2,6 +2,10 @@
 /* @import '@fontsource/plus-jakarta-sans/400.css'; Specify weight */
 /* @import '@fontsource/plus-jakarta-sans/400-italic.css'; Specify weight and style */
 
+#app {
+  height: 100dvh;
+}
+
 *,
 *::before,
 *::after {
@@ -30,8 +34,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#app {
-  height: 100dvh;
+@media only screen and (hover: none) and (pointer: coarse) {
+  input,
+  select,
+  textarea {
+    font-size: 15px;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    font-size: 16px;
+  }
 }
 
 /* color variables */
