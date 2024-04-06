@@ -37,7 +37,6 @@
 import { onMounted, ref } from 'vue'
 import CrossIcon from '@/assets/icons/icon-cross.vue'
 import createAndAddCard from '@/composables/createAndAddCard'
-// TODO add 'required' to all required props in project
 const props = defineProps(['listId', 'isCreatingCard'])
 const emit = defineEmits(['exitCardComposer'])
 const newCardTitle = ref('')

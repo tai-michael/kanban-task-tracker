@@ -28,8 +28,6 @@
       <div v-if="!store.cardDetails?.attachments.length">
         <AddAttachmentButton />
       </div>
-      <!-- TODO need to check UI on iPhone -->
-      <!-- TODO change styling of buttons in card so that all are purple -->
 
       <ul v-if="store.cardDetails?.attachments.length">
         <li
