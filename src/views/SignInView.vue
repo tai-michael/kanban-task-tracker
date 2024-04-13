@@ -3,7 +3,7 @@
     class="h-full flex justify-center items-center dark:bg-[var(--dark-gray)] bg-[var(--main-purple-transparent)]"
   >
     <div
-      class="flex flex-col items-center w-[290px] gap-y-6 border dark:border-[var(--main-purple)] rounded-lg pb-3 bg-white dark:bg-[var(--dark-gray)] px-1.5 bg-[var(--very-light-gray)] min-h-[235px]"
+      class="flex flex-col justify-center items-center w-[290px] gap-y-6 border dark:border-[var(--main-purple)] rounded-lg pb-3 bg-white dark:bg-[var(--dark-gray)] px-1.5 bg-[var(--very-light-gray)] min-h-[290px]"
     >
       <img :src="isDark ? LogoLight : LogoDark" class="w-[150px] mt-9" />
       <FirebaseUI />
