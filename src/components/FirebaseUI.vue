@@ -1,14 +1,21 @@
 <template>
   <div
     id="firebaseui-auth-container"
-    class="flex justify-center items-center min-h-[127px]"
-  ></div>
+    class="relative flex justify-center items-center min-h-[190px] min-w-[280px]"
+  >
+    <!-- anonymous sign-ins don't trigger firebaseUI's loading bar, so need custom spinner -->
+    <SpinnerCircle
+      v-if="user?.isAnonymous"
+      :spinner-classes="'absolute top-12 flex w-14 h-14 border-4 border-[var(--main-purple-hover)] z-10'"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { auth } from '@/firebaseInit'
+import { auth, user } from '@/firebaseInit'
 import firebase from 'firebase/compat/app'
+import SpinnerCircle from '@/assets/spinner-circle.vue'
 import * as firebaseui from 'firebaseui'
 import 'firebaseui/dist/firebaseui.css'
 
