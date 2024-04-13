@@ -62,6 +62,7 @@
 import { computed, defineAsyncComponent, inject, ref } from 'vue'
 import Title from '@/components/Title.vue'
 import EllipsisMenu from '@/components/EllipsisMenu.vue'
+import CardComposer from '@/components/CardComposer.vue'
 import PlusIcon from '@/assets/icons/icon-add.vue'
 import useCardInteractionState from '@/composables/useCardInteractionState'
 import { useRouter } from 'vue-router'
@@ -69,9 +70,6 @@ import { useBoardStore } from '@/stores'
 import { VueDraggable } from 'vue-draggable-plus'
 const CardPreview = defineAsyncComponent(
   () => import('@/components/CardPreview.vue')
-)
-const CardComposer = defineAsyncComponent(
-  () => import('@/components/CardComposer.vue')
 )
 const store = useBoardStore()
 const router = useRouter()
