@@ -33,8 +33,8 @@ onMounted(() => {
       // firebase.auth.PhoneAuthProvider.PROVIDER_ID,
       firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
     ],
-    // Setting this to false makes it so that page won't refresh after sign in
     callbacks: {
+      // Setting this to false makes it so that page won't refresh after sign in
       signInSuccessWithAuthResult: () => true,
       // uiShown: function () {
       //   // The widget is rendered.

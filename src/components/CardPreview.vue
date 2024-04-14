@@ -12,9 +12,9 @@
         @mouseleave="hover = false"
         class="card-badge"
         :class="{
-          'bg-[var(--card-preview-overdue)] hover:bg-[var(--card-preview-overdue-hover)]':
+          'bg-[var(--card-overdue)] hover:bg-[var(--card-overdue-hover)]':
             isOverdue,
-          'bg-[var(--card-preview-complete)] hover:bg-[var(--card-preview-complete-hover)]':
+          'bg-[var(--card-complete)] hover:bg-[var(--card-complete-hover)]':
             card.is_completed,
         }"
       >
@@ -25,22 +25,15 @@
             :checked="card.is_completed"
             @click.stop="store.toggleCardCompleted(card.id)"
           />
-          <ClockIcon
-            v-show="!hover"
-            :color="
-              isOverdue || card.is_completed
-                ? 'white'
-                : 'var(--card-text-subtle)'
-            "
-          />
+          <ClockIcon v-show="!hover" :color="clockIconColor" />
         </div>
         <span
           v-if="formattedDueDate"
-          :class="
-            isOverdue || card.is_completed
-              ? 'text-white'
-              : 'text-[var(--card-text-subtle)]'
-          "
+          :class="{
+            'text-[var(--card-overdue-text)]': isOverdue,
+            'text-white': card.is_completed,
+            'text-[var(--card-text-subtle)]': !isOverdue || card.is_completed,
+          }"
         >
           {{ formattedDueDate }}
         </span>
@@ -49,7 +42,9 @@
       <div
         v-if="checklistProgress"
         class="card-badge text-[var(--card-text-subtle)]"
-        :class="{ 'bg-[#259c6b]': allChecklistItemsCompleted }"
+        :class="{
+          'bg-[var(--card-complete)]': allChecklistItemsCompleted,
+        }"
       >
         <CheckSquareIcon
           :color="
@@ -129,6 +124,12 @@ const allChecklistItemsCompleted = computed(() =>
     ? true
     : false
 )
+
+const clockIconColor = computed(() => {
+  if (isOverdue.value) return 'var(--card-overdue-text)'
+  else if (props.card.is_completed) return 'white'
+  else return 'var(--card-text-subtle)'
+})
 </script>
 
 <style scoped lang="scss">

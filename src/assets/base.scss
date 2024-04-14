@@ -70,7 +70,9 @@ body {
   --dark-blue: hsla(210, 79%, 46%);
   --medium-blue: hsla(210, 97%, 55%);
 
-  --red: hsla(0, 78%, 63%, 1);
+  --light-red: hsla(0, 78%, 63%, 1);
+  --dark-red: hsla(0, 100%, 40%);
+  --very-dark-red: hsla(0, 100%, 30%);
 }
 
 :root {
@@ -102,11 +104,12 @@ body {
   --title-color: black;
   --card-preview-bg: white;
   --card-preview-title: black;
-  --card-preview-overdue: hsla(0, 100%, 55%);
-  --card-preview-overdue-hover: hsla(0, 100%, 70%);
-  --card-preview-complete: hsla(155, 62%, 35%, 1);
-  --card-preview-complete-hover: hsla(155, 62%, 43%);
   --card-preview-attachment-icon: hsla(218, 24%, 35%, 80%);
+  --card-overdue: hsla(1, 96%, 91%, 1);
+  --card-overdue-hover: hsla(0, 26%, 77%);
+  --card-overdue-text: hsla(4, 66%, 41%);
+  --card-complete: hsla(155, 62%, 32%);
+  --card-complete-hover: hsla(155, 62%, 40%);
 
   --card-primary-button: var(--main-purple);
   --card-primary-button-hover: var(--main-purple-hover);
@@ -157,6 +160,11 @@ body {
   --title-color: white;
   --card-preview-bg: hsla(235, 12%, 22%, 95%);
   --card-preview-title: white;
+  --card-overdue: var(--very-dark-red);
+  --card-overdue-hover: var(--dark-red);
+  --card-overdue-text: white;
+  --card-complete: hsla(155, 62%, 30%);
+  --card-complete-hover: hsla(155, 62%, 40%);
   --card-preview-attachment-icon: hsla(216, 15%, 50%);
 
   --card-secondary-button: var(--medium-gray);
@@ -165,7 +173,7 @@ body {
   --card-text: white;
   --card-text-subtle: var(--medium-dark-gray);
 
-  --delete-zone: hsla(0, 100%, 45%);
+  --delete-zone: var(--very-dark-red);
   --popover-border: hsla(0, 0%, 24%);
 }
 

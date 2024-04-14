@@ -60,7 +60,7 @@
               class="px-3 rounded hover:bg-[var(--card-secondary-button-hover)] active:bg-[var(--card-secondary-button-hover)] transition-colors duration-100 ease-in-out"
             >
               <label
-                class="font-medium text-[var(--red)] select-none cursor-pointer"
+                class="font-medium text-[var(--light-red)] select-none cursor-pointer"
                 >Delete item</label
               >
             </button>
@@ -90,8 +90,10 @@
                 type="button"
                 class="ellipsis-popover__button p-3"
               >
-                <DeleteIcon class="text-[var(--red)]" />
-                <label class="select-none text-[var(--red)]">Delete</label>
+                <DeleteIcon class="text-[var(--light-red)]" />
+                <label class="select-none text-[var(--light-red)]"
+                  >Delete</label
+                >
               </button>
             </div>
           </template>

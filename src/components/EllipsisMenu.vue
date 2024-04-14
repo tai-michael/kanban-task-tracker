@@ -25,8 +25,8 @@
             type="button"
             class="ellipsis-popover__button"
           >
-            <DeleteIcon class="text-[var(--red)]" />
-            <label class="text-[var(--red)] font-medium">
+            <DeleteIcon class="text-[var(--light-red)]" />
+            <label class="text-[var(--light-red)] font-medium">
               {{ props.deleteButtonLabel }}
             </label>
           </button>

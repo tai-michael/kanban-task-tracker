@@ -111,12 +111,12 @@
       >
         <span
           v-if="isCompleted"
-          class="bg-[#1f845a] text-white px-1.5 flex items-center rounded h-[85%]"
+          class="bg-[var(--card-complete)] text-white px-1.5 flex items-center rounded h-[85%]"
           >Completed</span
         >
         <span
           v-if="isOverdue"
-          class="px-1.5 flex items-center rounded h-[87%] bg-[#ffeceb] text-[#ae2a19] dark:bg-[#ae2a19] dark:text-white"
+          class="px-1.5 flex items-center rounded h-[87%] bg-[hsl(1,96,91)] text-[#ae2a19] dark:bg-[#ae2a19] dark:text-white"
           >Overdue</span
         >
       </div>
