@@ -38,7 +38,7 @@ export const useBoardStore = defineStore('board', () => {
   const addList = (list: List) => {
     board.value.lists.push(list)
   }
-  const removeList = async (listId: string) => {
+  const deleteList = async (listId: string) => {
     const listIndex = board.value.lists.findIndex((list) => list.id === listId)
     if (listIndex === -1) return
 
@@ -65,7 +65,7 @@ export const useBoardStore = defineStore('board', () => {
     const list = board.value.lists.find((l) => l.id === listId)
     list.cards.push(card)
   }
-  const removeCard = (cardId: string) => {
+  const deleteCardFromStore = (cardId: string) => {
     for (const list of board.value.lists) {
       const cardIndex = list.cards.findIndex((c) => c.id === cardId)
       if (cardIndex !== -1) {
@@ -75,16 +75,16 @@ export const useBoardStore = defineStore('board', () => {
     }
   }
 
-  const removeBoardFromSingleBoardsCollection = () => {
+  const deleteBoardFromSingleBoardsCollection = () => {
     deleteDoc(doc(db, 'boards_single', board.value.id))
   }
-  const removeBoardFromSidebar = () => {
+  const deleteBoardFromSidebar = () => {
     const boardIndex = boards.value.findIndex((b) => b.id === board.value.id)
 
     if (boardIndex === -1) return
     boards.value.splice(boardIndex, 1)
   }
-  const removeCardDescriptionsFromBackend = async () => {
+  const deleteCardDescriptionsFromBackend = async () => {
     const batch = writeBatch(db)
 
     const cardIds = board.value.lists.flatMap((list) =>
@@ -102,7 +102,7 @@ export const useBoardStore = defineStore('board', () => {
       console.error('Error deleting cards:', error)
     }
   }
-  const removeCardAttachmentsFromFirebaseStorage = async () => {
+  const deleteCardAttachmentsFromFirebaseStorage = async () => {
     const boardFolderRef = storageRef(
       storage,
       `attachments/${auth.currentUser.uid}/${board.value.id}`
@@ -118,11 +118,11 @@ export const useBoardStore = defineStore('board', () => {
       console.error('Error deleting files from Firebase Storage:', error)
     }
   }
-  const deleteBoard = () => {
-    removeBoardFromSingleBoardsCollection()
-    removeBoardFromSidebar()
-    removeCardDescriptionsFromBackend()
-    removeCardAttachmentsFromFirebaseStorage() // not from firestore
+  const deleteBoardAndCleanup = () => {
+    deleteBoardFromSingleBoardsCollection()
+    deleteBoardFromSidebar()
+    deleteCardDescriptionsFromBackend()
+    deleteCardAttachmentsFromFirebaseStorage() // not from firestore
     clearBoard()
     router.replace('/')
   }
@@ -132,15 +132,15 @@ export const useBoardStore = defineStore('board', () => {
     board,
 
     addBoard,
-    deleteBoard,
+    deleteBoardAndCleanup,
     hydrateBoards,
     hydrateBoard,
     clearBoard,
     updateBoardTitle,
     addList,
-    removeList,
+    deleteList,
     updateListTitle,
     addCard,
-    removeCard,
+    deleteCardFromStore,
   }
 })

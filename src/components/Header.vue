@@ -45,7 +45,7 @@
           :delete-button-label="deleteButtonLabel"
           :delete-confirmation-header="deleteConfirmationHeader"
           :delete-confirmation-body="deleteConfirmationBody"
-          @delete-confirmed="boardStore.deleteBoard"
+          @delete-confirmed="boardStore.deleteBoardAndCleanup"
         />
       </div>
 

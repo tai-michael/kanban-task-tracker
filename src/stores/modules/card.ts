@@ -55,7 +55,7 @@ export const useCardStore = defineStore('card', () => {
   const addChecklistItem = (item: ChecklistItem) => {
     cardDetails.value.checklist.push(item)
   }
-  const removeChecklistItem = (id: string) => {
+  const deleteChecklistItem = (id: string) => {
     const itemIndex = cardDetails.value.checklist.findIndex(
       (item) => item.id === id
     )
@@ -87,7 +87,7 @@ export const useCardStore = defineStore('card', () => {
   const addAttachment = (attachment: CardAttachment) => {
     cardDetails.value.attachments.push(attachment)
   }
-  const removeAttachment = (attachmentToDelete: CardAttachment) => {
+  const deleteAttachment = (attachmentToDelete: CardAttachment) => {
     const attachmentIndex = cardDetails.value.attachments.findIndex(
       (attachment) => attachment.storageName === attachmentToDelete.storageName
     )
@@ -113,7 +113,7 @@ export const useCardStore = defineStore('card', () => {
     updateCardDueDate,
     toggleCardCompleted,
     addChecklistItem,
-    removeChecklistItem,
+    deleteChecklistItem,
     updateChecklistItemName,
     storeUnsavedChecklistItemName,
     deleteUnsavedChecklistItemName,
@@ -121,7 +121,7 @@ export const useCardStore = defineStore('card', () => {
     syncChecklistItemsCompleted,
     syncChecklistItemsTotal,
     addAttachment,
-    removeAttachment,
+    deleteAttachment,
     syncAttachmentsTotal,
   }
 })

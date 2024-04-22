@@ -25,7 +25,7 @@
 import { watch, onMounted, defineAsyncComponent, onUnmounted } from 'vue'
 import EllipsisMenu from '@/components/EllipsisMenu.vue'
 import updateFirestoreDoc from '@/composables/updateFirestoreDoc'
-import deleteCard from '@/composables/deleteCard'
+import deleteCardAndCleanup from '@/composables/deleteCardAndCleanup'
 import { useCardStore } from '@/stores'
 const CardTitle = defineAsyncComponent(
   () => import('@/components/card-details/CardTitle.vue')
@@ -47,7 +47,7 @@ const deleteConfirmationBody = `Are you sure you want to delete this card? This 
 
 const emit = defineEmits(['cardDeleted'])
 const deleteCardAndCloseModal = () => {
-  deleteCard(store.cardDetails?.boardId, store.cardDetails.id)
+  deleteCardAndCleanup(store.cardDetails?.boardId, store.cardDetails.id)
   emit('cardDeleted')
 }
 

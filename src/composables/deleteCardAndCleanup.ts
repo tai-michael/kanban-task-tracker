@@ -6,7 +6,7 @@ import { ref as storageRef, listAll, deleteObject } from 'firebase/storage'
 export default function (boardId: string, cardId: string) {
   const store = useBoardStore()
 
-  store.removeCard(cardId)
+  store.deleteCardFromStore(cardId)
   deleteDoc(doc(db, 'cards', cardId))
   deleteCardAttachmentsFromFirebaseStorage(boardId, cardId)
 }

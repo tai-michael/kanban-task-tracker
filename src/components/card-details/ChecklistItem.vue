@@ -186,7 +186,7 @@ const clearFocus = () => {
 }
 
 const handleDeleteItem = (id: string) => {
-  store.removeChecklistItem(id)
+  store.deleteChecklistItem(id)
   activeItemName.value = ''
   emit('stoppedEditingItemName')
 }

@@ -10,7 +10,7 @@
       :delete-button-label="deleteButtonLabel"
       :delete-confirmation-header="deleteConfirmationHeader"
       :delete-confirmation-body="deleteConfirmationBody"
-      @delete-confirmed="store.removeList(props.list.id)"
+      @delete-confirmed="store.deleteList(props.list.id)"
     />
   </div>
 

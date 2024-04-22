@@ -66,7 +66,7 @@ const deleteFile = (fileToDelete) => {
       `attachments/${auth.currentUser.uid}/${store.cardDetails?.boardId}/${store.cardDetails?.id}/${fileToDelete.storageName}`
     )
     deleteObject(fileRef)
-    store.removeAttachment(fileToDelete)
+    store.deleteAttachment(fileToDelete)
   } catch (error) {
     console.error('Error deleting file:', error)
   }
