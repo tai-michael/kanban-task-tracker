@@ -94,7 +94,6 @@ const toggleModal = () => {
 const emit = defineEmits(['deleteConfirmed'])
 const handleDelete = () => {
   emit('deleteConfirmed')
-  toggleEllipsisMenu()
   // REVIEW maybe add toast for this, though probably unnecessary
 }
 
