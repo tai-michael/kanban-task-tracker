@@ -2,7 +2,7 @@
   <div ref="inputRef" class="input-form">
     <textarea
       v-model.trim="newCardTitle"
-      v-focus="isCreatingCard"
+      v-focus
       @blur="handleBlur"
       @keyup.enter="processCardCreation"
       @keyup.esc="resetCardCreationState"
@@ -37,7 +37,7 @@
 import { onMounted, ref } from 'vue'
 import CrossIcon from '@/assets/icons/icon-cross.vue'
 import createAndAddCard from '@/composables/createAndAddCard'
-const props = defineProps(['listId', 'isCreatingCard'])
+const props = defineProps(['listId'])
 const emit = defineEmits(['exitCardComposer'])
 const newCardTitle = ref('')
 

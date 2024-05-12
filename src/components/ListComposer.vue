@@ -4,7 +4,7 @@
       <div class="input-form">
         <input
           v-model.trim="newListTitle"
-          v-focus="isCreatingList"
+          v-focus
           @keyup.enter="processListCreation"
           @keyup.esc="hideListComposer"
           placeholder="Enter a list title"

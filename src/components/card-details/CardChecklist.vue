@@ -39,7 +39,7 @@
       >
         <input
           v-model.trim="newItemName"
-          v-focus="isCreatingItem"
+          v-focus
           @blur="processItemCreation"
           @keydown.enter="processItemCreation"
           @keydown.esc.prevent="exitItemCreation"

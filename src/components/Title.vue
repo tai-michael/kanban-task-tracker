@@ -11,7 +11,7 @@
     v-else
     ref="titleInput"
     v-model.trim="editableTitle"
-    v-focus="isEditingTitle"
+    v-focus
     @focus="setTitle"
     @keydown.enter.prevent="handleSubmit"
     @blur="handleSubmit"

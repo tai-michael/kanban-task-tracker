@@ -33,7 +33,7 @@
         <textarea
           ref="textArea"
           v-model.trim="cardDescription"
-          v-focus="isEditingDescription"
+          v-focus
           @focus="setDescription"
           @input="adjustTextAreaHeight"
           @blur="changeDescription"

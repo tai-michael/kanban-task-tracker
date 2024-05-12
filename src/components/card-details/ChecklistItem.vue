@@ -22,7 +22,7 @@
         >
           <input
             v-model.trim="activeItemName"
-            v-focus="item.id === activeItemId"
+            v-focus
             @blur="storeUnsavedItemName($event, item.name)"
             @keydown.enter="saveItemName(item.name)"
             @keydown.esc.prevent="clearItemEdit(item.id, item.name)"
