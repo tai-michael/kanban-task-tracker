@@ -15,7 +15,3 @@
     />
   </svg>
 </template>
-
-<script setup lang="ts">
-defineProps(['color'])
-</script>

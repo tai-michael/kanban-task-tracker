@@ -1,12 +1,9 @@
 <template>
-  <!-- <svg :fill="color" width="12" height="12" xmlns="http://www.w3.org/2000/svg">
-    <path d="M7.368 12V7.344H12V4.632H7.368V0H4.656v4.632H0v2.712h4.656V12z" />
-  </svg> -->
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
     height="16"
-    :fill="color"
+    fill="currentColor"
     class="bi bi-clock"
     viewBox="0 0 16 16"
   >
@@ -18,7 +15,3 @@
     />
   </svg>
 </template>
-
-<script setup lang="ts">
-defineProps(['color'])
-</script>
