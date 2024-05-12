@@ -58,7 +58,9 @@
         class="delete-container"
       >
         <div class="delete-zone">
-          <DeleteIcon class="dark:text-white" /><span class="dark:text-white"
+          <DeleteIcon
+            class="text-[var(--very-dark-red)] dark:text-white"
+          /><span class="text-[var(--very-dark-red)] dark:text-white"
             >Drag here to delete</span
           >
         </div>
