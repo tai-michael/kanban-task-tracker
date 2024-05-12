@@ -103,7 +103,7 @@ const draggableOptions = computed(() => {
     chosenClass: isMobileView.value ? 'tilted' : '',
     dragClass: 'tilted',
     ghostClass: 'ghost',
-    disabled: isCreatingCard.value ? true : false,
+    disabled: isCreatingCard.value,
   }
 })
 

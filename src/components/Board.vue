@@ -58,7 +58,7 @@ const draggableOptions = computed(() => {
     handle: '.my-handle',
     dragClass: 'tilted',
     ghostClass: 'ghost',
-    disabled: isEllipsisMenuActive.value ? true : false,
+    disabled: isEllipsisMenuActive.value,
     // chosenClass: 'tilted', // REVIEW this doesn't work because of some strange interaction with scroll-snap
   }
 })

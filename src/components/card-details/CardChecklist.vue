@@ -104,7 +104,7 @@ const draggableOptions = computed(() => {
     chosenClass: isMobileView.value ? 'tilted' : '',
     dragClass: isMobileView.value ? 'tilted' : 'dragged',
     ghostClass: 'ghost',
-    disabled: isCreatingItem.value || isEditingItemName.value ? true : false,
+    disabled: isCreatingItem.value || isEditingItemName.value,
   }
 })
 
