@@ -19,15 +19,6 @@
     />
 
     <div
-      class="backdrop"
-      v-if="isMobileView && isDatePickerOpen"
-      @wheel.prevent
-      @touchmove.prevent
-      @scroll.prevent
-      @touchstart.prevent
-    ></div>
-
-    <div
       class="flex gap-x-2 bg-[var(--card-secondary-button)] p-1.5 rounded"
       :class="{ 'p-0': !selectedDate }"
     >
@@ -40,9 +31,9 @@
         @keydown.esc.prevent="datePicker?.closeMenu"
         time-picker-inline
         select-text="Save"
-        :teleport-center="isMobileView ? true : false"
+        :teleport-center="isMobileView"
         :alt-position="customCalenderPosition"
-        :dark="isDark ? true : false"
+        :dark="isDark"
       >
         <template #trigger>
           <div
@@ -122,6 +113,15 @@
       </div>
     </div>
   </div>
+
+  <div
+    class="backdrop"
+    v-if="isMobileView && isDatePickerOpen"
+    @wheel.prevent
+    @touchmove.prevent
+    @scroll.prevent
+    @touchstart.prevent
+  ></div>
 </template>
 
 <script setup lang="ts">
@@ -135,7 +135,7 @@ import { useDark } from '@vueuse/core'
 import { useCardStore } from '@/stores'
 const store = useCardStore()
 const isDark = useDark()
-const isMobileView = inject('isMobileView')
+const isMobileView = inject<boolean>('isMobileView')
 const customCalenderPosition = () => ({ top: 40, left: -6 })
 
 const isDatePickerOpen = ref(false)
