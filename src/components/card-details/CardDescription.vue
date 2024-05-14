@@ -12,20 +12,16 @@
     </div>
 
     <div class="xs:ml-[var(--card-gutter-desktop)] flex flex-col">
-      <li
-        v-if="!isEditingDescription"
-        @click="isEditingDescription = true"
-        class="overflow-auto"
-      >
+      <li v-if="!isEditingDescription" @click="isEditingDescription = true">
         <span
-          v-if="!store.cardDetails.description"
-          class="fake-text-area cursor-pointer"
+          v-if="store.cardDetails?.description"
+          class="break-words text-[var(--card-text-subtle)]"
         >
-          Enter a description for this card...
+          {{ store.cardDetails?.description }}
         </span>
 
-        <span v-else class="break-words text-[var(--card-text-subtle)]">
-          {{ store.cardDetails.description }}
+        <span v-else class="fake-text-area cursor-pointer">
+          Enter a description for this card...
         </span>
       </li>
 
