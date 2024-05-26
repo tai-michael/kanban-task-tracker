@@ -95,20 +95,20 @@ watch(
   () => props.cardId,
   async (newValue) => {
     // second condition prevents clearing card and 'find' from triggering if closing and reopening card
-    if (newValue && newValue !== cardStore?.cardDetails?.id) {
-      console.log('new card id detected')
-      if (Object.keys(cardStore.cardDetails).length) cardStore.clearCard()
+    if (!newValue || newValue === cardStore?.cardDetails?.id) return
 
-      // speeds up switching between already opened cards
-      const matchingCard = cardStore.memoizedCards.find(
-        (card) => card.id === newValue
-      )
-      if (matchingCard) return cardStore.hydrateCardDetails(matchingCard)
+    console.log('new card id detected')
+    if (Object.keys(cardStore.cardDetails).length) cardStore.clearCard()
 
-      isFetchingCard.value = true
-      await fetchCard(props.cardId)
-      isFetchingCard.value = false
-    }
+    // speeds up switching between already opened cards
+    const matchingCard = cardStore.memoizedCards.find(
+      (card) => card.id === newValue
+    )
+    if (matchingCard) return cardStore.hydrateCardDetails(matchingCard)
+
+    isFetchingCard.value = true
+    await fetchCard(props.cardId)
+    isFetchingCard.value = false
   }
 )
 

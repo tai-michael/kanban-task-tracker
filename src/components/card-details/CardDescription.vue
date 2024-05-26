@@ -79,11 +79,11 @@ const adjustTextAreaHeight = () => {
   })
 }
 
-watch(isEditingDescription, (newValue) => {
-  if (newValue) {
-    adjustTextAreaHeight()
-  }
-})
+// watch(isEditingDescription, (newValue) => {
+//   if (newValue) {
+//     adjustTextAreaHeight()
+//   }
+// })
 
 const changeDescription = (event) => {
   // NOTE tabbing while input is focused triggers blur, so the second set of conditions is used to prevent that and allow tabbing to buttons
@@ -138,5 +138,9 @@ onMounted(() => {
   &:hover {
     background-color: var(--card-secondary-button-hover);
   }
+}
+
+textarea {
+  field-sizing: content;
 }
 </style>

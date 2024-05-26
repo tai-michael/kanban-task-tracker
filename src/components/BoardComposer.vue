@@ -26,10 +26,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useBoardStore } from '@/stores'
 import createAndAddBoard from '@/composables/createAndAddBoard'
 const router = useRouter()
-const store = useBoardStore()
 const boardTitle = ref('')
 
 const handleCreateBoard = async () => {
