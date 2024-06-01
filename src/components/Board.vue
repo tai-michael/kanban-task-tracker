@@ -15,7 +15,11 @@
         :class="{ 'snap-center': !isListHeld }"
       >
         <div class="list-container">
-          <List :list="list" @card-selected="$emit('card-selected')"></List>
+          <List
+            :list="list"
+            @is-editing-title="toggleTitleState"
+            @card-selected="$emit('card-selected')"
+          ></List>
         </div>
       </div>
     </VueDraggable>
@@ -46,6 +50,11 @@ const updateListHeldStatus = (isHeld: boolean) => {
   isListHeld.value = isHeld
 }
 
+const isEditingListTitle = ref(false)
+const toggleTitleState = (isEditingTitle: boolean) => {
+  isEditingListTitle.value = isEditingTitle
+}
+
 const { isEllipsisMenuActive } = useEllipsisMenuState()
 const draggableOptions = computed(() => {
   return {
@@ -58,7 +67,7 @@ const draggableOptions = computed(() => {
     handle: '.my-handle',
     dragClass: 'tilted',
     ghostClass: 'ghost',
-    disabled: isEllipsisMenuActive.value,
+    disabled: isEllipsisMenuActive.value || isEditingListTitle.value,
     // chosenClass: 'tilted', // REVIEW this doesn't work because of some strange interaction with scroll-snap
   }
 })

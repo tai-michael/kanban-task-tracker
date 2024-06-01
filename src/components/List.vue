@@ -2,6 +2,7 @@
   <div class="flex justify-between gap-x-2 p-2 select-none my-handle">
     <Title
       :title="list.title"
+      @is-editing-title="emitTitleState"
       @title-edited="changeListTitle"
       class="overflow-hidden overflow-ellipsis whitespace-nowrap font-bold py-1.5 pr-2 pl-3"
     />
@@ -107,10 +108,14 @@ const draggableOptions = computed(() => {
   }
 })
 
-const emit = defineEmits(['cardSelected'])
+const emit = defineEmits(['isEditingTitle', 'cardSelected'])
 const handleCardSelection = (cardId: string) => {
   emit('cardSelected')
   router.push(`/card/${cardId}`)
+}
+
+const emitTitleState = (isEditingTitle: boolean) => {
+  emit('isEditingTitle', isEditingTitle)
 }
 
 const changeListTitle = (title: string) => {

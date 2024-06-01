@@ -26,9 +26,12 @@ const props = defineProps(['title'])
 const titleInput = ref()
 const editableTitle = ref('')
 const isEditingTitle = ref(false)
-const toggleEditState = () => (isEditingTitle.value = !isEditingTitle.value)
+const toggleEditState = () => {
+  isEditingTitle.value = !isEditingTitle.value
+  emit('isEditingTitle', isEditingTitle.value)
+}
 
-const emit = defineEmits(['titleEdited'])
+const emit = defineEmits(['isEditingTitle', 'titleEdited'])
 const handleSubmit = () => {
   if (!isEditingTitle.value) return
 
