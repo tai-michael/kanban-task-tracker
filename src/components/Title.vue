@@ -12,7 +12,6 @@
     ref="titleInput"
     v-model.trim="editableTitle"
     v-focus
-    @focus="setTitle"
     @keydown.enter.prevent="handleSubmit"
     @blur="handleSubmit"
     @keydown.esc.prevent="cancelEditingTitle"
@@ -44,16 +43,8 @@ const handleSubmit = () => {
 }
 
 const cancelEditingTitle = () => {
-  editableTitle.value = ''
+  editableTitle.value = props.title // reinstate original title
   toggleEditState()
-}
-
-const setTitle = () => {
-  // NOTE canceling an edit clears the description, so this is a workaround
-  if (editableTitle.value) return
-  editableTitle.value = props.title
-
-  titleInput.value.select() // Select all text in the input element
 }
 
 onMounted(() => {
